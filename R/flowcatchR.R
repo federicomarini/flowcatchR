@@ -176,7 +176,7 @@ rotateImages <- function(inputImgFiles,processingFolder,imgNames,rotAngle=estAng
 # showMe(rotate(testimg2,130))
 
 ################
-fullPreprocessWithWatershed <- function(filename="",imgname="",dispMet="raster",offsetGreen=0.15,offsetRed=0.15,writereport=FALSE,displayprocessing=FALSE,
+fullPreprocessWithWatershed_v1 <- function(filename="",imgname="",dispMet="raster",offsetGreen=0.15,offsetRed=0.15,writereport=FALSE,displayprocessing=FALSE,
                                         areaThresholdMin=5, areaThresholdMax=100,foundImgs="") #,...)
 {
   rawimg <- readImage(filename)
@@ -184,7 +184,7 @@ fullPreprocessWithWatershed <- function(filename="",imgname="",dispMet="raster",
   if (displayprocessing)    showMe(rawimg)
   rawimg_red <- rawimg[,,1]
   rawimg_green <- rawimg[,,2]
-  if (displayprocessing)    showMe(EBImage::combine(rgbImage(red=rawimg_red),rgbImage(green=rawimg_green),along=2))
+#   if (displayprocessing)    showMe(EBImage::combine(rgbImage(red=rawimg_red),rgbImage(green=rawimg_green),along=2))
   
   flo = makeBrush(3, shape='disc', step=FALSE)^2
   flo <- flo/sum(flo)
@@ -294,9 +294,9 @@ fullPreprocessWithWatershed <- function(filename="",imgname="",dispMet="raster",
   # with filtering
   if (displayprocessing)    showMe(rgbImage(green=cells_green,red=cells_red))
   # compare one above other
-  allImgs <- EBImage::combine(rawimg,rgbImage(green=obj_green,red=obj_red),rgbImage(green=cells_green,red=cells_red))
-  segmImgs <- EBImage::combine(rawimg,rgbImage(red=segm_red),rgbImage(green=segm_green))
-  if (displayprocessing)    display(allImgs,method="raster",all=TRUE)
+#   allImgs <- EBImage::combine(rawimg,rgbImage(green=obj_green,red=obj_red),rgbImage(green=cells_green,red=cells_red))
+#   segmImgs <- EBImage::combine(rawimg,rgbImage(red=segm_red),rgbImage(green=segm_green))
+#   if (displayprocessing)    display(allImgs,method="raster",all=TRUE)
   
   # only if TRUE, produce images/reports/feature analysis table & co.
   # using the pruned filename - removed the path
@@ -320,14 +320,14 @@ fullPreprocessWithWatershed <- function(filename="",imgname="",dispMet="raster",
     writeImage(cells_green,file=paste(processingFolder,"/paintedCells_green/cellGreen_",imgName,sep=""))
     
     
-    if (displayprocessing)  display(segmImgs,method="raster",all=TRUE)
-    pdf(file=paste(processingFolder,"/thresholdOverviews/threshold_overview_",imgName,".pdf",sep=""))
-    display(segmImgs,method="raster",all=TRUE)
-    dev.off()
-    if (displayprocessing)  display(allImgs,method="raster",all=TRUE)
-    pdf(file=paste(processingFolder,"/processingOverviews/featureSel_overview_",imgName,".pdf",sep=""))
-    display(allImgs,method="raster",all=TRUE)
-    dev.off()
+#     if (displayprocessing)  display(segmImgs,method="raster",all=TRUE)
+#     pdf(file=paste(processingFolder,"/thresholdOverviews/threshold_overview_",imgName,".pdf",sep=""))
+#     display(segmImgs,method="raster",all=TRUE)
+#     dev.off()
+#     if (displayprocessing)  display(allImgs,method="raster",all=TRUE)
+#     pdf(file=paste(processingFolder,"/processingOverviews/featureSel_overview_",imgName,".pdf",sep=""))
+#     display(allImgs,method="raster",all=TRUE)
+#     dev.off()
     write.table(shapeAndMomfeats_red,file=paste(processingFolder,"/featuresReports_red/feats_mom_",imgName,".tsv",sep="")
                 ,sep="\t",quote=FALSE,row.names=T,col.names=T)
     write.table(shapeAndMomfeats_green,file=paste(processingFolder,"/featuresReports_green/feats_mom_",imgName,".tsv",sep="")
@@ -339,7 +339,7 @@ fullPreprocessWithWatershed <- function(filename="",imgname="",dispMet="raster",
   
   
   
-  if (exists("foundImgs") & exists("imgsJustNames") )
+#   if (exists("foundImgs") & exists("imgsJustNames") )
     cat("Done with image",filename," - ", match(filename,foundImgs) ," of ", length(foundImgs), "\n",sep="")
 }
 
