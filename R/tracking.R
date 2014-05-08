@@ -968,7 +968,8 @@ linkParticles_v4_withIntensity <- function(particleList=imgObjectsList_v3,
 linkParticles_v5_withIntensity <- function(particleList=imgObjectsList_v3,
                                            L,
                                            R=2,
-                                           epsilon=0.1,
+                                           epsilon1=0.1,
+                                           epsilon2=2,
                                            lambda1=1,
                                            lambda2=1,
                                            nframes=length(candidate_feats_red),
@@ -1030,6 +1031,13 @@ linkParticles_v5_withIntensity <- function(particleList=imgObjectsList_v3,
       deltaSquared <- xdiff^2 + ydiff^2
       alpha <- atan2(ydiff,xdiff)
       
+      
+      # edit 2014-05-08
+      deltaSquared <- (deltaSquared - epsilon2) * ((deltaSquared - epsilon2) > 0)
+      # this allows to have a mini jitter on the position of the particle, that can now go slightly backwards and or move orthogonally to the flow
+      
+      
+      
       ## similarly, include the part where the area/intensity is considered
       
       areaVariation <- 0
@@ -1047,7 +1055,7 @@ linkParticles_v5_withIntensity <- function(particleList=imgObjectsList_v3,
       
       distFunction <- deltaSquared + areaVariation + intensityVariation
       
-      newCost <- lambda1 * (distFunction / (1-lambda2*(alpha/(pi+epsilon))))
+      newCost <- lambda1 * (distFunction / (1-lambda2*(alpha/(pi+epsilon1))))
       #       newCost <- deltaSquared
       # cost function for link p_i, q_j
       

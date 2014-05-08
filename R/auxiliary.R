@@ -147,3 +147,28 @@ estimateAngle <- function()
 }
 
 # estA <- estimateAngle() # useless YET! - the EBImage is not able to deal with pixel coordinates interactively AND correctly..
+
+
+
+# creation of the particle list of lists object - starting point for tracking algorithm
+createParticleSet <- function(nframes,
+                              particleReports,  # vector containing the location of the files for the processed reports
+                              linkrange)        # linkrange, i.e. the number of frames to look for candidate particles of the same track 
+{
+  particleSet <- vector(nframes,mode="list")
+  # check that the number of frames is the same as the number of processed reports
+  for (k in 1:length(particleReports))
+  {
+    tmpList <- list()
+    tmpList$particles <- read.delim(file=particleReports[k],sep="\t") # will contain a lot of information - position and other features computed
+    particleNr <- nrow(tmpList$particles)
+    tmpList$link <- rep(0,particleNr)
+    tmpList$frame <- rep(k,particleNr)
+    tmpList$label <- rep(NA,particleNr)
+    tmpList$special <- rep(TRUE,particleNr)
+    tmpList$nxt <- matrix(0,nrow=particleNr,ncol=linkrange)
+    particleSet[[k]] <- tmpList
+  }
+  return(particleSet)
+}
+

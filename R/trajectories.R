@@ -74,6 +74,8 @@ linksToTrajectories_v3 <- function(particleList=imgObjectsList_v3)
   }
   return(trajList)
 }
+## maybe add this too? IN THE FUNCTION ITSELF!
+## dfTrajs <- do.call(rbind.data.frame,liTra)
 
 
 
@@ -81,8 +83,9 @@ linksToTrajectories_v3 <- function(particleList=imgObjectsList_v3)
 # imgDimensions <- dim(readImage(i))
 # cubeLimits <- list(xlim=c(0,imgDimensions[1]),ylim=c(0,imgDimensions[2]),tlim=c(0,nframes))
 
-showTrajectories <- function(trajectoryDataFrame,cubeLimits)
+showTrajectories <- function(trajectoryList,cubeLimits)
 {
+  trajectoryDataFrame <- do.call(rbind.data.frame, trajectoryList)
   cat("Plotting",max(trajectoryDataFrame$trajLabel),"trajectories...\n")
   for (t in 1:max(trajectoryDataFrame$trajLabel))
   {
