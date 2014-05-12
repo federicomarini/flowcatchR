@@ -237,12 +237,16 @@ inspectTrajectorySet <- function(trajectorySet,
   
   
   # best thing, prompt for something like "did you like the trajectory? :)"
-#   interactive() <- TRUE # does not work-..
-  userInput <- readline(prompt="Should I keep this trajectory? --- 0: NO, 1:YES --- no other values allowed")
+  #   interactive() <- TRUE # does not work-..
+#   if(interactive()==FALSE)  userInput <- readline(prompt="Should I keep this trajectory? --- 0: NO, 1:YES --- no other values allowed")
+  #   
+  cat("Should I keep this trajectory? --- 0: NO, 1:YES --- no other values allowed")
+    userInput <- readLines(n = 1L)
+  #   userInput <- readline(prompt="Should I keep this trajectory? --- 0: NO, 1:YES --- no other values allowed")
   # if no 0 nor 1, error/do not update, reprompt?
   # otherwise, this becomes the value for the field
   # ... else
-  trajectorySet[[trajNr]]$keep <- userInput
+  trajectorySet[[trajNr]]$keep <- as.logical(as.numeric(userInput))
   
   
   ## TODO somehow not expecting the user prompting the value... "no interactive run"..
