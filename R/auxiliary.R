@@ -172,3 +172,28 @@ createParticleSet <- function(nframes,
   return(particleSet)
 }
 
+
+
+
+# ntrajs <- length(trajectoryList)
+createTrajectorySet <- function(trajectoryList
+                                ) 
+{
+  ntrajs <- length(trajectoryList)
+  trajectorySet <- vector(ntrajs,mode="list")
+  
+  for (k in 1:ntrajs)
+  {
+    tmpList <- list()
+    tmpList$trajectory <- trajectoryList[[k]]
+    tmpList$npoints <- nrow(trajectoryList[[k]])
+    tmpList$nframes <- trajectoryList[[k]]$frame[nrow(trajectoryList[[k]])]-trajectoryList[[k]]$frame[1] + 1
+    tmpList$ngaps <- tmpList$nframes - tmpList$npoints
+    tmpList$keep <- NA # initialized, then set to 0 or 1
+      
+    trajectorySet[[k]] <- tmpList
+  }
+  return(trajectorySet)
+}
+
+
