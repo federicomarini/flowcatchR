@@ -3,6 +3,7 @@ showMe <- function(imgObject, dispMet="raster",...)
   display(imgObject, method=dispMet)
 }
 ################
+## old ##
 setupFolders <- function(projectFolder="~",analysisFolder)
 {
   setwd(projectFolder)
@@ -42,6 +43,7 @@ setupFolders <- function(projectFolder="~",analysisFolder)
 
 
 ################
+## old ##
 createBGimages <- function(allImagesToAverage,foundImgs,processingFolder,imgNames)
 {
   # the images are in foundImgs
@@ -81,7 +83,7 @@ createBGimages <- function(allImagesToAverage,foundImgs,processingFolder,imgName
 
 
 ################
-
+## old ##
 cutOutImages <- function(inputImgFiles,processingFolder=processingFolder,imgNames,
                          cutLeft=5,cutRight=5,cutUp=5,cutDown=5,write=F,cutAll=0)
 {
@@ -112,6 +114,7 @@ cutOutImages <- function(inputImgFiles,processingFolder=processingFolder,imgName
 ################
 # points <- locator(2,type="l",col="white",)
 
+## old ##
 estimateAngle <- function()
 {
   # to be called on a clear image
@@ -144,6 +147,7 @@ estimateAngle <- function()
 # estA <- estimateAngle() # useless YET! - the EBImage is not able to deal with pixel coordinates interactively AND correctly..
 
 ################
+## old ##
 rotateImages <- function(inputImgFiles,processingFolder,imgNames,rotAngle=estAngle,write=F,tryOne=T)
 {
   # sanity checks that we are not cutting  too much?

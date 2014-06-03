@@ -1,3 +1,10 @@
+# removeBackground
+
+
+
+
+
+
 
 ################
 createBGimages <- function(allImagesToAverage,foundImgs,processingFolder,imgNames)
@@ -64,6 +71,77 @@ cutOutImages <- function(inputImgFiles,processingFolder=processingFolder,imgName
   
 }
 
+cut.FrameList <- function(framelist,
+                             cutLeft=5,cutRight=5,cutUp=5,cutDown=5,
+                             cutAll=0,
+                             testing=FALSE)
+{
+  out <- vector(length(framelist),mode="list")
+  class(out) <- c("FrameList",class(out))
+  if(cutAll > 0)
+  {
+    cutLeft <- cutRight <- cutUp <- cutDown <- cutAll
+  }
+  
+  if(!testing)
+  {
+    for(i in 1:length(framelist))
+    {
+      img <- framelist[[i]]$image
+      cutoutImg <- img[cutLeft:(dim(img)[1]-cutRight),cutUp:(dim(img)[2]-cutDown),]
+      out[[i]]$image <- cutoutImg
+      out[[i]]$location <- NA # it is modified from an existing object -> maybe provide the name of the object it got created from?
+    }
+    return(out)
+  } else {
+    # just check on one image, the first one
+    img <- framelist[[1]]$image
+    cutoutImg <- img[cutLeft:(dim(img)[1]-cutRight),cutUp:(dim(img)[2]-cutDown),]
+    display(cutoutImg)
+    return(cutoutImg)
+  }
+}
+
+rotate.FrameList <- function(framelist,
+                             rotAngle=0,
+                             testing=FALSE,
+                             output.origin=c(dim(framelist[[i]]$image)[1]/3,dim(framelist[[i]]$image)[2]/3),
+                             output.dim=c(dim(framelist[[i]]$image)[1]*1.5,dim(framelist[[i]]$image)[2]*1.5))
+{
+  out <- vector(length(framelist),mode="list")
+  class(out) <- c("FrameList",class(out))
+    
+  if(!testing)
+  {
+    for(i in 1:length(framelist))
+    {
+      img <- framelist[[i]]$image
+      rotatedImg <- rotate(img,rotAngle,
+                           output.origin=output.origin,
+                           output.dim=output.dim)
+      out[[i]]$image <- rotatedImg
+      out[[i]]$location <- NA
+      
+    } 
+    return(out)
+  } else {
+    # just check on one image, the first one
+    img <- framelist[[1]]$image
+    rotatedImg <- rotate(img,rotAngle,
+                         output.origin=output.origin,
+                         output.dim=output.dim)
+                  
+    return(rotatedImg)
+  }  
+}
+
+
+
+
+
+
+
+
 
 ################
 rotateImages <- function(inputImgFiles,processingFolder,imgNames,rotAngle=estAngle,write=F,tryOne=T)
@@ -98,8 +176,174 @@ rotateImages <- function(inputImgFiles,processingFolder,imgNames,rotAngle=estAng
 # showMe(rotate(testimg2,130))
 
 
+preprocess <- function(x,...)
+{
+  UseMethod("preprocess")
+}
+
+preprocess.ChannelsFrameList <- function(channelsframelist,
+                                         channel="")
+{
+  cat("do that")
+  # call on red OR
+  # call on green OR
+  # call on blue
+  switch(channel,
+         red={
+           cat("Preprocessing the red channel!\n")
+           out <- preprocess.FrameList(channelsframelist[[1]])
+           }, 
+         green={
+           cat("Preprocessing the green channel!\n")
+           out <- preprocess.FrameList(channelsframelist[[2]])
+         },
+         blue={
+           cat("Preprocessing the blue channel!\n")
+           out <- preprocess.FrameList(channelsframelist[[3]])
+         },
+         stop("You did not choose any of the value for the channel - allowed values= red|green|blue")
+  )
+  return(out)
+}
+
+preprocess.FrameList <- function(framelist,
+                                 brushSize=3,
+                                 brushShape="disc",
+                                 adaptOffset=0.15,
+                                 adaptWinWidth=10,
+                                 adaptWinHeight=10,
+                                 kernSize=3,
+                                 kernShape="disc",
+                                 watershedTolerance=1,
+                                 watershedRadius=1,
+                                 displayprocessing=FALSE,
+                                 areaThresholdMin=5,
+                                 areaThresholdMax=100) # for the single channel images/for one channel of multi-channel images
+{
+  cat("do this - processing the single channel")
+  out <- vector(length(framelist),mode="list")
+  class(out) <- c("FrameList",class(out))
+  
+  for(i in 1:length(framelist))
+  {
+    rawimg <- framelist[[i]]$image
+    colorMode(rawimg) <- Grayscale
+    
+    flo = makeBrush(brushSize, brushShape, step=FALSE)^2
+    flo <- flo/sum(flo)
+    
+    thresh_img <- thresh(filter2(rawimg,flo),w=adaptWinWidth,h=adaptWinHeight,offset=adaptOffset)
+    
+    # if needed with a step of smoothing & co (operations of opening,...)
+    kern <- makeBrush(size=kernSize,shape=kernShape)
+    
+    distmap_thre <- distmap(thresh_img)
+    watershed_thre <- watershed(distmap_thre,tolerance=watershedTolerance,ext=watershedRadius) 
+  
+    out[[i]]$image <- watershed_thre
+    out[[i]]$channel <- framelist[[i]]$channel
+    out[[i]]$location <- framelist[[i]]$location  # or maybe call it location raw? 
+  }
+  return(out)
+}
+
+
+
+
+extractParticles <- function(framelistRaw,
+                             framelistPreprocessed,
+                             areaThresholdMin=5,
+                             areaThresholdMax=100 # and others of interest, for example
+                             )
+{
+  # check that both input framelists have same length!
+  if(length(framelistRaw) != length(framelistProcessed) )
+  {
+    stop("FrameList objects have different lengths!")
+  } else {
+    cat("Computing features...\n")
+  }
+  
+  # returns a particle list - not linked yet
+  
+  out <- vector(length(framelistRaw),mode="list")
+  class(out) <- c("ParticleList",class(out))
+  
+  for(i in 1:length(framelistRaw))
+  {
+    segmImg <- framelistProcessed[[i]]$image
+    rawImg <- framelistRaw[[i]]$image
+    
+    imgFeatures <- as.data.frame(computeFeatures(segmImg,rawImg,xname="cell"))
+    
+    out[[i]]$particles <- imgFeatures
+    out[[i]]$imgSource <- framelistProcessed[[i]]$location
+    out[[i]]$channel <- framelistProcessed[[i]]$channel
+  }
+  cat("Done!\n")
+  return(out)
+}
+
+
+filterParticles <- function(particlelist,
+                            areaThresholdMin = 1,
+                            areaThresholdMax = 1000 #, # and others of interest, for example
+                            #shapeThreshold = 0.5,
+                            #eccentricityThreshold = 0.7 # currently not so efficient with so small particles available in the images!!
+                            )
+{
+  # returns a particle list - not linked yet
+  out <- vector(length(particlelist),mode="list")
+  class(out) <- c("ParticleList",class(out))
+  
+  for(i in 1:length(particlelist))
+  {
+    candidateParticles <- particlelist[[i]]$particles
+    
+    nobjects <- nrow(candidateParticles)
+    candidateParticles$shapeFactor <- (candidateParticles$cell.0.s.perimeter)^2 / (4*pi*candidateParticles$cell.0.s.area)
+    
+    notBecauseOfArea <- c()
+    notBecauseOfEccen <- c()
+    notBecauseOfShape <- c()
+    
+    notBecauseOfArea <- which( (candidateParticles$cell.0.s.area < areaThresholdMin) | (candidateParticles$cell.0.s.area > areaThresholdMax) )
+#     notBecauseOfEccen <- which(candidateParticles$cell.0.m.eccentricity > eccenThreshold)
+    
+    leftOut <- unique(c(notBecauseOfArea,notBecauseOfEccen)) #, not because of ....
+    if(length(leftOut)!=0)#     if(!is.null(leftOut))
+    {
+      filteredParticles <- candidateParticles[-leftOut,]
+    } else {
+      filteredParticles <- candidateParticles
+    }
+      #       cat("Had", nrow(framestats), "\t; Kept",nrow(candidates),"\n")
+    
+    
+    out[[i]]$particles <- filteredParticles
+    out[[i]]$imgSource <- particlelist[[i]]$imgSource
+    out[[i]]$channel <- particlelist[[i]]$channel
+  }
+  return(out)
+}
+
+
+
+
+
+
+
+
+
+
+
 
 ################
+## old ##
+## old ##
+## old ##
+## old ##
+## old ##
 fullPreprocessWithWatershed_v1 <- function(filename="",imgname="",dispMet="raster",offsetGreen=0.15,offsetRed=0.15,writereport=FALSE,displayprocessing=FALSE,
                                            areaThresholdMin=5, areaThresholdMax=100,foundImgs="") #,...)
 {
@@ -521,3 +765,11 @@ preprocessTransmigratingPlusWatershed <- function(filename="",imgname="",dispMet
 }
 
 
+
+
+
+
+
+
+
+###############
