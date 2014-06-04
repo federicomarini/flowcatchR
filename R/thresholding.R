@@ -1,8 +1,8 @@
 
 
 ################
-
-oootsu <- function (input_image,nr_bit=16)  # use all channels?
+## needs to be revisited!
+otsuThreshold <- function (input_image,nr_bit=16)  # use all channels?
 {
   # image is read through readImage from EBImage
   # returns the level where the variance between classes is maximized
@@ -88,7 +88,7 @@ oootsu <- function (input_image,nr_bit=16)  # use all channels?
 
 
 ################
-kittykitty <- function (input_image,nr_bit=8)  # use all channels?
+kittlerillingerThreshold <- function (input_image,nr_bit=8)  # use all channels?
 {
   greyVec <- input_image
   totPixels <- length(greyVec)

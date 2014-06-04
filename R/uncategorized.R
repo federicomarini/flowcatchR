@@ -1,3 +1,5 @@
+
+# to be used in combination with a binary image - segmented e.g. via watershed/other methods
 reproducibleColorLabels <- function (x, normalize = TRUE) 
 {
   set.seed(123)

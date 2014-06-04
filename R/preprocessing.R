@@ -1,75 +1,3 @@
-# removeBackground
-
-
-
-
-
-
-
-################
-createBGimages <- function(allImagesToAverage,foundImgs,processingFolder,imgNames)
-{
-  # the images are in foundImgs
-  
-  firstImage <- readImage(foundImgs[1])
-  summedUpImg <- firstImage > 5 # set it all black
-  
-  # create the average img and write it to file
-  for (i in 1:length(foundImgs))
-  {
-    currentImg <- readImage(foundImgs[i])
-    
-    summedUpImg <- summedUpImg + currentImg
-    cat("Done summing up image",imgNames[i],"\n")
-  }
-  
-  avgImage <- summedUpImg / length(foundImgs)
-  writeImage(avgImage[,,1],file=paste(processingFolder,"/backgroundImages/background_red_time_averaged.tif",sep=""))
-  writeImage(avgImage[,,2],file=paste(processingFolder,"/backgroundImages/background_green_time_averaged.tif",sep=""))
-  writeImage(avgImage,file=paste(processingFolder,"/backgroundImages/background_allchannels_time_averaged.tif",sep=""))
-  
-  # create by subtraction the bg-removed images and write them out
-  for (i in 1:length(foundImgs))
-  {
-    currentImg <- readImage(foundImgs[i])
-    bgRemovedImg <- currentImg - avgImage
-    writeImage(bgRemovedImg[,,1],file=paste(processingFolder,"/backgroundsubtractedImages_red/bgRem_red_",imgNames[i],sep=""))
-    writeImage(bgRemovedImg[,,2],file=paste(processingFolder,"/backgroundsubtractedImages_green/bgRem_green_",imgNames[i],sep=""))
-    writeImage(bgRemovedImg,file=paste(processingFolder,"/backgroundsubtractedImages_allchannels/bgRem_",imgNames[i],sep=""))
-    cat("Done with writing bg_subtracted image",imgNames[i],"\n")
-  }
-  
-  
-}
-
-################
-
-cutOutImages <- function(inputImgFiles,processingFolder=processingFolder,imgNames,
-                         cutLeft=5,cutRight=5,cutUp=5,cutDown=5,write=F,cutAll=0)
-{
-  # sanity checks that we are not cutting  too much?
-  ## if... stop, and print a message
-  
-  if(cutAll > 0)
-  {
-    cutLeft <- cutRight <- cutUp <- cutDown <- cutAll
-  }
-  
-  for(i in 1:length(inputImgFiles))
-  {
-    img <- readImage(inputImgFiles[i])
-    cutoutImg <- img[cutLeft:(dim(img)[1]-cutRight),cutUp:(dim(img)[2]-cutDown),]
-    if(write)
-    {
-      writeImage(cutoutImg,file=paste0(processingFolder,"/cutoutImages/cutout_",imgNames[i]))
-      cat("Done with writing cutout image",imgNames[i],"of",length(inputImgFiles), "\n")
-    } else {
-      showMe(cutoutImg)
-      browser()
-    }
-  }
-  
-}
 
 cut.FrameList <- function(framelist,
                              cutLeft=5,cutRight=5,cutUp=5,cutDown=5,
@@ -143,39 +71,6 @@ rotate.FrameList <- function(framelist,
 
 
 
-################
-rotateImages <- function(inputImgFiles,processingFolder,imgNames,rotAngle=estAngle,write=F,tryOne=T)
-{
-  # sanity checks that we are not cutting  too much?
-  ## if... stop, and print a message
-  endLoop <- length(inputImgFiles)
-  if (tryOne) endLoop <- 1
-  
-  for(i in 1:endLoop)
-  {
-    img <- readImage(inputImgFiles[i])
-    rotImg <- rotate(img,rotAngle,
-                     output.origin=c(dim(img)[1]/3,dim(img)[2]/3),
-                     output.dim=c(dim(img)[1]*1.5,dim(img)[2]*1.5)
-    )
-    if(write && !tryOne)
-    {
-      writeImage(rotImg,file=paste0(processingFolder,"/rotatedImages/rotated_",imgNames[i]))
-      cat("Done with writing rotated image",imgNames[i],"of",length(inputImgFiles), "\n")
-    } else {
-      showMe(rotImg)
-      #       browser()
-    }
-  }
-  
-}
-# rotateImages(inputImgFiles=foundImgs,processingFolder=paste(projectFolder,analysisFolder4,sep=""),imgNames=imgsJustNames,rotAngle=estA,write=F,tryOne=T)
-# 
-# rotateImages(inputImgFiles=foundImgs,processingFolder=paste(projectFolder,analysisFolder4,sep=""),imgNames=imgsJustNames,rotAngle=130,write=F,tryOne=T)
-# 
-# showMe(rotate(testimg2,130))
-
-
 preprocess <- function(x,...)
 {
   UseMethod("preprocess")
@@ -201,7 +96,7 @@ preprocess.ChannelsFrameList <- function(channelsframelist,
            cat("Preprocessing the blue channel!\n")
            out <- preprocess.FrameList(channelsframelist[[3]])
          },
-         stop("You did not choose any of the value for the channel - allowed values= red|green|blue")
+         stop("You did not choose any of the value for the channel - allowed values= red | green | blue")
   )
   return(out)
 }
@@ -251,11 +146,32 @@ preprocess.FrameList <- function(framelist,
 
 
 extractParticles <- function(framelistRaw,
-                             framelistPreprocessed,
+                             framelistPreprocessed=NULL,
+                             channel="",  # if we provide the channelsFrameList as input 
                              areaThresholdMin=5,
                              areaThresholdMax=100 # and others of interest, for example
                              )
 {
+  if(!is(framelistRaw,"FrameList") & !is(framelistRaw,"ChannelsFrameList"))
+  {
+    stop("You need to provide at least a FrameList/channelsFrameList object as input!")
+  }
+  
+  
+  if(is.null(framelistPreprocessed))
+  {
+    cat("You did not provide a preprocessed FrameList alongside with the raw set of frames!\n")
+    cat("Don't worry, the raw FrameList object will be first preprocessed with a set of default parameter!\n")
+    cat("You can always change them afterwards if they do not fit to your scenario!")
+    if(is(framelistRaw,"ChannelsFrameList"))
+    {
+      framelistRaw <- framelistRaw[[channel]]
+      framelistProcessed <- preprocess.FrameList(framelistRaw)
+    } else {
+      framelistPreprocessed <- preprocess.FrameList(framelistRaw)
+    }
+  }
+  
   # check that both input framelists have same length!
   if(length(framelistRaw) != length(framelistProcessed) )
   {
@@ -294,7 +210,20 @@ filterParticles <- function(particlelist,
 {
   # returns a particle list - not linked yet
   out <- vector(length(particlelist),mode="list")
-  class(out) <- c("ParticleList",class(out))
+  if(is(particlelist,"linkedParticleList"))
+  {
+    class(out) <- c("ParticleList",class(out))
+    cat("Warning, you are filtering particles that were previously linked by tracking them - reperform the linking afterwards!\n")
+  } else {
+    if(is(particlelist,"ParticleList")) 
+    {
+      class(out) <- c("ParticleList",class(out))
+      cat("Filtering the particles...\n")
+    } else {
+      stop("You need to provide a ParticleList object as input for filterParticles!\n")
+    }
+  }
+  
   
   for(i in 1:length(particlelist))
   {
@@ -342,6 +271,105 @@ filterParticles <- function(particlelist,
 ## old ##
 ## old ##
 ## old ##
+
+# removeBackground
+################
+createBGimages <- function(allImagesToAverage,foundImgs,processingFolder,imgNames)
+{
+  # the images are in foundImgs
+  
+  firstImage <- readImage(foundImgs[1])
+  summedUpImg <- firstImage > 5 # set it all black
+  
+  # create the average img and write it to file
+  for (i in 1:length(foundImgs))
+  {
+    currentImg <- readImage(foundImgs[i])
+    
+    summedUpImg <- summedUpImg + currentImg
+    cat("Done summing up image",imgNames[i],"\n")
+  }
+  
+  avgImage <- summedUpImg / length(foundImgs)
+  writeImage(avgImage[,,1],file=paste(processingFolder,"/backgroundImages/background_red_time_averaged.tif",sep=""))
+  writeImage(avgImage[,,2],file=paste(processingFolder,"/backgroundImages/background_green_time_averaged.tif",sep=""))
+  writeImage(avgImage,file=paste(processingFolder,"/backgroundImages/background_allchannels_time_averaged.tif",sep=""))
+  
+  # create by subtraction the bg-removed images and write them out
+  for (i in 1:length(foundImgs))
+  {
+    currentImg <- readImage(foundImgs[i])
+    bgRemovedImg <- currentImg - avgImage
+    writeImage(bgRemovedImg[,,1],file=paste(processingFolder,"/backgroundsubtractedImages_red/bgRem_red_",imgNames[i],sep=""))
+    writeImage(bgRemovedImg[,,2],file=paste(processingFolder,"/backgroundsubtractedImages_green/bgRem_green_",imgNames[i],sep=""))
+    writeImage(bgRemovedImg,file=paste(processingFolder,"/backgroundsubtractedImages_allchannels/bgRem_",imgNames[i],sep=""))
+    cat("Done with writing bg_subtracted image",imgNames[i],"\n")
+  }
+  
+  
+}
+
+################
+
+cutOutImages <- function(inputImgFiles,processingFolder=processingFolder,imgNames,
+                         cutLeft=5,cutRight=5,cutUp=5,cutDown=5,write=F,cutAll=0)
+{
+  # sanity checks that we are not cutting  too much?
+  ## if... stop, and print a message
+  
+  if(cutAll > 0)
+  {
+    cutLeft <- cutRight <- cutUp <- cutDown <- cutAll
+  }
+  
+  for(i in 1:length(inputImgFiles))
+  {
+    img <- readImage(inputImgFiles[i])
+    cutoutImg <- img[cutLeft:(dim(img)[1]-cutRight),cutUp:(dim(img)[2]-cutDown),]
+    if(write)
+    {
+      writeImage(cutoutImg,file=paste0(processingFolder,"/cutoutImages/cutout_",imgNames[i]))
+      cat("Done with writing cutout image",imgNames[i],"of",length(inputImgFiles), "\n")
+    } else {
+      showMe(cutoutImg)
+      browser()
+    }
+  }
+  
+}
+
+################
+rotateImages <- function(inputImgFiles,processingFolder,imgNames,rotAngle=estAngle,write=F,tryOne=T)
+{
+  # sanity checks that we are not cutting  too much?
+  ## if... stop, and print a message
+  endLoop <- length(inputImgFiles)
+  if (tryOne) endLoop <- 1
+  
+  for(i in 1:endLoop)
+  {
+    img <- readImage(inputImgFiles[i])
+    rotImg <- rotate(img,rotAngle,
+                     output.origin=c(dim(img)[1]/3,dim(img)[2]/3),
+                     output.dim=c(dim(img)[1]*1.5,dim(img)[2]*1.5)
+    )
+    if(write && !tryOne)
+    {
+      writeImage(rotImg,file=paste0(processingFolder,"/rotatedImages/rotated_",imgNames[i]))
+      cat("Done with writing rotated image",imgNames[i],"of",length(inputImgFiles), "\n")
+    } else {
+      showMe(rotImg)
+      #       browser()
+    }
+  }
+  
+}
+# rotateImages(inputImgFiles=foundImgs,processingFolder=paste(projectFolder,analysisFolder4,sep=""),imgNames=imgsJustNames,rotAngle=estA,write=F,tryOne=T)
+# 
+# rotateImages(inputImgFiles=foundImgs,processingFolder=paste(projectFolder,analysisFolder4,sep=""),imgNames=imgsJustNames,rotAngle=130,write=F,tryOne=T)
+# 
+# showMe(rotate(testimg2,130))
+
 ## old ##
 ## old ##
 fullPreprocessWithWatershed_v1 <- function(filename="",imgname="",dispMet="raster",offsetGreen=0.15,offsetRed=0.15,writereport=FALSE,displayprocessing=FALSE,

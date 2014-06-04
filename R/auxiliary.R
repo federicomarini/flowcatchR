@@ -3,6 +3,10 @@ showMe <- function(imgObject, dispMet="raster",...)
   display(imgObject, method=dispMet)
 }
 
+
+
+
+
 #' newFrameList
 #' constructor for a FrameList object
 #' 
@@ -13,6 +17,7 @@ newFrameList <- function(nframes,
                          imgsLocation
                          )
 {
+  cat("Creating a new object of class FrameList...\n")
   # check that nframes coincides with the number of images available -throw an error otherwise?
   frameList <- vector(nframes,mode="list")
   class(frameList) <- c("FrameList",class(frameList))
@@ -32,6 +37,7 @@ newFrameList <- function(nframes,
 
 print.FrameList <- function(framelist)
 {
+  cat("An object of the FrameList class. \n\n")
   cat("List of frames for",length(framelist),"images\n")
   cat("Images contain information on",ifelse(!is.na(dim(framelist[[1]]$image)[3]),dim(framelist[[1]]$image)[3],"1"),"channel(s)\n")
   cat("Image dimensions:\t",dim(framelist[[1]]$image)[1:2],"\n")
@@ -77,7 +83,7 @@ createChannelsFrameList <- function(framelist)
     blueCh[[i]]$channel <- "blue"
   }
   
-  channelsframelist <- list(redCh,greenCh,blueCh)
+  channelsframelist <- list(red=redCh,green=greenCh,blue=blueCh)
   class(channelsframelist) <- c("ChannelsFrameList",class(channelsframelist))
   return(channelsframelist)
 }
@@ -91,6 +97,7 @@ newParticleList <- function()
 
 print.ParticleList <- function(particlelist)
 {
+  cat("An object of the ParticleList class. \n\n")
   cat("List of particles for",length(particlelist),"images\n\n")
   cat("Displaying a subset of the features of the",nrow(particlelist[[1]]$particles),"particles found in the first image...\n")
   linesToShow <- min(5,nrow(particlelist[[1]]$particles))
@@ -98,6 +105,17 @@ print.ParticleList <- function(particlelist)
   cat("\nParticles identified on the",particlelist[[1]]$channel,"channel\n")
 }
 
+print.linkedParticleList <- function(linkedparticlelist)
+{
+  cat("An object of the linkedParticleList class. \n\n")
+  cat("List of linked particles for",length(linkedparticlelist),"images\n\n")
+  cat("Particles were tracked throughout the following",ncol(linkedparticlelist[[1]]$nxt),"frame(s)\n\n" )
+  
+  cat("Displaying a subset of the features of the",nrow(linkedparticlelist[[1]]$particles),"particles found in the first image...\n")
+  linesToShow <- min(5,nrow(linkedparticlelist[[1]]$particles))
+  print(linkedparticlelist[[1]]$particles[1:linesToShow,1:8])
+  cat("\nParticles identified on the",linkedparticlelist[[1]]$channel,"channel\n")
+}
 
 
 
@@ -122,6 +140,20 @@ initialize.ParticleList <- function(particlelist,
     out[[i]]$channel <- particlelist[[i]]$channel
   }
   return(out)
+}
+
+
+
+print.TrajectoryList <- function(trajectorylist)
+{
+  cat("An object of the TrajectoryList class. \n\n")
+  cat("TrajectoryList composed of",length(trajectorylist),"trajectories\n\n")
+  
+  cat("Trajectories cover a range of",max(unlist(lapply(trajectorylist,function(arg){(arg$trajectory$frame)}))) + 1,"frames\n") # not taking things in frame100 or smthing else happens?
+  cat("Displaying a segment of the first trajectory...\n")
+  print(trajectorylist[[1]]$trajectory[1:min(10,nrow(trajectorylist[[1]]$trajectory)),])
+  
+  
 }
 
 
@@ -312,7 +344,16 @@ createParticleSet <- function(nframes,
 
 
 
+## OLD
+## OLD
+## OLD
+## OLD
+## OLD
+## OLD
 
+## OLD
+## OLD
+## OLD
 # ntrajs <- length(trajectoryList)
 createTrajectorySet <- function(trajectoryList
                                 ) 
