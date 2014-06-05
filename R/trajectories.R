@@ -34,12 +34,12 @@ generate.TrajectoryList <- function(particlelist,
       if(nextOne > 0) # if the particle starts a trajectory, then follow it
       {
         ntraj <- ntraj+1
-        traj <- c(linkedparticlelist[[iframe]]$particles[ipart,1],linkedparticlelist[[iframe]]$particles[ipart,2],ntraj,iframe)
+        traj <- c(linkedparticlelist[[iframe]]$particles[ipart,1],linkedparticlelist[[iframe]]$particles[ipart,2],ntraj,iframe,ipart)
         linkedparticlelist[[iframe]]$link[ipart] <- -2 # instead of -1
         while(nextOne > 0)
         {
           iframe <- iframe + 1
-          traj <- rbind(traj,c(linkedparticlelist[[iframe]]$particles[nextOne,1],linkedparticlelist[[iframe]]$particles[nextOne,2],ntraj,iframe))
+          traj <- rbind(traj,c(linkedparticlelist[[iframe]]$particles[nextOne,1],linkedparticlelist[[iframe]]$particles[nextOne,2],ntraj,iframe,nextOne))
           nextOld <- nextOne
           nextOne <- linkedparticlelist[[iframe]]$nxt[nextOne,1]
           linkedparticlelist[[iframe]]$nxt[nextOld,1] <- -2
@@ -47,7 +47,7 @@ generate.TrajectoryList <- function(particlelist,
         
         out[[ntraj]] <- list()
         
-        colnames(traj) <- c("xCoord","yCoord","trajLabel","frame")
+        colnames(traj) <- c("xCoord","yCoord","trajLabel","frame","frameobjectID")
         rownames(traj) <- paste0(ntraj,"_",seq(1:nrow(traj)))
         traj <- as.data.frame(traj)
         out[[ntraj]]$trajectory <- traj
@@ -216,6 +216,65 @@ inspectTrajectorySet <- function(trajectorySet,
   modTrajSet <- trajectorySet
   return(modTrajSet)
 }
+
+
+
+
+paintTrajectory <- function(trajectorylist,rawframelist,preprocessedframelist,trajId)
+{
+  # doing it on one single traj
+  
+#   for(i in 1:length(trajectorylist))
+  i <- trajId
+  {
+    currentTraj <- trajectorylist[[i]]$trajectory
+    framesIncluded <- currentTraj$frame
+    subsetRaw <- subset(rawframelist,framesToKeep=framesIncluded)
+    subsetProcessed <- subset(preprocessedframelist,framesIncluded)
+    
+    out <- vector("list",length(framesIncluded))
+    
+    for (j in 1:length(out))
+    {
+      rawimg <- subsetRaw[[j]]$image
+      segmimg <- subsetProcessed[[j]]$image
+      singleObjectSegm <- segmimg
+      singleObjectSegm[segmimg!=currentTraj$frameobjectID[j]] <- 0
+      rawWithPaintedObj <- paintObjects(singleObjectSegm,rawimg,col="red") #  even more beautiful if i have red cells displayed and contour as YELLOW!
+      
+      
+      
+      out[[j]]$image <- rawWithPaintedObj
+        
+        
+    }
+    
+#     
+#     segm <- wsthre
+#       buildingUp <- rawimg
+#       for(obj in 1:max(segm))
+#       {
+#         
+#         elab_singleObject <- segm
+#         elab_singleObject[segm!=obj]<- 0  
+#         buildUp <- paintObjects(Image(elab_singleObject,colormode="Grayscale"),buildingUp,col=colors()[52+obj])
+#         buildingUp <- buildUp
+#       }
+#       
+    
+  }
+  class(out) <- c("FrameList",class(out))
+  return(out)
+  
+}
+
+
+## paintTRAJSSSSSS on all, giffed?
+
+
+
+
+
 
 
 

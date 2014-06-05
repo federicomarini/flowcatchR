@@ -56,14 +56,78 @@ inspect.FrameList <- function(framelist,
   firstFrames <- list()
   
   # need to set the colorMode to Grayscale if it is only one channel so that combine works!!
+  
+  singleChannel <- !(length(dim(framelist[[1]]$image)) > 2)
+  
   firstFrames[[1]] <- framelist[[1]]$image
+  if(singleChannel) 
+  {
+    colorMode(firstFrames[[1]]) <- Grayscale
+  }
   for (i in 2:nframes)
   {
     firstFrames[[i]] <- framelist[[i]]$image
+    if(singleChannel)
+    {
+      colorMode(firstFrames[[i]]) <- Grayscale
+    }
   }
   
   firstFramesCombined <- combine(firstFrames)
   display(firstFramesCombined,all=TRUE)
+}
+
+
+fullInspection.FrameList <- function(framelist,
+                                     nframes=10)
+{
+  # nframes should also be more than the nr of frames available
+  cat("Displaying the full FrameList object, composed of",length(framelist),"\n")
+  
+  firstFrames <- list()
+  # need to set the colorMode to Grayscale if it is only one channel so that combine works!!
+  
+  singleChannel <- !(length(dim(framelist[[1]]$image)) > 2)
+  
+  firstFrames[[1]] <- framelist[[1]]$image
+  if(singleChannel) 
+  {
+    colorMode(firstFrames[[1]]) <- Grayscale
+  }
+#   loopUntil <- min(nframes,length(framelist))
+  for (i in 2:length(framelist))
+  {
+    firstFrames[[i]] <- framelist[[i]]$image
+    if(singleChannel)
+    {
+      colorMode(firstFrames[[i]]) <- Grayscale
+    }
+  }
+  
+  firstFramesCombined <- combine(firstFrames)
+  display(firstFramesCombined,all=TRUE)
+}
+
+
+
+
+
+
+subset.FrameList <- function(framelist,framesToKeep)
+{
+  # check that the frames to keep are actually in the original framelist?
+  out <- vector("list",length(framesToKeep))
+  counter <- 0
+  for (i in 1:length(framelist))
+  {
+    if(i %in% framesToKeep)
+    {
+      counter <- counter + 1
+      out[[counter]] <- framelist[[i]]
+    }
+  }
+  class(out) <- c("FrameList",class(out))
+  return(out)
 }
 
 
@@ -86,6 +150,35 @@ createChannelsFrameList <- function(framelist)
   channelsframelist <- list(red=redCh,green=greenCh,blue=blueCh)
   class(channelsframelist) <- c("ChannelsFrameList",class(channelsframelist))
   return(channelsframelist)
+}
+
+
+
+
+
+
+export.FrameList <- function(framelist,
+                             folder="/Users/fede/TEMP/exportFrameList/",
+                             nameStub="testExport",
+                             createGif=FALSE,
+                             removeAfterCreatingGif=TRUE
+                             )
+{
+  dir.create(folder,showWarnings=FALSE) # if not already existing...
+  imgNames <- lapply(1:length(framelist),function(arg){paste0(folder,nameStub,arg,".png")})
+  for (i in 1:length(framelist))
+  {
+    writeImage(framelist[[i]]$image,imgNames[[i]])
+  }
+  if(createGif)
+  {
+    # using imagemagick
+    system(paste0("convert -delay 40 ",folder,nameStub,"*.png ",folder,nameStub,".gif"))
+    if(removeAfterCreatingGif)
+    {
+      file.remove(list.files(path=folder,pattern=paste0(".png"),full.names=TRUE))
+    }
+  }
 }
 
 
