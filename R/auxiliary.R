@@ -164,8 +164,11 @@ export.FrameList <- function(framelist,
                              removeAfterCreatingGif=TRUE
                              )
 {
-  dir.create(folder,showWarnings=FALSE) # if not already existing...
-  imgNames <- lapply(1:length(framelist),function(arg){paste0(folder,nameStub,arg,".png")})
+  if(!file.exists(folder))
+  {
+    dir.create(folder,showWarnings=FALSE) # if not already existing...
+  }
+  imgNames <- lapply(1:length(framelist),function(arg){paste0(folder,nameStub,"_frame_",arg,".png")})
   for (i in 1:length(framelist))
   {
     writeImage(framelist[[i]]$image,imgNames[[i]])
@@ -173,11 +176,11 @@ export.FrameList <- function(framelist,
   if(createGif)
   {
     # using imagemagick
-    system(paste0("convert -delay 40 ",folder,nameStub,"*.png ",folder,nameStub,".gif"))
-    if(removeAfterCreatingGif)
-    {
-      file.remove(list.files(path=folder,pattern=paste0(".png"),full.names=TRUE))
-    }
+    system(paste0("convert -delay 40 ",folder,nameStub,"_frame_*.png ",folder,nameStub,".gif"))
+  }
+  if(removeAfterCreatingGif)
+  {
+    file.remove(list.files(path=folder,pattern=paste0(".png"),full.names=TRUE))
   }
 }
 
@@ -202,7 +205,7 @@ print.linkedParticleList <- function(linkedparticlelist)
 {
   cat("An object of the linkedParticleList class. \n\n")
   cat("List of linked particles for",length(linkedparticlelist),"images\n\n")
-  cat("Particles were tracked throughout the following",ncol(linkedparticlelist[[1]]$nxt),"frame(s)\n\n" )
+  cat("Particles were tracked throughout the subsequent",ncol(linkedparticlelist[[1]]$nxt),"frame(s)\n\n" )
   
   cat("Displaying a subset of the features of the",nrow(linkedparticlelist[[1]]$particles),"particles found in the first image...\n")
   linesToShow <- min(5,nrow(linkedparticlelist[[1]]$particles))

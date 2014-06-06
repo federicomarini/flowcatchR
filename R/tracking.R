@@ -7,7 +7,9 @@ link.ParticleList <- function(particlelist,
                               lambda2=1,
                               penaltyFunction=penaltyFunctionGenerator(),
                               nframes, # could be used to restrict the range? frameStart to frameEnd?
-                              verboseOutput=F
+                              verboseOutput=F,
+                              useIntensityChange=TRUE,
+                              useAreaChange=TRUE
                               )
 {
   out <- initialize.ParticleList(particlelist)
@@ -80,7 +82,12 @@ link.ParticleList <- function(particlelist,
       intensityVariation <- intDiff^2
       
 
-      distFunction <- deltaSquared + areaVariation + intensityVariation
+#       distFunction <- deltaSquared + ifelse(useAreaChange,areaVariation,0) + ifelse(useIntensityChange,intensityVariation,0)
+      distFunction <- deltaSquared
+      if(useIntensityChange) distFunction <- distFunction + intensityVariation
+      if(useAreaChange) distFunction <- distFunction + areaVariation
+
+
       newCost <- penaltyFunction(alpha,distFunction)
       
       #       newCost <- deltaSquared

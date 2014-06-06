@@ -107,124 +107,11 @@ display.TrajectoryList <- function(trajectorylist,framelist)
 
 
 
-
-
-
-
-
-# trajectoryList <- liTra
-# imgRepository <- "/Volumes/flow/test_28_03_2014/cutout2/"
-# foundImgs <- listImages(imgRepository)
-
-inspectTrajectories <- function(trajectoryList,
-                                imgRepository)
-{
-  # work on the same object trajectoryList, modifying some fields ad hoc/adding some dedicated!
-  
-  
-  
-  # do it for on trajectory, e.g.
-  trajNr <- 36
-  particleRadius <- 3
-  particleColor <- "white" # or choose a nice vector for them!
-  # it is loopable :)
-  
-  acquiredImages <- listImages(imgRepository)
-  
-  currentTraj <- trajectoryList[[trajNr]]
-  nrPoints <- nrow(currentTraj)
-  nrFrames <- currentTraj$frame[nrow(currentTraj)]-currentTraj$frame[1] + 1
-  nrGaps <- nrFrames - nrPoints
-  cat("Displaying a trajectory of",nrPoints,"points over",nrFrames,"frames ---",nrGaps,"gaps detected!\n")
-  imgsForTheTrajectory <- acquiredImages[currentTraj$frame]
-  
-  # for each point of the trajectory
-  for(p in 1:nrow(currentTraj))
-  {
-    img <- readImage(imgsForTheTrajectory[p])
-    imgWithCircle <- drawCircle(img,x=currentTraj$xCoord[p],y=currentTraj$yCoord[p],radius=particleRadius,col=particleColor)
-    display(imgWithCircle,method="raster") # or save?
-    # best thing, prompt for something like "did you like the trajectory? :)"
-  }
-  
-  
-  
-}
-
-
-
-
-# trajectorySet <- liTra2
-# imgRepository <- "/Volumes/flow/test_28_03_2014/cutout2/"
-# foundImgs <- listImages(imgRepository)
-
-inspectTrajectorySet <- function(trajectorySet,
-                                 imgRepository)
-{
-  # work on the object trajectorySet, some fields ad hoc/adding some dedicated!
-  
-  # do it for on trajectory, e.g.
-  trajNr <- 36
-  particleRadius <- 3
-  particleColor <- "white" # or choose a nice vector for them!
-  # it is loopable :)
-  acquiredImages <- listImages(imgRepository)
-  
-  currentTraj <- trajectorySet[[trajNr]]$trajectory
-  # old
-  #   nrPoints <- nrow(currentTraj)
-  #   nrFrames <- currentTraj$frame[nrow(currentTraj)]-currentTraj$frame[1] + 1
-  #   nrGaps <- nrFrames - nrPoints
-  # using the dedicated fields
-  nrPoints <- trajectorySet[[trajNr]]$npoints
-  nrFrames <- trajectorySet[[trajNr]]$nframes
-  nrGaps <- trajectorySet[[trajNr]]$ngaps
-  
-  cat("Displaying a trajectory of",nrPoints,"points over",nrFrames,"frames ---",nrGaps,"gaps detected!\n")
-  imgsForTheTrajectory <- acquiredImages[currentTraj$frame]
-  
-  # for each point of the trajectory
-  for(p in 1:nrow(currentTraj))
-  {
-    img <- readImage(imgsForTheTrajectory[p])
-    imgWithCircle <- drawCircle(img,x=currentTraj$xCoord[p],y=currentTraj$yCoord[p],radius=particleRadius,col=particleColor)
-    display(imgWithCircle,method="raster") # or save?
-    
-  }
-  
-  
-  
-  # best thing, prompt for something like "did you like the trajectory? :)"
-  #   interactive() <- TRUE # does not work-..
-  #   if(interactive()==FALSE)  userInput <- readline(prompt="Should I keep this trajectory? --- 0: NO, 1:YES --- no other values allowed")
-  #   
-  cat("Should I keep this trajectory? --- 0: NO, 1:YES --- no other values allowed")
-  userInput <- readLines(n = 1L)
-  #   userInput <- readline(prompt="Should I keep this trajectory? --- 0: NO, 1:YES --- no other values allowed")
-  # if no 0 nor 1, error/do not update, reprompt?
-  # otherwise, this becomes the value for the field
-  # ... else
-  trajectorySet[[trajNr]]$keep <- as.logical(as.numeric(userInput))
-  
-  
-  ## TODO somehow not expecting the user prompting the value... "no interactive run"..
-  
-  
-  
-  
-  
-  modTrajSet <- trajectorySet
-  return(modTrajSet)
-}
-
-
-
-
 paintTrajectory <- function(trajectorylist,rawframelist,preprocessedframelist,trajId)
 {
   # doing it on one single traj
   
-#   for(i in 1:length(trajectorylist))
+  #   for(i in 1:length(trajectorylist))
   i <- trajId
   {
     currentTraj <- trajectorylist[[i]]$trajectory
@@ -240,32 +127,14 @@ paintTrajectory <- function(trajectorylist,rawframelist,preprocessedframelist,tr
       segmimg <- subsetProcessed[[j]]$image
       singleObjectSegm <- segmimg
       singleObjectSegm[segmimg!=currentTraj$frameobjectID[j]] <- 0
-      rawWithPaintedObj <- paintObjects(singleObjectSegm,rawimg,col="red") #  even more beautiful if i have red cells displayed and contour as YELLOW!
+      rawWithPaintedObj <- paintObjects(singleObjectSegm,rawimg,col="yellow") #  even more beautiful if i have red cells displayed and contour as YELLOW!
       
-      
-      
-      out[[j]]$image <- rawWithPaintedObj
-        
-        
-    }
-    
-#     
-#     segm <- wsthre
-#       buildingUp <- rawimg
-#       for(obj in 1:max(segm))
-#       {
-#         
-#         elab_singleObject <- segm
-#         elab_singleObject[segm!=obj]<- 0  
-#         buildUp <- paintObjects(Image(elab_singleObject,colormode="Grayscale"),buildingUp,col=colors()[52+obj])
-#         buildingUp <- buildUp
-#       }
-#       
-    
+      out[[j]]$image <- rawWithPaintedObj 
+    }  
   }
   class(out) <- c("FrameList",class(out))
   return(out)
-  
+
 }
 
 
@@ -273,6 +142,50 @@ paintTrajectory <- function(trajectorylist,rawframelist,preprocessedframelist,tr
 
 
 
+
+
+
+evaluateTrajectoryList <- function(trajectorylist,
+                                   rawframelist,
+                                   preprocessedframelist
+                                   #,trajID
+                                   )
+{
+#   out <- vector("list",length(trajectorylist))
+  out <- trajectorylist # initialized as the input object, which is afterwards modified in the corresponding slot
+  #   id <- 1 # just for trajId =1 now, then could be actually be done cycling on the trajectories
+  for (id in 1:length(trajectorylist))
+  {
+    cat("Evaluating trajectory",id,"...\n")
+    # create painted trajs...
+    paintedTraj <- paintTrajectory(trajectorylist,rawframelist,preprocessedframelist,id)
+    # display it for checking purposes
+#     fullInspection.FrameList(paintedTraj)
+    # export it also as gif
+    export.FrameList(paintedTraj,nameStub=paste0("evaluation_traj_",id),createGif=TRUE,removeAfterCreatingGif=TRUE)
+    
+    # "interactive" part, asking the user whether the trajectory is correct
+    
+    
+    # best thing, prompt for something like "did you like the trajectory? :)"
+    #   interactive() <- TRUE # does not work-..
+    #   if(interactive()==FALSE)  userInput <- readline(prompt="Should I keep this trajectory? --- 0: NO, 1:YES --- no other values allowed")
+
+    
+    cat("Should I keep this trajectory? --- 0: NO, 1:YES --- no other values allowed")
+    userInput <- readLines(n = 1L)
+    #   userInput <- readline(prompt="Should I keep this trajectory? --- 0: NO, 1:YES --- no other values allowed")
+    # if no 0 nor 1, error/do not update, reprompt?
+    # otherwise, this becomes the value for the field
+    # ... else
+    out[[id]]$keep <- as.logical(as.numeric(userInput))
+    
+    
+    ## TODO somehow not expecting the user prompting the value... "no interactive run".. 
+  }
+
+  return(out)
+}
 
 
 
