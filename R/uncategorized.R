@@ -53,8 +53,7 @@ reproducibleColorLabels <- function (x, normalize = TRUE)
 
 
 # labelCells(rawtest[,,1],protest,classes=c("yes","no"),classColours=c("red","blue"))
-
-labelCells <- function (img, segmentedImage, classes, classColours, nblocks = 3, 
+labelCellsFROMCRIMAGE <- function (img, segmentedImage, classes, classColours, nblocks = 3, 
           labeledPoints = NULL, filename = NULL, filenameImage = NULL, 
           transformCoordinates = FALSE) 
 {
@@ -683,3 +682,121 @@ labelCells <- function (img, segmentedImage, classes, classColours, nblocks = 3,
 #               row.names=FALSE, sep=" ",col.names=F
 #   )
 # }
+
+
+
+
+# 
+# 
+# ## attempts via tcltk?!
+# 
+# mywait <- function() {
+#   tt <- tktoplevel()
+#   tkpack( tkbutton(tt, text='Continue', command=function()tkdestroy(tt)),
+#           side='bottom')
+#   tkpack( tkbutton(tt, text='Reject', command=function()tkdestroy(tt)),
+#           side='bottom')
+#   tkbind(tt,'<Key>', function()tkdestroy(tt) )
+#   
+#   tkwait.window(tt)
+# }
+# 
+# myprompt <- function() {
+#   tt <- tktoplevel()
+#   tkpack( tkbutton(tt, text='Continue', command=function()tkdestroy(tt)),
+#           side='bottom')
+#   tkbind(tt,'<Key>', function()tkdestroy(tt) )
+#   
+#   tkwait.window(tt)
+# }   
+# 
+# 
+# 
+# 
+# tt <- tktoplevel()  # Create a new toplevel window
+# 
+# tktitle(tt) <- "Simple Dialog"  # Give the window a title
+# 
+# # Create a variable to keep track of the state of the dialog window:
+# #  If the window is active,                                            done = 0
+# #  If the window has been closed using the OK button,                  done = 1
+# #  If the window has been closed using the Cancel button or destroyed, done = 2
+# done <- tclVar(0)   # tclVar() creates a Tcl variable
+# 
+# # Create two buttons and for each one, set the value of the done variable
+# # to an appropriate value
+# OK.but <- tkbutton(tt, text = "  Accept  ",
+#                    command = function() tclvalue(done) <- 1)
+# Cancel.but <- tkbutton(tt, text = "Reject",
+#                        command = function() tclvalue(done) <- 2)
+# 
+# # Place the two buttons on the same row in their assigned window (tt)
+# tkgrid(OK.but, Cancel.but)
+# 
+# # Capture the event "Destroy" (e.g. Alt-F4 in Windows) and when this happens,
+# # assign 2 to done
+# tkbind(tt, "<Destroy>", function() tclvalue(done) <- 2)
+# 
+# tkfocus(tt)         # Place the focus to our tk window
+# 
+# # # Do not proceed with the following code until the variable done is non-zero.
+# # # (but other processes can still run, i.e., the system is not frozen)
+# # tkwait.variable(done)
+# # 
+# # # The variable done is now non-zero, so we would like to record its value before
+# # # destroying the window tt.  If we destroy it first, then done will be set to 2
+# # # because of our earlier binding, but we want to determine whether the user
+# # # pressed OK (i.e., see whether done is equal to 1)
+# 
+# doneVal <- as.integer(tclvalue(done))   # Get and coerce content of a Tcl variable
+# tkdestroy(tt)
+# 
+# # Test the result
+# if (doneVal == 1) tkmessageBox(message = "You pressed OK!")
+# if (doneVal == 2) tkmessageBox(message = "You either pressed Cancel or destroyed the dialog!")
+# 
+# 
+# 
+# 
+# 
+# TCL_evaluateTrajectoryList <- function(trajectorylist,
+#                                        rawframelist,
+#                                        preprocessedframelist
+#                                        #,trajID
+# )
+# {
+#   #   out <- vector("list",length(trajectorylist))
+#   out <- trajectorylist # initialized as the input object, which is afterwards modified in the corresponding slot
+#   #   id <- 1 # just for trajId =1 now, then could be actually be done cycling on the trajectories
+#   for (id in 1:length(trajectorylist))
+#   {
+#     cat("Evaluating trajectory",id,"...\n")
+#     # create painted trajs...
+#     paintedTraj <- paintTrajectory(trajectorylist,rawframelist,preprocessedframelist,id)
+#     # display it for checking purposes
+#     #     fullInspection.FrameList(paintedTraj)
+#     # export it also as gif
+#     export.FrameList(paintedTraj,nameStub=paste0("evaluation_traj_",id),createGif=TRUE,removeAfterCreatingGif=TRUE)
+#     
+#     # "interactive" part, asking the user whether the trajectory is correct
+#     
+#     
+#     # best thing, prompt for something like "did you like the trajectory? :)"
+#     #   interactive() <- TRUE # does not work-..
+#     #   if(interactive()==FALSE)  userInput <- readline(prompt="Should I keep this trajectory? --- 0: NO, 1:YES --- no other values allowed")
+#     
+#     
+#     cat("Should I keep this trajectory? --- 0: NO, 1:YES --- no other values allowed")
+#     mywait()
+#     
+#     
+#     #     out[[id]]$keep <- as.logical(as.numeric(userInput))
+#     
+#     
+#     ## TODO somehow not expecting the user prompting the value... "no interactive run".. 
+#   }
+#   
+#   return(out)
+# }
+# 
+# 

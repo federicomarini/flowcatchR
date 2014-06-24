@@ -191,10 +191,6 @@ evaluateTrajectoryList <- function(trajectorylist,
 
 
 
-
-
-
-
 # 
 # linksToTrajectories <- function(imgObjectsList)
 # {
