@@ -1,3 +1,12 @@
+#' Displays with raster
+#' 
+#' Displays images with R native functions, makes direct use of EBImage's display
+#' 
+#' @param imgObject an \code{Image} object
+#' @param dispMet Set to default as "raster", could be "browser"
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 showMe <- function(imgObject, dispMet="raster",...)
 {
   display(imgObject, method=dispMet)
@@ -7,11 +16,20 @@ showMe <- function(imgObject, dispMet="raster",...)
 
 
 
+
 #' newFrameList
+#' 
 #' constructor for a FrameList object
+#' 
+#' This function is used to create a FrameList object from a vector of images. 
+#' The number of frames is also specified, as just a subset of the images can be used for this
 #' 
 #'@param nframes Number of frames that will constitute the FrameList object
 #'@param imgsLocation Vector of strings containing the locations where the (raw) images are to be found
+#'
+#'@return An object of the \code{FrameList} class, which holds the info on a list of frames, specifying for each the following elements:
+#'\item{image}{The \code{Image} object containing the image itself}
+#'\item{location}{The complete path to the location of the original image}
 #'
 newFrameList <- function(nframes,
                          imgsLocation
@@ -34,7 +52,8 @@ newFrameList <- function(nframes,
   return(frameList)
 }
 
-
+#' print.FrameList
+#'
 print.FrameList <- function(framelist)
 {
   cat("An object of the FrameList class. \n\n")
