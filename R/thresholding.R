@@ -2,6 +2,7 @@
 
 ################
 ## needs to be revisited!
+#
 otsuThreshold <- function (input_image,nr_bit=16)  # use all channels?
 {
   # image is read through readImage from EBImage
@@ -88,6 +89,7 @@ otsuThreshold <- function (input_image,nr_bit=16)  # use all channels?
 
 
 ################
+
 kittlerillingerThreshold <- function (input_image,nr_bit=8)  # use all channels?
 {
   greyVec <- input_image

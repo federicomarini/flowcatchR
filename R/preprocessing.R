@@ -2,13 +2,30 @@
 #' 
 #' Performs cropping on the FrameList object, selecting how many pixels should be cut on each side
 #' 
+#' Cropping can be performed with careful choice of all cutting sides, or cropping a single value from
+#' all sides
 #' 
-cut.FrameList <- function(framelist,
-                             cutLeft=5,cutRight=5,cutUp=5,cutDown=5,
-                             cutAll=0,
-                             testing=FALSE)
+#' @param x An input FrameList object
+#' @param cutLeft Amount of pixels to be cut at the side
+#' @param cutRight Amount of pixels to be cut at the side
+#' @param cutUp Amount of pixels to be cut at the side
+#' @param cutDown Amount of pixels to be cut at the side
+#' @param cutAll Amount of pixels to be cut at all sides. Overrides the single side values
+#' @param testing Logical, whether to just test the cropping or to actually perform it. Default set to FALSE
+#' @param ... Arguments to be passed to methods
+#' 
+#' @return A FrameList object, with cropped frames in the image slot
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+
+cut.FrameList <- function(x,
+                          cutLeft=5,cutRight=5,cutUp=5,cutDown=5,
+                          cutAll=0,
+                          testing=FALSE,
+                          ...)
 {
-  out <- vector(length(framelist),mode="list")
+  out <- vector(length(x),mode="list")
   class(out) <- c("FrameList",class(out))
   if(cutAll > 0)
   {
@@ -17,9 +34,9 @@ cut.FrameList <- function(framelist,
   
   if(!testing)
   {
-    for(i in 1:length(framelist))
+    for(i in 1:length(x))
     {
-      img <- framelist[[i]]$image
+      img <- x[[i]]$image
       cutoutImg <- img[cutLeft:(dim(img)[1]-cutRight),cutUp:(dim(img)[2]-cutDown),]
       out[[i]]$image <- cutoutImg
       out[[i]]$location <- NA # it is modified from an existing object -> maybe provide the name of the object it got created from?
@@ -34,6 +51,24 @@ cut.FrameList <- function(framelist,
   }
 }
 
+
+#' rotate.FrameList
+#' 
+#' Rotates all images in a FrameList object 
+#' 
+#' Rotation is performed exploiting the rotate function of the EBImage package. Could be automated if support for coordinate/pixel interaction is included
+#' 
+#' @param framelist A FrameList object
+#' @param rotAngle The rotation angle (clockwise) specified in degrees
+#' @param testing Logical, whether to just test the rotation or to actually perform it. Default set to FALSE
+#' @param output.origin A vector of 2 numbers indicating the dimension of the output image, as in the rotate function
+#' @param output.dim A vector of 2 numbers indicating the output coordinates of the origin in pixels, as in the rotate function
+#'  
+#' @return A FrameList object containing the rotated frames
+#' 
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 rotate.FrameList <- function(framelist,
                              rotAngle=0,
                              testing=FALSE,
@@ -75,13 +110,40 @@ rotate.FrameList <- function(framelist,
 
 
 
+
+#' preprocess
+#' 
+#' Generic preprocessing function
+#' 
+#' Can be applied to FrameList or ChannelsFrameList objects. ChannelsFrameList are then subset to the chosen channel,
+#' and the method preprocess.FrameList is then applied, with its set of parameters
+#'  
+#' @param x A FrameList or a ChannelsFrameList object
+#' @param ... Arguments to be passed to methods, such as channel and/or preprocessing parameters
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 preprocess <- function(x,...)
 {
   UseMethod("preprocess")
 }
 
+
+#' preprocess.ChannelsFrameList
+#' 
+#' Preprocessing function for ChannelsFrameList objects
+#' 
+#' ChannelsFrameList are then subset to the chosen channel, and the method preprocess.FrameList is then applied, with its set of parameters
+#'  
+#' @param channelsframelist A ChannelsFrameList object
+#' @param channel Character string. The channel to perform the operations on. Can be "red", "green" or "blue"
+#' 
+#' @return A FrameList object, whose frame images are the preprocessed versions of the input images
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 preprocess.ChannelsFrameList <- function(channelsframelist,
-                                         channel="")
+                                         channel="") # HARALD: should i put here also the ...? and also in the function code too?
 {
   cat("do that")
   # call on red OR
@@ -105,6 +167,31 @@ preprocess.ChannelsFrameList <- function(channelsframelist,
   return(out)
 }
 
+#' preprocess.FrameList
+#' 
+#' Preprocessing function for FrameList objects
+#' 
+#' FrameList objects are processed according to the chosen set of parameters. Many of them refer directly to 
+#' existing EBImage functions, please see the corresponding help for additional information
+#'  
+#' @param framelist A FrameList object
+#' @param brushSize Size in pixels of the brush to be used for initial smoothing
+#' @param brushShape Shape of the brush to be used for initial smoothing
+#' @param adaptOffset Offset to be used in the adaptive thresholding step
+#' @param adaptWinWidth Width of the window for the adaptive thresholding step
+#' @param adaptWinHeight Height of the window for the adaptive thresholding step
+#' @param kernSize Size in pixels of the kernel used for morphological operations
+#' @param kernShape Shape of the kernel used for morphological operations
+#' @param watershedTolerance Tolerance allowed in performing the watershed-based segmentation
+#' @param watershedRadius Radius for the watershed-based segmentation
+#' @param displayprocessing Logical, whether to display intermediate steps while performing preprocessing. Dismissed currently, it could increase runtime a lot
+#' @param areaThresholdMin Size in pixels of the minimum area needed to detect the object as a potential particle of interest
+#' @param areaThresholdMax Size in pixels of the maximum area allowed to detect the object as a potential particle of interest
+#' 
+#' @return A FrameList object, whose frame images are the preprocessed versions of the input images
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 preprocess.FrameList <- function(framelist,
                                  brushSize=3,
                                  brushShape="disc",
@@ -149,6 +236,23 @@ preprocess.FrameList <- function(framelist,
 
 
 
+
+#' extractParticles
+#' 
+#' Extract particles from the images of a FrameList object. 
+#' 
+#'  
+#' @param framelistRaw A FrameList object with the raw images (mandatory)
+#' @param framelistPreprocessed A FrameList object with preprocessed images (optional, if not provided gets produced with standard default parameters)
+#' @param channel Character string. The channel to perform the operations on. Can be "red", "green" or "blue"
+#' @param areaThresholdMin Size in pixels of the minimum area needed to detect the object as a potential particle of interest
+#' @param areaThresholdMax Size in pixels of the maximum area allowed to detect the object as a potential particle of interest
+#' 
+#' @return A ParticleList object, containing all detected particles for each frame
+#' 
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 extractParticles <- function(framelistRaw,
                              framelistPreprocessed=NULL,
                              channel="",  # if we provide the channelsFrameList as input 
@@ -205,6 +309,23 @@ extractParticles <- function(framelistRaw,
 }
 
 
+
+#' filterParticles
+#' 
+#' Performs filtering on a ParticleList object
+#' 
+#' According to parameters of interests, such as size, eccentricity/shape, filters out the particles that do not 
+#' satisfy the indicated requirements
+#' 
+#' @param particlelist A ParticleList object. A LinkedParticleList object can also be provided as input, yet the returned object will be a ParticleList object that 
+#' @param areaThresholdMin Size in pixels of the minimum area needed to detect the object as a potential particle of interest
+#' @param areaThresholdMax Size in pixels of the maximum area allowed to detect the object as a potential particle of interest
+#' 
+#' 
+#' @return A ParticleList object
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 filterParticles <- function(particlelist,
                             areaThresholdMin = 1,
                             areaThresholdMax = 1000 #, # and others of interest, for example

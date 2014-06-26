@@ -1,3 +1,4 @@
+
 generate.TrajectoryList <- function(particlelist,
                                     provideExtraDetails=FALSE,
                                     ... # parameters for the eventual tracking - is it possible to do so? ask harald!
@@ -79,12 +80,12 @@ generate.TrajectoryList <- function(particlelist,
 # imgDimensions <- dim(readImage(i))
 # cubeLimits <- list(xlim=c(0,imgDimensions[1]),ylim=c(0,imgDimensions[2]),tlim=c(0,nframes))
 
+
 axesInfo <- function(framelist)
 {
   imgDimensions <- dim(framelist[[1]]$image)
   out <- list(xlim=c(0,imgDimensions[1]),ylim=c(0,imgDimensions[2]),tlim=c(0,length(framelist)))
 }
-
 
 
 display.TrajectoryList <- function(trajectorylist,framelist)
@@ -101,8 +102,6 @@ display.TrajectoryList <- function(trajectorylist,framelist)
   decorate3d(xlim=cubeLimits$xlim,ylim=cubeLimits$ylim,zlim=cubeLimits$tlim,xlab="",ylab="",zlab="",aspect=T)
   
 }
-
-
 
 
 
@@ -139,6 +138,7 @@ paintTrajectory <- function(trajectorylist,rawframelist,preprocessedframelist,tr
 
 
 ## paintTRAJSSSSSS on all, giffed?
+
 
 
 

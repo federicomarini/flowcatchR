@@ -1,4 +1,18 @@
 
+#' combine.preprocessedFrameList
+#' 
+#' Combines the information from a raw FrameList object and the corresponding preprocessed one
+#' 
+#' All objects are painted with a unique colour - for sake of speed
+#'  
+#' @param rawframelist A FrameList object containing the raw images
+#' @param preprocessedframelist A FrameList object with the preprocessed versions of the images (e.g. segmented)
+#' 
+#' @return A FrameList object, whose images are the combination of the raw images with the segmented objects drawn on them
+#' 
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 combine.preprocessedFrameList <- function(rawframelist,preprocessedframelist)
 {
   out <- vector("list",length(rawframelist))
@@ -52,6 +66,17 @@ combine.preprocessedFrameList <- function(rawframelist,preprocessedframelist)
 }
 
 
+
+#' actionPaint
+#'  
+#' @param rawimg An Image object with the raw frame data
+#' @param segmimg An Image object with the segmented objects
+#' 
+#' @return An Image object that combines raw and segmented images, with objects painted singularly with different colours
+#' 
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 actionPaint <- function(rawimg,segmimg)
 {
   buildingUp <- rawimg
@@ -70,6 +95,23 @@ actionPaint <- function(rawimg,segmimg)
 
 
 
+
+#' combineWcolor.preprocessedFrameList
+#' 
+#' Combines the information from a raw FrameList object and the corresponding preprocessed one,
+#' but this time every object is painted with a different colour
+#' 
+#' Every object is now shown with a different colour. Care should be taken, as this function is rather slower
+#' than combine.preprocessedFrameList
+#'   
+#' @param rawframelist A FrameList object containing the raw images
+#' @param preprocessedframelist A FrameList object with the preprocessed versions of the images (e.g. segmented)
+#' 
+#' @return A FrameList object, whose images are the combination of the raw images with the segmented objects drawn on them,
+#' painted singularly with different colours
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 combineWcolor.preprocessedFrameList <- function(rawframelist,preprocessedframelist) 
   # careful, it's kind of slower for painting all single objects separately and of different colors!
   # currently works best only when input raw image is in colorMode Color - as the colours there have actually a meaning 

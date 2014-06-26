@@ -1,5 +1,6 @@
 ## working on a TrajectoryList object...
 
+
 extractKinematics.traj <- function(trajectorylist,
                                    trajectoryID,
                                    acquisitionFrequency=30, # in milliseconds
@@ -56,6 +57,7 @@ extractKinematics.traj <- function(trajectorylist,
 }
 
 
+
 computeMSD <- function(sx,sy,until=4)
 {
   msd.t <- rep(0,until)
@@ -70,12 +72,14 @@ computeMSD <- function(sx,sy,until=4)
 }
 
 
+
 toPolarCoords <- function(x,y)
 {
   Theta <- atan2(y,x)
   Radius <- sqrt(x^2 + y^2)
   return(list(Theta=Theta,Radius=Radius))
 }
+
 
 toCartesianCoords <- function(Theta,Radius)
 {
@@ -101,6 +105,7 @@ extractKinematics.TrajectoryList <- function(trajectorylist,
 }
 
 
+
 velohist <- function(kinematicsfeaturesetlist)
 {
   curvilinearVelocities <- unlist(lapply(kinematicsfeaturesetlist,function(arg){arg$curvilinearVelocity}))
@@ -110,6 +115,10 @@ velohist <- function(kinematicsfeaturesetlist)
 
 
 
+distanceDiagnostics <- function()
+{
+  cat("something computing distances intra-particles- raises a flag/warning if distances (normalized) are less than 1.5 radius or so...")
+}
 
 # 
 # 

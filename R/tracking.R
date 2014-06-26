@@ -1,3 +1,4 @@
+
 link.ParticleList <- function(particlelist,
                               L,
                               R=2,
@@ -199,6 +200,7 @@ link.ParticleList <- function(particlelist,
   class(out) <- c("linkedParticleList",class(out))
   return(out)  
 }
+
 
 
 
