@@ -1,6 +1,23 @@
 ## working on a TrajectoryList object...
 
-
+####### finish documentation and functions themselves!
+#' extractKinematics.traj
+#' 
+#' Calculate a set of kinematics parameter from a single trajectory
+#' 
+#' The computed set of parameters include delta.x, delta.t and delta.v (displacements and instantaneous velocity), 
+#' totalTime, totalDistance, distStartToEnd, curvilinearVelocity, straightLineVelocity and linearityForwardProgression,
+#' Mean Squared Displacement and velocity autocorrelation
+#'   
+#' @param trajectorylist A TrajectoryList object
+#' @param trajectoryID The ID of a single trajectory
+#' @param acquisitionFrequency The frame rate of acquisition for the images, in milliseconds
+#' @param scala The value of micro(?)meters to which each single pixel corresponds
+#'  
+#' @return A KinematicsFeatureSet object
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 extractKinematics.traj <- function(trajectorylist,
                                    trajectoryID,
                                    acquisitionFrequency=30, # in milliseconds
@@ -11,8 +28,8 @@ extractKinematics.traj <- function(trajectorylist,
   # throw a warning/message/error if the traj is below 3 points?
   if(nrow(singleTraj) < 4)
   {
-    warning("The trajectory had 3 or less points, no features were computed!")
-    out <- list(notEmpty=FALSE)
+    warning(paste0("The trajectory with ID ",trajectoryID," had 3 or less points, no features were computed!"))
+    out <- list(paramsNotComputed=TRUE)
     class(out) <- c("KinematicsFeatureSet",class(out))
     return(out)
   }
@@ -50,14 +67,119 @@ extractKinematics.traj <- function(trajectorylist,
               linearityForwardProgression=linearityForwardProgression,
               trajMSD=trajMSD,
               velocityAutoCorr=velocityAutoCorr,
-              notEmpty=TRUE
+              paramsNotComputed=FALSE
               )
   class(out) <- c("KinematicsFeatureSet",class(out))
   return(out)
 }
 
 
+# extractKinematics.TrajectoryList <- function(trajectorylist,
+#                                              ...) # for frame rate and spatial scala
+# {
+#   out <- list()
+#   for(i in 1:length(trajectorylist))
+#   {
+#     kineOne <- extractKinematics.traj(trajectorylist,i) #, acquisitionFrequency=30, # in milliseconds, scala=50
+#     out[[length(out) + 1]] <- kineOne
+#   }
+#   # additional class attribute?
+#   class(out) <- c("KinematicsFeatureSetList",class(out))
+#   return(out)
+# }
 
+
+#' extractKinematics
+#' 
+#' Calculate a set of kinematics parameter from a TrajectoryList object, or a single parameter, or from a single trajectory (all possible combinations)
+#' 
+#' The computed set of parameters include delta.x, delta.t and delta.v (displacements and instantaneous velocity), 
+#' totalTime, totalDistance, distStartToEnd, curvilinearVelocity, straightLineVelocity and linearityForwardProgression,
+#' Mean Squared Displacement and velocity autocorrelation.
+#' If a single trajectory is specified, the computation is performed for that trajectory alone.
+#' If a parameter is specified, only that parameter is reported, either for one or all trajectories
+#'    
+#' @param trajectorylist A TrajectoryList object
+#' @param trajectoryID The ID of a single trajectory
+#' @param acquisitionFrequency The frame rate of acquisition for the images, in milliseconds
+#' @param scala The value of micro(?)meters to which each single pixel corresponds
+#' @param feature Character string, the name of the feature to be computed
+#' 
+#' @return A KinematicsFeatureSetList object, or a KinematicsFeatureSet object, or an atomic value, or a list(eventually coerced to a vector)
+#'  
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+extractKinematics <- function(trajectorylist,
+                              trajectoryID=NULL,
+                              acquisitionFrequency=30, # in milliseconds
+                              scala=50, # 1 pixel is ... micrometer
+                              feature=NULL
+                              )
+{
+  # compute all, for one or all trajectories
+  if(!is.null(trajectoryID)) # then operate on a single trajectory
+  {
+    
+    kineSet.out <- extractKinematics.traj(trajectorylist,trajectoryID,acquisitionFrequency=acquisitionFrequency,scala=scala) # returns a KinematicsFeatureSet object
+    # then eventually just report the desired kinematic feature
+    if(is.null(feature))
+    {
+      return(kineSet.out)
+    } else {
+      kineFeat.out <- kineSet.out[[feature]]
+      if(is.null(kineFeat.out)) stop("You selected a feature whose name is not available in the set (or was not computed because the trajectory was too short).
+                                      Please select one among delta.x, delta.t, delta.v, totalTime, totalDistance, distStartToEnd, curvilinearVelocity, straightLineVelocity, 
+                                      linearityForwardProgression, trajMSD or velocityAutoCorr")
+      return(kineFeat.out)
+    }
+    
+  } else { # it will be done on all trajectories of the trajectorylist
+    {
+      kineSetList.out <- list()
+      for(i in 1:length(trajectorylist))
+      {
+        kineOne <- extractKinematics.traj(trajectorylist,i,acquisitionFrequency=acquisitionFrequency,scala=scala) #, acquisitionFrequency=30, # in milliseconds, scala=50
+        kineSetList.out[[length(kineSetList.out) + 1]] <- kineOne
+      }
+      # additional class attribute?
+      class(kineSetList.out) <- c("KinematicsFeatureSetList",class(kineSetList.out)) # it is a list of KinematicsFeatureSet objects
+    }
+    # then eventually just report the desired kinematic feature
+    if(is.null(feature))
+    {
+      return(kineSetList.out)
+    } else {
+      kineFeatList.out <- lapply(kineSetList.out,function(arg){arg[[feature]]})
+      if(all(unlist(lapply(kineFeatList.out,function(arg){is.null(arg)})))) stop("You selected a feature whose name is not available in the set (or was not computed because
+                                                                                the trajectory was too short). Please select one among delta.x, delta.t, delta.v, totalTime,
+                                                                                totalDistance, distStartToEnd, curvilinearVelocity, straightLineVelocity, 
+                                                                                linearityForwardProgression, trajMSD or velocityAutoCorr")
+      if(feature %in% c("totalTime","totalDistance","distStartToEnd","curvilinearVelocity","straightLineVelocity","linearityForwardProgression"))
+      {
+        kineFeatList.out <- unlist(kineFeatList.out)
+      }
+      return(kineFeatList.out)
+    }
+  }
+}
+
+
+
+
+
+#' computeMSD
+#' 
+#' Calculates the Mean Squared Displacement for a trajectory
+#'  
+#' @param sx x axis positions along the trajectory
+#' @param sy y axis positions along the trajectory
+#' @param until how many points should be included in the Mean Squared Displacement curve
+#' 
+#' @return A numeric vector containing the values of the MSD
+#' 
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 computeMSD <- function(sx,sy,until=4)
 {
   msd.t <- rep(0,until)
@@ -73,6 +195,19 @@ computeMSD <- function(sx,sy,until=4)
 
 
 
+#' toPolarCoords
+#' 
+#' Converts cartesian coordinates to polar coordinates
+#' 
+#' Conversion from (x,y) to (radius,theta)
+#'  
+#' @param x x coordinate
+#' @param y y coordinate
+#' 
+#' @return A list containing Theta and Radius, as in polar coordinates
+#'  
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 toPolarCoords <- function(x,y)
 {
   Theta <- atan2(y,x)
@@ -81,6 +216,19 @@ toPolarCoords <- function(x,y)
 }
 
 
+#' toCartesianCoords
+#' 
+#' Converts polar coordinates to cartesian coordinates
+#' 
+#' Conversion from (radius,theta) to (x,y)
+#'  
+#' @param Theta The Theta angle
+#' @param Radius The radius value in polar coordinates
+#' 
+#' @return A list containing Theta and Radius, as in polar coordinates
+#'  
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 toCartesianCoords <- function(Theta,Radius)
 {
   xCoord <- Radius * cos(Theta)
@@ -90,35 +238,56 @@ toCartesianCoords <- function(Theta,Radius)
 
 
 
-extractKinematics.TrajectoryList <- function(trajectorylist,
-                                             ...) # for frame rate and spatial scala
-{
-  out <- list()
-  for(i in 1:length(trajectorylist))
-  {
-    kineOne <- extractKinematics.traj(trajectorylist,i) #, acquisitionFrequency=30, # in milliseconds, scala=50
-    out[[length(out) + 1]] <- kineOne
-  }
-  # additional class attribute?
-  class(out) <- c("KinematicsFeatureSetList",class(out))
-  return(out)
-}
 
 
 
-velohist <- function(kinematicsfeaturesetlist)
-{
-  curvilinearVelocities <- unlist(lapply(kinematicsfeaturesetlist,function(arg){arg$curvilinearVelocity}))
-  hist(curvilinearVelocities,breaks=20,probability=TRUE)
-  lines(density(curvilinearVelocities),col="steelblue")
-}
+# #' velohist
+# #' @description
+# #' @details
+# #'  
+# #' @param
+# #' @param
+# #' 
+# #' @return
+# #' 
+# #' @keywords
+# #' @seealso
+# #' @references
+# #' 
+# #' @examples
+# #' 
+# #' @export
+# #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+# velohist <- function(kinematicsfeaturesetlist)
+# {
+#   curvilinearVelocities <- unlist(lapply(kinematicsfeaturesetlist,function(arg){arg$curvilinearVelocity}))
+#   hist(curvilinearVelocities,breaks=20,probability=TRUE)
+#   lines(density(curvilinearVelocities),col="steelblue")
+# }
 
 
 
-distanceDiagnostics <- function()
-{
-  cat("something computing distances intra-particles- raises a flag/warning if distances (normalized) are less than 1.5 radius or so...")
-}
+# #' distanceDiagnostics
+# #' @description
+# #' @details
+# #'  
+# #' @param
+# #' @param
+# #' 
+# #' @return
+# #' 
+# #' @keywords
+# #' @seealso
+# #' @references
+# #' 
+# #' @examples
+# #' 
+# #' @export
+# #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+# distanceDiagnostics <- function()
+# {
+#   cat("something computing distances intra-particles- raises a flag/warning if distances (normalized) are less than 1.5 radius or so...")
+# }
 
 # 
 # 

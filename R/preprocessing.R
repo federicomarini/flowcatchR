@@ -44,7 +44,7 @@ cut.FrameList <- function(x,
     return(out)
   } else {
     # just check on one image, the first one
-    img <- framelist[[1]]$image
+    img <- x[[1]]$image
     cutoutImg <- img[cutLeft:(dim(img)[1]-cutRight),cutUp:(dim(img)[2]-cutDown),]
     display(cutoutImg)
     return(cutoutImg)
@@ -135,15 +135,17 @@ preprocess <- function(x,...)
 #' 
 #' ChannelsFrameList are then subset to the chosen channel, and the method preprocess.FrameList is then applied, with its set of parameters
 #'  
-#' @param channelsframelist A ChannelsFrameList object
+#' @param x A ChannelsFrameList object
 #' @param channel Character string. The channel to perform the operations on. Can be "red", "green" or "blue"
+#' @param ... Arguments to be passed to methods
 #' 
 #' @return A FrameList object, whose frame images are the preprocessed versions of the input images
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
-preprocess.ChannelsFrameList <- function(channelsframelist,
-                                         channel="") # HARALD: should i put here also the ...? and also in the function code too?
+preprocess.ChannelsFrameList <- function(x,
+                                         channel="",
+                                         ...) # HARALD: should i put here also the ...? and also in the function code too?
 {
   cat("do that")
   # call on red OR
@@ -152,15 +154,15 @@ preprocess.ChannelsFrameList <- function(channelsframelist,
   switch(channel,
          red={
            cat("Preprocessing the red channel!\n")
-           out <- preprocess.FrameList(channelsframelist[[1]])
+           out <- preprocess.FrameList(x[[1]])
            }, 
          green={
            cat("Preprocessing the green channel!\n")
-           out <- preprocess.FrameList(channelsframelist[[2]])
+           out <- preprocess.FrameList(x[[2]])
          },
          blue={
            cat("Preprocessing the blue channel!\n")
-           out <- preprocess.FrameList(channelsframelist[[3]])
+           out <- preprocess.FrameList(x[[3]])
          },
          stop("You did not choose any of the value for the channel - allowed values= red | green | blue")
   )
@@ -174,7 +176,7 @@ preprocess.ChannelsFrameList <- function(channelsframelist,
 #' FrameList objects are processed according to the chosen set of parameters. Many of them refer directly to 
 #' existing EBImage functions, please see the corresponding help for additional information
 #'  
-#' @param framelist A FrameList object
+#' @param x A FrameList object
 #' @param brushSize Size in pixels of the brush to be used for initial smoothing
 #' @param brushShape Shape of the brush to be used for initial smoothing
 #' @param adaptOffset Offset to be used in the adaptive thresholding step
@@ -187,12 +189,13 @@ preprocess.ChannelsFrameList <- function(channelsframelist,
 #' @param displayprocessing Logical, whether to display intermediate steps while performing preprocessing. Dismissed currently, it could increase runtime a lot
 #' @param areaThresholdMin Size in pixels of the minimum area needed to detect the object as a potential particle of interest
 #' @param areaThresholdMax Size in pixels of the maximum area allowed to detect the object as a potential particle of interest
+#' @param ... Arguments to be passed to methods
 #' 
 #' @return A FrameList object, whose frame images are the preprocessed versions of the input images
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
-preprocess.FrameList <- function(framelist,
+preprocess.FrameList <- function(x,
                                  brushSize=3,
                                  brushShape="disc",
                                  adaptOffset=0.15,
@@ -204,15 +207,16 @@ preprocess.FrameList <- function(framelist,
                                  watershedRadius=1,
                                  displayprocessing=FALSE,
                                  areaThresholdMin=5,
-                                 areaThresholdMax=100) # for the single channel images/for one channel of multi-channel images
+                                 areaThresholdMax=100,
+                                 ...) # for the single channel images/for one channel of multi-channel images
 {
   cat("do this - processing the single channel")
-  out <- vector(length(framelist),mode="list")
+  out <- vector(length(x),mode="list")
   class(out) <- c("FrameList",class(out))
   
-  for(i in 1:length(framelist))
+  for(i in 1:length(x))
   {
-    rawimg <- framelist[[i]]$image
+    rawimg <- x[[i]]$image
     colorMode(rawimg) <- Grayscale
     
     flo = makeBrush(brushSize, brushShape, step=FALSE)^2
@@ -227,8 +231,8 @@ preprocess.FrameList <- function(framelist,
     watershed_thre <- watershed(distmap_thre,tolerance=watershedTolerance,ext=watershedRadius) 
   
     out[[i]]$image <- watershed_thre
-    out[[i]]$channel <- framelist[[i]]$channel
-    out[[i]]$location <- framelist[[i]]$location  # or maybe call it location raw? 
+    out[[i]]$channel <- x[[i]]$channel
+    out[[i]]$location <- x[[i]]$location  # or maybe call it location raw? 
   }
   return(out)
 }

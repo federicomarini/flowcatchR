@@ -12,7 +12,7 @@ newFrameList(nframes, imgsLocation)
 }
 \value{
 An object of the \code{FrameList} class, which holds the info on a list of frames, specifying for each the following elements:
-\item{image}{The Image object containing the image itself}
+\item{image}{The \code{Image} object containing the image itself}
 \item{location}{The complete path to the location of the original image}
 }
 \description{

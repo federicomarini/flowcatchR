@@ -312,42 +312,44 @@ newParticleList <- function()
 #' 
 #' Method for displaying conveniently a ParticleList object
 #'  
-#' @param particlelist A ParticleList object
+#' @param x A ParticleList object
+#' @param ... Arguments to be passed to methods
 #' 
 #' @method print ParticleList
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
-print.ParticleList <- function(particlelist)
+print.ParticleList <- function(x,...)
 {
   cat("An object of the ParticleList class. \n\n")
-  cat("List of particles for",length(particlelist),"images\n\n")
-  cat("Displaying a subset of the features of the",nrow(particlelist[[1]]$particles),"particles found in the first image...\n")
-  linesToShow <- min(5,nrow(particlelist[[1]]$particles))
-  print(particlelist[[1]]$particles[1:linesToShow,1:8])
-  cat("\nParticles identified on the",particlelist[[1]]$channel,"channel\n")
+  cat("List of particles for",length(x),"images\n\n")
+  cat("Displaying a subset of the features of the",nrow(x[[1]]$particles),"particles found in the first image...\n")
+  linesToShow <- min(5,nrow(x[[1]]$particles))
+  print(x[[1]]$particles[1:linesToShow,1:8])
+  cat("\nParticles identified on the",x[[1]]$channel,"channel\n")
 }
 
 #' print.LinkedParticleList
 #' 
 #' Method for displaying conveniently a LinkedParticleList object
 #'  
-#' @param linkedparticlelist A LinkedParticleList object
+#' @param x A LinkedParticleList object
+#' @param ... Arguments to be passed to methods
 #' 
 #' @method print LinkedParticleList
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
-print.LinkedParticleList <- function(linkedparticlelist)
+print.LinkedParticleList <- function(x,...)
 {
   cat("An object of the linkedParticleList class. \n\n")
-  cat("List of linked particles for",length(linkedparticlelist),"images\n\n")
-  cat("Particles were tracked throughout the subsequent",ncol(linkedparticlelist[[1]]$nxt),"frame(s)\n\n" )
+  cat("List of linked particles for",length(x),"images\n\n")
+  cat("Particles were tracked throughout the subsequent",ncol(x[[1]]$nxt),"frame(s)\n\n" )
   
-  cat("Displaying a subset of the features of the",nrow(linkedparticlelist[[1]]$particles),"particles found in the first image...\n")
-  linesToShow <- min(5,nrow(linkedparticlelist[[1]]$particles))
-  print(linkedparticlelist[[1]]$particles[1:linesToShow,1:8])
-  cat("\nParticles identified on the",linkedparticlelist[[1]]$channel,"channel\n")
+  cat("Displaying a subset of the features of the",nrow(x[[1]]$particles),"particles found in the first image...\n")
+  linesToShow <- min(5,nrow(x[[1]]$particles))
+  print(x[[1]]$particles[1:linesToShow,1:8])
+  cat("\nParticles identified on the",x[[1]]$channel,"channel\n")
 }
 
 
@@ -393,20 +395,21 @@ initialize.ParticleList <- function(particlelist,
 #' 
 #' Method for displaying conveniently a TrajectoryList object
 #'  
-#' @param trajectorylist A TrajectoryList object
+#' @param x A TrajectoryList object
+#' @param ... Arguments to be passed to methods
 #' 
 #' @method print TrajectoryList
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
-print.TrajectoryList <- function(trajectorylist)
+print.TrajectoryList <- function(x,...)
 {
   cat("An object of the TrajectoryList class. \n\n")
-  cat("TrajectoryList composed of",length(trajectorylist),"trajectories\n\n")
+  cat("TrajectoryList composed of",length(x),"trajectories\n\n")
   
-  cat("Trajectories cover a range of",max(unlist(lapply(trajectorylist,function(arg){(arg$trajectory$frame)}))) + 1,"frames\n") # not taking things in frame100 or smthing else happens?
+  cat("Trajectories cover a range of",max(unlist(lapply(x,function(arg){(arg$trajectory$frame)}))) + 1,"frames\n") # not taking things in frame100 or smthing else happens?
   cat("Displaying a segment of the first trajectory...\n")
-  print(trajectorylist[[1]]$trajectory[1:min(10,nrow(trajectorylist[[1]]$trajectory)),])
+  print(x[[1]]$trajectory[1:min(10,nrow(x[[1]]$trajectory)),])
   
   
 }

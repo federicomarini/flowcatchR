@@ -1,4 +1,27 @@
-
+#' link.ParticleList
+#' 
+#' Performs linking of the particles by tracking them through the frames
+#' 
+#' 
+#' @param particlelist A ParticleList object
+#' @param L Maximum number of pixels an object can move in two consecutive frames
+#' @param R Linkrange, i.e. the number of consecutive frames to search for potential candidate links
+#' @param epsilon1 A numeric value, to be used in the formula. Jitter for allowing angular displacements
+#' @param epsilon2 A numeric value, to be used in the formula. Jitter for allowing spatial displacements
+#' @param lambda1 A numeric value. Multiplicative factor for the penalty function
+#' @param lambda2 A numeric value. Multiplicative factor applied to the angular displacement
+#' @param penaltyFunction A function structured in such a way to be applied as penalty function in the linking
+#' @param nframes Numeric value. Number of frames where the linking should be performed 
+#' @param verboseOutput Logical, whether the output should report additional intermediate steps. For debugging use mainly
+#' @param useIntensityChange Logical, whether to include also intensity change of the particles in the cost function calculation
+#' @param useAreaChange Logical, whether to include also area change of the particles in the cost function calculation
+#' 
+#' @references Sbalzarini et al.?
+#' 
+#' @return A LinkedParticleList object
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 link.ParticleList <- function(particlelist,
                               L,
                               R=2,
@@ -205,6 +228,19 @@ link.ParticleList <- function(particlelist,
 
 
 
+#' penaltyFunctionGenerator
+#' 
+#' A function to generate penalty functions to use while linking particles
+#' 
+#' @param epsilon1 A numeric value, to be used in the formula. Jitter for allowing angular displacements
+#' @param epsilon2 A numeric value, to be used in the formula. Jitter for allowing spatial displacements
+#' @param lambda1 A numeric value. Multiplicative factor for the penalty function
+#' @param lambda2 A numeric value. Multiplicative factor applied to the angular displacement
+#' 
+#' @return A function object, to be used as penalty function
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 penaltyFunctionGenerator <- function(epsilon1=0.1,
                                      epsilon2=2,
                                      lambda1=1,
@@ -215,13 +251,7 @@ penaltyFunctionGenerator <- function(epsilon1=0.1,
   function(angle,distance) { 
     lambda1 * ( distance/ (1-lambda2*(angle/(pi+epsilon1))))
   }
-  
-  
 }
-
-
-
-
 
 
 

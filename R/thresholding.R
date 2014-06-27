@@ -1,8 +1,16 @@
 
 
-################
-## needs to be revisited!
-#
+#' otsuThreshold
+#' 
+#' Determines the value for the threshold grey level according to the Otsu method 
+#'  
+#' @param input_image An Image object
+#' @param nr_bit Number of bits to use for discretizing the levels
+#' 
+#' @return A numeric value
+#'  
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 otsuThreshold <- function (input_image,nr_bit=16)  # use all channels?
 {
   # image is read through readImage from EBImage
@@ -90,6 +98,18 @@ otsuThreshold <- function (input_image,nr_bit=16)  # use all channels?
 
 ################
 
+#' kittlerillingerThreshold
+#' 
+#' Determines the value for the threshold grey level according to the Kittler-Illinger method 
+#'   
+#' @param input_image An Image object
+#' @param nr_bit Number of bits to use for discretizing the levels
+#' 
+#' @return A numeric value
+#' 
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 kittlerillingerThreshold <- function (input_image,nr_bit=8)  # use all channels?
 {
   greyVec <- input_image

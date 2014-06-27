@@ -1,6 +1,22 @@
 
 # to be used in combination with a binary image - segmented e.g. via watershed/other methods
 
+#' reproducibleColorLabels
+#' 
+#' Color codes the labels of object masks by a random permutation
+#' 
+#' The labels of object masks are coloured this time in a "random but reproducible way", by setting a seed at the beginning of the function
+#' 
+#' @param x an Image object in Grayscale color mode or an array containing object masks
+#' @param normalize Logical, if TRUE normalizes the resulting color image
+#' 
+#' @return An Image object with color coded objects
+#' 
+#' @references colorLabels in the EBImage package
+#' 
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 reproducibleColorLabels <- function (x, normalize = TRUE) 
 {
   set.seed(123)

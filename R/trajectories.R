@@ -1,4 +1,16 @@
 
+#' generate.TrajectoryList
+#' 
+#' Generates a TrajectoryList object from a LinkedParticleList
+#' 
+#' @param particlelist A ParticleList object
+#' @param provideExtraDetails Logical, currently not used - could be introduced for providing additional info on the trajectories
+#' @param ... Arguments to be passed to methods
+#' 
+#' @return A TrajectoryList object
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 generate.TrajectoryList <- function(particlelist,
                                     provideExtraDetails=FALSE,
                                     ... # parameters for the eventual tracking - is it possible to do so? ask harald!
@@ -81,6 +93,16 @@ generate.TrajectoryList <- function(particlelist,
 # cubeLimits <- list(xlim=c(0,imgDimensions[1]),ylim=c(0,imgDimensions[2]),tlim=c(0,nframes))
 
 
+#' axesInfo
+#' 
+#' Auxiliary function to return the dimensions of the field of interest
+#'  
+#' @param framelist A FrameList object
+#' 
+#' @return A list object, containing the extremes of the field of interest (x-y-z, where z is time)
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 axesInfo <- function(framelist)
 {
   imgDimensions <- dim(framelist[[1]]$image)
@@ -88,6 +110,18 @@ axesInfo <- function(framelist)
 }
 
 
+#' display.TrajectoryList
+#' 
+#' Provides a visual representation of a TrajectoryList object
+#' 
+#' Based on the rgl library, the function extracts the region of interests from the dimensions of an image of the FrameList object,
+#' and afterwards plots the x-y-time representation of the identified trajectories
+#' 
+#' @param trajectorylist A TrajectoryList object
+#' @param framelist A FrameList object, used here to identify the limits of the region of interest 
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 display.TrajectoryList <- function(trajectorylist,framelist)
 {
   trajectoryDataFrame <- do.call(rbind.data.frame,lapply(trajectorylist,function(arg){arg$trajectory}))
@@ -106,6 +140,20 @@ display.TrajectoryList <- function(trajectorylist,framelist)
 
 
 
+#' paintTrajectory
+#' 
+#' Creates a FrameList objects containing raw information, combined with the segmented images and the relative trajectory under analysis
+#' 
+#' @param trajectorylist A TrajectoryList object
+#' @param rawframelist A FrameList object with raw images
+#' @param preprocessedframelist A FrameList object with preprocessed frames
+#' @param trajId Numeric value, the ID of the trajectory 
+#' 
+#' @return A new FrameList object
+#' 
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 paintTrajectory <- function(trajectorylist,rawframelist,preprocessedframelist,trajId)
 {
   # doing it on one single traj
@@ -145,6 +193,22 @@ paintTrajectory <- function(trajectorylist,rawframelist,preprocessedframelist,tr
 
 
 
+#' evaluateTrajectoryList
+#' 
+#' A pseudo-interactive function to inspect and accept/reject trajectories of a TrajectoryList object
+#'  
+#' The user gets the trajectories displayed singularly, and for each a keyboard input is required.
+#' The slot corresponding to the user feedback is interactively filled in. The TrajectoryList object is then ready for further operations
+#' 
+#' @param trajectorylist A TrajectoryList object
+#' @param rawframelist A FrameList object with raw images
+#' @param preprocessedframelist A FrameList object with preprocessed frames
+#' 
+#' @return A new TrajectoryList object
+#'
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 evaluateTrajectoryList <- function(trajectorylist,
                                    rawframelist,
                                    preprocessedframelist
