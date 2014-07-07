@@ -3,7 +3,7 @@
 \alias{display.TrajectoryList}
 \title{display.TrajectoryList}
 \usage{
-\method{display}{TrajectoryList}(trajectorylist, framelist)
+display.TrajectoryList(trajectorylist, framelist)
 }
 \arguments{
 \item{trajectorylist}{A TrajectoryList object}
