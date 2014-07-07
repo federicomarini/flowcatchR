@@ -29,7 +29,19 @@ extractKinematics.traj <- function(trajectorylist,
   if(nrow(singleTraj) < 4)
   {
     warning(paste0("The trajectory with ID ",trajectoryID," had 3 or less points, no features were computed!"))
-    out <- list(paramsNotComputed=TRUE)
+    out <- list(delta.x=NA,
+                delta.t=NA,
+                delta.v=NA,
+                totalTime=NA,
+                totalDistance=NA,
+                distStartToEnd=NA,
+                curvilinearVelocity=NA,
+                straightLineVelocity=NA,
+                linearityForwardProgression=NA,
+                trajMSD=NA,
+                velocityAutoCorr=NA,
+                paramsNotComputed=TRUE
+    )
     class(out) <- c("KinematicsFeatureSet",class(out))
     return(out)
   }

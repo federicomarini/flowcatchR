@@ -72,7 +72,7 @@ generate.TrajectoryList <- function(particlelist,
     }
   }
   
-  
+  cat("Done!\n")
   return(out)
 }
 

@@ -416,6 +416,64 @@ print.TrajectoryList <- function(x,...)
 
 
 
+#' print.KinematicsFeatureSet
+#' 
+#' Method for displaying conveniently a KinematicsFeatureSet object
+#'  
+#' @param x A KinematicsFeatureSet object
+#' @param ... Arguments to be passed to methods
+#' 
+#' @method print KinematicsFeatureSet
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+print.KinematicsFeatureSet <- function(x,...)
+{
+  cat("An object of the KinematicsFeatureSet class. \n\n")
+  cat("KinematicsFeatureSet composed of",length(x) - 1,"atomic/vectorial features\n\n")
+  cat("The features describe a trajectory of",length(x$delta.x) + 1,"points\n")
+  
+  cat("Available features:\n")
+  print(names(x))
+  cat("\n")
+  cat("Curvilinear Velocity:",x$curvilinearVelocity,"\n")
+  cat("Total Distance:",x$totalDistance,"\n")
+  cat("Total Time:",x$totalTime,"\n")
+  
+}
+
+
+#' print.KinematicsFeatureSetList
+#' 
+#' Method for displaying conveniently a KinematicsFeatureSetList object
+#'  
+#' @param x A KinematicsFeatureSetList object
+#' @param ... Arguments to be passed to methods
+#' 
+#' @method print KinematicsFeatureSetList
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+print.KinematicsFeatureSetList <- function(x,...)
+{
+  cat("An object of the KinematicsFeatureSetList class. \n\n")
+  cat("KinematicsFeatureSetList composed of",length(x)," KinematicsFeatureSet objects\n\n")
+    
+  cat("Available features (shown for the first trajectory):\n")
+  print(names(x[[1]]))
+  cat("\n")
+  cat("Curvilinear Velocity:",x[[1]]$curvilinearVelocity,"\n")
+  cat("Total Distance:",x[[1]]$totalDistance,"\n")
+  cat("Total Time:",x[[1]]$totalTime,"\n\n")
+  
+  cat("Average values (calculated on",sum(unlist(lapply(x,function(arg){arg[["paramsNotComputed"]]}))),"trajectories where parameters were computed)\n")
+  cat("Average Curvilinear Velocity:",mean(unlist(lapply(x,function(arg){arg[["curvilinearVelocity"]]})),na.rm=TRUE),"\n")
+  cat("Average Total Distance:",mean(unlist(lapply(x,function(arg){arg[["totalDistance"]]})),na.rm=TRUE),"\n")
+  cat("Average Total Time:",mean(unlist(lapply(x,function(arg){arg[["totalTime"]]})),na.rm=TRUE),"\n")
+  
+}
+
+
 #' repmat
 #' 
 #' Function equivalent for MATLAB's repmat - Replicate and tile arrays

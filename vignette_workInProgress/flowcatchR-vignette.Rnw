@@ -43,7 +43,7 @@ opts_chunk$set(fig.path='./figures/flowcatchR-',
                warning = FALSE,
                size='small',
                comment=NA,
-               echo=FALSE,
+               echo=TRUE, # set to true for the vignette!
                results='hide')
 options(replace.assign=TRUE,width=80)
 @
@@ -101,13 +101,28 @@ Essential features \Biocpkg{flowcatchR} delivers to the user are:
 This guide includes a brief overview of the entire processing flow, from raw images to analysis of kinematic parameters derived from the identified trajectories. An example dataset will be used to illustrate the available features, in order to track blood platelets in consecutive frames derived from an intravital microscopy acquisition (also available as a subset in the Data folder of the package). All steps will be dissected to explore parameters and options available.() A second example? ()Finally, a detailed explanation is given for the implementation of the algorithm used for particle tracking.
 
 \section{Processing overview}
-\flowcatchR works primarily with sets of fluorescent time-lapse images, where the particles of interest are marked with a fluorescent label (e.g., red for blood platelets, green for leukocytes). Although different entry spots are provided (such as the coordinates of identified points in each frame via tab delimited files), we will illustrate the characteristics of the package starting from a set of 20 frames derived from an intravital microscopy acquisition.
+\flowcatchR works primarily with sets of fluorescent time-lapse images, where the particles of interest are marked with a fluorescent label (e.g., red for blood platelets, green for leukocytes). Although different entry spots are provided (such as the coordinates of identified points in each frame via tab delimited files), we will illustrate the characteristics of the package starting from a set of 20 frames derived from an intravital microscopy acquisition, which for the sake of practicity were already registered to reduce the unwanted specimen movements. []ref to SPIM, imageJ \& co
 
-<<>>=
-
+<<loadData>>=
+library("flowcatchR")
+load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
 @
 
+To obtain the set of trajectories identified from the analysis of the loaded frames, a 6-step script is all that is needed:
 
+<<workflowCompact,eval=FALSE>>=
+plateletsMesenterium <- createChannelsFrameList(MesenteriumSubset)
+preprocessedPlatelets <- preprocess(plateletsMesenterium,channel="red")
+particlesPlatelets <- extractParticles(plateletsMesenterium[[1]], # use just red channel
+                                       preprocessedPlatelets)
+linkedPlatelets <- link.ParticleList(particlesPlatelets,
+                                     L=26,R=3,epsilon1=0,epsilon2=0,lambda1=1,lambda2=0,
+                                     nframes=20,useAreaChange=FALSE) # parameters for tracking
+trajectoryPlatelets <- generate.TrajectoryList(linkedPlatelets)
+kinematicsPlatelets <- extractKinematics(trajectoryPlatelets)
+@
+
+The following sections will provide additional detail to the steps mentioned above, with more also on the auxiliary function that are available in \flowcatchR.
 \section{}
 \section{}
 \section{}

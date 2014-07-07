@@ -278,14 +278,14 @@ extractParticles <- function(framelistRaw,
     if(is(framelistRaw,"ChannelsFrameList"))
     {
       framelistRaw <- framelistRaw[[channel]]
-      framelistProcessed <- preprocess.FrameList(framelistRaw)
+      framelistPreprocessed <- preprocess.FrameList(framelistRaw)
     } else {
       framelistPreprocessed <- preprocess.FrameList(framelistRaw)
     }
   }
   
   # check that both input framelists have same length!
-  if(length(framelistRaw) != length(framelistProcessed) )
+  if(length(framelistRaw) != length(framelistPreprocessed) )
   {
     stop("FrameList objects have different lengths!")
   } else {
@@ -299,14 +299,14 @@ extractParticles <- function(framelistRaw,
   
   for(i in 1:length(framelistRaw))
   {
-    segmImg <- framelistProcessed[[i]]$image
+    segmImg <- framelistPreprocessed[[i]]$image
     rawImg <- framelistRaw[[i]]$image
     
     imgFeatures <- as.data.frame(computeFeatures(segmImg,rawImg,xname="cell"))
     
     out[[i]]$particles <- imgFeatures
-    out[[i]]$imgSource <- framelistProcessed[[i]]$location
-    out[[i]]$channel <- framelistProcessed[[i]]$channel
+    out[[i]]$imgSource <- framelistPreprocessed[[i]]$location
+    out[[i]]$channel <- framelistPreprocessed[[i]]$channel
   }
   cat("Done!\n")
   return(out)
