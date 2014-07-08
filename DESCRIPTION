@@ -17,6 +17,9 @@ Description: flowcatchR is a set of tools to analyze in vivo microscopy imaging
     hemostasis and study of thrombosis development.
 License: BSD_3_clause + file LICENSE
 VignetteBuilder: knitr
-Suggests: BiocStyle
+Suggests:
+    BiocStyle
 Depends:
-    R (>= 2.10), EBImage, rgl
+    R (>= 2.10),
+    EBImage,
+    rgl
