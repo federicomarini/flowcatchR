@@ -94,10 +94,15 @@ inspect.frames <- function(framelist,
                            nframes=NULL,
                            inspectAll=FALSE)
 {
-  if(inspectAll & is.null(nframes)) 
+  if(is.null(nframes))
   {
-    nframes <- length(framelist)
-  }
+    if(inspectAll)
+    {
+      nframes <- length(framelist)
+    } else {
+      nframes <- min(10,length(framelist)) # set to 10 as default, or to the length of the object itself, bzw which is shorter
+    }
+  } 
   
   if(nframes > 10)
   {
@@ -240,11 +245,10 @@ channels <- function(framelist)
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 export.frames <- function(framelist,
-                             folder="/Users/fede/TEMP/exportFrameList/",
-                             nameStub="testExport",
-                             createGif=FALSE,
-                             removeAfterCreatingGif=TRUE
-                             )
+                          folder="/Users/fede/TEMP/exportFrameList/",
+                          nameStub="testExport",
+                          createGif=FALSE,
+                          removeAfterCreatingGif=TRUE)
 {
   if(!file.exists(folder))
   {
@@ -264,6 +268,7 @@ export.frames <- function(framelist,
   {
     file.remove(list.files(path=folder,pattern=paste0(".png"),full.names=TRUE))
   }
+  invisible()
 }
 
 

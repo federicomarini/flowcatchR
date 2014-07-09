@@ -18,7 +18,7 @@ papa <- particles(framelistRaw,framelistProcessed)
 qaqa <- select.particles(particlelist=papa)
 # rara <- initialize.ParticleList(qaqa)
 sum(unlist(lapply(qaqa,function(arg){nrow(arg$particles)})))
-[1] 1749
+# [1] 1749
 
 sasa <- link.particles(qaqa,L=26,R=3,epsilon1=0,epsilon2=0,lambda1=1,lambda2=0,nframes=100,include.area=FALSE)
 tata <- trajectories(sasa)
@@ -28,14 +28,18 @@ rere <- add.contours(frameList1,framelistProcessed,tata,trajId=3)
 inspect.frames(rere)
 inspect.frames(rere,99,inspectAll=TRUE)
 
+rere2 <- add.contours2(frameList1,framelistProcessed,tata,trajId=3,mode="trajectories")
+
+rere3 <- add.contours2(frameList1,framelistProcessed,tata,trajId=c(3,4,5,6),mode="trajectories")
+rere4 <- add.contours2(frameList1,framelistProcessed,tata,mode="trajectories")
+export.frames(rere4,nameStub=paste0("new_evaluation_trajAll_"),createGif=TRUE,removeAfterCreatingGif=TRUE)
 
 
+# segseg <- combine.preprocessedFrameList(frameList1,framelistProcessed) # if framelist raw is with colors, then also the output is..
+# inspect.FrameList(framelist=segseg)
 
-segseg <- combine.preprocessedFrameList(frameList1,framelistProcessed) # if framelist raw is with colors, then also the output is..
-inspect.FrameList(framelist=segseg)
-
-segcsegc <- combineWcolor.preprocessedFrameList(frameList1,framelistProcessed)
-inspect.FrameList(framelist=segcsegc)
+# segcsegc <- combineWcolor.preprocessedFrameList(frameList1,framelistProcessed)
+# inspect.FrameList(framelist=segcsegc)
 
 
 
@@ -51,6 +55,42 @@ unlist(lapply(tataMOD,function(arg){arg$keep}))
 # [61] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
 # [91]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE    NA FALSE
 # [121] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+
+
+# export.frames(paintedTraj,nameStub=paste0("evaluation_traj_AllTrajectories"),createGif=TRUE,removeAfterCreatingGif=TRUE)
+# 
+# # "interactive" part, asking the user whether the trajectory is correct
+# 
+# 
+# # best thing, prompt for something like "did you like the trajectory? :)"
+# #   interactive() <- TRUE # does not work-..
+# #   if(interactive()==FALSE)  userInput <- readline(prompt="Should I keep this trajectory? --- 0: NO, 1:YES --- no other values allowed")
+# 
+# 
+# cat("Should I keep this trajectory? --- 0: NO, 1:YES --- no other values allowed")
+# userInput <- readLines(n = 1L)
+# #   userInput <- readline(prompt="Should I keep this trajectory? --- 0: NO, 1:YES --- no other values allowed")
+# # if no 0 nor 1, error/do not update, reprompt?
+# # otherwise, this becomes the value for the field
+# # ... else
+# out[[id]]$keep <- as.logical(as.numeric(userInput))
+
+tataEval <- tata
+for(i in 1:length(tata))
+{
+  paintedTraj <- inspect.trajectories(tata,frameList1,framelistProcessed,i,F)
+  export.frames(paintedTraj,nameStub=paste0("evaluation_traj_oneByOne_",i),createGif=TRUE,removeAfterCreatingGif=TRUE)
+  # take a sec to evaluate
+  # and eventually update the slot?
+  cat("Should I keep this trajectory? --- 0: NO, 1:YES --- no other values allowed")
+  userInput <- readLines(n = 1L)
+  # if no 0 nor 1, error/do not update, reprompt?
+  # otherwise, this becomes the value for the field
+  tataEval[[i]]$keep <- as.logical(as.numeric(userInput))
+  
+}
+
+
 
 
 # with the new code structure

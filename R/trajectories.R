@@ -313,10 +313,7 @@ add.contours2 <- function(raw.frames,
         counter <- counter +1
       }
     }  
-      
-    
-    
-    
+
     
   } else if(mode=="particles") # there is actually no need for the trajectorylist/trajId, and the col can be just one value ;)
   {
@@ -326,33 +323,9 @@ add.contours2 <- function(raw.frames,
     stop("The mode parameter must assume one value of the following: 'particles' or 'trajectories'!")
   }
     
- 
-    # doing it on one single traj
 
-#   #   for(i in 1:length(trajectories))
-#   i <- trajId
-#   {
-#     currentTraj <- trajectories[[i]]$trajectory
-#     framesIncluded <- currentTraj$frame
-#     subsetRaw <- subset(raw.frames,framesToKeep=framesIncluded)
-#     subsetProcessed <- subset(binary.frames,framesIncluded)
-#     
-#     out <- vector("list",length(framesIncluded))
-#     
-#     for (j in 1:length(out))
-#     {
-#       rawimg <- subsetRaw[[j]]$image
-#       segmimg <- subsetProcessed[[j]]$image
-#       singleObjectSegm <- segmimg
-#       singleObjectSegm[segmimg!=currentTraj$frameobjectID[j]] <- 0
-#       rawWithPaintedObj <- paintObjects(singleObjectSegm,rawimg,col="yellow") #  even more beautiful if i have red cells displayed and contour as YELLOW!
-#       
-#       out[[j]]$image <- rawWithPaintedObj 
-#     }  
-#   }
-#   class(out) <- c("FrameList",class(out))
+
   return(out)
-
 }
 
 
@@ -369,63 +342,60 @@ add.contours2 <- function(raw.frames,
 
 
 
-#' evaluateTrajectoryList
+#' inspect.trajectories
 #' 
-#' A pseudo-interactive function to inspect and accept/reject trajectories of a TrajectoryList object
-#'  
-#' The user gets the trajectories displayed singularly, and for each a keyboard input is required.
+#' A function to inspect single trajectories from a TrajectoryList object
+#' 
+#' Basically it add the contours to just one object, and returns a FrameList object which is a subset of the input one
+#' The length of the returned object corresponds exactly the length of the identified trajectory, so uninteresting frames will be skipped
+#' 
+#' 
+#' OLD: A pseudo-interactive function to inspect and accept/reject trajectories of a TrajectoryList object
+#' OLD: The user gets the trajectories displayed singularly, and for each a keyboard input is required.
 #' The slot corresponding to the user feedback is interactively filled in. The TrajectoryList object is then ready for further operations
 #' 
 #' @param trajectorylist A TrajectoryList object
 #' @param rawframelist A FrameList object with raw images
 #' @param preprocessedframelist A FrameList object with preprocessed frames
+#' @param trajID A numeric value, storing the ID of trajectory which is under inspection
+#' @param browse Logical, whether to automatically open the painted trajectory to inspect
 #' 
-#' @return A new TrajectoryList object
+#' @return A new TrajectoryList object -NO! Returns now a FrameList object, and this can be used to evaluate the trajectory
 #'
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
-evaluateTrajectoryList <- function(trajectorylist,
-                                   rawframelist,
-                                   preprocessedframelist
-                                   #,trajID
-                                   )
+inspect.trajectories <- function(trajectorylist,
+                                 rawframelist,
+                                 preprocessedframelist,
+                                 trajID,
+                                 browse=TRUE)
 {
-#   out <- vector("list",length(trajectorylist))
-  out <- trajectorylist # initialized as the input object, which is afterwards modified in the corresponding slot
-  #   id <- 1 # just for trajId =1 now, then could be actually be done cycling on the trajectories
-  for (id in 1:length(trajectorylist))
+  currentTraj <- trajectories[[trajID]]$trajectory
+  framesIncluded <- currentTraj$frame
+  subsetRaw <- subset(rawframelist,framesToKeep=framesIncluded)
+  subsetProcessed <- subset(preprocessedframelist,framesIncluded)
+  
+  out <- vector("list",length(framesIncluded))
+  
+  for (j in 1:length(out))
   {
-    cat("Evaluating trajectory",id,"...\n")
-    # create painted trajs...
-    paintedTraj <- add.contours(trajectorylist,rawframelist,preprocessedframelist,id)
-    # display it for checking purposes
-#     fullInspection.FrameList(paintedTraj)
-    # export it also as gif
-    export.frames(paintedTraj,nameStub=paste0("evaluation_traj_",id),createGif=TRUE,removeAfterCreatingGif=TRUE)
+    rawimg <- subsetRaw[[j]]$image
+    segmimg <- subsetProcessed[[j]]$image
+    singleObjectSegm <- segmimg
+    singleObjectSegm[segmimg!=currentTraj$frameobjectID[j]] <- 0
+    rawWithPaintedObj <- paintObjects(singleObjectSegm,rawimg,col="yellow") #  even more beautiful if i have red cells displayed and contour as YELLOW!
     
-    # "interactive" part, asking the user whether the trajectory is correct
-    
-    
-    # best thing, prompt for something like "did you like the trajectory? :)"
-    #   interactive() <- TRUE # does not work-..
-    #   if(interactive()==FALSE)  userInput <- readline(prompt="Should I keep this trajectory? --- 0: NO, 1:YES --- no other values allowed")
-
-    
-    cat("Should I keep this trajectory? --- 0: NO, 1:YES --- no other values allowed")
-    userInput <- readLines(n = 1L)
-    #   userInput <- readline(prompt="Should I keep this trajectory? --- 0: NO, 1:YES --- no other values allowed")
-    # if no 0 nor 1, error/do not update, reprompt?
-    # otherwise, this becomes the value for the field
-    # ... else
-    out[[id]]$keep <- as.logical(as.numeric(userInput))
-    
-    
-    ## TODO somehow not expecting the user prompting the value... "no interactive run".. 
+    out[[j]]$image <- rawWithPaintedObj 
   }
-
+  class(out) <- c("FrameList",class(out))
+  if(browse) inspect.frames(out)
   return(out)
 }
+
+  
+  
+  
 
 
 
