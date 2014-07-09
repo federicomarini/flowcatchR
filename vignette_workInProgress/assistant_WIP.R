@@ -3,34 +3,44 @@
 library("flowcatchR")
 
 imgRepository <- list.files("/Volumes/users$/marinif/flow/test_28_03_2014/cutout2/",full.names=T,pattern="*.tif")
-frameList1 <- newFrameList(nframes=100,imgsLocation=imgRepository)
+frameList1 <- read.frames(imgsLocation=imgRepository,nframes=100)
 
 ffffg <- cut(x=frameList1,cutAll=20)
 
-cc <- createChannelsFrameList(frameList1)
+cc <- channels(frameList1)
 
 prepro <- preprocess.ChannelsFrameList(cc,"red")
 framelistProcessed <- prepro
 framelistRaw <- cc[[1]]
 
-papa <- extractParticles(framelistRaw,framelistProcessed)
+papa <- particles(framelistRaw,framelistProcessed)
 
-qaqa <- filterParticles(particlelist=papa)
+qaqa <- select.particles(particlelist=papa)
 # rara <- initialize.ParticleList(qaqa)
+sum(unlist(lapply(qaqa,function(arg){nrow(arg$particles)})))
+[1] 1749
 
-sasa <- link.ParticleList(qaqa,L=26,R=3,epsilon1=0,epsilon2=0,lambda1=1,lambda2=0,nframes=100,useAreaChange=FALSE)
-tata <- generate.TrajectoryList(sasa)
+sasa <- link.particles(qaqa,L=26,R=3,epsilon1=0,epsilon2=0,lambda1=1,lambda2=0,nframes=100,include.area=FALSE)
+tata <- trajectories(sasa)
 
 
-rere <- paintTrajectory(tata,frameList1,framelistProcessed,trajId=3)
-fullInspection.FrameList(rere)
+rere <- add.contours(frameList1,framelistProcessed,tata,trajId=3)
+inspect.frames(rere)
+inspect.frames(rere,99,inspectAll=TRUE)
+
+
+
+
 segseg <- combine.preprocessedFrameList(frameList1,framelistProcessed) # if framelist raw is with colors, then also the output is..
 inspect.FrameList(framelist=segseg)
 
 segcsegc <- combineWcolor.preprocessedFrameList(frameList1,framelistProcessed)
 inspect.FrameList(framelist=segcsegc)
 
-display.TrajectoryList(tata,qaqa)
+
+
+
+plot(tata,qaqa)
 
 
 tataMOD <- evaluateTrajectoryList(tata,frameList1,framelistProcessed)
@@ -42,28 +52,24 @@ unlist(lapply(tataMOD,function(arg){arg$keep}))
 # [91]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE    NA FALSE
 # [121] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 
-# wawa <- extractKinematics.TrajectoryList(tata)
-# 
-# extractKinematics.traj(tata,1)‰
-# 
-# extractKinematics.traj(tata,13)
-# plot(extractKinematics.traj(tata,13)$trajMSD)
-# rere2 <- paintTrajectory(tata,frameList1,framelistProcessed,trajId=13)
-# fullInspection.FrameList(rere2)
 
 # with the new code structure
-wawa2 <- extractKinematics(tata)
+wawa2 <- kinematics(tata)
 
 extractKinematics.traj(tata,1)
 
 extractKinematics.traj(tata,13)
 plot(extractKinematics.traj(tata,13)$trajMSD)
-rere2 <- paintTrajectory(tata,frameList1,framelistProcessed,trajId=13)
-fullInspection.FrameList(rere2)
+rere2 <- add.contours(frameList1,framelistProcessed,tata,trajId=13)
+inspect.frames(rere2)
 
 singleKFS <- extractKinematics(tata,13)
 singleK_manyTrajs <- extractKinematics(tata,feature="curvilinearVelocity")
 singleKF <- extractKinematics(tata,trajectoryID=13,feature="curvilinearVelocity")
+
+
+
+
 
 #' @title
 #' @description
@@ -78,7 +84,9 @@ singleKF <- extractKinematics(tata,trajectoryID=13,feature="curvilinearVelocity"
 #' @seealso
 #' @references
 #' 
-#' @examples
+#' @examples 
+#' load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+#' plateletsFrameList <- channels(MesenteriumSubset)$red
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
