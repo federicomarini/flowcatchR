@@ -1,4 +1,4 @@
-#' link.ParticleList
+#' link.particles
 #' 
 #' Performs linking of the particles by tracking them through the frames
 #' 
@@ -13,8 +13,8 @@
 #' @param penaltyFunction A function structured in such a way to be applied as penalty function in the linking
 #' @param nframes Numeric value. Number of frames where the linking should be performed 
 #' @param verboseOutput Logical, whether the output should report additional intermediate steps. For debugging use mainly
-#' @param useIntensityChange Logical, whether to include also intensity change of the particles in the cost function calculation
-#' @param useAreaChange Logical, whether to include also area change of the particles in the cost function calculation
+#' @param include.intensity Logical, whether to include also intensity change of the particles in the cost function calculation
+#' @param include.area Logical, whether to include also area change of the particles in the cost function calculation
 #' 
 #' @references Sbalzarini et al.?
 #' 
@@ -22,19 +22,18 @@
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
-link.ParticleList <- function(particlelist,
-                              L,
-                              R=2,
-                              epsilon1=0.1,
-                              epsilon2=2,
-                              lambda1=1,
-                              lambda2=1,
-                              penaltyFunction=penaltyFunctionGenerator(),
-                              nframes, # could be used to restrict the range? frameStart to frameEnd?
-                              verboseOutput=F,
-                              useIntensityChange=TRUE,
-                              useAreaChange=TRUE
-                              )
+link.particles <- function(particlelist,
+                           L,
+                           R=2,
+                           epsilon1=0.1,
+                           epsilon2=2,
+                           lambda1=1,
+                           lambda2=1,
+                           penaltyFunction=penaltyFunctionGenerator(),
+                           nframes, # could be used to restrict the range? frameStart to frameEnd?
+                           verboseOutput=F,
+                           include.intensity=TRUE,
+                           include.area=TRUE)
 {
   out <- initialize.ParticleList(particlelist)
   # preliminary step to set the particles next arrays (or matrix in our case) according to the linkrange
@@ -106,10 +105,10 @@ link.ParticleList <- function(particlelist,
       intensityVariation <- intDiff^2
       
 
-#       distFunction <- deltaSquared + ifelse(useAreaChange,areaVariation,0) + ifelse(useIntensityChange,intensityVariation,0)
+#       distFunction <- deltaSquared + ifelse(include.area,areaVariation,0) + ifelse(include.intensity,intensityVariation,0)
       distFunction <- deltaSquared
-      if(useIntensityChange) distFunction <- distFunction + intensityVariation
-      if(useAreaChange) distFunction <- distFunction + areaVariation
+      if(include.intensity) distFunction <- distFunction + intensityVariation
+      if(include.area) distFunction <- distFunction + areaVariation
 
 
       newCost <- penaltyFunction(alpha,distFunction)

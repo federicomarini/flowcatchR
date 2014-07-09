@@ -19,23 +19,22 @@ showMe <- function(imgObject, dispMet="raster",...)
 
 
 
-#' newFrameList
+#' read.frames
 #' 
 #' constructor for a FrameList object
 #' 
 #' This function is used to create a FrameList object from a vector of images. 
 #' The number of frames is also specified, as just a subset of the images can be used for this
 #' 
-#'@param nframes Number of frames that will constitute the FrameList object
 #'@param imgsLocation Vector of strings containing the locations where the (raw) images are to be found
+#'@param nframes Number of frames that will constitute the FrameList object
 #'
 #'@return An object of the \code{FrameList} class, which holds the info on a list of frames, specifying for each the following elements:
 #'\item{image}{The \code{Image} object containing the image itself}
 #'\item{location}{The complete path to the location of the original image}
 #'
-newFrameList <- function(nframes,
-                         imgsLocation
-                         )
+read.frames <- function(imgsLocation,
+                        nframes)
 {
   cat("Creating a new object of class FrameList...\n")
   # check that nframes coincides with the number of images available -throw an error otherwise?
@@ -75,7 +74,7 @@ print.FrameList <- function(x,...)
 
 
 
-#' inspect.FrameList
+#' inspect.frames
 #' 
 #' Explore the first frames of a FrameList
 #' 
@@ -84,19 +83,30 @@ print.FrameList <- function(x,...)
 #' first inspection
 #' 
 #' @param framelist A FrameList object
-#' @param nframes The number of frames to display
-#' 
+#' @param nframes The number of frames to display (default value: 6)
+#' @param inspectAll Logical, whether to inspect all frames (overriding the default of 10 that can be used also when inspectAll is FALSE)
 #' 
 #'
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
-inspect.FrameList <- function(framelist,
-                             nframes=4)
+inspect.frames <- function(framelist,
+                           nframes=NULL,
+                           inspectAll=FALSE)
 {
-  if(nframes > 8)
+  if(inspectAll & is.null(nframes)) 
   {
-    stop("Too high number of frames, try with a number <= 8")
+    nframes <- length(framelist)
+  }
+  
+  if(nframes > 10)
+  {
+    if(!inspectAll)
+    {
+      stop("Too high number of frames, try with a number <= 10")
+    }
+    cat("You selected to inspect a number of frames > 10, this might take a while...\n")
+    
   }
   # nframes should also be more than the nr of frames available
   cat("Displaying the first",nframes,"frames for the FrameList")
@@ -125,51 +135,6 @@ inspect.FrameList <- function(framelist,
   display(firstFramesCombined,all=TRUE)
 }
 
-
-#' fullInspection.FrameList
-#' 
-#' Display entirely a FrameList object
-#' 
-#' All frames of a FrameList are displayed in the browser, and are interactively navigable.
-#' Default number of shown frames is 10, but in this case there is no upper limit to display.
-#' Care should be taken with large FrameList objects
-#'  
-#' @param framelist A FrameList object
-#' @param nframes The number of frames to display
-#' 
-#'
-#' 
-#' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
-fullInspection.FrameList <- function(framelist,
-                                     nframes=10)
-{
-  # nframes should also be more than the nr of frames available
-  cat("Displaying the full FrameList object, composed of",length(framelist),"\n")
-  
-  firstFrames <- list()
-  # need to set the colorMode to Grayscale if it is only one channel so that combine works!!
-  
-  singleChannel <- !(length(dim(framelist[[1]]$image)) > 2)
-  
-  firstFrames[[1]] <- framelist[[1]]$image
-  if(singleChannel) 
-  {
-    colorMode(firstFrames[[1]]) <- Grayscale
-  }
-#   loopUntil <- min(nframes,length(framelist))
-  for (i in 2:length(framelist))
-  {
-    firstFrames[[i]] <- framelist[[i]]$image
-    if(singleChannel)
-    {
-      colorMode(firstFrames[[i]]) <- Grayscale
-    }
-  }
-  
-  firstFramesCombined <- combine(firstFrames)
-  display(firstFramesCombined,all=TRUE)
-}
 
 
 
@@ -211,7 +176,7 @@ subset.FrameList <- function(x,framesToKeep,...)
 }
 
 
-#' createChannelsFrameList
+#' channels
 #' 
 #' Creates a ChannelsFrameList object from a FrameList object, decomposed in the acquired channels
 #'  
@@ -220,9 +185,16 @@ subset.FrameList <- function(x,framesToKeep,...)
 #' @return A ChannelsFrameList object, which is a list of 3 FrameList objects, named respectively red, green and blue
 #' 
 #' @export
+#' 
+#' @examples 
+#' load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+#' channels(MesenteriumSubset)
+#' plateletsFrameList <- channels(MesenteriumSubset)$red
+#' 
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
-createChannelsFrameList <- function(framelist)
+channels <- function(framelist)
 {
+  # check if the framelist indeed has more than one channel, first of all! -> needs to be done TODO
   redCh <- framelist
   greenCh <- framelist
   blueCh <- framelist
@@ -247,7 +219,7 @@ createChannelsFrameList <- function(framelist)
 
 
 
-#' export.FrameList
+#' export.frames
 #' 
 #' Exports a FrameList object
 #' 
@@ -267,7 +239,7 @@ createChannelsFrameList <- function(framelist)
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
-export.FrameList <- function(framelist,
+export.frames <- function(framelist,
                              folder="/Users/fede/TEMP/exportFrameList/",
                              nameStub="testExport",
                              createGif=FALSE,

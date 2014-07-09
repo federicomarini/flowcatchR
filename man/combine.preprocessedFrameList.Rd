@@ -3,12 +3,14 @@
 \alias{combine.preprocessedFrameList}
 \title{combine.preprocessedFrameList}
 \usage{
-combine.preprocessedFrameList(rawframelist, preprocessedframelist)
+combine.preprocessedFrameList(rawframelist, preprocessedframelist, col = NULL)
 }
 \arguments{
 \item{rawframelist}{A FrameList object containing the raw images}
 
 \item{preprocessedframelist}{A FrameList object with the preprocessed versions of the images (e.g. segmented)}
+
+\item{col}{A color character string, to select which color will be used for drawing the contours of the particles. If not specified, it will default according to the objects provided}
 }
 \value{
 A FrameList object, whose images are the combination of the raw images with the segmented objects drawn on them

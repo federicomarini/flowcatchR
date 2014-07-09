@@ -44,7 +44,7 @@ opts_chunk$set(fig.path='./figures/flowcatchR-',
                size='small',
                comment=NA,
                echo=TRUE, # set to true for the vignette!
-               results='hide')
+               results='hold')
 options(replace.assign=TRUE,width=80)
 @
 
@@ -67,7 +67,7 @@ options(replace.assign=TRUE,width=80)
 \flowcatchR is a set of tools to analyze in vivo microscopy imaging data, focused on tracking flowing blood cells. It guides the steps from segmentation to calculation of features, filtering out particles not of interest, providing also a set of utilities to help checking the quality of the performed operations (e.g. how good the segmentation was). The main novel contribution investigates the issue of tracking flowing cells such as in blood vessels, to categorize the particles in flowing, rolling and adherent. This classification is applied in the study of phenomena such as hemostasis and study of thrombosis development.
 \end{abstract}
 
-<<loadlibraries>>=
+<<loadlibraries,results='hide'>>=
 library("flowcatchR")
 @
 
@@ -100,37 +100,200 @@ Essential features \Biocpkg{flowcatchR} delivers to the user are:
 
 This guide includes a brief overview of the entire processing flow, from raw images to analysis of kinematic parameters derived from the identified trajectories. An example dataset will be used to illustrate the available features, in order to track blood platelets in consecutive frames derived from an intravital microscopy acquisition (also available as a subset in the Data folder of the package). All steps will be dissected to explore parameters and options available.() A second example? ()Finally, a detailed explanation is given for the implementation of the algorithm used for particle tracking.
 
-\section{Processing overview}
+\section{Processing overview}\label{sec:overview}
 \flowcatchR works primarily with sets of fluorescent time-lapse images, where the particles of interest are marked with a fluorescent label (e.g., red for blood platelets, green for leukocytes). Although different entry spots are provided (such as the coordinates of identified points in each frame via tab delimited files), we will illustrate the characteristics of the package starting from a set of 20 frames derived from an intravital microscopy acquisition, which for the sake of practicity were already registered to reduce the unwanted specimen movements. []ref to SPIM, imageJ \& co
 
-<<loadData>>=
-library("flowcatchR")
+<<loadData,results='hide'>>=
+# library("flowcatchR")
 load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
 @
 
-To obtain the set of trajectories identified from the analysis of the loaded frames, a 6-step script is all that is needed:
+To obtain the set of trajectories identified from the analysis of the loaded frames, a 6-step (5 if the compacter version is selected) script is all that is needed:
 
-<<workflowCompact,eval=FALSE>>=
-plateletsMesenterium <- createChannelsFrameList(MesenteriumSubset)
-preprocessedPlatelets <- preprocess(plateletsMesenterium,channel="red")
-particlesPlatelets <- extractParticles(plateletsMesenterium[[1]], # use just red channel
+<<workflowCompact,eval=FALSE,results='hide'>>=
+# separate the information into the three channels
+allChannelsMesenterium <- createChannelsFrameList(MesenteriumSubset)
+# perform smoothing/segmentation on the red channel
+preprocessedPlatelets <- preprocess(allChannelsMesenterium,channel="red")
+# identify platelets and compute some features on them (will be used also for next steps)
+particlesPlatelets <- extractParticles(allChannelsMesenterium$red, # use just red channel
                                        preprocessedPlatelets)
+
+
+# the same is achievable through 
+particlesPlatelets <- extractParticles(allChannelsMesenterium$red)
+
+
+# the tracking is performed (see explanation for details on the parameters)
 linkedPlatelets <- link.ParticleList(particlesPlatelets,
                                      L=26,R=3,epsilon1=0,epsilon2=0,lambda1=1,lambda2=0,
-                                     nframes=20,useAreaChange=FALSE) # parameters for tracking
+                                     nframes=20,useAreaChange=FALSE)
+# the linked particle list is transformed into trajectories
 trajectoryPlatelets <- generate.TrajectoryList(linkedPlatelets)
+# computes a set of interesting kinematic parameters
 kinematicsPlatelets <- extractKinematics(trajectoryPlatelets)
 @
 
 The following sections will provide additional detail to the steps mentioned above, with more also on the auxiliary function that are available in \flowcatchR.
+
+\section{Image Acquisition}
+A set of images is acquired, after a proper microscopy setup has been performed. This includes for example a careful choice of spatial and temporal resolution; often a compromise must be met to have a good frame rate and a good Signal to Noise Ratio to detect the particles in the single frames. For a good review on the steps to be taken, please refer to Meijering's work \cite{Meijering2008}. 
+
+\flowcatchR provides an S3 class that can store the information of a complete acquisition, namely \Rclass{FrameList}. A \Rclass{FrameList} object is structured as a list, whose elements are in turn a list too. The \Robject{image} and its \Robject{location} are stored in the respective slots. To construct a \Rclass{FrameList}, the \Rfunction{newFrameList} function is used:
+
+<<newFrameList>>=
+# path to the folder containing the images
+imgRepository <- list.files("/Volumes/users$/marinif/flow/test_28_03_2014/cutout2/",
+                            full.names=T,pattern="*.tif")
+# initialization
+fullData <- newFrameList(nframes=100,imgsLocation=imgRepository)
+
+# printing summary information for the FrameList object
+fullData
+@
+
+\TODO{put all commandies to r fncs, objs, classes...}
+\Robject{nframes} specifies the number of frames that will constitute the FrameList object, whereas \Robject{imgsLocation} is a vector of character strings with the location of the (raw) images. In this case we just loaded the full dataset, but for the demonstrational purpose of this vignette, we will proceed with the subset available in the MesenteriumSubset.RData object, which we previously loaded in Section \ref{sec:overview}.
+
+Importantly, these image sets were already registered and rotated in such a way that the overall direction of the movement of interest flows from left to right, as a visual aid and also to fit with some assumptions that will be done in the subsequent step of particle tracking. To register the images, we recommend the general purpose suite offered by ImageJ/Fiji, in particular with the plugins ...
+
+For the following steps, we will focus on the information contained in the red channel, corresponding in this case to blood platelets. We do so by calling:
+
+<<decomposeChannels>>=
+allChannelsMesenterium <- createChannelsFrameList(MesenteriumSubset)
+
+allChannelsMesenterium
+@
+
+This creates an object of the class ChannelsFrameList, which is in turn a list of three FrameList objects (one for each color channel).
+
+<<selectRed>>=
+plateletsMesenterium <- allChannelsMesenterium$red
+
+plateletsMesenterium
+@
+
+As we can see, by selecting one of the channels, we get in return a FrameList object.
+
+\section{Image Preprocessing and Analysis}
+Steps such as denoising, smoothing and morphological operations (erosion/dilation, opening/closing) can be performed thanks to the general functions provided by EBImage. \flowcatchR offers a wrapper around a series of operations to be applied to all images in a FrameList object. The generic function preprocess has a method for FrameList objects, which is called via the command:
+
+<<segmentPreprocess>>=
+preprocessedPlatelets <- preprocess.FrameList(plateletsMesenterium,
+                                              brushSize = 3, brushShape = "disc",
+                                              adaptOffset = 0.15, adaptWinWidth = 10, adaptWinHeight = 10,
+                                              kernSize = 3, kernShape = "disc",
+                                              watershedTolerance = 1, watershedRadius = 1,
+                                              areaThresholdMin = 5, areaThresholdMax = 100)
+@
+
+For a detailed explanation of the parameters to better tweak the performances of this segmentation step, please refer to the help of preprocess.FrameList
+
+% We also ported to the R language two widely adopted thresholding algorithms for gray-level images, namely the ones developed by Otsu (ref, 1979) and Kittler and Illingworth (ref, 1986), which despite their historical origin perform well with bimodal histograms such as fluorescent images. []say the names of the functions? 
+
+The user can choose any combination of the operations in order to segment the images provided as input, but preprocess is a very convenient high level function for proceeding in the workflow. It is also possible, as it was shown in the introductory 5-step script, to call just ExtractParticles on the raw FrameList object. In this latter case, ExtractPArticles computes the preprocessed FrameList object according to default parameters. Still, in either situation, the output for this step is an object of the ParticleList class.
+
+<<particleList>>=
+preprocessedPlatelets
+@
+
+As it can be seen from the summary information, each ParticleList ...
+
+Denoising, registration, cut/rotate 
+combinePrepro
+particleExtr, filtering
+
+
+<<allCode,eval=FALSE>>=
+ffffg <- cut(x=frameList1,cutAll=20)
+
+cc <- createChannelsFrameList(frameList1)
+
+prepro <- preprocess.ChannelsFrameList(cc,"red")
+framelistProcessed <- prepro
+framelistRaw <- cc[[1]]
+
+papa <- extractParticles(framelistRaw,framelistProcessed)
+
+qaqa <- filterParticles(particlelist=papa)
+# rara <- initialize.ParticleList(qaqa)
+
+sasa <- link.ParticleList(qaqa,L=26,R=3,epsilon1=0,epsilon2=0,lambda1=1,lambda2=0,nframes=100,useAreaChange=FALSE)
+tata <- generate.TrajectoryList(sasa)
+  
+
+rere <- paintTrajectory(tata,frameList1,framelistProcessed,trajId=3)
+fullInspection.FrameList(rere)
+segseg <- combine.preprocessedFrameList(frameList1,framelistProcessed) # if framelist raw is with colors, then also the output is..
+inspect.FrameList(framelist=segseg)
+
+segcsegc <- combineWcolor.preprocessedFrameList(frameList1,framelistProcessed)
+inspect.FrameList(framelist=segcsegc)
+
+display.TrajectoryList(tata,qaqa)
+
+
+tataMOD <- evaluateTrajectoryList(tata,frameList1,framelistProcessed)
+unlist(lapply(tataMOD,function(arg){arg$keep}))
+
+# extractKinematics.traj(tata,1)‰
+# 
+# extractKinematics.traj(tata,13)
+# plot(extractKinematics.traj(tata,13)$trajMSD)
+# rere2 <- paintTrajectory(tata,frameList1,framelistProcessed,trajId=13)
+# fullInspection.FrameList(rere2)
+
+# with the new code structure
+wawa2 <- extractKinematics(tata)
+
+extractKinematics.traj(tata,1)
+
+extractKinematics.traj(tata,13)
+plot(extractKinematics.traj(tata,13)$trajMSD)
+rere2 <- paintTrajectory(tata,frameList1,framelistProcessed,trajId=13)
+fullInspection.FrameList(rere2)
+
+singleKFS <- extractKinematics(tata,13)
+singleK_manyTrajs <- extractKinematics(tata,feature="curvilinearVelocity")
+singleKF <- extractKinematics(tata,trajectoryID=13,feature="curvilinearVelocity")
+
+@
+
+
+
+\section{Particle tracking}
+explanation of tracking algorithm approach
+penalty generator
+
+
+
+\section{Trajectory Analysis}
+identified trajs, compute params
+evaluate trajs
+
+
+
+\section{Auxiliary functions}
+inspectFramelist
+print methods
+subsetting
+
+exportFramelis
+
+
+
 \section{}
+
+
+
 \section{}
+
+
+
 \section{}
-\section{}
-\section{}
-\section{}
-\section{}
-\section{}
+
+
+
 \section{}
 
 
@@ -146,7 +309,7 @@ gne
 
 
 
-
+\TODO{auto sort references?}
 
 \newpage
 \section{Session Information}

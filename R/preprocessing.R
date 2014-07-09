@@ -147,7 +147,7 @@ preprocess.ChannelsFrameList <- function(x,
                                          channel="",
                                          ...) # HARALD: should i put here also the ...? and also in the function code too?
 {
-  cat("do that")
+#   cat("do that")
   # call on red OR
   # call on green OR
   # call on blue
@@ -177,18 +177,16 @@ preprocess.ChannelsFrameList <- function(x,
 #' existing EBImage functions, please see the corresponding help for additional information
 #'  
 #' @param x A FrameList object
-#' @param brushSize Size in pixels of the brush to be used for initial smoothing
-#' @param brushShape Shape of the brush to be used for initial smoothing
-#' @param adaptOffset Offset to be used in the adaptive thresholding step
-#' @param adaptWinWidth Width of the window for the adaptive thresholding step
-#' @param adaptWinHeight Height of the window for the adaptive thresholding step
-#' @param kernSize Size in pixels of the kernel used for morphological operations
-#' @param kernShape Shape of the kernel used for morphological operations
-#' @param watershedTolerance Tolerance allowed in performing the watershed-based segmentation
-#' @param watershedRadius Radius for the watershed-based segmentation
+#' @param brush.size Size in pixels of the brush to be used for initial smoothing
+#' @param brush.shape Shape of the brush to be used for initial smoothing
+#' @param at.offset Offset to be used in the adaptive thresholding step
+#' @param at.wwidth Width of the window for the adaptive thresholding step
+#' @param at.wheight Height of the window for the adaptive thresholding step
+#' @param kern.size Size in pixels of the kernel used for morphological operations
+#' @param kern.shape Shape of the kernel used for morphological operations
+#' @param ws.tolerance Tolerance allowed in performing the watershed-based segmentation
+#' @param ws.radius Radius for the watershed-based segmentation
 #' @param displayprocessing Logical, whether to display intermediate steps while performing preprocessing. Dismissed currently, it could increase runtime a lot
-#' @param areaThresholdMin Size in pixels of the minimum area needed to detect the object as a potential particle of interest
-#' @param areaThresholdMax Size in pixels of the maximum area allowed to detect the object as a potential particle of interest
 #' @param ... Arguments to be passed to methods
 #' 
 #' @return A FrameList object, whose frame images are the preprocessed versions of the input images
@@ -196,21 +194,19 @@ preprocess.ChannelsFrameList <- function(x,
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 preprocess.FrameList <- function(x,
-                                 brushSize=3,
-                                 brushShape="disc",
-                                 adaptOffset=0.15,
-                                 adaptWinWidth=10,
-                                 adaptWinHeight=10,
-                                 kernSize=3,
-                                 kernShape="disc",
-                                 watershedTolerance=1,
-                                 watershedRadius=1,
+                                 brush.size=3,
+                                 brush.shape="disc",
+                                 at.offset=0.15,
+                                 at.wwidth=10,
+                                 at.wheight=10,
+                                 kern.size=3,
+                                 kern.shape="disc",
+                                 ws.tolerance=1,
+                                 ws.radius=1,
                                  displayprocessing=FALSE,
-                                 areaThresholdMin=5,
-                                 areaThresholdMax=100,
                                  ...) # for the single channel images/for one channel of multi-channel images
 {
-  cat("do this - processing the single channel")
+#   cat("do this - processing the single channel")
   out <- vector(length(x),mode="list")
   class(out) <- c("FrameList",class(out))
   
@@ -219,16 +215,16 @@ preprocess.FrameList <- function(x,
     rawimg <- x[[i]]$image
     colorMode(rawimg) <- Grayscale
     
-    flo = makeBrush(brushSize, brushShape, step=FALSE)^2
+    flo = makeBrush(brush.size, brush.shape, step=FALSE)^2
     flo <- flo/sum(flo)
     
-    thresh_img <- thresh(filter2(rawimg,flo),w=adaptWinWidth,h=adaptWinHeight,offset=adaptOffset)
+    thresh_img <- thresh(filter2(rawimg,flo),w=at.wwidth,h=at.wheight,offset=at.offset)
     
     # if needed with a step of smoothing & co (operations of opening,...)
-    kern <- makeBrush(size=kernSize,shape=kernShape)
+    kern <- makeBrush(size=kern.size,shape=kern.shape)
     
     distmap_thre <- distmap(thresh_img)
-    watershed_thre <- watershed(distmap_thre,tolerance=watershedTolerance,ext=watershedRadius) 
+    watershed_thre <- watershed(distmap_thre,tolerance=ws.tolerance,ext=ws.radius) 
   
     out[[i]]$image <- watershed_thre
     out[[i]]$channel <- x[[i]]$channel
@@ -241,7 +237,7 @@ preprocess.FrameList <- function(x,
 
 
 
-#' extractParticles
+#' particles
 #' 
 #' Extract particles from the images of a FrameList object. 
 #' 
@@ -249,20 +245,16 @@ preprocess.FrameList <- function(x,
 #' @param framelistRaw A FrameList object with the raw images (mandatory)
 #' @param framelistPreprocessed A FrameList object with preprocessed images (optional, if not provided gets produced with standard default parameters)
 #' @param channel Character string. The channel to perform the operations on. Can be "red", "green" or "blue"
-#' @param areaThresholdMin Size in pixels of the minimum area needed to detect the object as a potential particle of interest
-#' @param areaThresholdMax Size in pixels of the maximum area allowed to detect the object as a potential particle of interest
 #' 
 #' @return A ParticleList object, containing all detected particles for each frame
 #' 
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
-extractParticles <- function(framelistRaw,
-                             framelistPreprocessed=NULL,
-                             channel="",  # if we provide the channelsFrameList as input 
-                             areaThresholdMin=5,
-                             areaThresholdMax=100 # and others of interest, for example
-                             )
+particles <- function(framelistRaw,
+                      framelistPreprocessed=NULL,
+                      channel=""  # if we provide the channelsFrameList as input 
+                      )
 {
   if(!is(framelistRaw,"FrameList") & !is(framelistRaw,"ChannelsFrameList"))
   {
@@ -277,8 +269,8 @@ extractParticles <- function(framelistRaw,
     cat("You can always change them afterwards if they do not fit to your scenario!")
     if(is(framelistRaw,"ChannelsFrameList"))
     {
-      framelistRaw <- framelistRaw[[channel]]
-      framelistPreprocessed <- preprocess.FrameList(framelistRaw)
+#       framelistRaw <- framelistRaw[[channel]]
+      framelistPreprocessed <- preprocess.ChannelsFrameList(framelistRaw[[channel]])
     } else {
       framelistPreprocessed <- preprocess.FrameList(framelistRaw)
     }
@@ -314,7 +306,7 @@ extractParticles <- function(framelistRaw,
 
 
 
-#' filterParticles
+#' select.particles
 #' 
 #' Performs filtering on a ParticleList object
 #' 
@@ -322,17 +314,17 @@ extractParticles <- function(framelistRaw,
 #' satisfy the indicated requirements
 #' 
 #' @param particlelist A ParticleList object. A LinkedParticleList object can also be provided as input, yet the returned object will be a ParticleList object that 
-#' @param areaThresholdMin Size in pixels of the minimum area needed to detect the object as a potential particle of interest
-#' @param areaThresholdMax Size in pixels of the maximum area allowed to detect the object as a potential particle of interest
+#' @param min.area Size in pixels of the minimum area needed to detect the object as a potential particle of interest
+#' @param max.area Size in pixels of the maximum area allowed to detect the object as a potential particle of interest
 #' 
 #' 
 #' @return A ParticleList object
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
-filterParticles <- function(particlelist,
-                            areaThresholdMin = 1,
-                            areaThresholdMax = 1000 #, # and others of interest, for example
+select.particles <- function(particlelist,
+                             min.area = 1,
+                             max.area = 1000 #, # and others of interest, for example
                             #shapeThreshold = 0.5,
                             #eccentricityThreshold = 0.7 # currently not so efficient with so small particles available in the images!!
                             )
@@ -349,7 +341,7 @@ filterParticles <- function(particlelist,
       class(out) <- c("ParticleList",class(out))
       cat("Filtering the particles...\n")
     } else {
-      stop("You need to provide a ParticleList object as input for filterParticles!\n")
+      stop("You need to provide a ParticleList object as input for select.particles!\n")
     }
   }
   
@@ -365,7 +357,7 @@ filterParticles <- function(particlelist,
     notBecauseOfEccen <- c()
     notBecauseOfShape <- c()
     
-    notBecauseOfArea <- which( (candidateParticles$cell.0.s.area < areaThresholdMin) | (candidateParticles$cell.0.s.area > areaThresholdMax) )
+    notBecauseOfArea <- which( (candidateParticles$cell.0.s.area < min.area) | (candidateParticles$cell.0.s.area > max.area) )
 #     notBecauseOfEccen <- which(candidateParticles$cell.0.m.eccentricity > eccenThreshold)
     
     leftOut <- unique(c(notBecauseOfArea,notBecauseOfEccen)) #, not because of ....

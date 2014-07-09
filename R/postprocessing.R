@@ -7,13 +7,14 @@
 #'  
 #' @param rawframelist A FrameList object containing the raw images
 #' @param preprocessedframelist A FrameList object with the preprocessed versions of the images (e.g. segmented)
+#' @param col A color character string, to select which color will be used for drawing the contours of the particles. If not specified, it will default according to the objects provided
 #' 
 #' @return A FrameList object, whose images are the combination of the raw images with the segmented objects drawn on them
 #' 
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
-combine.preprocessedFrameList <- function(rawframelist,preprocessedframelist)
+combine.preprocessedFrameList <- function(rawframelist,preprocessedframelist,col=NULL)
 {
   out <- vector("list",length(rawframelist))
   for (i in 1:length(out))
@@ -24,24 +25,8 @@ combine.preprocessedFrameList <- function(rawframelist,preprocessedframelist)
     # works well if rawimg has still all 3 frames, otherwise i guess it stays B/W
     if(length(dim(rawimg))>2)
     {
-      rawWithObj <- paintObjects(segmimg,rawimg,col="yellow")
-      
-      
-      
-      # TODO a slower version that paints all objects singularly but of different colours?
-      # similar to this..
-      #   segm <- wsthre_green
-      #   buildingUp_green <- rawimg
-      #   for(obj in 1:max(segm))
-      #   {
-      #     
-      #     elab_singleObject <- segm
-      #     elab_singleObject[segm!=obj]<- 0  
-      #     buildUp_green <- paintObjects(Image(elab_singleObject,colormode="Grayscale"),buildingUp_green,col=colors()[52+obj])
-      #     buildingUp_green <- buildUp_green
-      #   }
-      #   
-      
+      if(is.null(col)) col <- "yellow"
+      rawWithObj <- paintObjects(segmimg,rawimg,col=col)
     } else {
       channel <- rawframelist[[i]]$channel # read it directly from the framelist object!
       switch(channel,

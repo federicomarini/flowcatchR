@@ -3,38 +3,33 @@
 \alias{preprocess.FrameList}
 \title{preprocess.FrameList}
 \usage{
-\method{preprocess}{FrameList}(x, brushSize = 3, brushShape = "disc",
-  adaptOffset = 0.15, adaptWinWidth = 10, adaptWinHeight = 10,
-  kernSize = 3, kernShape = "disc", watershedTolerance = 1,
-  watershedRadius = 1, displayprocessing = FALSE, areaThresholdMin = 5,
-  areaThresholdMax = 100, ...)
+\method{preprocess}{FrameList}(x, brush.size = 3, brush.shape = "disc",
+  at.offset = 0.15, at.wwidth = 10, at.wheight = 10, kern.size = 3,
+  kern.shape = "disc", ws.tolerance = 1, ws.radius = 1,
+  displayprocessing = FALSE, ...)
 }
 \arguments{
 \item{x}{A FrameList object}
 
-\item{brushSize}{Size in pixels of the brush to be used for initial smoothing}
+\item{brush.size}{Size in pixels of the brush to be used for initial smoothing}
 
-\item{brushShape}{Shape of the brush to be used for initial smoothing}
+\item{brush.shape}{Shape of the brush to be used for initial smoothing}
 
-\item{adaptOffset}{Offset to be used in the adaptive thresholding step}
+\item{at.offset}{Offset to be used in the adaptive thresholding step}
 
-\item{adaptWinWidth}{Width of the window for the adaptive thresholding step}
+\item{at.wwidth}{Width of the window for the adaptive thresholding step}
 
-\item{adaptWinHeight}{Height of the window for the adaptive thresholding step}
+\item{at.wheight}{Height of the window for the adaptive thresholding step}
 
-\item{kernSize}{Size in pixels of the kernel used for morphological operations}
+\item{kern.size}{Size in pixels of the kernel used for morphological operations}
 
-\item{kernShape}{Shape of the kernel used for morphological operations}
+\item{kern.shape}{Shape of the kernel used for morphological operations}
 
-\item{watershedTolerance}{Tolerance allowed in performing the watershed-based segmentation}
+\item{ws.tolerance}{Tolerance allowed in performing the watershed-based segmentation}
 
-\item{watershedRadius}{Radius for the watershed-based segmentation}
+\item{ws.radius}{Radius for the watershed-based segmentation}
 
 \item{displayprocessing}{Logical, whether to display intermediate steps while performing preprocessing. Dismissed currently, it could increase runtime a lot}
-
-\item{areaThresholdMin}{Size in pixels of the minimum area needed to detect the object as a potential particle of interest}
-
-\item{areaThresholdMax}{Size in pixels of the maximum area allowed to detect the object as a potential particle of interest}
 
 \item{...}{Arguments to be passed to methods}
 }

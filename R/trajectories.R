@@ -1,5 +1,5 @@
 
-#' generate.TrajectoryList
+#' trajectories
 #' 
 #' Generates a TrajectoryList object from a LinkedParticleList
 #' 
@@ -11,10 +11,9 @@
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
-generate.TrajectoryList <- function(particlelist,
-                                    provideExtraDetails=FALSE,
-                                    ... # parameters for the eventual tracking - is it possible to do so? ask harald!
-                                    )
+trajectories <- function(particlelist,
+                         provideExtraDetails=FALSE,
+                         ...) # parameters for the eventual tracking - is it possible to do so? ask harald!
 {
   if(is(particlelist,"linkedParticleList"))
   {
@@ -25,7 +24,7 @@ generate.TrajectoryList <- function(particlelist,
     {
       cat("Input ParticleList is not a linkedParticleList! \n")
       cat("Performing linking first with some set of default parameters - you might want to change them according to your scenario...\n")
-      linkedparticlelist <- link.ParticleList(particlelist,L=26,R=3,epsilon1=0,epsilon2=0,lambda1=1,lambda2=0)
+      linkedparticlelist <- link.particles(particlelist,L=26,R=3,epsilon1=0,epsilon2=0,lambda1=1,lambda2=0)
       print(linkedparticlelist)
     }
   }
@@ -68,6 +67,7 @@ generate.TrajectoryList <- function(particlelist,
         out[[ntraj]]$nframes <- traj$frame[nrow(traj)]-traj$frame[1] + 1
         out[[ntraj]]$ngaps <- out[[ntraj]]$nframes - out[[ntraj]]$npoints
         out[[ntraj]]$keep <- NA # initialized, then set to 0 or 1
+        out[[ntraj]]$ID <- ntraj
       }
     }
   }
@@ -101,6 +101,7 @@ generate.TrajectoryList <- function(particlelist,
 #' 
 #' @return A list object, containing the extremes of the field of interest (x-y-z, where z is time)
 #' 
+#' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 axesInfo <- function(framelist)
@@ -110,22 +111,25 @@ axesInfo <- function(framelist)
 }
 
 
-#' display.TrajectoryList
+#' plot.TrajectoryList
 #' 
 #' Provides a visual representation of a TrajectoryList object
 #' 
 #' Based on the rgl library, the function extracts the region of interests from the dimensions of an image of the FrameList object,
 #' and afterwards plots the x-y-time representation of the identified trajectories
 #' 
-#' @param trajectorylist A TrajectoryList object
+#' @param x A TrajectoryList object
 #' @param framelist A FrameList object, used here to identify the limits of the region of interest 
+#' @param ... Arguments to be passed to methods
+#'
+#' @method plot TrajectoryList
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
-display.TrajectoryList <- function(trajectorylist,framelist)
+plot.TrajectoryList <- function(x,framelist,...)
 {
-  trajectoryDataFrame <- do.call(rbind.data.frame,lapply(trajectorylist,function(arg){arg$trajectory}))
-  cat("Plotting",length(trajectorylist),"trajectories...\n")
+  trajectoryDataFrame <- do.call(rbind.data.frame,lapply(x,function(arg){arg$trajectory}))
+  cat("Plotting",length(x),"trajectories...\n")
   for (t in 1:max(trajectoryDataFrame$trajLabel))
   {
     singleTraj <- trajectoryDataFrame[which(trajectoryDataFrame$trajLabel==t),]
@@ -140,13 +144,13 @@ display.TrajectoryList <- function(trajectorylist,framelist)
 
 
 
-#' paintTrajectory
+#' add.contours
 #' 
 #' Creates a FrameList objects containing raw information, combined with the segmented images and the relative trajectory under analysis
 #' 
-#' @param trajectorylist A TrajectoryList object
-#' @param rawframelist A FrameList object with raw images
-#' @param preprocessedframelist A FrameList object with preprocessed frames
+#' @param raw.frames A FrameList object with raw images
+#' @param binary.frames A FrameList object with preprocessed frames
+#' @param trajectories A trajectories object
 #' @param trajId Numeric value, the ID of the trajectory 
 #' 
 #' @return A new FrameList object
@@ -154,17 +158,17 @@ display.TrajectoryList <- function(trajectorylist,framelist)
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
-paintTrajectory <- function(trajectorylist,rawframelist,preprocessedframelist,trajId)
+add.contours <- function(raw.frames,binary.frames,trajectories,trajId)
 {
-  # doing it on one single traj
+  # doing it on one single traj # 'THIS ONE WILL STAY!! 
   
-  #   for(i in 1:length(trajectorylist))
+  #   for(i in 1:length(trajectories))
   i <- trajId
   {
-    currentTraj <- trajectorylist[[i]]$trajectory
+    currentTraj <- trajectories[[i]]$trajectory
     framesIncluded <- currentTraj$frame
-    subsetRaw <- subset(rawframelist,framesToKeep=framesIncluded)
-    subsetProcessed <- subset(preprocessedframelist,framesIncluded)
+    subsetRaw <- subset(raw.frames,framesToKeep=framesIncluded)
+    subsetProcessed <- subset(binary.frames,framesIncluded)
     
     out <- vector("list",length(framesIncluded))
     
@@ -186,6 +190,178 @@ paintTrajectory <- function(trajectorylist,rawframelist,preprocessedframelist,tr
 
 
 ## paintTRAJSSSSSS on all, giffed?
+
+
+
+
+
+
+
+#' add.contours2
+#' 
+#' Creates a FrameList objects containing raw information, combined with the segmented images and the relative trajectory under analysis
+#' 
+#' If a TrajectoryList is provided and mode is set to "trajectories", returns a FrameList with all trajectories included in the IDs 
+#' vector painted accordingly.
+#' If the mode is set to "particles", it will just plot the particles (all) on all frames.
+#' If no trajectoryList is provided, it will be computed with default parameters.
+#' If no binary.frames is provided, it will be computed also with default parameters
+#' 
+#' @param raw.frames A FrameList object with raw images
+#' @param binary.frames A FrameList object with preprocessed frames
+#' @param trajectories A trajectories object
+#' @param trajIds Numeric vector, the ID(s) of the trajectory.
+#' @param mode A character string, can assume the values "particles" or "trajectories". Defaults to "particles"
+#' @param col A vector of color strings
+#' @param channel A character string, to select which channel to process, if a ChannelsFrameList is supplied or if the FrameList in raw.frames has more than one channel
+#' 
+#' @return A new FrameList object
+#' 
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+add.contours2 <- function(raw.frames,
+                          binary.frames=NULL,
+                          trajectories=NULL,
+                          trajIds=NULL,
+                          mode="particles", # could assume also "trajectories" as a value
+                          col=NULL, 
+                          channel=NULL)
+{
+  # store for combining steps
+  input.frames <- raw.frames # and leave untouched
+  # check whether the input has more than one channel in the FrameList
+  if(is(raw.frames,"FrameList"))
+  {
+    nrChannels <- getNumberOfFrames(raw.frames[[1]]$image)
+    if(nrChannels > 1)
+    {
+      raw.frames <- channels(raw.frames)
+    } #else, it has already just one channel and we can proceed
+  }
+  
+  # if no preprocessed is provided...
+  if(is.null(binary.frames))
+  {
+    # compute them with the defaults
+    if(is(raw.frames,"ChannelsFrameList"))
+    {
+      if(is.null(channel))
+      {
+        stop("You need to provide a channel along with a ChannelsFrameList - or maybe you supplied a FrameList object with more than one channel to the raw.frames parameter?")
+      }
+#     framelistRaw <- raw.frames[[channel]]
+      binary.frames <- preprocess.ChannelsFrameList(raw.frames,channel)
+    } else {
+      binary.frames <- preprocess.FrameList(raw.frames)
+    }
+    # check also whether trajectories are there already, if so throw an error # or a warning?
+    if(!is.null(trajectories))
+    {
+      stop("You are providing a TrajectoryList object, but no binary.frames FrameList! Please check whether you might have it in your workspace!")
+    }
+  }
+
+  # 
+  if(mode=="trajectories") # additional checks on the trajectorylist object provided 
+  {
+    # if no trajectorylist is provided, compute it
+    if(is.null(trajectories))
+    {
+      trajectories <- trajectories(particles(input.frames,binary.frames))
+    }
+    
+    availableIDs <- unlist(lapply(trajectories,function(arg){arg$ID}))
+    # if no single ids are provided, do it for all
+    if(is.null(trajIds))
+    {
+      # will do it on all, so update it to all the available ones
+      trajIds <- availableIDs
+   
+    } else {
+      # will do it by looping on the length of the provided trajectory IDs vector
+      # check that the trajectories are indeed "plottable"!
+      if(!all(trajIds %in% availableIDs))
+      {
+        stop("You are providing IDs of trajectories that are not available. Please run unlist(lapply(trajectories,function(arg){arg$ID})) on the trajectory object!")
+      }
+    }
+    
+    # actually does it for both cases above
+    library(colorRamps)
+    colcols <- rep(colorRamps::primary.colors(40,steps=10,F),6)
+    out <- input.frames
+    for(i in trajIds)
+    {
+      # same as above actually -> make it a function? # compacted like this
+#       cat("Doing",i,"-\n")
+#       browser()
+      currentTraj <- trajectories[[i]]$trajectory
+      counter <- 1
+      for(j in currentTraj$frame)
+      {
+        rawimg <- out[[j]]$image
+        segmimg <- binary.frames[[j]]$image
+        singleObjectSegm <- segmimg
+        singleObjectSegm[segmimg!=currentTraj$frameobjectID[counter]] <- 0
+#         cat("max obj",max(segmimg),"---",length(as.data.frame(table(singleObjectSegm))$singleObjectSegm)-1,"\t\t")
+        
+        rawWithPaintedObj <- paintObjects(singleObjectSegm,rawimg,col=colcols[i])
+#         cat(paste0("traj",i, "\tframe",j,"\t",colcols[i]))
+        out[[j]]$image <- rawWithPaintedObj 
+#         cat("\n")
+        counter <- counter +1
+      }
+    }  
+      
+    
+    
+    
+    
+  } else if(mode=="particles") # there is actually no need for the trajectorylist/trajId, and the col can be just one value ;)
+  {
+    out <- combine.preprocessedFrameList(input.frames,binary.frames,col)
+   
+  } else {
+    stop("The mode parameter must assume one value of the following: 'particles' or 'trajectories'!")
+  }
+    
+ 
+    # doing it on one single traj
+
+#   #   for(i in 1:length(trajectories))
+#   i <- trajId
+#   {
+#     currentTraj <- trajectories[[i]]$trajectory
+#     framesIncluded <- currentTraj$frame
+#     subsetRaw <- subset(raw.frames,framesToKeep=framesIncluded)
+#     subsetProcessed <- subset(binary.frames,framesIncluded)
+#     
+#     out <- vector("list",length(framesIncluded))
+#     
+#     for (j in 1:length(out))
+#     {
+#       rawimg <- subsetRaw[[j]]$image
+#       segmimg <- subsetProcessed[[j]]$image
+#       singleObjectSegm <- segmimg
+#       singleObjectSegm[segmimg!=currentTraj$frameobjectID[j]] <- 0
+#       rawWithPaintedObj <- paintObjects(singleObjectSegm,rawimg,col="yellow") #  even more beautiful if i have red cells displayed and contour as YELLOW!
+#       
+#       out[[j]]$image <- rawWithPaintedObj 
+#     }  
+#   }
+#   class(out) <- c("FrameList",class(out))
+  return(out)
+
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -222,11 +398,11 @@ evaluateTrajectoryList <- function(trajectorylist,
   {
     cat("Evaluating trajectory",id,"...\n")
     # create painted trajs...
-    paintedTraj <- paintTrajectory(trajectorylist,rawframelist,preprocessedframelist,id)
+    paintedTraj <- add.contours(trajectorylist,rawframelist,preprocessedframelist,id)
     # display it for checking purposes
 #     fullInspection.FrameList(paintedTraj)
     # export it also as gif
-    export.FrameList(paintedTraj,nameStub=paste0("evaluation_traj_",id),createGif=TRUE,removeAfterCreatingGif=TRUE)
+    export.frames(paintedTraj,nameStub=paste0("evaluation_traj_",id),createGif=TRUE,removeAfterCreatingGif=TRUE)
     
     # "interactive" part, asking the user whether the trajectory is correct
     

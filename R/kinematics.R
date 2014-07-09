@@ -101,7 +101,7 @@ extractKinematics.traj <- function(trajectorylist,
 # }
 
 
-#' extractKinematics
+#' kinematics
 #' 
 #' Calculate a set of kinematics parameter from a TrajectoryList object, or a single parameter, or from a single trajectory (all possible combinations)
 #' 
@@ -121,12 +121,11 @@ extractKinematics.traj <- function(trajectorylist,
 #'  
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
-extractKinematics <- function(trajectorylist,
-                              trajectoryID=NULL,
-                              acquisitionFrequency=30, # in milliseconds
-                              scala=50, # 1 pixel is ... micrometer
-                              feature=NULL
-                              )
+kinematics <- function(trajectorylist,
+                       trajectoryID=NULL,
+                       acquisitionFrequency=30, # in milliseconds
+                       scala=50, # 1 pixel is ... micrometer
+                       feature=NULL)
 {
   # compute all, for one or all trajectories
   if(!is.null(trajectoryID)) # then operate on a single trajectory
