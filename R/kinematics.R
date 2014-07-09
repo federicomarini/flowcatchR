@@ -252,30 +252,6 @@ toCartesianCoords <- function(Theta,Radius)
 
 
 
-# #' velohist
-# #' @description
-# #' @details
-# #'  
-# #' @param
-# #' @param
-# #' 
-# #' @return
-# #' 
-# #' @keywords
-# #' @seealso
-# #' @references
-# #' 
-# #' @examples
-# #' 
-# #' @export
-# #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
-# velohist <- function(kinematicsfeaturesetlist)
-# {
-#   curvilinearVelocities <- unlist(lapply(kinematicsfeaturesetlist,function(arg){arg$curvilinearVelocity}))
-#   hist(curvilinearVelocities,breaks=20,probability=TRUE)
-#   lines(density(curvilinearVelocities),col="steelblue")
-# }
-
 
 
 # #' distanceDiagnostics

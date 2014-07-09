@@ -385,8 +385,6 @@ select.particles <- function(particlelist,
 
 
 
-
-# 
 # 
 # ################
 # ## old ##
@@ -431,65 +429,6 @@ select.particles <- function(particlelist,
 # }
 # 
 # ################
-# 
-# cutOutImages <- function(inputImgFiles,processingFolder=processingFolder,imgNames,
-#                          cutLeft=5,cutRight=5,cutUp=5,cutDown=5,write=F,cutAll=0)
-# {
-#   # sanity checks that we are not cutting  too much?
-#   ## if... stop, and print a message
-#   
-#   if(cutAll > 0)
-#   {
-#     cutLeft <- cutRight <- cutUp <- cutDown <- cutAll
-#   }
-#   
-#   for(i in 1:length(inputImgFiles))
-#   {
-#     img <- readImage(inputImgFiles[i])
-#     cutoutImg <- img[cutLeft:(dim(img)[1]-cutRight),cutUp:(dim(img)[2]-cutDown),]
-#     if(write)
-#     {
-#       writeImage(cutoutImg,file=paste0(processingFolder,"/cutoutImages/cutout_",imgNames[i]))
-#       cat("Done with writing cutout image",imgNames[i],"of",length(inputImgFiles), "\n")
-#     } else {
-#       showMe(cutoutImg)
-#       browser()
-#     }
-#   }
-#   
-# }
-# 
-# ################
-# rotateImages <- function(inputImgFiles,processingFolder,imgNames,rotAngle=estAngle,write=F,tryOne=T)
-# {
-#   # sanity checks that we are not cutting  too much?
-#   ## if... stop, and print a message
-#   endLoop <- length(inputImgFiles)
-#   if (tryOne) endLoop <- 1
-#   
-#   for(i in 1:endLoop)
-#   {
-#     img <- readImage(inputImgFiles[i])
-#     rotImg <- rotate(img,rotAngle,
-#                      output.origin=c(dim(img)[1]/3,dim(img)[2]/3),
-#                      output.dim=c(dim(img)[1]*1.5,dim(img)[2]*1.5)
-#     )
-#     if(write && !tryOne)
-#     {
-#       writeImage(rotImg,file=paste0(processingFolder,"/rotatedImages/rotated_",imgNames[i]))
-#       cat("Done with writing rotated image",imgNames[i],"of",length(inputImgFiles), "\n")
-#     } else {
-#       showMe(rotImg)
-#       #       browser()
-#     }
-#   }
-#   
-# }
-# # rotateImages(inputImgFiles=foundImgs,processingFolder=paste(projectFolder,analysisFolder4,sep=""),imgNames=imgsJustNames,rotAngle=estA,write=F,tryOne=T)
-# # 
-# # rotateImages(inputImgFiles=foundImgs,processingFolder=paste(projectFolder,analysisFolder4,sep=""),imgNames=imgsJustNames,rotAngle=130,write=F,tryOne=T)
-# # 
-# # showMe(rotate(testimg2,130))
 # 
 # ## old ##
 # ## old ##

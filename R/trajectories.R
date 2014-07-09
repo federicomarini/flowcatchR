@@ -288,7 +288,7 @@ add.contours2 <- function(raw.frames,
     }
     
     # actually does it for both cases above
-    library(colorRamps)
+#     library(colorRamps)
     colcols <- rep(colorRamps::primary.colors(40,steps=10,F),6)
     out <- input.frames
     for(i in trajIds)
