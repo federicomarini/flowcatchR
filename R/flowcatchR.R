@@ -49,3 +49,16 @@ NULL
 #' @name MesenteriumSubset
 #' @docType data
 NULL
+
+
+.FLOWCATCHR_VERSION <- '0.2'
+#'
+#'
+.onAttach <- function(lib, pkg, ...) {
+packageStartupMessage(sprintf("\nThis is flowcatchR version %s - A toolset to analyze in vivo microscopy imaging data
+for tracking flowing blood cells. Copyright (C) 2014 Federico Marini\n
+Type '?flowcatchR' for help or see www.imbei.de for more details", .FLOWCATCHR_VERSION))
+}
+
+
+

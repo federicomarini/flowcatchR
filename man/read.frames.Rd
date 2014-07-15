@@ -3,10 +3,10 @@
 \alias{read.frames}
 \title{read.frames}
 \usage{
-read.frames(imgsLocation, nframes)
+read.frames(image.files, nframes = NULL)
 }
 \arguments{
-\item{imgsLocation}{Vector of strings containing the locations where the (raw) images are to be found}
+\item{image.files}{Vector of strings containing the locations where the (raw) images are to be found, or alternatively, the path to the folder}
 
 \item{nframes}{Number of frames that will constitute the FrameList object}
 }

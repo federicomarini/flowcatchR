@@ -3,7 +3,8 @@
 \alias{inspect.frames}
 \title{inspect.frames}
 \usage{
-inspect.frames(framelist, nframes = NULL, inspectAll = FALSE)
+inspect.frames(framelist, nframes = NULL, inspectAll = FALSE,
+  display.method = "browser")
 }
 \arguments{
 \item{framelist}{A FrameList object}
@@ -11,6 +12,8 @@ inspect.frames(framelist, nframes = NULL, inspectAll = FALSE)
 \item{nframes}{The number of frames to display (default value: 6)}
 
 \item{inspectAll}{Logical, whether to inspect all frames (overriding the default of 10 that can be used also when inspectAll is FALSE)}
+
+\item{display.method}{Method for displaying, can be either "raster" or "browser". Defaults to browser, by opening a window in the browser}
 }
 \description{
 Explore the first frames of a FrameList

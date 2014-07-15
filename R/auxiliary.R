@@ -26,25 +26,41 @@ showMe <- function(imgObject, dispMet="raster",...)
 #' This function is used to create a FrameList object from a vector of images. 
 #' The number of frames is also specified, as just a subset of the images can be used for this
 #' 
-#'@param imgsLocation Vector of strings containing the locations where the (raw) images are to be found
+#'@param image.files Vector of strings containing the locations where the (raw) images are to be found, or alternatively, the path to the folder
 #'@param nframes Number of frames that will constitute the FrameList object
 #'
 #'@return An object of the \code{FrameList} class, which holds the info on a list of frames, specifying for each the following elements:
 #'\item{image}{The \code{Image} object containing the image itself}
 #'\item{location}{The complete path to the location of the original image}
 #'
-read.frames <- function(imgsLocation,
-                        nframes)
+read.frames <- function(image.files,
+                        nframes=NULL)
 {
   cat("Creating a new object of class FrameList...\n")
+  is.dir <- file.info(image.files[1])$isdir
+  if(is.dir){
+    image.files <- image.files[1]
+    cat("Reading images from directory", image.files,"...\n")
+    image.files <- list.files(image.files, pattern='*.jpg$|*.jpeg$|*.tiff$|*.tif$', full.names=T, ignore.case=T)
+    if(length(image.files) == 0) 
+      stop('No images with JPEG or JPG extension found. Images must be JPG format, please convert any non-JPG images to JPG')
+  }
+  
+  z <- sapply(image.files, file.exists)
+  if(!all(z)) 
+    stop(sprintf('Files "%s" do not exist', paste0(image.files[!z], collapse=', ')))
+  
+  if(is.null(nframes))
+    nframes <- length(image.files)
+  
   # check that nframes coincides with the number of images available -throw an error otherwise?
   frameList <- vector(nframes,mode="list")
   class(frameList) <- c("FrameList",class(frameList))
 
   for (i in 1:nframes)
   {
-    frameList[[i]]$image <- readImage(imgsLocation[i])
-    frameList[[i]]$location <- imgsLocation[i]
+    frameList[[i]]$image <- readImage(image.files[i])
+    frameList[[i]]$location <- image.files[i]
     # or should i just use     frameList[[i]] <- readImage(imgsLocation[[i]])
 
   }
@@ -85,14 +101,15 @@ print.FrameList <- function(x,...)
 #' @param framelist A FrameList object
 #' @param nframes The number of frames to display (default value: 6)
 #' @param inspectAll Logical, whether to inspect all frames (overriding the default of 10 that can be used also when inspectAll is FALSE)
-#' 
+#' @param display.method Method for displaying, can be either "raster" or "browser". Defaults to browser, by opening a window in the browser
 #'
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 inspect.frames <- function(framelist,
                            nframes=NULL,
-                           inspectAll=FALSE)
+                           inspectAll=FALSE,
+                           display.method="browser")
 {
   if(is.null(nframes))
   {
@@ -137,7 +154,7 @@ inspect.frames <- function(framelist,
   }
   
   firstFramesCombined <- combine(firstFrames)
-  display(firstFramesCombined,all=TRUE)
+  display(firstFramesCombined,all=TRUE,method=display.method)
 }
 
 

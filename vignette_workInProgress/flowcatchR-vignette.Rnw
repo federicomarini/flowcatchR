@@ -111,17 +111,23 @@ load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RDa
 To obtain the set of trajectories identified from the analysis of the loaded frames, a 6-step (5 if the compacter version is selected) script is all that is needed:
 
 <<workflowCompact,eval=FALSE,results='hide'>>=
+
+# will need to change all this. ideally it would work with..
+# one command to seize them all
+
+fullResults <- kinematics(trajectories(particles(channels(MesenteriumSubset)$red)))
+
 # separate the information into the three channels
-allChannelsMesenterium <- createChannelsFrameList(MesenteriumSubset)
+allChannelsMesenterium <- channels(MesenteriumSubset)
 # perform smoothing/segmentation on the red channel
 preprocessedPlatelets <- preprocess(allChannelsMesenterium,channel="red")
 # identify platelets and compute some features on them (will be used also for next steps)
-particlesPlatelets <- extractParticles(allChannelsMesenterium$red, # use just red channel
+particlesPlatelets <- particles(allChannelsMesenterium$red, # use just red channel
                                        preprocessedPlatelets)
 
 
 # the same is achievable through 
-particlesPlatelets <- extractParticles(allChannelsMesenterium$red)
+particlesPlatelets <- particles(allChannelsMesenterium$red)
 
 
 # the tracking is performed (see explanation for details on the parameters)
@@ -136,6 +142,20 @@ kinematicsPlatelets <- extractKinematics(trajectoryPlatelets)
 
 The following sections will provide additional detail to the steps mentioned above, with more also on the auxiliary function that are available in \flowcatchR.
 
+<<testRun>>=
+ptm <- proc.time()
+
+fullResults <- kinematics(trajectories(particles(channels(MesenteriumSubset)$red)))
+
+# Print elapsed time
+elapsed = signif( (proc.time() - ptm)[['elapsed']], 5)
+gc(reset=T, verbose=F)
+
+elapsed
+
+@
+
+
 \section{Image Acquisition}
 A set of images is acquired, after a proper microscopy setup has been performed. This includes for example a careful choice of spatial and temporal resolution; often a compromise must be met to have a good frame rate and a good Signal to Noise Ratio to detect the particles in the single frames. For a good review on the steps to be taken, please refer to Meijering's work \cite{Meijering2008}. 
 
@@ -143,24 +163,35 @@ A set of images is acquired, after a proper microscopy setup has been performed.
 
 <<newFrameList>>=
 # path to the folder containing the images
-imgRepository <- list.files("/Volumes/users$/marinif/flow/test_28_03_2014/cutout2/",
-                            full.names=T,pattern="*.tif")
+# imgRepository <- list.files("/Volumes/users$/marinif/flow/test_28_03_2014/cutout2/",
+#                             full.names=T,pattern="*.tif")
+
 # initialization
-fullData <- newFrameList(nframes=100,imgsLocation=imgRepository)
+fullData <- read.frames(image.files="/Volumes/users$/marinif/flow/test_28_03_2014/cutout2/",nframes=100)
 
 # printing summary information for the FrameList object
 fullData
 @
 
+\Robject{nframes} specifies the number of frames that will constitute the FrameList object, whereas \Robject{image.files} is a vector of character strings with the location of the (raw) images, or the path to the folder containing them (works automatically if images are in TIFF/JPG format). In this case we just loaded the full dataset, but for the demonstrational purpose of this vignette, we will proceed with the subset available in the MesenteriumSubset.RData object, which we previously loaded in Section \ref{sec:overview}.
+
+It is possible to inspect the first frames of a FrameList object with the function inspect.frames.
+
+<<inspectRaw>>=
+inspect.frames(fullData,nframes=6,display.method="raster")
+@
+
+By default, display.method is set to "browser", as in the EBImage function display. This opens up a window in the predefined browser (e.g. Mozilla Firefox), with navigable frames (arrows on the top left corner).
+
+
 \TODO{put all commandies to r fncs, objs, classes...}
-\Robject{nframes} specifies the number of frames that will constitute the FrameList object, whereas \Robject{imgsLocation} is a vector of character strings with the location of the (raw) images. In this case we just loaded the full dataset, but for the demonstrational purpose of this vignette, we will proceed with the subset available in the MesenteriumSubset.RData object, which we previously loaded in Section \ref{sec:overview}.
 
 Importantly, these image sets were already registered and rotated in such a way that the overall direction of the movement of interest flows from left to right, as a visual aid and also to fit with some assumptions that will be done in the subsequent step of particle tracking. To register the images, we recommend the general purpose suite offered by ImageJ/Fiji, in particular with the plugins ...
 
 For the following steps, we will focus on the information contained in the red channel, corresponding in this case to blood platelets. We do so by calling:
 
 <<decomposeChannels>>=
-allChannelsMesenterium <- createChannelsFrameList(MesenteriumSubset)
+allChannelsMesenterium <- channels(MesenteriumSubset)
 
 allChannelsMesenterium
 @
@@ -175,6 +206,11 @@ plateletsMesenterium
 
 As we can see, by selecting one of the channels, we get in return a FrameList object.
 
+<<inspectPlatelets>>=
+inspect.frames(plateletsMesenterium,nframes=6,display.method="raster")
+@
+
+
 \section{Image Preprocessing and Analysis}
 Steps such as denoising, smoothing and morphological operations (erosion/dilation, opening/closing) can be performed thanks to the general functions provided by EBImage. \flowcatchR offers a wrapper around a series of operations to be applied to all images in a FrameList object. The generic function preprocess has a method for FrameList objects, which is called via the command:
 
@@ -185,23 +221,48 @@ preprocessedPlatelets <- preprocess.FrameList(plateletsMesenterium,
                                               kernSize = 3, kernShape = "disc",
                                               watershedTolerance = 1, watershedRadius = 1,
                                               areaThresholdMin = 5, areaThresholdMax = 100)
-@
-
-For a detailed explanation of the parameters to better tweak the performances of this segmentation step, please refer to the help of preprocess.FrameList
-
-% We also ported to the R language two widely adopted thresholding algorithms for gray-level images, namely the ones developed by Otsu (ref, 1979) and Kittler and Illingworth (ref, 1986), which despite their historical origin perform well with bimodal histograms such as fluorescent images. []say the names of the functions? 
-
-The user can choose any combination of the operations in order to segment the images provided as input, but preprocess is a very convenient high level function for proceeding in the workflow. It is also possible, as it was shown in the introductory 5-step script, to call just ExtractParticles on the raw FrameList object. In this latter case, ExtractPArticles computes the preprocessed FrameList object according to default parameters. Still, in either situation, the output for this step is an object of the ParticleList class.
-
-<<particleList>>=
 preprocessedPlatelets
 @
 
-As it can be seen from the summary information, each ParticleList ...
+For a detailed explanation of the parameters to better tweak the performances of this segmentation step, please refer to the help of preprocess.FrameList. To obtain an immediate feedback about the effects of the operations performed in the full preprocessing phase, we can call again inspect.frames on the FrameList of segmented images.
 
-Denoising, registration, cut/rotate 
-combinePrepro
-particleExtr, filtering
+<<inspectSegm>>=
+inspect.frames(preprocessedPlatelets,nframes=6,display.method="raster")
+@
+
+
+% We also ported to the R language two widely adopted thresholding algorithms for gray-level images, namely the ones developed by Otsu (ref, 1979) and Kittler and Illingworth (ref, 1986), which despite their historical origin perform well with bimodal histograms such as fluorescent images. []say the names of the functions? 
+
+The user can choose any combination of the operations in order to segment the images provided as input, but preprocess is a very convenient high level function for proceeding in the workflow. It is also possible, as it was shown in the introductory 5-step script, to call just ExtractParticles on the raw FrameList object. In this latter case, ExtractParticles computes the preprocessed FrameList object according to default parameters. Still, in either situation, the output for this step is an object of the ParticleList class.
+
+<<particleList>>=
+platelets <- particles(plateletsMesenterium,preprocessedPlatelets)
+
+platelets
+@
+
+As it can be seen from the summary information, each ParticleList stores the essential information on all particles that were detected in the original images, alongside with a complete set of features, which are computed by integrating the information from both the raw and the segmented frames.
+
+A ParticleList is also a list of lists, structured with the elements particles (storing the actual info), imgSource to help backtracking the operations performed, and channel, as selected in the initial steps.
+
+It is possible to filter out particles according to their properties, such as area, shape and eccentricity. This is possible with the function select.particles. Currently the implementation regards only the surface extension, but any additional feature can be chosen and adopted to restrict the number of candidate particles according to particular properties which are expected and/or to remove potential noise that went through the preprocessing phase.
+
+<<selectParticles>>=
+selectedPlatelets <- select.particles(platelets,min.area=3)
+
+selectedPlatelets
+@
+
+This step can be done iteratively, with the help of the function add.contours (2). \TODO{tell here about it already?}
+
+To connect the particles from one frame to the other, we perform first the detection of particles on all images. Only in a successive phase, we establish the links between the so identified objects.
+
+<<checkSelection>>=
+paintedPlatelets <- add.contours2(raw.frames=plateletsMesenterium,binary.frames=preprocessedPlatelets,mode="particles")
+
+inspect.frames(paintedPlatelets,nframes=6,display.method="raster")
+@
+
 
 
 <<allCode,eval=FALSE>>=
