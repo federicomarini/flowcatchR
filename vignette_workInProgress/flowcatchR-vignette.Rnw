@@ -42,7 +42,8 @@ opts_chunk$set(fig.path='./figures/flowcatchR-',
                message = FALSE,
                warning = FALSE,
                size='small',
-               comment=NA,
+               comment='##',
+               prompt=FALSE,
                echo=TRUE, # set to true for the vignette!
                results='hold')
 options(replace.assign=TRUE,width=80)
@@ -258,7 +259,9 @@ This step can be done iteratively, with the help of the function add.contours (2
 To connect the particles from one frame to the other, we perform first the detection of particles on all images. Only in a successive phase, we establish the links between the so identified objects.
 
 <<checkSelection>>=
-paintedPlatelets <- add.contours2(raw.frames=plateletsMesenterium,binary.frames=preprocessedPlatelets,mode="particles")
+paintedPlatelets <- add.contours2(raw.frames=MesenteriumSubset,
+                                  binary.frames=preprocessedPlatelets,
+                                  mode="particles")
 
 inspect.frames(paintedPlatelets,nframes=6,display.method="raster")
 @
