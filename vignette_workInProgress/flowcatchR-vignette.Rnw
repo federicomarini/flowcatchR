@@ -45,8 +45,10 @@ opts_chunk$set(fig.path='./figures/flowcatchR-',
                comment='##',
                prompt=FALSE,
                echo=TRUE, # set to true for the vignette!
-               results='hold')
-options(replace.assign=TRUE,width=80)
+               results='hold',
+               tidy=TRUE)
+options(replace.assign=TRUE,width=80,'reindent.spaces'=2) # for tidying up the code
+knit_hooks$set(rgl = hook_rgl)
 @
 
 
@@ -178,8 +180,8 @@ fullData
 
 It is possible to inspect the first frames of a FrameList object with the function inspect.frames.
 
-<<inspectRaw>>=
-inspect.frames(fullData,nframes=6,display.method="raster")
+<<inspectRaw,fig.height=4,fig.width=7.5>>=
+inspect.frames(fullData,nframes=9,display.method="raster",inspectAll=T)
 @
 
 By default, display.method is set to "browser", as in the EBImage function display. This opens up a window in the predefined browser (e.g. Mozilla Firefox), with navigable frames (arrows on the top left corner).
@@ -207,8 +209,8 @@ plateletsMesenterium
 
 As we can see, by selecting one of the channels, we get in return a FrameList object.
 
-<<inspectPlatelets>>=
-inspect.frames(plateletsMesenterium,nframes=6,display.method="raster")
+<<inspectPlatelets,fig.height=4,fig.width=7.5>>=
+inspect.frames(plateletsMesenterium,nframes=9,display.method="raster")
 @
 
 
@@ -227,8 +229,8 @@ preprocessedPlatelets
 
 For a detailed explanation of the parameters to better tweak the performances of this segmentation step, please refer to the help of preprocess.FrameList. To obtain an immediate feedback about the effects of the operations performed in the full preprocessing phase, we can call again inspect.frames on the FrameList of segmented images.
 
-<<inspectSegm>>=
-inspect.frames(preprocessedPlatelets,nframes=6,display.method="raster")
+<<inspectSegm,fig.height=4,fig.width=7.5>>=
+inspect.frames(preprocessedPlatelets,nframes=9,display.method="raster")
 @
 
 
@@ -255,17 +257,17 @@ selectedPlatelets
 @
 
 This step can be done iteratively, with the help of the function add.contours (2). \TODO{tell here about it already?}
+If called with the parameter mode set to "particles", then it will automatically generate a FrameList object, with the contours of all particles drawn around the objects that passed the segmentation (and filtering) step.
 
-To connect the particles from one frame to the other, we perform first the detection of particles on all images. Only in a successive phase, we establish the links between the so identified objects.
-
-<<checkSelection>>=
+<<checkSelection,fig.height=4,fig.width=7.5>>=
 paintedPlatelets <- add.contours2(raw.frames=MesenteriumSubset,
                                   binary.frames=preprocessedPlatelets,
                                   mode="particles")
 
-inspect.frames(paintedPlatelets,nframes=6,display.method="raster")
+inspect.frames(paintedPlatelets,nframes=9,display.method="raster")
 @
 
+To connect the particles from one frame to the other, we perform first the detection of particles on all images. Only in a successive phase, we establish the links between the so identified objects. This topic will be explored in detail in the following section.
 
 
 <<allCode,eval=FALSE>>=
@@ -326,18 +328,76 @@ singleKF <- extractKinematics(tata,trajectoryID=13,feature="curvilinearVelocity"
 
 
 \section{Particle tracking}
-explanation of tracking algorithm approach
-penalty generator
 
+To establish the connections between particles, the function to be called is link.particles. The algorithm used to perform the tracking itself is an improved version of the original implementation of Sbalzarini et al., 2005. To summarize the method, it is a fast and efficient self-initializing feature point tracking algorithm (using the centroids of the objects as reference). The initial version is based on a particle matching algorithm, approached via a graph theory technique. It allows for appearances/disappearances of particles from the field of view, also temporarily as it happens in case of occlusions and objects leaving the plane of focus. Our implementation adds to the existing one by redefining the cost function used in the optimization phase of the link assignment, namely by adding two terms such as intensity variation and area variation, and mostly important with a function to penalize the movements that are either perpendicular or backwards with respect to the oriented flow of cells. Small unwanted movements, which may be present even after t¡he registration phase, are handled with two jitter terms. Multiplicative factors can further influence the penalties given to each term.
 
+In its default value, the penalty function is created via the penaltyFunctionGenerator. The user can exploit the parameter values in it to create a custom version of it, to match the particular needs stemming from the nature of the available data and phenomenon under inspection.
+
+<<penFunc>>=
+defaultPenalty <- penaltyFunctionGenerator()
+
+defaultPenalty
+@
+
+Now, to perform the linking of the particles, we use link.particles. Important parameters are L and r, such as in the original implementation from Sbalzarini. L is the maximum displacement in pixels that a particle is expected to have in two consecutive frames, and r is the value for the link range, i.e. the number of future frames to be considered for the linking (typically assumes values between 1 - when no occlusions are known to happen - and 3). An extended explanation of the parameters is in the documentation of the package.
+
+<<linkParticles>>=
+linkedPlatelets <- link.particles(platelets,L=26,R=3,epsilon1=0,epsilon2=0,lambda1=1,lambda2=0,penaltyFunction=penaltyFunctionGenerator(),nframes=20,include.area=FALSE)
+
+linkedPlatelets
+@
+
+As it can be seen, linkedPlatelets is an object of the LinkedParticleList class, which is also a ParticleList class. 
+
+After inspecting the trajectories (see section below []) it might be possible to filter a LinkedParticleList object, and subsequently reperform the linking on its updated version (e.g. some detected particles were found to be noise, and thus removed with select.particles)
 
 \section{Trajectory Analysis}
+
+It is possible to extract the trajectories with the correspondent omonymous function with the command
+
+<<generateTrajs>>=
+trajPlatelets <- trajectories(linkedPlatelets)
+
+trajPlatelets
+@
+
+Before proceeding with the actual analysis of the trajectories, it is recommended to evaluate them by visual inspection. flowcatchR provides two methods to do this.
+
+By plotting all trajectories in a 2D+time representation, it's possible to have an overview of all trajectories. 
+
+<<cubeTrajs,rgl=TRUE>>=
+plot(trajPlatelets,MesenteriumSubset)
+@
+
+\TODO{Need to capture the output of the cube of rgl - how!??!?!}
+
+To have more insights on single trajectories, or on some of them, or also on all of them, add.contours offers a mode "trajectories". Particles are drawn on the raw images with colours corresponding to the trajectory IDs. add.contours plots by default all trajectories, but the user can supply a vector of the IDs of interest to override this behaviour.
+
+<<contourTrajs>>=
+paintedTrajectories <- add.contours2(raw.frames=MesenteriumSubset,
+                                  binary.frames=preprocessedPlatelets,
+                                  trajectories=trajPlatelets,
+                                  mode="trajectories")
+paintedTrajectories
+@
+
+As with any other FrameList object, it is recommended to take a peek at it via the inspect.frames function
+
+<<inspectTrajs>>=
+inspect.frames(paintedTrajectories,nframes=9,display.method="raster")
+@
+
+
+
 identified trajs, compute params
 evaluate trajs
 
 
 
 \section{Auxiliary functions}
+
+Of course at any point of the analysis, the user may wish to export the images stored in a FrameList object. This can be done via the export.frames function, which offers multiple ways to export - animated gif or jpeg, pi pa pu []
+
 inspectFramelist
 print methods
 subsetting
@@ -349,20 +409,7 @@ exportFramelis
 \section{}
 
 
-
 \section{}
-
-
-
-\section{}
-
-
-
-\section{}
-
-
-
-
 
 \section{ff}
 ffff ff ff

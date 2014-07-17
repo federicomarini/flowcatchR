@@ -219,7 +219,7 @@ link.particles <- function(particlelist,
   out[[frames_number]]$special[] <- FALSE
   out[[frames_number]]$nxt[,] <- -1  
   
-  class(out) <- c("linkedParticleList",class(out))
+  class(out) <- c("LinkedParticleList",class(out))
   return(out)  
 }
 

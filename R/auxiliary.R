@@ -336,7 +336,7 @@ print.ParticleList <- function(x,...)
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 print.LinkedParticleList <- function(x,...)
 {
-  cat("An object of the linkedParticleList class. \n\n")
+  cat("An object of the LinkedParticleList class. \n\n")
   cat("List of linked particles for",length(x),"images\n\n")
   cat("Particles were tracked throughout the subsequent",ncol(x[[1]]$nxt),"frame(s)\n\n" )
   

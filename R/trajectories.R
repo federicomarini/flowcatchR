@@ -15,14 +15,14 @@ trajectories <- function(particlelist,
                          provideExtraDetails=FALSE,
                          ...) # parameters for the eventual tracking - is it possible to do so? ask harald!
 {
-  if(is(particlelist,"linkedParticleList"))
+  if(is(particlelist,"LinkedParticleList"))
   {
     cat("Generating trajectories...\n")
     linkedparticlelist <- particlelist
   } else {
     if(is(particlelist,"ParticleList"))
     {
-      cat("Input ParticleList is not a linkedParticleList! \n")
+      cat("Input ParticleList is not a LinkedParticleList! \n")
       cat("Performing linking first with some set of default parameters - you might want to change them according to your scenario...\n")
       linkedparticlelist <- link.particles(particlelist,L=26,R=3,epsilon1=0,epsilon2=0,lambda1=1,lambda2=0)
       print(linkedparticlelist)
