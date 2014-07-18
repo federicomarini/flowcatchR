@@ -70,9 +70,9 @@ knit_hooks$set(rgl = hook_rgl)
 \flowcatchR is a set of tools to analyze in vivo microscopy imaging data, focused on tracking flowing blood cells. It guides the steps from segmentation to calculation of features, filtering out particles not of interest, providing also a set of utilities to help checking the quality of the performed operations (e.g. how good the segmentation was). The main novel contribution investigates the issue of tracking flowing cells such as in blood vessels, to categorize the particles in flowing, rolling and adherent. This classification is applied in the study of phenomena such as hemostasis and study of thrombosis development.
 \end{abstract}
 
-<<loadlibraries,results='hide'>>=
-library("flowcatchR")
-@
+% <<loadlibraries,results='hide'>>=
+% library("flowcatchR")
+% @
 
 \tableofcontents
 
@@ -106,8 +106,8 @@ This guide includes a brief overview of the entire processing flow, from raw ima
 \section{Processing overview}\label{sec:overview}
 \flowcatchR works primarily with sets of fluorescent time-lapse images, where the particles of interest are marked with a fluorescent label (e.g., red for blood platelets, green for leukocytes). Although different entry spots are provided (such as the coordinates of identified points in each frame via tab delimited files), we will illustrate the characteristics of the package starting from a set of 20 frames derived from an intravital microscopy acquisition, which for the sake of practicity were already registered to reduce the unwanted specimen movements. []ref to SPIM, imageJ \& co
 
-<<loadData,results='hide'>>=
-# library("flowcatchR")
+<<loadData,results='hide',message=TRUE>>=
+library("flowcatchR")
 load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
 @
 
@@ -159,7 +159,7 @@ elapsed
 @
 
 
-\section{Image Acquisition}
+\section{Image acquisition}
 A set of images is acquired, after a proper microscopy setup has been performed. This includes for example a careful choice of spatial and temporal resolution; often a compromise must be met to have a good frame rate and a good Signal to Noise Ratio to detect the particles in the single frames. For a good review on the steps to be taken, please refer to Meijering's work \cite{Meijering2008}. 
 
 \flowcatchR provides an S3 class that can store the information of a complete acquisition, namely \Rclass{FrameList}. A \Rclass{FrameList} object is structured as a list, whose elements are in turn a list too. The \Robject{image} and its \Robject{location} are stored in the respective slots. To construct a \Rclass{FrameList}, the \Rfunction{newFrameList} function is used:
@@ -214,7 +214,7 @@ inspect.frames(plateletsMesenterium,nframes=9,display.method="raster")
 @
 
 
-\section{Image Preprocessing and Analysis}
+\section{Image preprocessing and analysis}
 Steps such as denoising, smoothing and morphological operations (erosion/dilation, opening/closing) can be performed thanks to the general functions provided by EBImage. \flowcatchR offers a wrapper around a series of operations to be applied to all images in a FrameList object. The generic function preprocess has a method for FrameList objects, which is called via the command:
 
 <<segmentPreprocess>>=
@@ -376,7 +376,7 @@ As it can be seen, linkedPlatelets is an object of the LinkedParticleList class,
 
 After inspecting the trajectories (see section below []) it might be possible to filter a LinkedParticleList object, and subsequently reperform the linking on its updated version (e.g. some detected particles were found to be noise, and thus removed with select.particles)
 
-\section{Trajectory Analysis}
+\section{Trajectory analysis}
 
 It is possible to extract the trajectories with the correspondent omonymous function with the command
 
