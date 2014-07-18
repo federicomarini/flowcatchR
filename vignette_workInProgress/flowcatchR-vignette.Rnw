@@ -233,6 +233,31 @@ For a detailed explanation of the parameters to better tweak the performances of
 inspect.frames(preprocessedPlatelets,nframes=9,display.method="raster")
 @
 
+The frames could be cut if needed to remove background noise that might be present close to the edges. This is done with
+
+<<cutFrames>>=
+croppedFrames <- cut(plateletsMesenterium,
+                               cutLeft=6,cutRight=6,
+                               cutUp=3,cutDown=3,
+                               testing=FALSE)
+croppedFrames
+@
+
+If testing is set to true, the function just displays the first cropped frame, to get a feeling whether the choice of parameters was adequate. Similarly, for the function rotate.FrameList the same behaviour is expected, whereas the rotation in degrees is specified by the parameter rotAngle.
+
+<<rotateFrames>>=
+rotatedFrames <- rotate.FrameList(plateletsMesenterium, rotAngle=30)
+rotatedFrames
+@
+
+If desired, it is possible to select just a subset of the frames belonging to a FrameList. This can be done via the subset method:
+
+<<subsetFrames>>=
+subsetFrames <- subset.FrameList(plateletsMesenterium,
+                                 framesToKeep=c(1:10,14:20))
+subsetFrames
+@
+
 
 % We also ported to the R language two widely adopted thresholding algorithms for gray-level images, namely the ones developed by Otsu (ref, 1979) and Kittler and Illingworth (ref, 1986), which despite their historical origin perform well with bimodal histograms such as fluorescent images. []say the names of the functions? 
 
@@ -383,44 +408,120 @@ paintedTrajectories
 
 As with any other FrameList object, it is recommended to take a peek at it via the inspect.frames function
 
-<<inspectTrajs>>=
+<<inspectTrajs,fig.height=4,fig.width=7.5>>=
 inspect.frames(paintedTrajectories,nframes=9,display.method="raster")
+@
+
+To allow for a thorough evaluation of the single trajectories, export.frames is a valid helper, as it creates single images corresponding to each frame in the FrameList object. We first extract for example trajectory 13 with this command:
+
+<<traj11,fig.height=4,fig.width=7.5>>=
+traj11<- add.contours2(raw.frames=MesenteriumSubset,
+                                  binary.frames=preprocessedPlatelets,
+                                  trajectories=trajPlatelets,
+                                  mode="trajectories",
+                       trajIds=11)
+traj11
+inspect.frames(traj11,nframes=9,display.method="raster")
+@
+
+Then working on the FrameList traj11, which looks like this in the list view:
+
+<<viewTraj11>>=
+trajPlatelets[[11]]
+@
+
+
+<<exportTraj11>>=
+export.frames(traj11,nameStub="vignetteTest_traj11",createGif=TRUE,removeAfterCreatingGif=FALSE)
+@
+
+export.frames offers multiple ways to export - animated gif (if ImageMagick is available and installed on the system) or multiple jpeg images.
+
+Of course the user might want to evaluate singularly each trajectory that was identified, and this can be done by looping on the trajectory IDs.
+
+<<loopExport, cache=TRUE>>=
+evaluatedTrajectories <- trajPlatelets
+
+for(i in 1:length(trajPlatelets))
+{
+  paintedTraj <- add.contours2(raw.frames=MesenteriumSubset,
+                               binary.frames=preprocessedPlatelets,
+                               trajectories=trajPlatelets,
+                               mode="trajectories",
+                               col="yellow",
+                               trajIds=i)
+  
+  export.frames(paintedTraj,nameStub=paste0("vignetteTest_evaluation_traj_oneByOne_",i),createGif=TRUE,removeAfterCreatingGif=TRUE)
+  # take a sec to evaluate
+  # and eventually update the slot?
+#   cat("Should I keep this trajectory? --- 0: NO, 1:YES --- no other values allowed")
+#   userInput <- readLines(n = 1L)
+#   # if no 0 nor 1, error/do not update, reprompt?
+#   # otherwise, this becomes the value for the field
+#   evaluatedTrajectories[[i]]$keep <- as.logical(as.numeric(userInput))
+  
+}
+@
+
+Always using trajectory 11 as example, we would set evaluatedTrajectories[[1]]\$keep to TRUE, as the trajectory was correctly identified, as we just checked.
+
+Once all trajectories have been selected, we can proceed to calculate (a set of) kinematic parameters, for a single or all trajectories in a TrajectoryList object. The function kinematics returns the desired output, respectively a KinematicsFeatureSet object, a KinematicsFeatureSetList, a single value or a vector (or list, if not coercible to vector) of these single values (one parameter for each trajectory).
+
+<<kinemFeats>>=
+allKinematicFeats.allPlatelets <- kinematics(trajPlatelets,
+                                             trajectoryID=NULL, # will select all trajectory IDs 
+                                             acquisitionFrequency=30, # value in milliseconds
+                                             scala=50, # 1 pixel is equivalent to ... micrometer
+                                             feature=NULL) # again, selects all kinematic features available
+@
+
+As it is reported from the output, the function raises a warning for trajectories which have 3 or less points, as they might be spurious detections.
+
+<<kinemInspect>>=
+allKinematicFeats.allPlatelets
+@
+
+A summary for the returned object (in this case a KinematicsFeatureSetList) shows some of the computed parameters.
+By default, information about the first trajectory is reported in brief, and the same parameters are evaluated on average across the selected trajectories. The true values can be accessed in this case for each trajectory by the subset operator for lists ("[[]]"), followed by the name of the kinematic feature (e.g., \$totalDistance).
+
+A list of all available parameters is printed with an error message if the user specifies an incorrect name, such as here:
+
+<<kinemFeatsAvailable>>=
+allKinematicFeats.allPlatelets <- kinematics(trajPlatelets,feature="?")
+@
+
+When asking for a single parameter, the value returned is structured in a vector, such that it is straightforward to proceed with further analysis, e.g. by plotting the distribution of the curvilinear velocities.
+
+<<allVelos>>=
+allVelocities <- kinematics(trajPlatelets,feature="curvilinearVelocity")
+hist(allVelocities, breaks=10, probability=T)
+lines(density(allVelocities,na.rm=T),col="steelblue")
 @
 
 
 
-identified trajs, compute params
-evaluate trajs
-
-
-
 \section{Auxiliary functions}
+Actually got included in the preprocessing step
 
-Of course at any point of the analysis, the user may wish to export the images stored in a FrameList object. This can be done via the export.frames function, which offers multiple ways to export - animated gif or jpeg, pi pa pu []
-
-inspectFramelist
-print methods
-subsetting
-
-exportFramelis
-
-
-
-\section{}
-
-
-\section{}
-
-\section{ff}
-ffff ff ff
 \subsection{gne gne}
 gne
 
+\section{Supplementary information}
+For more information on the method adapted for tracking cells, see Sbalzarini.
+For additional details regarding the functions of flowcatchR, please consult the documentation or write an email to \email{federico.marini@uni-mainz.de}. 
+\subsection{Vignette data}
+Due to space limitations, the complete dataset for the acquired frames used in this vignette is not included as part of the flowcatchR package.
+If you would like to get access to the it, you can email \email{federico.marini@uni-mainz.de}.
 
+\section{Acknowledgements}
+This package was developed at the Institute of Medical Biostatistics, Epidemiology and Informatics at the University Medical Center, Mainz (Germany), with the financial support provided by the TRP-A15 Translational Research Project grant. 
 
+flowcatchR incorporates suggestions and feedback from the wet-lab biology units operating at the Center for Thrombosis and Hemostasis (CTH), in particular Sven Jaeckel and Kerstin Jurk. Sven Jaeckel also provided us with the sample acquisition which is available in this vignette.
 
-
+We would like to thank the members of the Biostatistics division for valuable discussions, and additionally Isabella Zwiener for contributing to the first ideas on the project.
 \TODO{auto sort references?}
+
+\printbibliography
 
 \newpage
 \section{Session Information}
@@ -429,7 +530,6 @@ toLatex(sessionInfo())
 # Sys.time()
 @
 
-\printbibliography
 % \bibliographystyle
 % \bibliography{flowcatchR} % does not work!?
 % 

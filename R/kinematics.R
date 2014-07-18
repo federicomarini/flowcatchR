@@ -127,6 +127,13 @@ kinematics <- function(trajectorylist,
                        scala=50, # 1 pixel is ... micrometer
                        feature=NULL)
 {
+  # first check whether the user wants to know what features are available to compute
+  if(feature=="?"){
+    cat("Available features to compute are listed here below.
+         Please select one among delta.x, delta.t, delta.v, totalTime, totalDistance, distStartToEnd, curvilinearVelocity, 
+         straightLineVelocity, linearityForwardProgression, trajMSD or velocityAutoCorr")
+    return(NULL)
+  }
   # compute all, for one or all trajectories
   if(!is.null(trajectoryID)) # then operate on a single trajectory
   {

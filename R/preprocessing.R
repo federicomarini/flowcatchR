@@ -97,7 +97,7 @@ rotate.FrameList <- function(framelist,
     rotatedImg <- rotate(img,rotAngle,
                          output.origin=output.origin,
                          output.dim=output.dim)
-                  
+    display(rotatedImg)              
     return(rotatedImg)
   }  
 }
