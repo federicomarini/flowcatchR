@@ -11,9 +11,11 @@ extractKinematics.traj(trajectorylist, trajectoryID,
 
 \item{trajectoryID}{The ID of a single trajectory}
 
-\item{acquisitionFrequency}{The frame rate of acquisition for the images, in milliseconds}
+\item{acquisitionFrequency}{The frame rate of acquisition for the images, in
+milliseconds}
 
-\item{scala}{The value of micro(?)meters to which each single pixel corresponds}
+\item{scala}{The value of micro(?)meters to which each single pixel
+  corresponds}
 }
 \value{
 A KinematicsFeatureSet object
@@ -22,9 +24,11 @@ A KinematicsFeatureSet object
 Calculate a set of kinematics parameter from a single trajectory
 }
 \details{
-The computed set of parameters include delta.x, delta.t and delta.v (displacements and instantaneous velocity),
-totalTime, totalDistance, distStartToEnd, curvilinearVelocity, straightLineVelocity and linearityForwardProgression,
-Mean Squared Displacement and velocity autocorrelation
+The computed set of parameters include delta.x, delta.t and delta.v
+(displacements and instantaneous velocity), totalTime, totalDistance,
+distStartToEnd, curvilinearVelocity, straightLineVelocity and
+linearityForwardProgression, Mean Squared Displacement and velocity
+autocorrelation
 }
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014

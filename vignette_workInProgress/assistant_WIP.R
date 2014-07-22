@@ -3,7 +3,7 @@
 library("flowcatchR")
 
 imgRepository <- list.files("/Volumes/users$/marinif/flow/test_28_03_2014/cutout2/",full.names=T,pattern="*.tif")
-frameList1 <- read.frames(imgsLocation=imgRepository,nframes=100)
+frameList1 <- read.frames(image.files = imgRepository,nframes=100)
 
 ffffg <- cut(x=frameList1,cutAll=20)
 

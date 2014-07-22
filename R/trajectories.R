@@ -143,6 +143,65 @@ plot.TrajectoryList <- function(x,framelist,...)
 
 
 
+#' plot2D.TrajectoryList
+#' 
+#' Provides a bird's eye view of a TrajectoryList object on a bidimensional space
+#' 
+#' Independent from the rgl library, the function extracts the region of interests from the dimensions of an image of the FrameList object,
+#' and afterwards plots the x-y-time representation of the identified trajectories on a 2d plane. It is possible to subset the TrajectoryList
+#' object with the IDs of the desired trajectories
+#' 
+#' @param x A TrajectoryList object
+#' @param framelist A FrameList object, used here to identify the limits of the region of interest 
+#' @param trajIDs A vector containing the ids of the desired trajectories
+#' @param ... Arguments to be passed to methods
+#'
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+plot2D.TrajectoryList <- function(x,framelist,trajIDs=NULL,...)
+{
+  cubeLimits <- axesInfo(framelist)
+  xlim <- cubeLimits$xlim
+  ylim <- cubeLimits$ylim
+  
+  colcols <- rep(colorRamps::primary.colors(40,steps=10,F),6)
+  if(is.null(trajIDs))
+  {
+    trajIDs <- 1:length(x)
+  } else {
+    # check the IDs are correctly given
+    allAvailableTrajectories <- sapply(x,function(arg){unique(arg$trajectory$trajLabel)})
+    if(!all(trajIDs %in% allAvailableTrajectories))
+      stop("You are supplying IDs of trajectories which are not included in the TrajectoryList object!")
+  }
+  cat("Plotting",length(trajIDs),"trajectories (total available in the TrajectoryList:", length(x), ")...\n")
+  
+#   trajectoryDataFrame <- do.call(rbind.data.frame,lapply(x,function(arg){arg$trajectory}))
+  t <- trajIDs[1]
+  plot(yCoord~xCoord, data = x[[t]]$trajectory,
+     xlim=xlim, ylim=ylim, xlab = "Pixel Coordinates - x axis",ylab="Pixel Coordinates - y axis",
+     col=colcols[t],type = "l", lty = 1,lwd = 3,
+     main= "Overview of the identified trajectories")
+#   text((yCoord + 2)~xCoord, data = x[[t]]$trajectory, labels=t,
+#      col=colcols[t])
+  # plotting just the label for the first point
+  text((yCoord[1] + 4)~xCoord[1], data = x[[t]]$trajectory, labels=t,
+     col=colcols[t])
+  for (t in trajIDs[-1])
+  {
+    lines(yCoord~xCoord, data = x[[t]]$trajectory,
+          col=colcols[t],type = "l", lty = 1,lwd = 3)
+    text((yCoord[1] + 4)~xCoord[1], data = x[[t]]$trajectory, labels=t,
+         col=colcols[t])
+  }
+#   cubeLimits <- axesInfo(framelist)
+#   decorate3d(xlim=cubeLimits$xlim,ylim=cubeLimits$ylim,zlim=cubeLimits$tlim,xlab="",ylab="",zlab="",aspect=T)
+  
+}
+
+
+
 
 #' add.contours
 #' 

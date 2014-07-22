@@ -11,24 +11,29 @@ kinematics(trajectorylist, trajectoryID = NULL, acquisitionFrequency = 30,
 
 \item{trajectoryID}{The ID of a single trajectory}
 
-\item{acquisitionFrequency}{The frame rate of acquisition for the images, in milliseconds}
+\item{acquisitionFrequency}{The frame rate of acquisition for the images, in
+milliseconds}
 
-\item{scala}{The value of micro(?)meters to which each single pixel corresponds}
+\item{scala}{The value of micro(?)meters to which each single pixel
+corresponds}
 
 \item{feature}{Character string, the name of the feature to be computed}
 }
 \value{
-A KinematicsFeatureSetList object, or a KinematicsFeatureSet object, or an atomic value, or a list(eventually coerced to a vector)
+A KinematicsFeatureSetList object, or a KinematicsFeatureSet object,
+  or an atomic value, or a list(eventually coerced to a vector)
 }
 \description{
 Calculate a set of kinematics parameter from a TrajectoryList object, or a single parameter, or from a single trajectory (all possible combinations)
 }
 \details{
-The computed set of parameters include delta.x, delta.t and delta.v (displacements and instantaneous velocity),
-totalTime, totalDistance, distStartToEnd, curvilinearVelocity, straightLineVelocity and linearityForwardProgression,
-Mean Squared Displacement and velocity autocorrelation.
-If a single trajectory is specified, the computation is performed for that trajectory alone.
-If a parameter is specified, only that parameter is reported, either for one or all trajectories
+The computed set of parameters include delta.x, delta.t and delta.v
+(displacements and instantaneous velocity), totalTime, totalDistance,
+distStartToEnd, curvilinearVelocity, straightLineVelocity and
+linearityForwardProgression, Mean Squared Displacement and velocity
+autocorrelation. If a single trajectory is specified, the computation is
+performed for that trajectory alone. If a parameter is specified, only that
+parameter is reported, either for one or all trajectories
 }
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014

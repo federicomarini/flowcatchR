@@ -5,17 +5,21 @@
 #' 
 #' Calculate a set of kinematics parameter from a single trajectory
 #' 
-#' The computed set of parameters include delta.x, delta.t and delta.v (displacements and instantaneous velocity), 
-#' totalTime, totalDistance, distStartToEnd, curvilinearVelocity, straightLineVelocity and linearityForwardProgression,
-#' Mean Squared Displacement and velocity autocorrelation
-#'   
+#' The computed set of parameters include delta.x, delta.t and delta.v
+#' (displacements and instantaneous velocity), totalTime, totalDistance,
+#' distStartToEnd, curvilinearVelocity, straightLineVelocity and
+#' linearityForwardProgression, Mean Squared Displacement and velocity
+#' autocorrelation
+#' 
 #' @param trajectorylist A TrajectoryList object
 #' @param trajectoryID The ID of a single trajectory
-#' @param acquisitionFrequency The frame rate of acquisition for the images, in milliseconds
-#' @param scala The value of micro(?)meters to which each single pixel corresponds
-#'  
+#' @param acquisitionFrequency The frame rate of acquisition for the images, in
+#'   milliseconds
+#' @param scala The value of micro(?)meters to which each single pixel
+#'   corresponds
+#'   
 #' @return A KinematicsFeatureSet object
-#' 
+#'   
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 extractKinematics.traj <- function(trajectorylist,
@@ -105,20 +109,25 @@ extractKinematics.traj <- function(trajectorylist,
 #' 
 #' Calculate a set of kinematics parameter from a TrajectoryList object, or a single parameter, or from a single trajectory (all possible combinations)
 #' 
-#' The computed set of parameters include delta.x, delta.t and delta.v (displacements and instantaneous velocity), 
-#' totalTime, totalDistance, distStartToEnd, curvilinearVelocity, straightLineVelocity and linearityForwardProgression,
-#' Mean Squared Displacement and velocity autocorrelation.
-#' If a single trajectory is specified, the computation is performed for that trajectory alone.
-#' If a parameter is specified, only that parameter is reported, either for one or all trajectories
-#'    
+#' The computed set of parameters include delta.x, delta.t and delta.v
+#' (displacements and instantaneous velocity), totalTime, totalDistance,
+#' distStartToEnd, curvilinearVelocity, straightLineVelocity and
+#' linearityForwardProgression, Mean Squared Displacement and velocity
+#' autocorrelation. If a single trajectory is specified, the computation is
+#' performed for that trajectory alone. If a parameter is specified, only that
+#' parameter is reported, either for one or all trajectories
+#' 
 #' @param trajectorylist A TrajectoryList object
 #' @param trajectoryID The ID of a single trajectory
-#' @param acquisitionFrequency The frame rate of acquisition for the images, in milliseconds
-#' @param scala The value of micro(?)meters to which each single pixel corresponds
+#' @param acquisitionFrequency The frame rate of acquisition for the images, in
+#'   milliseconds
+#' @param scala The value of micro(?)meters to which each single pixel
+#'   corresponds
 #' @param feature Character string, the name of the feature to be computed
-#' 
-#' @return A KinematicsFeatureSetList object, or a KinematicsFeatureSet object, or an atomic value, or a list(eventually coerced to a vector)
-#'  
+#'   
+#' @return A KinematicsFeatureSetList object, or a KinematicsFeatureSet object,
+#'   or an atomic value, or a list(eventually coerced to a vector)
+#'   
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 kinematics <- function(trajectorylist,
@@ -130,7 +139,10 @@ kinematics <- function(trajectorylist,
   # first check whether the user wants to know what features are available to compute
   if(!is.null(feature)) {
     if (feature=="?") {
-        print("Available features to compute are listed here below.\nPlease select one among delta.x, delta.t, delta.v, totalTime,\ntotalDistance, distStartToEnd, curvilinearVelocity,\nstraightLineVelocity, linearityForwardProgression, trajMSD or velocityAutoCorr")
+        cat("Available features to compute are listed here below.
+            Please select one among delta.x, delta.t, delta.v, totalTime,
+            totalDistance, distStartToEnd, curvilinearVelocity,
+            straightLineVelocity, linearityForwardProgression, trajMSD or velocityAutoCorr")
       return(NULL)
     }
   }
