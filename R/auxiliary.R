@@ -271,7 +271,8 @@ export.frames <- function(framelist,
   {
     dir.create(folder,showWarnings=FALSE) # if not already existing...
   }
-  imgNames <- lapply(1:length(framelist),function(arg){paste0(folder,nameStub,"_frame_",arg,".png")})
+  imgNames <- lapply(1:length(framelist),
+                     function(arg){paste0(folder,nameStub,"_frame_",formatC(arg,nchar(length(framelist)),flag="0"),".png")})
   for (i in 1:length(framelist))
   {
     writeImage(framelist[[i]]$image,imgNames[[i]])
@@ -288,19 +289,96 @@ export.frames <- function(framelist,
   invisible()
 }
 
-
-
-#' newParticleList
+#' export.particles
 #' 
+#' Exports a ParticleList object
 #' 
+#' Writes the particles contained in the particles data frame slot of the ParticleList object elements.
+#' A track of the provenience of the particles is stored as a comment line above the header
+#' 
+#' @param particlelist A ParticleList object
+#' @param folder The path of the folder where the particle lists should be written
+#' @param nameStub The stub for the file name, that will be used as a prefix for the exported particle lists
+#' 
+#' @return Particle list files are written in the desired location
 #' 
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
-newParticleList <- function()
+export.particles <- function(particlelist,
+                          folder="/Users/fede/TEMP/exportParticleList/",
+                          nameStub="testExport_particles_")
 {
-  cat("need to do. Option to read in from a csv file containing preprocessed data") # would still need to fix the thing on the name of the folder containing the area
+  cat("Exporting the .tsv files for the particle lists...\n")
+  if(!file.exists(folder))
+  {
+    dir.create(folder,showWarnings=FALSE) # if not already existing...
+  }
+  particleNames <- lapply(1:length(particlelist),
+                          function(arg){paste0(folder,nameStub,"_frame_",formatC(arg,nchar(length(particlelist)),flag="0"),".tsv")})
+  for (i in 1:length(particlelist))
+  {
+    writeLines(paste("#",particlelist[[i]]$imgSource,particlelist[[i]]$channel,sep = "|"),particleNames[[i]])
+    write.table(particlelist[[i]]$particles,particleNames[[i]],append = TRUE,sep = "\t",quote = FALSE,col.names = TRUE,row.names= FALSE)
+  }
+  cat("Done exporting the .tsv files for the particle lists.\n
+      You can ignore the warning messages as long as you remind the additional comment line added starting with '#'")
+  invisible()
 }
+
+
+#' read.particles
+#' 
+#' constructor for a ParticleList object
+#' 
+#' This function is used to create a ParticleList object from a vector/list of tab separated text files, each of one containing one line for each 
+#' particle in the related frame, alongside with its coordinates and if available, the computed features
+#' The number of frames is also specified, as just a subset of the particle lists can be used for this
+#' 
+#'@param particle.files Vector of strings containing the locations where the particle coordinates are to be found, or alternatively, the path to the folder
+#'@param nframes Number of frames that will constitute the ParticleList object
+#'
+#'@return An object of the \code{ParticleList} class 
+#' 
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+read.particles <- function(particle.files,
+                           nframes=NULL)
+{
+  cat("Creating a new object of class ParticleList...\n")
+  is.dir <- file.info(particle.files[1])$isdir
+  if(is.dir){
+    particle.files <- particle.files[1]
+    cat("Reading particles from directory", particle.files,"...\n")
+    particle.files <- list.files(particle.files, pattern='*.tsv$', full.names=T, ignore.case=T)
+    if(length(particle.files) == 0) 
+      stop('No particle files with .tsv extension found. Particles must be provided in .tsv formati, please check whether the extension is .txt and change it ')
+  }
+  
+  z <- sapply(particle.files, file.exists)
+  if(!all(z)) 
+    stop(sprintf('Files "%s" do not exist', paste0(particle.files[!z], collapse=', ')))
+  
+  if(is.null(nframes))
+    nframes <- length(particle.files)
+  
+  # check that nframes coincides with the number of images available -throw an error otherwise?
+  particleList <- vector(nframes,mode="list")
+  class(particleList) <- c("ParticleList",class(particleList))
+  
+  for (i in 1:nframes)
+  {
+    particleList[[i]]$particles <- read.table(particle.files[i],sep="\t",comment.char = "#",header=TRUE,stringsAsFactors = FALSE)
+    commentLine <- readLines(particle.files[i],n=1)
+    particleList[[i]]$imgSource <- unlist(strsplit(commentLine,split = "|",fixed=TRUE))[2]
+    particleList[[i]]$channel <- unlist(strsplit(commentLine,split = "|",fixed=TRUE))[3]
+  }
+#   attr(particleList,"call") <- match.call()
+  cat("Created a particleList object of",nframes,"frames!\n")
+  return(particleList)
+}
+
 
 #' print.ParticleList
 #' 

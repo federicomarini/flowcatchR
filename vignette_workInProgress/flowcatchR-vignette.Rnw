@@ -501,14 +501,25 @@ lines(density(allVelocities,na.rm=T),col="steelblue")
 
 
 \section{Auxiliary functions}
-Actually got included in the preprocessing step
+\flowcatchR provides function to export and import the identified particles, in order to offer an additional entry point for analysis (if particles were detected with other routines) and also to store separately the information per each frame about the objects that were primarily identified.
+
+An example is provided in the lines below:
+
+<<expo-impo>>=
+# export to csv format
+export.particles(platelets,folder = "/Users/fede/TEMP/exportParticleList/")
+# re-import the previously exported, in this case
+reimportedPlatelets <- read.particles("/Users/fede/TEMP/exportParticleList/")
+reimportedPlatelets
+@
+
 
 \subsection{gne gne}
 gne
 
 \section{Supplementary information}
 For more information on the method adapted for tracking cells, see Sbalzarini.
-For additional details regarding the functions of flowcatchR, please consult the documentation or write an email to \email{federico.marini@uni-mainz.de}. 
+For additional details regarding the functions of \flowcatchR, please consult the documentation or write an email to \email{federico.marini@uni-mainz.de}. 
 \subsection{Vignette data}
 Due to space limitations, the complete dataset for the acquired frames used in this vignette is not included as part of the flowcatchR package.
 If you would like to get access to the it, you can email \email{federico.marini@uni-mainz.de}.
@@ -516,7 +527,7 @@ If you would like to get access to the it, you can email \email{federico.marini@
 \section{Acknowledgements}
 This package was developed at the Institute of Medical Biostatistics, Epidemiology and Informatics at the University Medical Center, Mainz (Germany), with the financial support provided by the TRP-A15 Translational Research Project grant. 
 
-flowcatchR incorporates suggestions and feedback from the wet-lab biology units operating at the Center for Thrombosis and Hemostasis (CTH), in particular Sven Jaeckel and Kerstin Jurk. Sven Jaeckel also provided us with the sample acquisition which is available in this vignette.
+\flowcatchR incorporates suggestions and feedback from the wet-lab biology units operating at the Center for Thrombosis and Hemostasis (CTH), in particular Sven Jaeckel and Kerstin Jurk. Sven Jaeckel also provided us with the sample acquisition which is available in this vignette.
 
 We would like to thank the members of the Biostatistics division for valuable discussions, and additionally Isabella Zwiener for contributing to the first ideas on the project.
 \TODO{auto sort references?}

@@ -295,6 +295,7 @@ particles <- function(framelistRaw,
     rawImg <- framelistRaw[[i]]$image
     
     imgFeatures <- as.data.frame(computeFeatures(segmImg,rawImg,xname="cell"))
+    imgFeatures$shapeFactor <- (imgFeatures$cell.0.s.perimeter)^2 / (4*pi*imgFeatures$cell.0.s.area)
     
     out[[i]]$particles <- imgFeatures
     out[[i]]$imgSource <- framelistPreprocessed[[i]]$location

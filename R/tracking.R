@@ -36,6 +36,7 @@ link.particles <- function(particlelist,
                            include.area=TRUE)
 {
   out <- initialize.ParticleList(particlelist)
+  pb <- txtProgressBar(min = 0, max = 100, style = 3)
   # preliminary step to set the particles next arrays (or matrix in our case) according to the linkrange
   # done now in case linkrange can get modified during the runs or across different runs
   if(verboseOutput) cat("Starting up...\n\n")
@@ -63,9 +64,9 @@ link.particles <- function(particlelist,
   }
   
   # max cost = displacement^2
-  for(m in 1:(frames_number - curr_linkrange + 1)) # +2?!?!
+  for(m in 1:(frames_number - curr_linkrange + 1)) # +2?!?! or + 0? need to do a very good round of debug on this!!
   {
-    cat("---------- Linking frame",m,"of",frames_number,"...........\n")
+    if(verboseOutput) cat("---------- Linking frame",m,"of",frames_number,"...........\n")
     nop <- nrow(out[[m]]$particles)
     out[[m]]$special[] <- FALSE
     out[[m]]$nxt[,] <- -1
@@ -212,13 +213,15 @@ link.particles <- function(particlelist,
     # shrink curr_linkrange if needed at the end of the frames
     if(m==(frames_number-curr_linkrange-1) && curr_linkrange > 1)
       curr_linkrange <- curr_linkrange - 1
-    
+#     browser()
+    setTxtProgressBar(pb, (m / (frames_number - curr_linkrange + 1)*100))
   }
   #   cat("I GOT HERE ----")
   # terminate all links at the list objects at the very last frame
   out[[frames_number]]$special[] <- FALSE
-  out[[frames_number]]$nxt[,] <- -1  
-  
+  out[[frames_number]]$nxt[,] <- -1 
+  setTxtProgressBar(pb, 100)
+  close(pb)
   class(out) <- c("LinkedParticleList",class(out))
   return(out)  
 }
