@@ -37,7 +37,11 @@ cut.FrameList <- function(x,
     for(i in 1:length(x))
     {
       img <- x[[i]]$image
-      cutoutImg <- img[cutLeft:(dim(img)[1]-cutRight),cutUp:(dim(img)[2]-cutDown),]
+      if (getNumberOfFrames(img)==3)
+        cutoutImg <- img[cutLeft:(dim(img)[1]-cutRight),cutUp:(dim(img)[2]-cutDown),]
+      else
+        cutoutImg <- img[cutLeft:(dim(img)[1]-cutRight),cutUp:(dim(img)[2]-cutDown)]
+      
       out[[i]]$image <- cutoutImg
       out[[i]]$location <- NA # it is modified from an existing object -> maybe provide the name of the object it got created from?
     }

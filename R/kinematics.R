@@ -44,6 +44,9 @@ extractKinematics.traj <- function(trajectorylist,
                 linearityForwardProgression=NA,
                 trajMSD=NA,
                 velocityAutoCorr=NA,
+                instAngle=NA,
+                directChange=NA,
+                dirAutoCorr=NA,
                 paramsNotComputed=TRUE
     )
     class(out) <- c("KinematicsFeatureSet",class(out))
@@ -66,12 +69,18 @@ extractKinematics.traj <- function(trajectorylist,
   distStartToEnd <- sqrt( (sx[length(sx)] - sx[1])^2 + (sy[length(sy)] - sy[1])^2 )
   straightLineVelocity <- distStartToEnd / totalTime
   
-  linearityForwardProgression <- curvilinearVelocity / straightLineVelocity
+  linearityForwardProgression <- straightLineVelocity / curvilinearVelocity
   
   # msd only to compute where no gaps are present?
   trajMSD <- computeMSD(sx,sy,until=floor(nrow(singleTraj)/4))
   velocityAutoCorr <- acf(delta.v,plot=FALSE)
   # 
+  
+  # directionality of the traj, with angles
+  instAngle <- atan2(d1y,d1x)
+  directChange <- diff(instAngle)
+  dirAutoCorr <- acf(directChange)
+  
   out <- list(delta.x=delta.x,
               delta.t=delta.t,
               delta.v=delta.v,
@@ -83,6 +92,9 @@ extractKinematics.traj <- function(trajectorylist,
               linearityForwardProgression=linearityForwardProgression,
               trajMSD=trajMSD,
               velocityAutoCorr=velocityAutoCorr,
+              instAngle=instAngle,
+              directChange=directChange,
+              dirAutoCorr=dirAutoCorr,
               paramsNotComputed=FALSE
               )
   class(out) <- c("KinematicsFeatureSet",class(out))

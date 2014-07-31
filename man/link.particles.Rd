@@ -5,7 +5,7 @@
 \usage{
 link.particles(particlelist, L, R = 2, epsilon1 = 0.1, epsilon2 = 2,
   lambda1 = 1, lambda2 = 1, penaltyFunction = penaltyFunctionGenerator(),
-  nframes, verboseOutput = F, include.intensity = TRUE,
+  nframes, verboseOutput = F, prog = F, include.intensity = TRUE,
   include.area = TRUE)
 }
 \arguments{
@@ -28,6 +28,8 @@ link.particles(particlelist, L, R = 2, epsilon1 = 0.1, epsilon2 = 2,
 \item{nframes}{Numeric value. Number of frames where the linking should be performed}
 
 \item{verboseOutput}{Logical, whether the output should report additional intermediate steps. For debugging use mainly}
+
+\item{prog}{Logical, whether the a progress bar should be shown during the tracking phase}
 
 \item{include.intensity}{Logical, whether to include also intensity change of the particles in the cost function calculation}
 

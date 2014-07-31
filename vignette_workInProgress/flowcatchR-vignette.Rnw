@@ -85,7 +85,7 @@ This document offers an introduction and overview of the \R{} \Bioconductor{} pa
 \flowcatchR builds upon functionalities provided by the \Biocpkg{EBImage} package, and extends them in order to analyze time-lapse microscopy images. Unique characteristics of the datasets \flowcatchR is designed for are listed here:
 
 \begin{itemize}
-\item Images come from intravital microscopy experiments. This means, SNR is not optimal, and very importantly there are potential major movements of the alive specimen, that can ba confounded with the true movements of the particles of interest
+\item Images come from intravital microscopy experiments. This means, SNR is not optimal, and very importantly there are potential major movements of the alive specimen, that can be confounded with the true movements of the particles of interest
 \item A relatively dense number of cells per image, with particles that can enter and leave the field of view
 \item The acquisition frame rate is a compromise between allowing the fluorescent cells to be detected and detecting the movements properly (typical values range around ...\TODO{ask})
 \item Cells can flow, temporarily adhere to the endothelial layer and/or be permanently adherent. Therefore, all movement modalities should be detected correctly throughout the entire acquisition. Cells can also cluster together and form (temporary) conglomerates
@@ -295,7 +295,8 @@ inspect.frames(paintedPlatelets,nframes=9,display.method="raster")
 To connect the particles from one frame to the other, we perform first the detection of particles on all images. Only in a successive phase, we establish the links between the so identified objects. This topic will be explored in detail in the following section.
 
 
-<<allCode,eval=FALSE>>=
+<<allCode,eval=FALSE,echo=FALSE,results='hide'>>=
+# this was with older versions of the code
 ffffg <- cut(x=frameList1,cutAll=20)
 
 cc <- createChannelsFrameList(frameList1)
