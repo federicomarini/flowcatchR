@@ -79,7 +79,7 @@ extractKinematics.traj <- function(trajectorylist,
   # directionality of the traj, with angles
   instAngle <- atan2(d1y,d1x)
   directChange <- diff(instAngle)
-  dirAutoCorr <- acf(directChange)
+  dirAutoCorr <- acf(directChange,plot=FALSE)
   
   out <- list(delta.x=delta.x,
               delta.t=delta.t,

@@ -134,13 +134,11 @@ particlesPlatelets <- particles(allChannelsMesenterium$red)
 
 
 # the tracking is performed (see explanation for details on the parameters)
-linkedPlatelets <- link.ParticleList(particlesPlatelets,
-                                     L=26,R=3,epsilon1=0,epsilon2=0,lambda1=1,lambda2=0,
-                                     nframes=20,useAreaChange=FALSE)
+linkedPlatelets <- link.particles(particlesPlatelets,L=26,R=3,epsilon1=0,epsilon2=0,lambda1=1,lambda2=0,penaltyFunction=penaltyFunctionGenerator(),nframes=20,include.area=FALSE)
 # the linked particle list is transformed into trajectories
-trajectoryPlatelets <- generate.TrajectoryList(linkedPlatelets)
+trajectoryPlatelets <- trajectories(linkedPlatelets)
 # computes a set of interesting kinematic parameters
-kinematicsPlatelets <- extractKinematics(trajectoryPlatelets)
+kinematicsPlatelets <- kinematics(trajectoryPlatelets)
 @
 
 The following sections will provide additional detail to the steps mentioned above, with more also on the auxiliary function that are available in \flowcatchR.
