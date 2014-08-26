@@ -111,6 +111,29 @@ singleKF <- extractKinematics(tata,trajectoryID=13,feature="curvilinearVelocity"
 
 
 
+## testing out on transmigration
+
+library("flowcatchR")
+imgRepository <- list.files("/Volumes/users$/marinif/flow/Transmigration/RawImages/serie1/",full.names=T,pattern="*.jpeg")
+imgRepository
+frameListTrans <- read.frames(image.files = imgRepository,nframes=14)
+
+preprocess(frameListTrans)
+preproTrans <- preprocess(frameListTrans)
+partTrans <- particles(frameListTrans,preproTrans)
+
+linkTrans <- link.particles(partTrans,L=26,R=2,epsilon1=0,epsilon2=0,lambda1=1,lambda2=0,nframes=14,include.area=FALSE)
+trajTrans <- trajectories(linkTrans)
+
+
+
+
+
+
+
+
+
+
 #' @title
 #' @description
 #' @details

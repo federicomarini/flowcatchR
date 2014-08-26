@@ -18,7 +18,8 @@ Description: flowcatchR is a set of tools to analyze in vivo microscopy imaging
 License: BSD_3_clause + file LICENSE
 VignetteBuilder: knitr
 Suggests:
-    BiocStyle
+    BiocStyle,
+    knitr
 Depends:
     R (>= 2.10),
     EBImage,

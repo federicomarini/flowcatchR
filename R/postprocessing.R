@@ -28,19 +28,23 @@ combine.preprocessedFrameList <- function(rawframelist,preprocessedframelist,col
       if(is.null(col)) col <- "yellow"
       rawWithObj <- paintObjects(segmimg,rawimg,col=col)
     } else {
-      channel <- rawframelist[[i]]$channel # read it directly from the framelist object!
-      switch(channel,
-             red={
-               rawWithObj <- rgbImage(red=paintObjects(segmimg,rawimg))
-             }, 
-             green={
-               rawWithObj <- rgbImage(green=paintObjects(segmimg,rawimg))
-             },
-             blue={
-               rawWithObj <- rgbImage(blue=paintObjects(segmimg,rawimg))
-             },
-             stop("No channel value was stored in the appropriate slot!")
-      )
+      if(!is.null(rawframelist[[i]]$channel)){
+        channel <- rawframelist[[i]]$channel # read it directly from the framelist object!
+        switch(channel,
+               red={
+                 rawWithObj <- rgbImage(red=paintObjects(segmimg,rawimg))
+               }, 
+               green={
+                 rawWithObj <- rgbImage(green=paintObjects(segmimg,rawimg))
+               },
+               blue={
+                 rawWithObj <- rgbImage(blue=paintObjects(segmimg,rawimg))
+               },
+               stop("No channel value was stored in the appropriate slot!")
+        )
+      } else {
+        rawWithObj <- rgbImage(red=rawimg, green = paintObjects(segmimg,rawimg,col = "green"))
+      }
     }
     out[[i]]$image <- rawWithObj
   }

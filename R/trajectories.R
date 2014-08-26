@@ -130,15 +130,17 @@ plot.TrajectoryList <- function(x,framelist,...)
 {
   trajectoryDataFrame <- do.call(rbind.data.frame,lapply(x,function(arg){arg$trajectory}))
   cat("Plotting",length(x),"trajectories...\n")
-  for (t in 1:max(trajectoryDataFrame$trajLabel))
+  colcols <- rep(colorRamps::primary.colors(40,steps=10,F),6)
+  for (i in 1:max(trajectoryDataFrame$trajLabel))
   {
-    singleTraj <- trajectoryDataFrame[which(trajectoryDataFrame$trajLabel==t),]
-    plot3d(singleTraj$xCoord, singleTraj$yCoord, singleTraj$frame, col=colours()[singleTraj$trajLabel],type="l",add=T)
+    singleTraj <- trajectoryDataFrame[which(trajectoryDataFrame$trajLabel==i),]
+    plot3d(singleTraj$xCoord, singleTraj$yCoord, singleTraj$frame, col=colcols[singleTraj$trajLabel],type="l",lwd = 3,add=T)
     
   }
   cubeLimits <- axesInfo(framelist)
-  decorate3d(xlim=cubeLimits$xlim,ylim=cubeLimits$ylim,zlim=cubeLimits$tlim,xlab="",ylab="",zlab="",aspect=T)
-  
+#   
+  decorate3d(xlim=cubeLimits$xlim,ylim=cubeLimits$ylim,zlim=cubeLimits$tlim,xlab="",ylab="",zlab="Frame Number",aspect=T)
+  bg3d("black") 
 }
 
 

@@ -289,6 +289,39 @@ export.frames <- function(framelist,
   invisible()
 }
 
+
+
+# export.frames2 <- function(framelist,
+#                           folder="/Users/fede/TEMP/exportFrameList/",
+#                           nameStub="testExport",
+#                           createGif=FALSE,
+#                           ext="png",
+#                           removeAfterCreatingGif=TRUE)
+# {
+#   if(!file.exists(folder))
+#   {
+#     dir.create(folder,showWarnings=FALSE) # if not already existing...
+#   }
+#   imgNames <- lapply(1:length(framelist),
+#                      function(arg){paste0(folder,nameStub,"_frame_",formatC(arg,nchar(length(framelist)),flag="0"),".",ext)})
+#   for (i in 1:length(framelist))
+#   {
+#     writeImage(framelist[[i]]$image,imgNames[[i]])
+#   }
+#   if(createGif)
+#   {
+#     # using imagemagick
+#     system(paste0("convert -delay 40 ",folder,nameStub,"_frame_*.",ext," ",folder,nameStub,".gif"))
+#   }
+#   if(removeAfterCreatingGif)
+#   {
+#     file.remove(list.files(path=folder,pattern=paste0(".png"),full.names=TRUE))
+#   }
+#   invisible()
+# }
+
+
+
 #' export.particles
 #' 
 #' Exports a ParticleList object
