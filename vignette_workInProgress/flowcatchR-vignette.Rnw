@@ -8,7 +8,8 @@
 %%%%%%%%%%% additional/optional packages %%%%%%%%%%% 
 % \usepackage{fancyhdr}
 % for using cleverly the bibliography from mendeley 
-\usepackage[backend=bibtex]{biblatex}
+\usepackage[backend=bibtex, sorting=none]{biblatex}
+% \usepackage{natbib}
 % put refs here
 \bibliography{flowcatchR.bib}
 %%%%%%%%%%% user defined commands %%%%%%%%%%% 
@@ -49,6 +50,12 @@ opts_chunk$set(fig.path='./figures/flowcatchR-',
                tidy=TRUE)
 options(replace.assign=TRUE,width=80,'reindent.spaces'=2) # for tidying up the code
 knit_hooks$set(rgl = hook_rgl)
+@
+
+<<biblioSetup,echo=FALSE,results='hide'>>=
+Sys.setenv(TEXINPUTS=getwd(),
+           BIBINPUTS=getwd(),
+           BSTINPUTS=getwd())
 @
 
 
@@ -521,7 +528,7 @@ reimportedPlatelets
 gne
 
 \section{Supplementary information}
-For more information on the method adapted for tracking cells, see Sbalzarini.
+For more information on the method adapted for tracking cells, see Sbalzarini \cite{Sbalzarini2005}.
 For additional details regarding the functions of \flowcatchR, please consult the documentation or write an email to \email{federico.marini@uni-mainz.de}. 
 \subsection{Vignette data}
 Due to space limitations, the complete dataset for the acquired frames used in this vignette is not included as part of the flowcatchR package.
@@ -544,6 +551,11 @@ toLatex(sessionInfo())
 # Sys.time()
 @
 
+% \bibliographystyle{unsrt}
+\printbibliography
+
+% \bibliographystyle{natbib}
+
 % \bibliographystyle
 % \bibliography{flowcatchR} % does not work!?
 % 
@@ -553,9 +565,7 @@ toLatex(sessionInfo())
 % \end{thebibliography}
 
 \end{document}
-
-
-
+  
 
 
 

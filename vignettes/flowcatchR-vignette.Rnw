@@ -544,6 +544,9 @@ toLatex(sessionInfo())
 # Sys.time()
 @
 
+\bibliography{}
+\bibliographystyle{natbib}
+
 % \bibliographystyle
 % \bibliography{flowcatchR} % does not work!?
 % 
@@ -553,7 +556,7 @@ toLatex(sessionInfo())
 % \end{thebibliography}
 
 \end{document}
-
+  
 
 
 
