@@ -209,9 +209,9 @@ subset.FrameList <- function(x,framesToKeep,...)
 #' @export
 #' 
 #' @examples 
-#' load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
-#' channels(MesenteriumSubset)
-#' plateletsFrameList <- channels(MesenteriumSubset)$red
+#' load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubsetCompressed.RData"))
+#' channels(MesenteriumSubsetCompressed)
+#' plateletsFrameList <- channels(MesenteriumSubsetCompressed)$red
 #' 
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 channels <- function(framelist)

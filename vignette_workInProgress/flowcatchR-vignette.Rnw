@@ -98,7 +98,7 @@ Essential features \Biocpkg{flowcatchR} delivers to the user are:
 \item A simple and flexible, yet complete framework to analyze time-lapse image sets , with classes such as \Rclass{FrameList}, \Rclass{ParticleList} and \Rclass{TrajectoryList} constituting the backbone of the procedure
 \item Facilities for detection of objects in the segmentation step
 \item An algorithm for tracking the particles, adapted and improved from Sbalzarini et al. (2005) \cite{Sbalzarini2005} \TODO{ fix how to use refs with knitr and bioc vignette}, that reflects the directional aspect of the motion
-\item A set of functions inspecting the kinematic properties of the iehdentified trajectories, providing summary statistics and visualization tools to help classifying identified objects
+\item A set of functions inspecting the kinematic properties of the identified trajectories, providing summary statistics and visualization tools to help classifying identified objects
 \end{itemize}
 
 This guide includes a brief overview of the entire processing flow, from raw images to analysis of kinematic parameters derived from the identified trajectories. An example dataset will be used to illustrate the available features, in order to track blood platelets in consecutive frames derived from an intravital microscopy acquisition (also available as a subset in the Data folder of the package). All steps will be dissected to explore parameters and options available.() A second example? ()Finally, a detailed explanation is given for the implementation of the algorithm used for particle tracking.
@@ -330,7 +330,7 @@ display.TrajectoryList(tata,qaqa)
 tataMOD <- evaluateTrajectoryList(tata,frameList1,framelistProcessed)
 unlist(lapply(tataMOD,function(arg){arg$keep}))
 
-# extractKinematics.traj(tata,1)‰
+# extractKinematics.traj(tata,1)
 # 
 # extractKinematics.traj(tata,13)
 # plot(extractKinematics.traj(tata,13)$trajMSD)

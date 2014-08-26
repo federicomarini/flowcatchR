@@ -50,6 +50,19 @@ NULL
 #' @docType data
 NULL
 
+#' MesenteriumSubsetCompressed
+#' 
+#' A sample FrameList object provided
+#' 
+#' The sample FrameList object is constituted by a subset of a time-lapse intravital microscopy imaging dataset.
+#' Green channel marks leukocytes, red channel focuses on blood platelets. 20 frames are provided in this subset.
+#' Images are kindly provided by Sven Jaeckel (\email{Sven.Jaeckel@@unimedizin-mainz.de}).
+#' 
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @name MesenteriumSubsetCompressed
+#' @docType data
+NULL
+
 
 .FLOWCATCHR_VERSION <- '0.2'
 #'
