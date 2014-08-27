@@ -24,6 +24,10 @@ Exports a ParticleList object
 Writes the particles contained in the particles data frame slot of the ParticleList object elements.
 A track of the provenience of the particles is stored as a comment line above the header
 }
+\examples{
+load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+\dontrun{export.particles(candidate.platelets)}
+}
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
 }

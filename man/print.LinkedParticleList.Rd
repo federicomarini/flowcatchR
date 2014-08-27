@@ -13,6 +13,13 @@
 \description{
 Method for displaying conveniently a LinkedParticleList object
 }
+\examples{
+load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+linked.platelets <- link.particles(candidate.platelets,L=26,R=3,epsilon1=0,
+epsilon2=0,lambda1=1,lambda2=0,penaltyFunction=penaltyFunctionGenerator(),
+nframes=20,include.area=FALSE)
+print(linked.platelets)
+}
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
 }

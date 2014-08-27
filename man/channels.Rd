@@ -15,9 +15,10 @@ A ChannelsFrameList object, which is a list of 3 FrameList objects, named respec
 Creates a ChannelsFrameList object from a FrameList object, decomposed in the acquired channels
 }
 \examples{
-load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubsetCompressed.RData"))
-channels(MesenteriumSubsetCompressed)
-plateletsFrameList <- channels(MesenteriumSubsetCompressed)$red
+load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+channels(MesenteriumSubset)
+plateletsFrameList <- channels(MesenteriumSubset)$red
+plateletsFrameList
 }
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014

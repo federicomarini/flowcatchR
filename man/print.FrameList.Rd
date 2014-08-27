@@ -13,6 +13,10 @@
 \description{
 Method for displaying conveniently a FrameList object
 }
+\examples{
+load(file.path(system.file("extra", package = "flowcatchR"), "MesenteriumSubset.RData"))
+print(MesenteriumSubset)
+}
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
 }

@@ -13,6 +13,12 @@
 \description{
 Method for displaying conveniently a KinematicsFeatureSet object
 }
+\examples{
+load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+platelets.trajectories <- trajectories(candidate.platelets)
+traj11features <- kinematics(platelets.trajectories,trajectoryID = 11)
+print(traj11features)
+}
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
 }

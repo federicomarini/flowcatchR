@@ -22,6 +22,10 @@ Extracts a subset of frames from a FrameList object
 An input FrameList object is subject to subsetting. This function is useful e.g. when the trajectory of interest
 is presenting gaps (i.e. does not actually include a frame)
 }
+\examples{
+load(file.path(system.file("extra", package = "flowcatchR"), "MesenteriumSubset.RData"))
+subset.FrameList(MesenteriumSubset, framesToKeep = c(1:10, 14:20))
+}
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
 }

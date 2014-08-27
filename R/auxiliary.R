@@ -6,6 +6,9 @@
 #' @param dispMet Set to default as "raster", could be "browser"
 #' @param ... Arguments to be passed to display
 #' 
+#' @examples
+#' load(file.path(system.file("extra", package = "flowcatchR"), "MesenteriumSubset.RData"))
+#' showMe(MesenteriumSubset[[1]]$image)
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
@@ -16,9 +19,6 @@ showMe <- function(imgObject, dispMet="raster",...)
 
 
 
-
-
-
 #' read.frames
 #' 
 #' constructor for a FrameList object
@@ -26,13 +26,20 @@ showMe <- function(imgObject, dispMet="raster",...)
 #' This function is used to create a FrameList object from a vector of images. 
 #' The number of frames is also specified, as just a subset of the images can be used for this
 #' 
-#'@param image.files Vector of strings containing the locations where the (raw) images are to be found, or alternatively, the path to the folder
-#'@param nframes Number of frames that will constitute the FrameList object
+#' @param image.files Vector of strings containing the locations where the (raw) images are to be found, or alternatively, the path to the folder
+#' @param nframes Number of frames that will constitute the FrameList object
 #'
-#'@return An object of the \code{FrameList} class, which holds the info on a list of frames, specifying for each the following elements:
-#'\item{image}{The \code{Image} object containing the image itself}
-#'\item{location}{The complete path to the location of the original image}
+#' @return An object of the \code{FrameList} class, which holds the info on a list of frames, specifying for each the following elements:
+#' \item{image}{The \code{Image} object containing the image itself}
+#' \item{location}{The complete path to the location of the original image}
+#' 
 #'
+#' @examples
+#' ## see vignette
+#' \dontrun{fullData <- read.frames(image.files = "/path/to/the/directory", nframes = 100)}
+#' 
+#' @export
+#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 read.frames <- function(image.files,
                         nframes=NULL)
 {
@@ -77,6 +84,10 @@ read.frames <- function(image.files,
 #' @param ... Arguments to be passed to methods
 #'  
 #' @method print FrameList
+#' 
+#' @examples
+#' load(file.path(system.file("extra", package = "flowcatchR"), "MesenteriumSubset.RData"))
+#' print(MesenteriumSubset)
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 print.FrameList <- function(x,...)
@@ -102,7 +113,10 @@ print.FrameList <- function(x,...)
 #' @param nframes The number of frames to display (default value: 6)
 #' @param inspectAll Logical, whether to inspect all frames (overriding the default of 10 that can be used also when inspectAll is FALSE)
 #' @param display.method Method for displaying, can be either "raster" or "browser". Defaults to browser, by opening a window in the browser
-#'
+#' 
+#' @examples
+#' load(file.path(system.file("extra", package = "flowcatchR"), "MesenteriumSubset.RData"))
+#' \dontrun{inspect.frames(MesenteriumSubset)}
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
@@ -178,6 +192,10 @@ inspect.frames <- function(framelist,
 #' 
 #' @method subset FrameList
 #' 
+#' @examples
+#' load(file.path(system.file("extra", package = "flowcatchR"), "MesenteriumSubset.RData"))
+#' subset.FrameList(MesenteriumSubset, framesToKeep = c(1:10, 14:20))
+#' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 subset.FrameList <- function(x,framesToKeep,...)
@@ -209,9 +227,10 @@ subset.FrameList <- function(x,framesToKeep,...)
 #' @export
 #' 
 #' @examples 
-#' load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubsetCompressed.RData"))
-#' channels(MesenteriumSubsetCompressed)
-#' plateletsFrameList <- channels(MesenteriumSubsetCompressed)$red
+#' load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+#' channels(MesenteriumSubset)
+#' plateletsFrameList <- channels(MesenteriumSubset)$red
+#' plateletsFrameList
 #' 
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 channels <- function(framelist)
@@ -239,8 +258,6 @@ channels <- function(framelist)
 
 
 
-
-
 #' export.frames
 #' 
 #' Exports a FrameList object
@@ -257,7 +274,9 @@ channels <- function(framelist)
 #' 
 #' @return Image files are written in the desired location
 #' 
-#'
+#' @examples
+#' load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+#' \dontrun{export.frames(MesenteriumSubset,nameStub="subset_export_",createGif=TRUE,removeAfterCreatingGif=FALSE)}
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
@@ -335,6 +354,9 @@ export.frames <- function(framelist,
 #' 
 #' @return Particle list files are written in the desired location
 #' 
+#' @examples
+#' load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+#' \dontrun{export.particles(candidate.platelets)}
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
@@ -368,11 +390,13 @@ export.particles <- function(particlelist,
 #' particle in the related frame, alongside with its coordinates and if available, the computed features
 #' The number of frames is also specified, as just a subset of the particle lists can be used for this
 #' 
-#'@param particle.files Vector of strings containing the locations where the particle coordinates are to be found, or alternatively, the path to the folder
-#'@param nframes Number of frames that will constitute the ParticleList object
+#' @param particle.files Vector of strings containing the locations where the particle coordinates are to be found, or alternatively, the path to the folder
+#' @param nframes Number of frames that will constitute the ParticleList object
 #'
-#'@return An object of the \code{ParticleList} class 
+#' @return An object of the \code{ParticleList} class 
 #' 
+#' @examples
+#' ## see vignette and export.particles
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
@@ -386,7 +410,7 @@ read.particles <- function(particle.files,
     cat("Reading particles from directory", particle.files,"...\n")
     particle.files <- list.files(particle.files, pattern='*.tsv$', full.names=T, ignore.case=T)
     if(length(particle.files) == 0) 
-      stop('No particle files with .tsv extension found. Particles must be provided in .tsv formati, please check whether the extension is .txt and change it ')
+      stop('No particle files with .tsv extension found. Particles must be provided in .tsv format, please check whether the extension is .txt and change it ')
   }
   
   z <- sapply(particle.files, file.exists)
@@ -422,6 +446,10 @@ read.particles <- function(particle.files,
 #' 
 #' @method print ParticleList
 #' 
+#' @examples
+#' load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+#' print(candidate.platelets)
+#' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 print.ParticleList <- function(x,...)
@@ -443,6 +471,13 @@ print.ParticleList <- function(x,...)
 #' 
 #' @method print LinkedParticleList
 #' 
+#' @examples
+#' load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+#' linked.platelets <- link.particles(candidate.platelets,L=26,R=3,epsilon1=0,
+#' epsilon2=0,lambda1=1,lambda2=0,penaltyFunction=penaltyFunctionGenerator(),
+#' nframes=20,include.area=FALSE)
+#' print(linked.platelets)
+#' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 print.LinkedParticleList <- function(x,...)
@@ -461,7 +496,7 @@ print.LinkedParticleList <- function(x,...)
 
 #' initialize.ParticleList
 #' 
-#' Initialize a ParticleList object for subsequent tracking
+#' Initialize a ParticleList object for subsequent linking/tracking
 #'  
 #' @param particlelist A ParticleList object
 #' @param linkrange The number of frames to look for candidate particles potentially belonging to the same track
@@ -505,6 +540,11 @@ initialize.ParticleList <- function(particlelist,
 #' 
 #' @method print TrajectoryList
 #' 
+#' @examples 
+#' load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+#' platelets.trajectories <- trajectories(candidate.platelets)
+#' print(platelets.trajectories)
+#' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 print.TrajectoryList <- function(x,...)
@@ -529,6 +569,12 @@ print.TrajectoryList <- function(x,...)
 #' @param ... Arguments to be passed to methods
 #' 
 #' @method print KinematicsFeatureSet
+#' 
+#' @examples 
+#' load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+#' platelets.trajectories <- trajectories(candidate.platelets)
+#' traj11features <- kinematics(platelets.trajectories,trajectoryID = 11)
+#' print(traj11features)
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
@@ -557,6 +603,12 @@ print.KinematicsFeatureSet <- function(x,...)
 #' 
 #' @method print KinematicsFeatureSetList
 #' 
+#' @examples 
+#' load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+#' platelets.trajectories <- trajectories(candidate.platelets)
+#' alltrajs.features <- kinematics(platelets.trajectories)
+#' print(alltrajs.features)
+#'
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 print.KinematicsFeatureSetList <- function(x,...)

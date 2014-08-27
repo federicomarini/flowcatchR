@@ -21,6 +21,9 @@ This function is used to create a ParticleList object from a vector/list of tab 
 particle in the related frame, alongside with its coordinates and if available, the computed features
 The number of frames is also specified, as just a subset of the particle lists can be used for this
 }
+\examples{
+## see vignette and export.particles
+}
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
 }

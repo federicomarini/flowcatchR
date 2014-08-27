@@ -29,6 +29,10 @@ Writes the images contained in the image slot of the FrameList object elements.
 The images can be exported as single frames, or as a .gif image that is composed
 by the single frames.
 }
+\examples{
+load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+\dontrun{export.frames(MesenteriumSubset,nameStub="subset_export_",createGif=TRUE,removeAfterCreatingGif=FALSE)}
+}
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
 }

@@ -13,6 +13,11 @@
 \description{
 Method for displaying conveniently a TrajectoryList object
 }
+\examples{
+load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+platelets.trajectories <- trajectories(candidate.platelets)
+print(platelets.trajectories)
+}
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
 }

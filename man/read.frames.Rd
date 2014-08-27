@@ -22,4 +22,11 @@ constructor for a FrameList object
 This function is used to create a FrameList object from a vector of images.
 The number of frames is also specified, as just a subset of the images can be used for this
 }
+\examples{
+## see vignette
+\dontrun{fullData <- read.frames(image.files = "/path/to/the/directory", nframes = 100)}
+}
+\author{
+Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
+}
 

@@ -23,6 +23,10 @@ The first frames of a FrameList are displayed in the browser, and are interactiv
 Default number of shown frames is 4, can be set maximum to 8, as this function is purely for a
 first inspection
 }
+\examples{
+load(file.path(system.file("extra", package = "flowcatchR"), "MesenteriumSubset.RData"))
+\dontrun{inspect.frames(MesenteriumSubset)}
+}
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
 }

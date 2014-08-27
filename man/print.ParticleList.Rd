@@ -13,6 +13,10 @@
 \description{
 Method for displaying conveniently a ParticleList object
 }
+\examples{
+load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+print(candidate.platelets)
+}
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
 }

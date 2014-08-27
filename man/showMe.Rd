@@ -15,6 +15,10 @@ showMe(imgObject, dispMet = "raster", ...)
 \description{
 Displays images with R native functions, makes direct use of EBImage's display
 }
+\examples{
+load(file.path(system.file("extra", package = "flowcatchR"), "MesenteriumSubset.RData"))
+showMe(MesenteriumSubset[[1]]$image)
+}
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
 }

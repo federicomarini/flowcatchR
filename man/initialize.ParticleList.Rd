@@ -14,7 +14,7 @@ initialize.ParticleList(particlelist, linkrange = 1)
 A ParticleList object with slots dedicated for the tracking pre-filled
 }
 \description{
-Initialize a ParticleList object for subsequent tracking
+Initialize a ParticleList object for subsequent linking/tracking
 }
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014

@@ -119,7 +119,7 @@ This guide includes a brief overview of the entire processing flow, from raw ima
 <<loadData,results='hide',message=TRUE>>=
 library("flowcatchR")
 # load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
-load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubsetCompressed.RData"))
+load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
 @
 
 To obtain the set of trajectories identified from the analysis of the loaded frames, a 6-step (5 if the compacter version is selected) script is all that is needed:
@@ -129,10 +129,10 @@ To obtain the set of trajectories identified from the analysis of the loaded fra
 # will need to change all this. ideally it would work with..
 # one command to seize them all
 
-fullResults <- kinematics(trajectories(particles(channels(MesenteriumSubsetCompressed)$red)))
+fullResults <- kinematics(trajectories(particles(channels(MesenteriumSubset)$red)))
 
 # separate the information into the three channels
-allChannelsMesenterium <- channels(MesenteriumSubsetCompressed)
+allChannelsMesenterium <- channels(MesenteriumSubset)
 # perform smoothing/segmentation on the red channel
 preprocessedPlatelets <- preprocess(allChannelsMesenterium,channel="red")
 # identify platelets and compute some features on them (will be used also for next steps)
@@ -160,7 +160,7 @@ The following sections will provide additional detail to the steps mentioned abo
 <<testRun>>=
 ptm <- proc.time()
 
-fullResults <- kinematics(trajectories(particles(channels(MesenteriumSubsetCompressed)$red)))
+fullResults <- kinematics(trajectories(particles(channels(MesenteriumSubset)$red)))
 
 # Print elapsed time
 elapsed = signif( (proc.time() - ptm)[['elapsed']], 5)
@@ -188,7 +188,7 @@ fullData <- read.frames(image.files="/Volumes/users$/marinif/flow/test_28_03_201
 fullData
 @
 
-\Robject{nframes} specifies the number of frames that will constitute the FrameList object, whereas \Robject{image.files} is a vector of character strings with the location of the (raw) images, or the path to the folder containing them (works automatically if images are in TIFF/JPG format). In this case we just loaded the full dataset, but for the demonstrational purpose of this vignette, we will proceed with the subset available in the MesenteriumSubsetCompressed.RData object, which we previously loaded in Section \ref{sec:overview}.
+\Robject{nframes} specifies the number of frames that will constitute the FrameList object, whereas \Robject{image.files} is a vector of character strings with the location of the (raw) images, or the path to the folder containing them (works automatically if images are in TIFF/JPG format). In this case we just loaded the full dataset, but for the demonstrational purpose of this vignette, we will proceed with the subset available in the MesenteriumSubset.RData object, which we previously loaded in Section \ref{sec:overview}.
 
 It is possible to inspect the first frames of a FrameList object with the function inspect.frames.
 
@@ -206,7 +206,7 @@ Importantly, these image sets were already registered and rotated in such a way 
 For the following steps, we will focus on the information contained in the red channel, corresponding in this case to blood platelets. We do so by calling:
 
 <<decomposeChannels>>=
-allChannelsMesenterium <- channels(MesenteriumSubsetCompressed)
+allChannelsMesenterium <- channels(MesenteriumSubset)
 
 allChannelsMesenterium
 @
@@ -297,7 +297,7 @@ This step can be done iteratively, with the help of the function add.contours (2
 If called with the parameter mode set to "particles", then it will automatically generate a FrameList object, with the contours of all particles drawn around the objects that passed the segmentation (and filtering) step.
 
 <<checkSelection,fig.height=4,fig.width=7.5>>=
-paintedPlatelets <- add.contours2(raw.frames=MesenteriumSubsetCompressed,
+paintedPlatelets <- add.contours2(raw.frames=MesenteriumSubset,
                                   binary.frames=preprocessedPlatelets,
                                   mode="particles")
 
@@ -406,7 +406,7 @@ Before proceeding with the actual analysis of the trajectories, it is recommende
 By plotting all trajectories in a 2D+time representation, it's possible to have an overview of all trajectories. 
 
 <<cubeTrajs,rgl=TRUE>>=
-plot(trajPlatelets,MesenteriumSubsetCompressed)
+plot(trajPlatelets,MesenteriumSubset)
 @
 
 \TODO{Need to capture the output of the cube of rgl - how!??!?!}
@@ -414,7 +414,7 @@ plot(trajPlatelets,MesenteriumSubsetCompressed)
 To have more insights on single trajectories, or on some of them, or also on all of them, add.contours offers a mode "trajectories". Particles are drawn on the raw images with colours corresponding to the trajectory IDs. add.contours plots by default all trajectories, but the user can supply a vector of the IDs of interest to override this behaviour.
 
 <<contourTrajs>>=
-paintedTrajectories <- add.contours2(raw.frames=MesenteriumSubsetCompressed,
+paintedTrajectories <- add.contours2(raw.frames=MesenteriumSubset,
                                   binary.frames=preprocessedPlatelets,
                                   trajectories=trajPlatelets,
                                   mode="trajectories")
@@ -430,7 +430,7 @@ inspect.frames(paintedTrajectories,nframes=9,display.method="raster")
 To allow for a thorough evaluation of the single trajectories, export.frames is a valid helper, as it creates single images corresponding to each frame in the FrameList object. We first extract for example trajectory 13 with this command:
 
 <<traj11,fig.height=4,fig.width=7.5>>=
-traj11<- add.contours2(raw.frames=MesenteriumSubsetCompressed,
+traj11<- add.contours2(raw.frames=MesenteriumSubset,
                                   binary.frames=preprocessedPlatelets,
                                   trajectories=trajPlatelets,
                                   mode="trajectories",
@@ -459,7 +459,7 @@ evaluatedTrajectories <- trajPlatelets
 
 for(i in 1:length(trajPlatelets))
 {
-  paintedTraj <- add.contours2(raw.frames=MesenteriumSubsetCompressed,
+  paintedTraj <- add.contours2(raw.frames=MesenteriumSubset,
                                binary.frames=preprocessedPlatelets,
                                trajectories=trajPlatelets,
                                mode="trajectories",
