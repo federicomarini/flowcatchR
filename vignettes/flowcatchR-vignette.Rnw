@@ -8,9 +8,13 @@
 %%%%%%%%%%% additional/optional packages %%%%%%%%%%% 
 % \usepackage{fancyhdr}
 % for using cleverly the bibliography from mendeley 
-\usepackage[backend=bibtex]{biblatex}
+\usepackage[backend=bibtex, sorting=none]{biblatex}
+% \usepackage{natbib}
 % put refs here
-\bibliography{flowcatchR.bib}
+\bibliography{flowcatchR}
+
+% \usepackage[authoryear]{natbib}
+
 %%%%%%%%%%% user defined commands %%%%%%%%%%% 
 \newcommand{\bash}[1]{\texttt{#1}}
 \newcommand{\TODO}[1]{{\textbf{TODO:} \textit{\textcolor{green}{#1}}}}
@@ -51,12 +55,18 @@ options(replace.assign=TRUE,width=80,'reindent.spaces'=2) # for tidying up the c
 knit_hooks$set(rgl = hook_rgl)
 @
 
+<<biblioSetup,echo=FALSE,results='hide'>>=
+Sys.setenv(TEXINPUTS=getwd(),
+           BIBINPUTS=getwd(),
+           BSTINPUTS=getwd())
+@
+
 
 % \bioctitle{flowcatchR: asdadds  dd aads}
 % \author{Federico Marini}
 % \date{\today}
 
-\title{{\flowcatchR: A framework for tracking and analyzing cells in time lapse microscopy images}}
+\title{{\flowcatchR: A framework for tracking and analyzing flowing blood cells in time lapse microscopy images}}
 \author{Federico Marini$^1$, Johanna Mazur, Harald Binder \\ [1em]Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI), \\ University Medical Center - Mainz (Germany)\\[1em] \email{$^1$marinif@uni-mainz.de}}
 \date{Edited: July 7, 2014; Compiled: \today}
 
@@ -80,12 +90,12 @@ knit_hooks$set(rgl = hook_rgl)
 \section{Introduction}
 \flowcatchR is a set of tools to analyze in vivo microscopy imaging data, focused on tracking flowing blood cells. It guides the steps from segmentation to calculation of features, filtering out particles not of interest, providing also a set of utilities to help checking the quality of the performed operations (e.g. how good the segmentation was). The main novel contribution investigates the issue of tracking flowing cells such as in blood vessels, to categorize the particles in flowing, rolling and adherent. This classification is applied in the study of phenomena such as hemostasis and study of thrombosis development.
 
-This document offers an introduction and overview of the \R{} \Bioconductor{} package \flowcatchR, which provides a set of tools to detect and track cells in time-lapse microscopy.
+This document offers an introduction and overview of the \R{}/\Bioconductor{} \cite{Rlang2013,Gentleman2004} package \flowcatchR, which provides a set of tools to detect and track cells in time-lapse microscopy.
 
-\flowcatchR builds upon functionalities provided by the \Biocpkg{EBImage} package, and extends them in order to analyze time-lapse microscopy images. Unique characteristics of the datasets \flowcatchR is designed for are listed here:
+\flowcatchR builds upon functionalities provided by the \Biocpkg{EBImage} package \cite{Pau2010}, and extends them in order to analyze time-lapse microscopy images. Unique characteristics of the datasets \flowcatchR is designed for are listed here:
 
 \begin{itemize}
-\item Images come from intravital microscopy experiments. This means, SNR is not optimal, and very importantly there are potential major movements of the alive specimen, that can be confounded with the true movements of the particles of interest
+\item Images come from intravital microscopy experiments. This means, SNR is not optimal, and very importantly there are potential major movements of the alive specimen, that can be confounded with the true movements of the particles of interest \cite{Meijering2008}
 \item A relatively dense number of cells per image, with particles that can enter and leave the field of view
 \item The acquisition frame rate is a compromise between allowing the fluorescent cells to be detected and detecting the movements properly (typical values range around ...\TODO{ask})
 \item Cells can flow, temporarily adhere to the endothelial layer and/or be permanently adherent. Therefore, all movement modalities should be detected correctly throughout the entire acquisition. Cells can also cluster together and form (temporary) conglomerates
@@ -97,8 +107,8 @@ Essential features \Biocpkg{flowcatchR} delivers to the user are:
 \begin{itemize}
 \item A simple and flexible, yet complete framework to analyze time-lapse image sets , with classes such as \Rclass{FrameList}, \Rclass{ParticleList} and \Rclass{TrajectoryList} constituting the backbone of the procedure
 \item Facilities for detection of objects in the segmentation step
-\item An algorithm for tracking the particles, adapted and improved from Sbalzarini et al. (2005) \cite{Sbalzarini2005} \TODO{ fix how to use refs with knitr and bioc vignette}, that reflects the directional aspect of the motion
-\item A set of functions inspecting the kinematic properties of the identified trajectories, providing summary statistics and visualization tools to help classifying identified objects
+\item An algorithm for tracking the particles, adapted and improved from the proposal of Sbalzarini and Koumoutsakos (2005) \cite{Sbalzarini2005} \TODO{ fix how to use refs with knitr and bioc vignette}, that reflects the directional aspect of the motion
+\item A set of functions inspecting the kinematic properties of the identified trajectories \cite{Beltman2009,Meijering2012a}, providing summary statistics and visualization tools to help classifying identified objects
 \end{itemize}
 
 This guide includes a brief overview of the entire processing flow, from raw images to analysis of kinematic parameters derived from the identified trajectories. An example dataset will be used to illustrate the available features, in order to track blood platelets in consecutive frames derived from an intravital microscopy acquisition (also available as a subset in the Data folder of the package). All steps will be dissected to explore parameters and options available.() A second example? ()Finally, a detailed explanation is given for the implementation of the algorithm used for particle tracking.
@@ -126,7 +136,7 @@ allChannelsMesenterium <- channels(MesenteriumSubsetCompressed)
 # perform smoothing/segmentation on the red channel
 preprocessedPlatelets <- preprocess(allChannelsMesenterium,channel="red")
 # identify platelets and compute some features on them (will be used also for next steps)
-particlesPlatelets <- particles(allChannelsMesenterium$red, # use just red channel
+particlesPlatelets <- particles(allChannelsMesenterium$red, 
                                        preprocessedPlatelets)
 
 
@@ -162,7 +172,7 @@ elapsed
 
 
 \section{Image acquisition}
-A set of images is acquired, after a proper microscopy setup has been performed. This includes for example a careful choice of spatial and temporal resolution; often a compromise must be met to have a good frame rate and a good Signal to Noise Ratio to detect the particles in the single frames. For a good review on the steps to be taken, please refer to Meijering's work \cite{Meijering2008}. 
+A set of images is acquired, after a proper microscopy setup has been performed. This includes for example a careful choice of spatial and temporal resolution; often a compromise must be met to have a good frame rate and a good Signal to Noise Ratio to detect the particles in the single frames. For a good review on the steps to be taken, please refer to Meijering's work \cite{Meijering2008, Meijering2012a}. 
 
 \flowcatchR provides an S3 class that can store the information of a complete acquisition, namely \Rclass{FrameList}. A \Rclass{FrameList} object is structured as a list, whose elements are in turn a list too. The \Robject{image} and its \Robject{location} are stored in the respective slots. To construct a \Rclass{FrameList}, the \Rfunction{newFrameList} function is used:
 
@@ -191,7 +201,7 @@ By default, display.method is set to "browser", as in the EBImage function displ
 
 \TODO{put all commandies to r fncs, objs, classes...}
 
-Importantly, these image sets were already registered and rotated in such a way that the overall direction of the movement of interest flows from left to right, as a visual aid and also to fit with some assumptions that will be done in the subsequent step of particle tracking. To register the images, we recommend the general purpose suite offered by ImageJ/Fiji, in particular with the plugins ...
+Importantly, these image sets were already registered and rotated in such a way that the overall direction of the movement of interest flows from left to right, as a visual aid and also to fit with some assumptions that will be done in the subsequent step of particle tracking. To register the images, we recommend the general purpose tools offered by suites such as ImageJ/Fiji \cite{Schneider2012,Schindelin2012}, in particular with the plugins ...
 
 For the following steps, we will focus on the information contained in the red channel, corresponding in this case to blood platelets. We do so by calling:
 
@@ -282,7 +292,7 @@ selectedPlatelets <- select.particles(platelets,min.area=3)
 
 selectedPlatelets
 @
-
+  
 This step can be done iteratively, with the help of the function add.contours (2). \TODO{tell here about it already?}
 If called with the parameter mode set to "particles", then it will automatically generate a FrameList object, with the contours of all particles drawn around the objects that passed the segmentation (and filtering) step.
 
@@ -357,7 +367,9 @@ singleKF <- extractKinematics(tata,trajectoryID=13,feature="curvilinearVelocity"
 
 \section{Particle tracking}
 
-To establish the connections between particles, the function to be called is link.particles. The algorithm used to perform the tracking itself is an improved version of the original implementation of Sbalzarini et al., 2005. To summarize the method, it is a fast and efficient self-initializing feature point tracking algorithm (using the centroids of the objects as reference). The initial version is based on a particle matching algorithm, approached via a graph theory technique. It allows for appearances/disappearances of particles from the field of view, also temporarily as it happens in case of occlusions and objects leaving the plane of focus. Our implementation adds to the existing one by redefining the cost function used in the optimization phase of the link assignment, namely by adding two terms such as intensity variation and area variation, and mostly important with a function to penalize the movements that are either perpendicular or backwards with respect to the oriented flow of cells. Small unwanted movements, which may be present even after the registration phase, are handled with two jitter terms. Multiplicative factors can further influence the penalties given to each term.
+To establish the connections between particles, the function to be called is link.particles. The algorithm used to perform the tracking itself is an improved version of the original implementation of Sbalzarini and Koumotsakos \cite{Sbalzarini2005}. To summarize the method, it is a fast and efficient self-initializing feature point tracking algorithm (using the centroids of the objects as reference). The initial version is based on a particle matching algorithm, approached via a graph theory technique. It allows for appearances/disappearances of particles from the field of view, also temporarily as it happens in case of occlusions and objects leaving the plane of focus. 
+
+Our implementation adds to the existing one by redefining the cost function used in the optimization phase of the link assignment, namely by adding two terms such as intensity variation and area variation, and mostly important with a function to penalize the movements that are either perpendicular or backwards with respect to the oriented flow of cells. Small unwanted movements, which may be present even after the registration phase, are handled with two jitter terms. Multiplicative factors can further influence the penalties given to each term.
 
 In its default value, the penalty function is created via the penaltyFunctionGenerator. The user can exploit the parameter values in it to create a custom version of it, to match the particular needs stemming from the nature of the available data and phenomenon under inspection.
 
@@ -367,7 +379,7 @@ defaultPenalty <- penaltyFunctionGenerator()
 defaultPenalty
 @
 
-Now, to perform the linking of the particles, we use link.particles. Important parameters are L and r, such as in the original implementation from Sbalzarini. L is the maximum displacement in pixels that a particle is expected to have in two consecutive frames, and r is the value for the link range, i.e. the number of future frames to be considered for the linking (typically assumes values between 1 - when no occlusions are known to happen - and 3). An extended explanation of the parameters is in the documentation of the package.
+Now, to perform the linking of the particles, we use link.particles. Important parameters are L and r, named as in the original implementation. L is the maximum displacement in pixels that a particle is expected to have in two consecutive frames, and r is the value for the link range, i.e. the number of future frames to be considered for the linking (typically assumes values between 1 - when no occlusions are known to happen - and 3). An extended explanation of the parameters is in the documentation of the package.
 
 <<linkParticles>>=
 linkedPlatelets <- link.particles(platelets,L=26,R=3,epsilon1=0,epsilon2=0,lambda1=1,lambda2=0,penaltyFunction=penaltyFunctionGenerator(),nframes=20,include.area=FALSE)
@@ -438,11 +450,11 @@ trajPlatelets[[11]]
 export.frames(traj11,nameStub="vignetteTest_traj11",createGif=TRUE,removeAfterCreatingGif=FALSE)
 @
 
-export.frames offers multiple ways to export - animated gif (if ImageMagick is available and installed on the system) or multiple jpeg images.
+export.frames offers multiple ways to export - animated gif (if \software{ImageMagick} is available and installed on the system) or multiple jpeg images.
 
 Of course the user might want to evaluate singularly each trajectory that was identified, and this can be done by looping on the trajectory IDs.
 
-<<loopExport, cache=TRUE>>=
+<<loopExport, cache=TRUE,eval=FALSE>>=
 evaluatedTrajectories <- trajPlatelets
 
 for(i in 1:length(trajPlatelets))
@@ -508,12 +520,12 @@ lines(density(allVelocities,na.rm=T),col="steelblue")
 
 An example is provided in the lines below:
 
-<<expo-impo>>=
+<<expo-impo,eval=FALSE>>=
 # export to csv format
 export.particles(platelets,folder = "/Users/fede/TEMP/exportParticleList/")
 # re-import the previously exported, in this case
 reimportedPlatelets <- read.particles("/Users/fede/TEMP/exportParticleList/")
-reimportedPlatelets
+
 @
 
 
@@ -521,7 +533,7 @@ reimportedPlatelets
 gne
 
 \section{Supplementary information}
-For more information on the method adapted for tracking cells, see Sbalzarini.
+For more information on the method adapted for tracking cells, see Sbalzarini and Koumotsakos (2005) \cite{Sbalzarini2005}.
 For additional details regarding the functions of \flowcatchR, please consult the documentation or write an email to \email{federico.marini@uni-mainz.de}. 
 \subsection{Vignette data}
 Due to space limitations, the complete dataset for the acquired frames used in this vignette is not included as part of the flowcatchR package.
@@ -530,12 +542,11 @@ If you would like to get access to the it, you can email \email{federico.marini@
 \section{Acknowledgements}
 This package was developed at the Institute of Medical Biostatistics, Epidemiology and Informatics at the University Medical Center, Mainz (Germany), with the financial support provided by the TRP-A15 Translational Research Project grant. 
 
-\flowcatchR incorporates suggestions and feedback from the wet-lab biology units operating at the Center for Thrombosis and Hemostasis (CTH), in particular Sven J\"ackel and Kerstin Jurk. Sven Jaeckel also provided us with the sample acquisition which is available in this vignette.
+\flowcatchR incorporates suggestions and feedback from the wet-lab biology units operating at the Center for Thrombosis and Hemostasis (CTH), in particular Sven J\"ackel and Kerstin Jurk. Sven J\"ackel also provided us with the sample acquisition which is available in this vignette.
 
 We would like to thank the members of the Biostatistics division for valuable discussions, and additionally Isabella Zwiener for contributing to the first ideas on the project.
 \TODO{auto sort references?}
 
-\printbibliography
 
 \newpage
 \section{Session Information}
@@ -544,8 +555,10 @@ toLatex(sessionInfo())
 # Sys.time()
 @
 
-\bibliography{}
-\bibliographystyle{natbib}
+% \bibliographystyle{unsrt}
+\printbibliography
+
+% \bibliographystyle{natbib}
 
 % \bibliographystyle
 % \bibliography{flowcatchR} % does not work!?
