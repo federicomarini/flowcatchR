@@ -21,6 +21,9 @@ A function object, to be used as penalty function
 \description{
 A function to generate penalty functions to use while linking particles
 }
+\examples{
+custom.function <- penaltyFunctionGenerator(epsilon1=0.1,epsilon2=6,lambda1=1.5,lambda2=0)
+}
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
 }

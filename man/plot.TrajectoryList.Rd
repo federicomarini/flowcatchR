@@ -19,6 +19,12 @@ Provides a visual representation of a TrajectoryList object
 Based on the rgl library, the function extracts the region of interests from the dimensions of an image of the FrameList object,
 and afterwards plots the x-y-time representation of the identified trajectories
 }
+\examples{
+load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+platelets.trajectories <- trajectories(candidate.platelets)
+plot(platelets.trajectories,MesenteriumSubset)
+}
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
 }

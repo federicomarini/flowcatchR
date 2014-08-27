@@ -19,6 +19,13 @@ Color codes the labels of object masks by a random permutation
 \details{
 The labels of object masks are coloured this time in a "random but reproducible way", by setting a seed at the beginning of the function
 }
+\examples{
+\dontrun{
+oneImg <- subset.FrameList(MesenteriumSubset,framesToKeep = 1)
+showMe(preprocess(oneImg)[[1]]$image)
+showMe(reproducibleColorLabels(preprocess(oneImg)[[1]]$image[,,1]))
+}
+}
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
 }

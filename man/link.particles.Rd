@@ -41,10 +41,16 @@ A LinkedParticleList object
 \description{
 Performs linking of the particles by tracking them through the frames
 }
+\examples{
+load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+tracked.platelets <- link.particles(candidate.platelets, L= 40)
+}
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
 }
 \references{
-Sbalzarini et al.?
+I F Sbalzarini and P Koumoutsakos."Feature point tracking and trajectory analysis for video imaging in cell biology."
+In: Journal of structural biology 151.2 (Aug. 2005), pp. 182-95. ISSN: 1047-8477. DOI: 10.1016/j.jsb.2005.06.002.
+URL: http://www.ncbi.nlm.nih.gov/pubmed/16043363
 }
 

@@ -22,6 +22,12 @@ Independent from the rgl library, the function extracts the region of interests 
 and afterwards plots the x-y-time representation of the identified trajectories on a 2d plane. It is possible to subset the TrajectoryList
 object with the IDs of the desired trajectories
 }
+\examples{
+load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+platelets.trajectories <- trajectories(candidate.platelets)
+plot2D.TrajectoryList(platelets.trajectories,MesenteriumSubset)
+}
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
 }

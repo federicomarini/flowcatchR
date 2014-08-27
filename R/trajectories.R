@@ -1,13 +1,17 @@
 
 #' trajectories
 #' 
-#' Generates a TrajectoryList object from a LinkedParticleList
+#' Generates a TrajectoryList object from a (Linked)ParticleList
 #' 
-#' @param particlelist A ParticleList object
+#' @param particlelist A (Linked)ParticleList object
 #' @param provideExtraDetails Logical, currently not used - could be introduced for providing additional info on the trajectories
 #' @param ... Arguments to be passed to methods
 #' 
 #' @return A TrajectoryList object
+#' 
+#' @examples
+#' load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+#' platelets.trajectories <- trajectories(candidate.platelets)
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
@@ -78,21 +82,6 @@ trajectories <- function(particlelist,
 
 
 
-
-
-
-
-
-## maybe add this too? IN THE FUNCTION ITSELF!
-## dfTrajs <- do.call(rbind.data.frame,liTra)
-
-
-
-# intro for this
-# imgDimensions <- dim(readImage(i))
-# cubeLimits <- list(xlim=c(0,imgDimensions[1]),ylim=c(0,imgDimensions[2]),tlim=c(0,nframes))
-
-
 #' axesInfo
 #' 
 #' Auxiliary function to return the dimensions of the field of interest
@@ -100,7 +89,6 @@ trajectories <- function(particlelist,
 #' @param framelist A FrameList object
 #' 
 #' @return A list object, containing the extremes of the field of interest (x-y-z, where z is time)
-#' 
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
@@ -123,6 +111,12 @@ axesInfo <- function(framelist)
 #' @param ... Arguments to be passed to methods
 #'
 #' @method plot TrajectoryList
+#' 
+#' @examples
+#' load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+#' load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+#' platelets.trajectories <- trajectories(candidate.platelets)
+#' plot(platelets.trajectories,MesenteriumSubset)
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
@@ -157,7 +151,12 @@ plot.TrajectoryList <- function(x,framelist,...)
 #' @param framelist A FrameList object, used here to identify the limits of the region of interest 
 #' @param trajIDs A vector containing the ids of the desired trajectories
 #' @param ... Arguments to be passed to methods
-#'
+
+#' @examples
+#' load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+#' load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+#' platelets.trajectories <- trajectories(candidate.platelets)
+#' plot2D.TrajectoryList(platelets.trajectories,MesenteriumSubset)
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
@@ -209,59 +208,6 @@ plot2D.TrajectoryList <- function(x,framelist,trajIDs=NULL,...)
 #' 
 #' Creates a FrameList objects containing raw information, combined with the segmented images and the relative trajectory under analysis
 #' 
-#' @param raw.frames A FrameList object with raw images
-#' @param binary.frames A FrameList object with preprocessed frames
-#' @param trajectories A trajectories object
-#' @param trajId Numeric value, the ID of the trajectory 
-#' 
-#' @return A new FrameList object
-#' 
-#' 
-#' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
-add.contours <- function(raw.frames,binary.frames,trajectories,trajId)
-{
-  # doing it on one single traj # 'THIS ONE WILL STAY!! 
-  
-  #   for(i in 1:length(trajectories))
-  i <- trajId
-  {
-    currentTraj <- trajectories[[i]]$trajectory
-    framesIncluded <- currentTraj$frame
-    subsetRaw <- subset(raw.frames,framesToKeep=framesIncluded)
-    subsetProcessed <- subset(binary.frames,framesIncluded)
-    
-    out <- vector("list",length(framesIncluded))
-    
-    for (j in 1:length(out))
-    {
-      rawimg <- subsetRaw[[j]]$image
-      segmimg <- subsetProcessed[[j]]$image
-      singleObjectSegm <- segmimg
-      singleObjectSegm[segmimg!=currentTraj$frameobjectID[j]] <- 0
-      rawWithPaintedObj <- paintObjects(singleObjectSegm,rawimg,col="yellow") #  even more beautiful if i have red cells displayed and contour as YELLOW!
-      
-      out[[j]]$image <- rawWithPaintedObj 
-    }  
-  }
-  class(out) <- c("FrameList",class(out))
-  return(out)
-
-}
-
-
-## paintTRAJSSSSSS on all, giffed?
-
-
-
-
-
-
-
-#' add.contours2
-#' 
-#' Creates a FrameList objects containing raw information, combined with the segmented images and the relative trajectory under analysis
-#' 
 #' If a TrajectoryList is provided and mode is set to "trajectories", returns a FrameList with all trajectories included in the IDs 
 #' vector painted accordingly.
 #' If the mode is set to "particles", it will just plot the particles (all) on all frames.
@@ -278,10 +224,18 @@ add.contours <- function(raw.frames,binary.frames,trajectories,trajId)
 #' 
 #' @return A new FrameList object
 #' 
+#' @examples
+#' load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+#' \dontrun{
+#' paintedTrajectories <- add.contours2(raw.frames = MesenteriumSubset, mode = "trajectories",channel="red")
+#' paintedParticles <- add.contours2(raw.frames = MesenteriumSubset, mode = "particles",channel="red")
+#' inspect.frames(paintedTrajectories)
+#' inspect.frames(paintedParticles)
+#' }
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
-add.contours2 <- function(raw.frames,
+add.contours <- function(raw.frames,
                           binary.frames=NULL,
                           trajectories=NULL,
                           trajIds=NULL,
@@ -402,198 +356,63 @@ add.contours2 <- function(raw.frames,
 
 
 
-
-#' inspect.trajectories
-#' 
-#' A function to inspect single trajectories from a TrajectoryList object
-#' 
-#' Basically it add the contours to just one object, and returns a FrameList object which is a subset of the input one
-#' The length of the returned object corresponds exactly the length of the identified trajectory, so uninteresting frames will be skipped
-#' 
-#' 
-#' OLD: A pseudo-interactive function to inspect and accept/reject trajectories of a TrajectoryList object
-#' OLD: The user gets the trajectories displayed singularly, and for each a keyboard input is required.
-#' The slot corresponding to the user feedback is interactively filled in. The TrajectoryList object is then ready for further operations
-#' 
-#' @param trajectorylist A TrajectoryList object
-#' @param rawframelist A FrameList object with raw images
-#' @param preprocessedframelist A FrameList object with preprocessed frames
-#' @param trajID A numeric value, storing the ID of trajectory which is under inspection
-#' @param browse Logical, whether to automatically open the painted trajectory to inspect
-#' 
-#' @return A new TrajectoryList object -NO! Returns now a FrameList object, and this can be used to evaluate the trajectory
-#'
-#' 
-#' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
-inspect.trajectories <- function(trajectorylist,
-                                 rawframelist,
-                                 preprocessedframelist,
-                                 trajID,
-                                 browse=TRUE)
-{
-  currentTraj <- trajectories[[trajID]]$trajectory
-  framesIncluded <- currentTraj$frame
-  subsetRaw <- subset(rawframelist,framesToKeep=framesIncluded)
-  subsetProcessed <- subset(preprocessedframelist,framesIncluded)
-  
-  out <- vector("list",length(framesIncluded))
-  
-  for (j in 1:length(out))
-  {
-    rawimg <- subsetRaw[[j]]$image
-    segmimg <- subsetProcessed[[j]]$image
-    singleObjectSegm <- segmimg
-    singleObjectSegm[segmimg!=currentTraj$frameobjectID[j]] <- 0
-    rawWithPaintedObj <- paintObjects(singleObjectSegm,rawimg,col="yellow") #  even more beautiful if i have red cells displayed and contour as YELLOW!
-    
-    out[[j]]$image <- rawWithPaintedObj 
-  }
-  class(out) <- c("FrameList",class(out))
-  if(browse) inspect.frames(out)
-  return(out)
-}
-
-  
-  
-  
-
-
-
-
-
-# 
-# linksToTrajectories <- function(imgObjectsList)
+## replaced basically by explicit text in the vignette
+# #' inspect.trajectory
+# #' 
+# #' A function to inspect single trajectories from a TrajectoryList object
+# #' 
+# #' Basically it add the contours to just one object, and returns a FrameList object which is a subset of the input one
+# #' The length of the returned object corresponds exactly the length of the identified trajectory, so uninteresting frames will be skipped
+# #' 
+# #' 
+# #' OLD: A pseudo-interactive function to inspect and accept/reject trajectories of a TrajectoryList object
+# #' OLD: The user gets the trajectories displayed singularly, and for each a keyboard input is required.
+# #' The slot corresponding to the user feedback is interactively filled in. The TrajectoryList object is then ready for further operations
+# #' 
+# #' @param trajectorylist A TrajectoryList object
+# #' @param rawframelist A FrameList object with raw images
+# #' @param preprocessedframelist A FrameList object with preprocessed frames
+# #' @param trajID A numeric value, storing the ID of trajectory which is under inspection
+# #' @param browse Logical, whether to automatically open the painted trajectory to inspect
+# #' 
+# #' @return A new TrajectoryList object -NO! Returns now a FrameList object, and this can be used to evaluate the trajectory
+# #'
+# #' @examples
+# #' ## see vignette
+# #' 
+# #' @export
+# #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+# inspect.trajectory <- function(trajectorylist,
+#                                  rawframelist,
+#                                  preprocessedframelist,
+#                                  trajID,
+#                                  browse=TRUE)
 # {
-#   trajList <- list()
-#   ntraj <- 0
-#   for(ii in 1:length(imgObjectsList)) # looping over the frames
+#   currentTraj <- trajectories[[trajID]]$trajectory
+#   framesIncluded <- currentTraj$frame
+#   subsetRaw <- subset(rawframelist,framesToKeep=framesIncluded)
+#   subsetProcessed <- subset(preprocessedframelist,framesIncluded)
+#   
+#   out <- vector("list",length(framesIncluded))
+#   
+#   for (j in 1:length(out))
 #   {
-#     npart <- nrow(imgObjectsList[[ii]])
+#     rawimg <- subsetRaw[[j]]$image
+#     segmimg <- subsetProcessed[[j]]$image
+#     singleObjectSegm <- segmimg
+#     singleObjectSegm[segmimg!=currentTraj$frameobjectID[j]] <- 0
+#     rawWithPaintedObj <- paintObjects(singleObjectSegm,rawimg,col="yellow") #  even more beautiful if i have red cells displayed and contour as YELLOW!
 #     
-#     for(ipart in 1:npart) # looping over the particles
-#     {
-#       iframe <- ii
-#       #       if((ii == 43) &&(ipart==12) ) browser()
-#       nextOne <- imgObjectsList[[iframe]]$link[ipart]
-#       if(nextOne > 0) # if the particle starts a trajectory, then follow it
-#       {
-#         ntraj <- ntraj+1
-#         traj <- c(imgObjectsList[[iframe]][ipart,1],imgObjectsList[[iframe]][ipart,2],ntraj,iframe)
-#         imgObjectsList[[iframe]]$link[ipart] <- -2 # instead of -1
-#         while(nextOne > 0)
-#         {
-#           iframe <- iframe + 1
-#           traj <- rbind(traj,c(imgObjectsList[[iframe]][nextOne,1],imgObjectsList[[iframe]][nextOne,2],ntraj,iframe))
-#           nextOld <- nextOne
-#           nextOne <- imgObjectsList[[iframe]]$link[nextOne]
-#           imgObjectsList[[iframe]]$link[nextOld] <- -2
-#         }
-#         
-#         trajList[[ntraj]] <- traj
-#         colnames(trajList[[ntraj]]) <- c("xCoord","yCoord","trajLabel","frame")
-#         rownames(trajList[[ntraj]]) <- paste0(ntraj,"_",seq(1:nrow(trajList[[ntraj]])))
-#         trajList[[ntraj]] <- as.data.frame(trajList[[ntraj]])
-#       }
-#     }
+#     out[[j]]$image <- rawWithPaintedObj 
 #   }
-#   return(trajList)
+#   class(out) <- c("FrameList",class(out))
+#   if(browse) inspect.frames(out)
+#   return(out)
 # }
-# 
-# 
-# linksToTrajectories_v3 <- function(particleList=imgObjectsList_v3)
-# {
-#   trajList <- list()
-#   ntraj <- 0
-#   linkrange <- ncol(particleList[[1]]$nxt) # can be derived from the object
-#   
-#   
-#   for(ii in 1:length(particleList)) # looping over the frames
-#   {
-#     npart <- nrow(particleList[[ii]]$particles)
-#     
-#     for(ipart in 1:npart) # looping over the particles
-#     {
-#       iframe <- ii
-#       nextOne <- particleList[[iframe]]$nxt[ipart,1] # need to tweak the column!
-#       if(nextOne > 0) # if the particle starts a trajectory, then follow it
-#       {
-#         ntraj <- ntraj+1
-#         traj <- c(particleList[[iframe]]$particles[ipart,1],particleList[[iframe]]$particles[ipart,2],ntraj,iframe)
-#         particleList[[iframe]]$link[ipart] <- -2 # instead of -1
-#         while(nextOne > 0)
-#         {
-#           iframe <- iframe + 1
-#           traj <- rbind(traj,c(particleList[[iframe]]$particles[nextOne,1],particleList[[iframe]]$particles[nextOne,2],ntraj,iframe))
-#           nextOld <- nextOne
-#           nextOne <- particleList[[iframe]]$nxt[nextOne,1]
-#           particleList[[iframe]]$nxt[nextOld,1] <- -2
-#         }
-#         
-#         trajList[[ntraj]] <- traj
-#         colnames(trajList[[ntraj]]) <- c("xCoord","yCoord","trajLabel","frame")
-#         rownames(trajList[[ntraj]]) <- paste0(ntraj,"_",seq(1:nrow(trajList[[ntraj]])))
-#         trajList[[ntraj]] <- as.data.frame(trajList[[ntraj]])
-#       }
-#     }
-#   }
-#   return(trajList)
-# }
-# ## maybe add this too? IN THE FUNCTION ITSELF!
-# ## dfTrajs <- do.call(rbind.data.frame,liTra)
-# 
-# 
-# 
-# linksToTrajectories_v5 <- function(particleList=imgObjectsList_v3)
-# {
-#   # trajSet is now a list of lists!
-#   # need some kind of definition for the "class" # see auxiliary.R
-#   
-#   
-#   
-#   
-#   # still work on the list - singularly-... but the nneed to combine it!
-#   trajList <- list()
-#   ntraj <- 0
-#   linkrange <- ncol(particleList[[1]]$nxt) # can be derived from the object
-#   
-#   
-#   for(ii in 1:length(particleList)) # looping over the frames
-#   {
-#     npart <- nrow(particleList[[ii]]$particles)
-#     
-#     for(ipart in 1:npart) # looping over the particles
-#     {
-#       iframe <- ii
-#       nextOne <- particleList[[iframe]]$nxt[ipart,1] # need to tweak the column!
-#       if(nextOne > 0) # if the particle starts a trajectory, then follow it
-#       {
-#         ntraj <- ntraj+1
-#         traj <- c(particleList[[iframe]]$particles[ipart,1],particleList[[iframe]]$particles[ipart,2],ntraj,iframe)
-#         particleList[[iframe]]$link[ipart] <- -2 # instead of -1
-#         while(nextOne > 0)
-#         {
-#           iframe <- iframe + 1
-#           traj <- rbind(traj,c(particleList[[iframe]]$particles[nextOne,1],particleList[[iframe]]$particles[nextOne,2],ntraj,iframe))
-#           nextOld <- nextOne
-#           nextOne <- particleList[[iframe]]$nxt[nextOne,1]
-#           particleList[[iframe]]$nxt[nextOld,1] <- -2
-#         }
-#         
-#         trajList[[ntraj]] <- traj
-#         colnames(trajList[[ntraj]]) <- c("xCoord","yCoord","trajLabel","frame")
-#         rownames(trajList[[ntraj]]) <- paste0(ntraj,"_",seq(1:nrow(trajList[[ntraj]])))
-#         trajList[[ntraj]] <- as.data.frame(trajList[[ntraj]])
-#       }
-#     }
-#   }
-#   
-#   trajSet <- createTrajectorySet(trajList)
-#   
-#   return(trajSet)
-# }
-# ## maybe add this too? IN THE FUNCTION ITSELF!
-# ## dfTrajs <- do.call(rbind.data.frame,liTra)
+
+  
+  
+  
 
 
 

@@ -33,6 +33,10 @@ Performs cropping on the FrameList object, selecting how many pixels should be c
 Cropping can be performed with careful choice of all cutting sides, or cropping a single value from
 all sides
 }
+\examples{
+load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+cut(MesenteriumSubset)
+}
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
 }

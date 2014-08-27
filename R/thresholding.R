@@ -38,7 +38,7 @@ otsuThreshold <- function (input_image,nr_bit=16)  # use all channels?
   # careful, sum is not exactly 1...
   
   ## coding in 16 bit, slightly better
-  greyLevels <- greyVec * (2^nr_bit -1) # parametrizable? nrBit <- 16
+  greyLevels <- greyVec * (2^nr_bit -1) 
   
   #### modified!!
   greyLevels <- as.vector(greyLevels)
@@ -130,8 +130,6 @@ kittlerillingerThreshold <- function (input_image,nr_bit=8)  # use all channels?
   # careful, sum is not exactly 1...
   
   
-  
-  
   P_t <- function(p, k)
   {
     s <- sum(p[0:k])
@@ -187,16 +185,13 @@ kittlerillingerThreshold <- function (input_image,nr_bit=8)  # use all channels?
   
   ## actually do the optimization (max required)
   o <- optimize(kittIll, c(1,length(tableGrey)), maximum=FALSE, L=length(tableGrey), p=p_i )
-  kitty_threshold <- o$minimum/((2^nr_bit)-1) 
+  kittlerillinger_threshold <- o$minimum/((2^nr_bit)-1) 
   
   cat("Calculated value with Kittler-Illinger thresholding method...")
-  cat(kitty_threshold)
+  cat(kittlerillinger_threshold)
   cat("\n")
   
-  return(kitty_threshold)
-  
-  
-  
-  
+  return(kittlerillinger_threshold)
+
 }
 

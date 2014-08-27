@@ -22,6 +22,11 @@ Performs filtering on a ParticleList object
 According to parameters of interests, such as size, eccentricity/shape, filters out the particles that do not
 satisfy the indicated requirements
 }
+\examples{
+load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+selected.platelets <- select.particles(candidate.platelets, min.area = 5)
+selected.platelets
+}
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
 }

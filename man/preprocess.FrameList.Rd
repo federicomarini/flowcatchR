@@ -43,6 +43,11 @@ Preprocessing function for FrameList objects
 FrameList objects are processed according to the chosen set of parameters. Many of them refer directly to
 existing EBImage functions, please see the corresponding help for additional information
 }
+\examples{
+load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+platelets.framelist <- channels(MesenteriumSubset)$red
+preprocess(platelets.framelist)
+}
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
 }

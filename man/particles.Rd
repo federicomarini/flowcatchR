@@ -18,6 +18,12 @@ A ParticleList object, containing all detected particles for each frame
 \description{
 Extract particles from the images of a FrameList object.
 }
+\examples{
+load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+platelets.framelist <- channels(MesenteriumSubset)$red
+platelets.preprocessed <- preprocess(platelets.framelist)
+particles.platelets <- particles(platelets.framelist, platelets.preprocessed)
+}
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
 }

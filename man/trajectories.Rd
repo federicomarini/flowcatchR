@@ -6,7 +6,7 @@
 trajectories(particlelist, provideExtraDetails = FALSE, ...)
 }
 \arguments{
-\item{particlelist}{A ParticleList object}
+\item{particlelist}{A (Linked)ParticleList object}
 
 \item{provideExtraDetails}{Logical, currently not used - could be introduced for providing additional info on the trajectories}
 
@@ -16,7 +16,11 @@ trajectories(particlelist, provideExtraDetails = FALSE, ...)
 A TrajectoryList object
 }
 \description{
-Generates a TrajectoryList object from a LinkedParticleList
+Generates a TrajectoryList object from a (Linked)ParticleList
+}
+\examples{
+load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+platelets.trajectories <- trajectories(candidate.platelets)
 }
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014

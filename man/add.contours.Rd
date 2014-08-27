@@ -3,7 +3,8 @@
 \alias{add.contours}
 \title{add.contours}
 \usage{
-add.contours(raw.frames, binary.frames, trajectories, trajId)
+add.contours(raw.frames, binary.frames = NULL, trajectories = NULL,
+  trajIds = NULL, mode = "particles", col = NULL, channel = NULL)
 }
 \arguments{
 \item{raw.frames}{A FrameList object with raw images}
@@ -12,13 +13,35 @@ add.contours(raw.frames, binary.frames, trajectories, trajId)
 
 \item{trajectories}{A trajectories object}
 
-\item{trajId}{Numeric value, the ID of the trajectory}
+\item{trajIds}{Numeric vector, the ID(s) of the trajectory.}
+
+\item{mode}{A character string, can assume the values "particles" or "trajectories". Defaults to "particles"}
+
+\item{col}{A vector of color strings}
+
+\item{channel}{A character string, to select which channel to process, if a ChannelsFrameList is supplied or if the FrameList in raw.frames has more than one channel}
 }
 \value{
 A new FrameList object
 }
 \description{
 Creates a FrameList objects containing raw information, combined with the segmented images and the relative trajectory under analysis
+}
+\details{
+If a TrajectoryList is provided and mode is set to "trajectories", returns a FrameList with all trajectories included in the IDs
+vector painted accordingly.
+If the mode is set to "particles", it will just plot the particles (all) on all frames.
+If no trajectoryList is provided, it will be computed with default parameters.
+If no binary.frames is provided, it will be computed also with default parameters
+}
+\examples{
+load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+\dontrun{
+paintedTrajectories <- add.contours2(raw.frames = MesenteriumSubset, mode = "trajectories",channel="red")
+paintedParticles <- add.contours2(raw.frames = MesenteriumSubset, mode = "particles",channel="red")
+inspect.frames(paintedTrajectories)
+inspect.frames(paintedParticles)
+}
 }
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014

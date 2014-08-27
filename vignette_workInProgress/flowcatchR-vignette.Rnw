@@ -113,6 +113,18 @@ Essential features \Biocpkg{flowcatchR} delivers to the user are:
 
 This guide includes a brief overview of the entire processing flow, from raw images to analysis of kinematic parameters derived from the identified trajectories. An example dataset will be used to illustrate the available features, in order to track blood platelets in consecutive frames derived from an intravital microscopy acquisition (also available as a subset in the Data folder of the package). All steps will be dissected to explore parameters and options available.() A second example? ()Finally, a detailed explanation is given for the implementation of the algorithm used for particle tracking.
 
+To install the package flowcatchR, please start a current version of R and type 
+
+<<install,eval=FALSE>>=
+source("http://bioconductor.org/biocLite.R")
+biocLite("flowcatchR")
+
+# currently could be done via github, I guess
+install.packages("devtools") #if needed
+devtools::install_github("flowcatchR", "federicomarini")
+@
+
+
 \section{Processing overview}\label{sec:overview}
 \flowcatchR works primarily with sets of fluorescent time-lapse images, where the particles of interest are marked with a fluorescent label (e.g., red for blood platelets, green for leukocytes). Although different entry spots are provided (such as the coordinates of identified points in each frame via tab delimited files), we will illustrate the characteristics of the package starting from a set of 20 frames derived from an intravital microscopy acquisition, which for the sake of practicity were already registered to reduce the unwanted specimen movements. []ref to SPIM, imageJ \& co
 
@@ -293,11 +305,11 @@ selectedPlatelets <- select.particles(platelets,min.area=3)
 selectedPlatelets
 @
   
-This step can be done iteratively, with the help of the function add.contours (2). \TODO{tell here about it already?}
+This step can be done iteratively, with the help of the function add.contours. 
 If called with the parameter mode set to "particles", then it will automatically generate a FrameList object, with the contours of all particles drawn around the objects that passed the segmentation (and filtering) step.
 
 <<checkSelection,fig.height=4,fig.width=7.5>>=
-paintedPlatelets <- add.contours2(raw.frames=MesenteriumSubset,
+paintedPlatelets <- add.contours(raw.frames=MesenteriumSubset,
                                   binary.frames=preprocessedPlatelets,
                                   mode="particles")
 
@@ -414,7 +426,7 @@ plot(trajPlatelets,MesenteriumSubset)
 To have more insights on single trajectories, or on some of them, or also on all of them, add.contours offers a mode "trajectories". Particles are drawn on the raw images with colours corresponding to the trajectory IDs. add.contours plots by default all trajectories, but the user can supply a vector of the IDs of interest to override this behaviour.
 
 <<contourTrajs>>=
-paintedTrajectories <- add.contours2(raw.frames=MesenteriumSubset,
+paintedTrajectories <- add.contours(raw.frames=MesenteriumSubset,
                                   binary.frames=preprocessedPlatelets,
                                   trajectories=trajPlatelets,
                                   mode="trajectories")
@@ -430,7 +442,7 @@ inspect.frames(paintedTrajectories,nframes=9,display.method="raster")
 To allow for a thorough evaluation of the single trajectories, export.frames is a valid helper, as it creates single images corresponding to each frame in the FrameList object. We first extract for example trajectory 13 with this command:
 
 <<traj11,fig.height=4,fig.width=7.5>>=
-traj11<- add.contours2(raw.frames=MesenteriumSubset,
+traj11<- add.contours(raw.frames=MesenteriumSubset,
                                   binary.frames=preprocessedPlatelets,
                                   trajectories=trajPlatelets,
                                   mode="trajectories",
@@ -467,14 +479,15 @@ for(i in 1:length(trajPlatelets))
                                trajIds=i)
   
   export.frames(paintedTraj,nameStub=paste0("vignetteTest_evaluation_traj_oneByOne_",i),createGif=TRUE,removeAfterCreatingGif=TRUE)
-  # take a sec to evaluate
-  # and eventually update the slot?
-#   cat("Should I keep this trajectory? --- 0: NO, 1:YES --- no other values allowed")
-#   userInput <- readLines(n = 1L)
-#   # if no 0 nor 1, error/do not update, reprompt?
-#   # otherwise, this becomes the value for the field
-#   evaluatedTrajectories[[i]]$keep <- as.logical(as.numeric(userInput))
   
+  #### uncomment the code below to perform the interactive evaluation of the single trajectories
+
+  #   cat("Should I keep this trajectory? --- 0: NO, 1:YES --- no other values allowed")
+  #   userInput <- readLines(n = 1L)
+  #   ## if neither 0 nor 1, do not update
+  #   ## otherwise, this becomes the value for the field keep in the TrajectoryList with evaluated trajectories
+  #   evaluatedTrajectories[[i]]$keep <- as.logical(as.numeric(userInput))
+ 
 }
 @
 

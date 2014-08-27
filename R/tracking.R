@@ -17,9 +17,15 @@
 #' @param include.intensity Logical, whether to include also intensity change of the particles in the cost function calculation
 #' @param include.area Logical, whether to include also area change of the particles in the cost function calculation
 #' 
-#' @references Sbalzarini et al.?
+#' @references I F Sbalzarini and P Koumoutsakos."Feature point tracking and trajectory analysis for video imaging in cell biology."
+#' In: Journal of structural biology 151.2 (Aug. 2005), pp. 182-95. ISSN: 1047-8477. DOI: 10.1016/j.jsb.2005.06.002.
+#' URL: http://www.ncbi.nlm.nih.gov/pubmed/16043363
 #' 
 #' @return A LinkedParticleList object
+#' 
+#' @examples
+#' load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+#' tracked.platelets <- link.particles(candidate.platelets, L= 40)
 #' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
@@ -245,6 +251,9 @@ link.particles <- function(particlelist,
 #' 
 #' @return A function object, to be used as penalty function
 #' 
+#' @examples
+#' custom.function <- penaltyFunctionGenerator(epsilon1=0.1,epsilon2=6,lambda1=1.5,lambda2=0)
+#' 
 #' @export
 #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
 penaltyFunctionGenerator <- function(epsilon1=0.1,
@@ -259,214 +268,3 @@ penaltyFunctionGenerator <- function(epsilon1=0.1,
   }
 }
 
-
-
-############## from here downwards, it's "just" old functions
-# linkParticles_v5_withIntensity <- function(particleList=imgObjectsList_v3,
-#                                            L,
-#                                            R=2,
-#                                            epsilon1=0.1,
-#                                            epsilon2=2,
-#                                            lambda1=1,
-#                                            lambda2=1,
-#                                            nframes=length(candidate_feats_red),
-#                                            verboseOutput=F
-# )
-# {
-#   # preliminary step to set the particles next arrays (or matrix in our case) according to the linkrange
-#   # done now in case linkrange can get modified during the runs or across different runs
-#   if(verboseOutput) cat("Starting up...\n\n")
-#   frames_number <- nframes
-#   linkrange <- R
-#   for (fr in 1:frames_number)
-#   {
-#     particleList[[fr]]$nxt <- matrix(0,nrow=nrow(particleList[[fr]]$particles),ncol=R)
-#   }
-#   
-#   curr_linkrange <- R
-#   displacement <- L
-#   # we need at least two frames
-#   if(frames_number < 2) 
-#   {
-#     # error
-#     cat("At least",R+1,"frames are needed!!! - INTERRUPTING!!!\n")
-#   }
-#   
-#   # if the linkrange is too big, set it to the right value
-#   if(frames_number < (curr_linkrange+1))
-#   {
-#     curr_linkrange <- frames_number - 1
-#   }
-#   
-#   # max cost = displacement^2
-#   for(m in 1:(frames_number - curr_linkrange + 1)) # +2?!?!
-#   {
-#     cat("---------- Linking frame",m,"of",frames_number,"...........\n")
-#     nop <- nrow(particleList[[m]]$particles)
-#     particleList[[m]]$special[] <- FALSE
-#     particleList[[m]]$nxt[,] <- -1
-#     
-#     
-#     # AND HERE BEGINS THE "TRUE" CYCLE THROUGHOUT NEXT FRAMES
-#     iterate <- 0
-#     for(n in 1:curr_linkrange)
-#     {
-#       iterate <- 0
-#       max_cost <- n*displacement*displacement
-#       
-#       nop_next <- nrow(particleList[[m+n]]$particles)
-#       
-#       ## cost matrix
-#       # setup the cost matrix
-#       C <- n*displacement*displacement*matrix(1,nop+1,nop_next+1)
-#       ## PLUS VARIATION
-#       # quadratic distance between p_i and q_j
-#       xrep <- repmat(t(particleList[[m+n]]$particles[,1]),nop,1) # function repmat replicates the matlab behaviour
-#       yrep <- repmat(t(particleList[[m+n]]$particles[,2]),nop,1)
-#       xdiff <- xrep - repmat(particleList[[m]]$particles[,1],1,nop_next)
-#       ydiff <- yrep - repmat(particleList[[m]]$particles[,2],1,nop_next)
-#       deltaSquared <- xdiff^2 + ydiff^2
-#       alpha <- atan2(ydiff,xdiff)
-#       
-#       
-#       # edit 2014-05-08
-#       deltaSquared <- (deltaSquared - epsilon2) * ((deltaSquared - epsilon2) > 0)
-#       # this allows to have a mini jitter on the position of the particle, that can now go slightly backwards and or move orthogonally to the flow
-#       
-#       
-#       
-#       ## similarly, include the part where the area/intensity is considered
-#       
-#       areaVariation <- 0
-#       # using the ... 6th column, corresponding to the area
-#       areaDiff <- repmat(t(particleList[[m+n]]$particles[,6]),nop,1) - repmat(particleList[[m]]$particles[,6],1,nop_next)
-#       areaVariation <- areaDiff^2
-#       
-#       intensityVariation <- 0
-#       # using the ... corresponding column, corresponding to the mean intensity
-#       intDiff <- repmat(t(particleList[[m+n]]$particles[,"cell.a.b.mean"]),nop,1) - repmat(particleList[[m]]$particles[,"cell.a.b.mean"],1,nop_next)
-#       intensityVariation <- intDiff^2
-#       
-#       
-#       # possibly add also a term for the intensity
-#       
-#       distFunction <- deltaSquared + areaVariation + intensityVariation
-#       
-#       newCost <- lambda1 * (distFunction / (1-lambda2*(alpha/(pi+epsilon1))))
-#       #       newCost <- deltaSquared
-#       # cost function for link p_i, q_j
-#       
-#       # for everything apart from the dummies, already set to rL^2...
-#       C[1:nop,1:nop_next] <- newCost # + squared moments and so on
-#       C[nop+1,nop_next+1] <- 0 # dummy to dummy      
-#       C[C>max_cost] <- Inf
-#       
-#       ## association matrix
-#       # empty association matrix  
-#       A <- matrix(0,nrow=nop+1,ncol=nop_next+1)
-#       # initialize link matrix A --- oldstyle, but working ;) and probably even more optimized than the for for for loops
-#       for(i in 1:nop)
-#       {
-#         # sort costs of real particles
-#         srtcst <- sort(C[i,])
-#         srtidx <- order(C[i,])
-#         # append index of dummy
-#         iidx <- 1
-#         dumidx <- which(srtidx==nop_next+1)
-#         # search for available particle of smallest cost or dummy
-#         while(sum(A[,srtidx[iidx]])!=0 & (iidx < dumidx))
-#         {
-#           iidx <- iidx +1      
-#         }
-#         A[i,srtidx[iidx]] <- 1
-#       }
-#       
-#       # set dummy particle for columns with no entry
-#       s <- colSums(A) # or colSums here?!
-#       A[nop+1,which(s<1)] <- 1
-#       #   s <- colSums(A)
-#       #   A[which(s<1),n+1] <- 1
-#       # dummy corresponds to dummy
-#       A[nop+1,nop_next+1] <- 1
-#       # consistency checks
-#       s1 <- colSums(A[,1:nop_next])
-#       s2 <- rowSums(A[1:nop,])
-#       
-#       # optimize the relation matrix
-#       finished <- 0
-#       mincost <- c()
-#       while(!finished)
-#       {
-#         iterate <- iterate + 1
-#         if(verboseOutput) cat("Frame:",m,"\t---\tLink_range:",n,"\t---\tIteration",iterate,".....")
-#         # non-set links of finite costs
-#         todo <- intersect(which(A[1:nop,1:nop_next]==0),which(C[1:nop,1:nop_next]<Inf) )
-#         
-#         Icand = ((todo-1) %% nop) + 1
-#         Jcand = floor((todo-1) / nop) + 1
-#         
-#         # determine the reduced cost Cred for each candidate insertion
-#         # initialize
-#         Cred <- rep(0,length(todo))
-#         Xcand <- rep(0,length(todo))
-#         Ycand <- rep(0,length(todo))
-#         # compute iteratively
-#         for(ic in 1:length(Icand))
-#         {
-#           Xcand[ic] <- which(A[Icand[ic],]==1)
-#           Ycand[ic] <- which(A[,Jcand[ic]]==1)
-#           Cred[ic] <- C[Icand[ic],Jcand[ic]] + C[Ycand[ic],Xcand[ic]] - C[Icand[ic],Xcand[ic]] - C[Ycand[ic],Jcand[ic]]
-#         }
-#         
-#         # find minimum cost of corresponding action
-#         minc <- sort(Cred)[1]
-#         mini <- order(Cred)[1]
-#         mincost <- c(mincost,minc)
-#         
-#         # if minimum < 0, link addition is favorable
-#         if(minc < 0)
-#         {
-#           if(verboseOutput) cat("--> Performing change!\n")
-#           # add link and update dependencies to preserve the topology
-#           A[Icand[mini],Jcand[mini]] <- 1
-#           A[Ycand[mini],Jcand[mini]] <- 0
-#           A[Icand[mini],Xcand[mini]] <- 0
-#           A[Ycand[mini],Xcand[mini]] <- 1
-#           
-#         } else {
-#           # the best is already done and there is no room for improving the cost function
-#           finished <- TRUE
-#           if(verboseOutput) cat("--> Found OPTIMAL solution for the current cost function!\n")
-#         }
-#         
-#         # consistency checks--..
-#         s1 <- colSums(A[,1:nop_next])
-#         s2 <- rowSums(A[1:nop,])
-#       }
-#       
-#       # convert link matrix to representation in the list format
-#       links <- which(A[1:nop,]==1,arr.ind=T)
-#       Ilinks <- links[,1]
-#       Jlinks <- links[,2]
-#       # if link is to dummy particle, set index to -1
-#       Jlinks[which(Jlinks==(nop_next+1))] <- -1
-#       
-#       # set links in the list object
-#       particleList[[m]]$nxt[Ilinks,n] <- Jlinks
-#     }
-#     # shrink curr_linkrange if needed at the end of the frames
-#     if(m==(frames_number-curr_linkrange-1) && curr_linkrange > 1)
-#       curr_linkrange <- curr_linkrange - 1
-#     
-#   }
-#   #   cat("I GOT HERE ----")
-#   # terminate all links at the list objects at the very last frame
-#   particleList[[frames_number]]$special[] <- FALSE
-#   particleList[[frames_number]]$nxt[,] <- -1  
-#   
-#   
-#   
-#   
-#   return(particleList)  
-# }
-# 

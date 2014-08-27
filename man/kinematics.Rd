@@ -35,6 +35,16 @@ autocorrelation. If a single trajectory is specified, the computation is
 performed for that trajectory alone. If a parameter is specified, only that
 parameter is reported, either for one or all trajectories
 }
+\examples{
+load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+platelets.trajectories <- trajectories(candidate.platelets)
+# for all trajectories, all features
+alltrajs.features <- kinematics(platelets.trajectories)
+# for one trajectory, all features
+traj11features <- kinematics(platelets.trajectories,trajectoryID = 11)
+# for all trajectories, one feature
+alltrajs.curvVel <- kinematics(platelets.trajectories,feature = "curvilinearVelocity")
+}
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
 }

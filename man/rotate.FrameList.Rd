@@ -28,6 +28,10 @@ Rotates all images in a FrameList object
 \details{
 Rotation is performed exploiting the rotate function of the EBImage package. Could be automated if support for coordinate/pixel interaction is included
 }
+\examples{
+load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+rotate.FrameList(MesenteriumSubset,rotAngle = 40)
+}
 \author{
 Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
 }
