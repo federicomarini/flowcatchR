@@ -14,11 +14,11 @@
 #' hemostasis and study of thrombosis development.
 #' 
 #' @author
-#' Federico Marini \email{federico.marini@@uni-mainz.de},
+#' Federico Marini \email{marinif@@uni-mainz.de},
 #' Johanna Mazur \email{mazur@@uni-mainz.de},
 #' Harald Binder \email{binderh@@uni-mainz.de}
 #'
-#' Maintainer: Federico Marini \email{federico.marini@@uni-mainz.de}
+#' Maintainer: Federico Marini \email{marinif@@uni-mainz.de}
 #' @name flowcatchR
 #' @docType package
 NULL
@@ -32,7 +32,7 @@ NULL
 #' Green channel marks leukocytes, red channel focuses on blood platelets.
 #' Images are kindly provided by Sven J\"ackel (\email{Sven.J\"ackel@@unimedizin-mainz.de}).
 #' 
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 #' @name fullFrameList
 #' @docType data
 NULL
@@ -45,7 +45,7 @@ NULL
 #' Green channel marks leukocytes, red channel focuses on blood platelets. 20 frames are provided in this subset.
 #' Images are kindly provided by Sven J\"ackel (\email{Sven.J\"ackel@@unimedizin-mainz.de}).
 #' 
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 #' @name MesenteriumSubset
 #' @docType data
 NULL
@@ -58,7 +58,7 @@ NULL
 #' Green channel marks leukocytes, red channel focuses on blood platelets. 20 frames are provided in this subset.
 #' Images are kindly provided by Sven J\"ackel (\email{Sven.J\"ackel@@unimedizin-mainz.de}).
 #' 
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 #' @name MesenteriumSubsetCompressed
 #' @docType data
 NULL

@@ -14,7 +14,7 @@
 #' platelets.trajectories <- trajectories(candidate.platelets)
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 trajectories <- function(particlelist,
                          provideExtraDetails=FALSE,
                          ...) # parameters for the eventual tracking - is it possible to do so? ask harald!
@@ -91,7 +91,7 @@ trajectories <- function(particlelist,
 #' @return A list object, containing the extremes of the field of interest (x-y-z, where z is time)
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 axesInfo <- function(framelist)
 {
   imgDimensions <- dim(framelist[[1]]$image)
@@ -119,7 +119,7 @@ axesInfo <- function(framelist)
 #' plot(platelets.trajectories,MesenteriumSubset)
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 plot.TrajectoryList <- function(x,framelist,...)
 {
   trajectoryDataFrame <- do.call(rbind.data.frame,lapply(x,function(arg){arg$trajectory}))
@@ -159,7 +159,7 @@ plot.TrajectoryList <- function(x,framelist,...)
 #' plot2D.TrajectoryList(platelets.trajectories,MesenteriumSubset)
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 plot2D.TrajectoryList <- function(x,framelist,trajIDs=NULL,...)
 {
   cubeLimits <- axesInfo(framelist)
@@ -234,7 +234,7 @@ plot2D.TrajectoryList <- function(x,framelist,trajIDs=NULL,...)
 #' }
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 add.contours <- function(raw.frames,
                           binary.frames=NULL,
                           trajectories=NULL,
@@ -381,7 +381,7 @@ add.contours <- function(raw.frames,
 # #' ## see vignette
 # #' 
 # #' @export
-# #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+# #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 # inspect.trajectory <- function(trajectorylist,
 #                                  rawframelist,
 #                                  preprocessedframelist,

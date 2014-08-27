@@ -547,10 +547,10 @@ gne
 
 \section{Supplementary information}
 For more information on the method adapted for tracking cells, see Sbalzarini and Koumotsakos (2005) \cite{Sbalzarini2005}.
-For additional details regarding the functions of \flowcatchR, please consult the documentation or write an email to \email{federico.marini@uni-mainz.de}. 
+For additional details regarding the functions of \flowcatchR, please consult the documentation or write an email to \email{marinif@uni-mainz.de}. 
 \subsection{Vignette data}
 Due to space limitations, the complete dataset for the acquired frames used in this vignette is not included as part of the flowcatchR package.
-If you would like to get access to the it, you can email \email{federico.marini@uni-mainz.de}.
+If you would like to get access to it, you can email \email{marinif@uni-mainz.de}.
 
 \section{Acknowledgements}
 This package was developed at the Institute of Medical Biostatistics, Epidemiology and Informatics at the University Medical Center, Mainz (Germany), with the financial support provided by the TRP-A15 Translational Research Project grant. 

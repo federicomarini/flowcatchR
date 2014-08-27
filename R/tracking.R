@@ -28,7 +28,7 @@
 #' tracked.platelets <- link.particles(candidate.platelets, L= 40)
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 link.particles <- function(particlelist,
                            L,
                            R=2,
@@ -255,7 +255,7 @@ link.particles <- function(particlelist,
 #' custom.function <- penaltyFunctionGenerator(epsilon1=0.1,epsilon2=6,lambda1=1.5,lambda2=0)
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 penaltyFunctionGenerator <- function(epsilon1=0.1,
                                      epsilon2=2,
                                      lambda1=1,

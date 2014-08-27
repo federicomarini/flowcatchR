@@ -21,7 +21,7 @@
 #' cut(MesenteriumSubset)
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 cut.FrameList <- function(x,
                           cutLeft=5,cutRight=5,cutUp=5,cutDown=5,
                           cutAll=0,
@@ -78,7 +78,7 @@ cut.FrameList <- function(x,
 #' rotate.FrameList(MesenteriumSubset,rotAngle = 40)
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 rotate.FrameList <- function(framelist,
                              rotAngle=0,
                              testing=FALSE,
@@ -132,7 +132,7 @@ rotate.FrameList <- function(framelist,
 #' @param ... Arguments to be passed to methods, such as channel and/or preprocessing parameters
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 preprocess <- function(x,...)
 {
   UseMethod("preprocess")
@@ -156,7 +156,7 @@ preprocess <- function(x,...)
 #' preprocess(channels(MesenteriumSubset),channel = "red")
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 preprocess.ChannelsFrameList <- function(x,
                                          channel="",
                                          ...) # HARALD: should i put here also the ...? and also in the function code too?
@@ -211,7 +211,7 @@ preprocess.ChannelsFrameList <- function(x,
 #' preprocess(platelets.framelist)
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 preprocess.FrameList <- function(x,
                                  brush.size=3,
                                  brush.shape="disc",
@@ -274,7 +274,7 @@ preprocess.FrameList <- function(x,
 #' particles.platelets <- particles(platelets.framelist, platelets.preprocessed)
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 particles <- function(framelistRaw,
                       framelistPreprocessed=NULL,
                       channel=""  # if we provide the channelsFrameList as input 
@@ -350,7 +350,7 @@ particles <- function(framelistRaw,
 #' selected.platelets
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 select.particles <- function(particlelist,
                              min.area = 1,
                              max.area = 1000 #, # and others of interest, for example

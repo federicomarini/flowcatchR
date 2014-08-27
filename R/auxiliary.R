@@ -11,7 +11,7 @@
 #' showMe(MesenteriumSubset[[1]]$image)
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 showMe <- function(imgObject, dispMet="raster",...)
 {
   display(imgObject, method=dispMet)
@@ -39,7 +39,7 @@ showMe <- function(imgObject, dispMet="raster",...)
 #' \dontrun{fullData <- read.frames(image.files = "/path/to/the/directory", nframes = 100)}
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 read.frames <- function(image.files,
                         nframes=NULL)
 {
@@ -89,7 +89,7 @@ read.frames <- function(image.files,
 #' load(file.path(system.file("extra", package = "flowcatchR"), "MesenteriumSubset.RData"))
 #' print(MesenteriumSubset)
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 print.FrameList <- function(x,...)
 {
   cat("An object of the FrameList class. \n\n")
@@ -119,7 +119,7 @@ print.FrameList <- function(x,...)
 #' \dontrun{inspect.frames(MesenteriumSubset)}
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 inspect.frames <- function(framelist,
                            nframes=NULL,
                            inspectAll=FALSE,
@@ -197,7 +197,7 @@ inspect.frames <- function(framelist,
 #' subset.FrameList(MesenteriumSubset, framesToKeep = c(1:10, 14:20))
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 subset.FrameList <- function(x,framesToKeep,...)
 {
   # check that the frames to keep are actually in the original framelist?
@@ -232,7 +232,7 @@ subset.FrameList <- function(x,framesToKeep,...)
 #' plateletsFrameList <- channels(MesenteriumSubset)$red
 #' plateletsFrameList
 #' 
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 channels <- function(framelist)
 {
   # check if the framelist indeed has more than one channel, first of all! -> needs to be done TODO
@@ -279,7 +279,7 @@ channels <- function(framelist)
 #' \dontrun{export.frames(MesenteriumSubset,nameStub="subset_export_",createGif=TRUE,removeAfterCreatingGif=FALSE)}
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 export.frames <- function(framelist,
                           folder="/Users/fede/TEMP/exportFrameList/",
                           nameStub="testExport",
@@ -359,7 +359,7 @@ export.frames <- function(framelist,
 #' \dontrun{export.particles(candidate.platelets)}
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 export.particles <- function(particlelist,
                           folder="/Users/fede/TEMP/exportParticleList/",
                           nameStub="testExport_particles_")
@@ -399,7 +399,7 @@ export.particles <- function(particlelist,
 #' ## see vignette and export.particles
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 read.particles <- function(particle.files,
                            nframes=NULL)
 {
@@ -451,7 +451,7 @@ read.particles <- function(particle.files,
 #' print(candidate.platelets)
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 print.ParticleList <- function(x,...)
 {
   cat("An object of the ParticleList class. \n\n")
@@ -479,7 +479,7 @@ print.ParticleList <- function(x,...)
 #' print(linked.platelets)
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 print.LinkedParticleList <- function(x,...)
 {
   cat("An object of the LinkedParticleList class. \n\n")
@@ -506,7 +506,7 @@ print.LinkedParticleList <- function(x,...)
 #'
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 initialize.ParticleList <- function(particlelist,
                                     linkrange=1)       
 {
@@ -546,7 +546,7 @@ initialize.ParticleList <- function(particlelist,
 #' print(platelets.trajectories)
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 print.TrajectoryList <- function(x,...)
 {
   cat("An object of the TrajectoryList class. \n\n")
@@ -577,7 +577,7 @@ print.TrajectoryList <- function(x,...)
 #' print(traj11features)
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 print.KinematicsFeatureSet <- function(x,...)
 {
   cat("An object of the KinematicsFeatureSet class. \n\n")
@@ -610,7 +610,7 @@ print.KinematicsFeatureSet <- function(x,...)
 #' print(alltrajs.features)
 #'
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 print.KinematicsFeatureSetList <- function(x,...)
 {
   cat("An object of the KinematicsFeatureSetList class. \n\n")

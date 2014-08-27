@@ -22,7 +22,7 @@
 #' }
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 reproducibleColorLabels <- function (x, normalize = TRUE) 
 {
   set.seed(123)

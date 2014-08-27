@@ -10,7 +10,7 @@
 #' @return A numeric value
 #'  
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 otsuThreshold <- function (input_image,nr_bit=16)  # use all channels?
 {
   # image is read through readImage from EBImage
@@ -109,7 +109,7 @@ otsuThreshold <- function (input_image,nr_bit=16)  # use all channels?
 #' 
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 kittlerillingerThreshold <- function (input_image,nr_bit=8)  # use all channels?
 {
   greyVec <- input_image

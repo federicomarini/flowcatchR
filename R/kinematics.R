@@ -18,7 +18,7 @@
 #' @return A KinematicsFeatureSet object
 #'   
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 extractKinematics.traj <- function(trajectorylist,
                                    trajectoryID,
                                    acquisitionFrequency=30, # in milliseconds
@@ -134,7 +134,7 @@ extractKinematics.traj <- function(trajectorylist,
 #' alltrajs.curvVel <- kinematics(platelets.trajectories,feature = "curvilinearVelocity")
 #'   
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 kinematics <- function(trajectorylist,
                        trajectoryID=NULL,
                        acquisitionFrequency=30, # in milliseconds
@@ -214,7 +214,7 @@ kinematics <- function(trajectorylist,
 #' 
 #' 
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 computeMSD <- function(sx,sy,until=4)
 {
   msd.t <- rep(0,until)
@@ -242,7 +242,7 @@ computeMSD <- function(sx,sy,until=4)
 #' @return A list containing Theta and Radius, as in polar coordinates
 #'  
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 toPolarCoords <- function(x,y)
 {
   Theta <- atan2(y,x)
@@ -263,7 +263,7 @@ toPolarCoords <- function(x,y)
 #' @return A list containing Theta and Radius, as in polar coordinates
 #'  
 #' @export
-#' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 toCartesianCoords <- function(Theta,Radius)
 {
   xCoord <- Radius * cos(Theta)
@@ -294,7 +294,7 @@ toCartesianCoords <- function(Theta,Radius)
 # #' @examples
 # #' 
 # #' @export
-# #' @author Federico Marini, \email{federico.marini@@uni-mainz.de}, 2014
+# #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 # distanceDiagnostics <- function()
 # {
 #   cat("something computing distances intra-particles- raises a flag/warning if distances (normalized) are less than 1.5 radius or so...")
