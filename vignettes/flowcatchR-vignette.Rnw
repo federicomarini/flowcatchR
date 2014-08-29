@@ -40,7 +40,6 @@ opts_chunk$set(fig.path='./figures/flowcatchR-',
                eval = TRUE,
                fig.width = 4.5,
                fig.height = 4.5,
-               tidy = FALSE,
                message = FALSE,
                warning = FALSE,
                size='small',
@@ -185,7 +184,7 @@ A set of images is acquired, after a proper microscopy setup has been performed.
 
 \flowcatchR provides an S3 class that can store the information of a complete acquisition, namely \Rclass{FrameList}. A \Rclass{FrameList} object is structured as a list, whose elements are in turn a list too. The \Robject{image} and its \Robject{location} are stored in the respective slots. To construct a \Rclass{FrameList}, the \Rfunction{newFrameList} function is used:
 
-<<newFrameList>>=
+<<newFrameList,eval=FALSE>>=
 # path to the folder containing the images
 # imgRepository <- list.files("/Volumes/users$/marinif/flow/test_28_03_2014/cutout2/",
 #                             full.names=T,pattern="*.tif")
@@ -202,7 +201,8 @@ fullData
 It is possible to inspect the first frames of a FrameList object with the function inspect.frames.
 
 <<inspectRaw,fig.height=4,fig.width=7.5>>=
-inspect.frames(fullData,nframes=9,display.method="raster",inspectAll=T)
+# inspect.frames(fullData,nframes=9,display.method="raster",inspectAll=T)
+inspect.frames(MesenteriumSubset,nframes=9,display.method="raster",inspectAll=T)
 @
 
 By default, display.method is set to "browser", as in the EBImage function display. This opens up a window in the predefined browser (e.g. Mozilla Firefox), with navigable frames (arrows on the top left corner).
@@ -455,7 +455,7 @@ trajPlatelets[[11]]
 @
 
 
-<<exportTraj11>>=
+<<exportTraj11,eval=FALSE>>=
 export.frames(traj11,nameStub="vignetteTest_traj11",createGif=TRUE,removeAfterCreatingGif=FALSE)
 @
 
