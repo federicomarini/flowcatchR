@@ -27,6 +27,6 @@ The number of frames is also specified, as just a subset of the images can be us
 \dontrun{fullData <- read.frames(image.files = "/path/to/the/directory", nframes = 100)}
 }
 \author{
-Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

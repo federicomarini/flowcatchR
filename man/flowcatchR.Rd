@@ -20,10 +20,10 @@ adherent. This classification is applied in the study of phenomena such as
 hemostasis and study of thrombosis development.
 }
 \author{
-Federico Marini \email{federico.marini@uni-mainz.de},
+Federico Marini \email{marinif@uni-mainz.de},
 Johanna Mazur \email{mazur@uni-mainz.de},
 Harald Binder \email{binderh@uni-mainz.de}
 
-Maintainer: Federico Marini \email{federico.marini@uni-mainz.de}
+Maintainer: Federico Marini \email{marinif@uni-mainz.de}
 }
 

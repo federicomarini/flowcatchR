@@ -26,6 +26,6 @@ load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RDa
 preprocess(channels(MesenteriumSubset),channel = "red")
 }
 \author{
-Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

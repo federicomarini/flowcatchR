@@ -23,6 +23,6 @@ Every object is now shown with a different colour. Care should be taken, as this
 than combine.preprocessedFrameList
 }
 \author{
-Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

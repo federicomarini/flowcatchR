@@ -25,6 +25,6 @@ platelets.preprocessed <- preprocess(platelets.framelist)
 particles.platelets <- particles(platelets.framelist, platelets.preprocessed)
 }
 \author{
-Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

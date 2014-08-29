@@ -46,6 +46,6 @@ traj11features <- kinematics(platelets.trajectories,trajectoryID = 11)
 alltrajs.curvVel <- kinematics(platelets.trajectories,feature = "curvilinearVelocity")
 }
 \author{
-Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

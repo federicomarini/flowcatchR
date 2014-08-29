@@ -46,7 +46,7 @@ load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.R
 tracked.platelets <- link.particles(candidate.platelets, L= 40)
 }
 \author{
-Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 \references{
 I F Sbalzarini and P Koumoutsakos."Feature point tracking and trajectory analysis for video imaging in cell biology."

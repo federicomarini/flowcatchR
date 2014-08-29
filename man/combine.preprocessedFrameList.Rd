@@ -22,6 +22,6 @@ Combines the information from a raw FrameList object and the corresponding prepr
 All objects are painted with a unique colour - for sake of speed
 }
 \author{
-Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

@@ -21,6 +21,6 @@ nframes=20,include.area=FALSE)
 print(linked.platelets)
 }
 \author{
-Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

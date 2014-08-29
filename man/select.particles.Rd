@@ -28,6 +28,6 @@ selected.platelets <- select.particles(candidate.platelets, min.area = 5)
 selected.platelets
 }
 \author{
-Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

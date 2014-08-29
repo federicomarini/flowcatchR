@@ -9,11 +9,9 @@
 % \usepackage{fancyhdr}
 % for using cleverly the bibliography from mendeley 
 \usepackage[backend=bibtex, sorting=none]{biblatex}
-% \usepackage{natbib}
 % put refs here
 \bibliography{flowcatchR}
 
-% \usepackage[authoryear]{natbib}
 
 %%%%%%%%%%% user defined commands %%%%%%%%%%% 
 \newcommand{\bash}[1]{\texttt{#1}}
@@ -62,9 +60,6 @@ Sys.setenv(TEXINPUTS=getwd(),
 @
 
 
-% \bioctitle{flowcatchR: asdadds  dd aads}
-% \author{Federico Marini}
-% \date{\today}
 
 \title{{\flowcatchR: A framework for tracking and analyzing flowing blood cells in time lapse microscopy images}}
 \author{Federico Marini$^1$, Johanna Mazur, Harald Binder \\ [1em]Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI), \\ University Medical Center - Mainz (Germany)\\[1em] \email{$^1$marinif@uni-mainz.de}}
@@ -77,7 +72,7 @@ Sys.setenv(TEXINPUTS=getwd(),
 
 
 \begin{abstract}
-\flowcatchR is a set of tools to analyze in vivo microscopy imaging data, focused on tracking flowing blood cells. It guides the steps from segmentation to calculation of features, filtering out particles not of interest, providing also a set of utilities to help checking the quality of the performed operations (e.g. how good the segmentation was). The main novel contribution investigates the issue of tracking flowing cells such as in blood vessels, to categorize the particles in flowing, rolling and adherent. This classification is applied in the study of phenomena such as hemostasis and study of thrombosis development.
+\flowcatchR is a set of tools to analyze in vivo microscopy imaging data, focused on tracking flowing blood cells. It guides throughout all the steps of bioimage processing, from segmentation to calculation of features, filtering out particles not of interest, providing also a set of utilities to help checking the quality of the performed operations. The main novel contribution investigates the issue of tracking flowing cells such as the ones in blood vessels, to categorize the particles in flowing, rolling and adherent by providing a comprehensive analysis of the identified trajectories. The extracted information is then applied in the study of phenomena such as hemostasis and study of thrombosis development. We expect this package to be potentially applied to a variety of essays, covering a wide range of applications founded on time-lapse microscopy.
 \end{abstract}
 
 % <<loadlibraries,results='hide'>>=
@@ -88,15 +83,15 @@ Sys.setenv(TEXINPUTS=getwd(),
 
 
 \section{Introduction}
-\flowcatchR is a set of tools to analyze in vivo microscopy imaging data, focused on tracking flowing blood cells. It guides the steps from segmentation to calculation of features, filtering out particles not of interest, providing also a set of utilities to help checking the quality of the performed operations (e.g. how good the segmentation was). The main novel contribution investigates the issue of tracking flowing cells such as in blood vessels, to categorize the particles in flowing, rolling and adherent. This classification is applied in the study of phenomena such as hemostasis and study of thrombosis development.
+\flowcatchR is a set of tools to analyze in vivo microscopy imaging data, focused on tracking flowing blood cells. It guides throughout all the steps of bioimage processing, from segmentation to calculation of features, filtering out particles not of interest, providing also a set of utilities to help checking the quality of the performed operations. The main novel contribution investigates the issue of tracking flowing cells such as the ones in blood vessels, to categorize the particles in flowing, rolling and adherent by providing a comprehensive analysis of the identified trajectories. The extracted information is then applied in the study of phenomena such as hemostasis and study of thrombosis development. We expect this package to be potentially applied to a variety of essays, covering a wide range of applications founded on time-lapse microscopy.
 
-This document offers an introduction and overview of the \R{}/\Bioconductor{} \cite{Rlang2013,Gentleman2004} package \flowcatchR, which provides a set of tools to detect and track cells in time-lapse microscopy.
+This document offers an introduction and overview of the \R{}/\Bioconductor{} \cite{Rlang2013,Gentleman2004} package \flowcatchR, which provides a flexible and comprehensive set of tools to detect and track flowing blood cells in time-lapse microscopy. 
 
 \flowcatchR builds upon functionalities provided by the \Biocpkg{EBImage} package \cite{Pau2010}, and extends them in order to analyze time-lapse microscopy images. Unique characteristics of the datasets \flowcatchR is designed for are listed here:
 
 \begin{itemize}
-\item Images come from intravital microscopy experiments. This means, SNR is not optimal, and very importantly there are potential major movements of the alive specimen, that can be confounded with the true movements of the particles of interest \cite{Meijering2008}
-\item A relatively dense number of cells per image, with particles that can enter and leave the field of view
+\item The images come from intravital microscopy experiments. This means, SNR is not optimal, and very importantly there are potential major movements of the alive specimen, that can be confounded with the true movements of the particles of interest \cite{Meijering2008}
+\item Cells are densely distributed on the images, with particles that can enter and leave the field of view
 \item The acquisition frame rate is a compromise between allowing the fluorescent cells to be detected and detecting the movements properly (typical values range around ...\TODO{ask})
 \item Cells can flow, temporarily adhere to the endothelial layer and/or be permanently adherent. Therefore, all movement modalities should be detected correctly throughout the entire acquisition. Cells can also cluster together and form (temporary) conglomerates
 \end{itemize}
@@ -105,13 +100,13 @@ This document offers an introduction and overview of the \R{}/\Bioconductor{} \c
 Essential features \Biocpkg{flowcatchR} delivers to the user are:
 
 \begin{itemize}
-\item A simple and flexible, yet complete framework to analyze time-lapse image sets , with classes such as \Rclass{FrameList}, \Rclass{ParticleList} and \Rclass{TrajectoryList} constituting the backbone of the procedure
+\item A simple and flexible, yet complete framework to analyze flowing blood cells (and more generally time-lapse) image sets , with a system of S3 classes such as \Rclass{FrameList}, \Rclass{ParticleList} and \Rclass{TrajectoryList} constituting the backbone of the procedures
 \item Facilities for detection of objects in the segmentation step
-\item An algorithm for tracking the particles, adapted and improved from the proposal of Sbalzarini and Koumoutsakos (2005) \cite{Sbalzarini2005} \TODO{ fix how to use refs with knitr and bioc vignette}, that reflects the directional aspect of the motion
-\item A set of functions inspecting the kinematic properties of the identified trajectories \cite{Beltman2009,Meijering2012a}, providing summary statistics and visualization tools to help classifying identified objects
+\item An algorithm for tracking the particles, adapted and improved from the proposal of Sbalzarini and Koumoutsakos (2005) \cite{Sbalzarini2005}, that reflects the directional aspect of the motion
+\item A wide set of functions inspecting the kinematic properties of the identified trajectories \cite{Beltman2009,Meijering2012a}, providing publication-ready summary statistics and visualization tools to help classifying identified objects
 \end{itemize}
 
-This guide includes a brief overview of the entire processing flow, from raw images to analysis of kinematic parameters derived from the identified trajectories. An example dataset will be used to illustrate the available features, in order to track blood platelets in consecutive frames derived from an intravital microscopy acquisition (also available as a subset in the Data folder of the package). All steps will be dissected to explore parameters and options available.() A second example? ()Finally, a detailed explanation is given for the implementation of the algorithm used for particle tracking.
+This guide includes a brief overview of the entire processing flow, from importing the raw images to the analysis of kinematic parameters derived from the identified trajectories. An example dataset will be used to illustrate the available features, in order to track blood platelets in consecutive frames derived from an intravital microscopy acquisition (also available as a subset in the package). All steps will be dissected to explore parameters and options available. () A second example will be included in a later version of the vignette? ()Finally, a detailed explanation is given for the implementation of the algorithm used for particle tracking.
 
 To install the package flowcatchR, please start a current version of R and type 
 
@@ -123,6 +118,8 @@ biocLite("flowcatchR")
 install.packages("devtools") #if needed
 devtools::install_github("flowcatchR", "federicomarini")
 @
+
+
 
 
 \section{Processing overview}\label{sec:overview}

@@ -18,6 +18,6 @@ Can be applied to FrameList or ChannelsFrameList objects. ChannelsFrameList are 
 and the method preprocess.FrameList is then applied, with its set of parameters
 }
 \author{
-Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

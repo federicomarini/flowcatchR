@@ -25,6 +25,6 @@ The number of frames is also specified, as just a subset of the particle lists c
 ## see vignette and export.particles
 }
 \author{
-Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

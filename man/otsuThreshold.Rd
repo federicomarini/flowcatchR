@@ -17,6 +17,6 @@ A numeric value
 Determines the value for the threshold grey level according to the Otsu method
 }
 \author{
-Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

@@ -12,6 +12,6 @@ Green channel marks leukocytes, red channel focuses on blood platelets.
 Images are kindly provided by Sven J\"ackel (\email{Sven.J\"ackel@unimedizin-mainz.de}).
 }
 \author{
-Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

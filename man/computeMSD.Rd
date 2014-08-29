@@ -19,6 +19,6 @@ A numeric vector containing the values of the MSD
 Calculates the Mean Squared Displacement for a trajectory
 }
 \author{
-Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

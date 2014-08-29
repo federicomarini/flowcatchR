@@ -20,6 +20,6 @@ Converts polar coordinates to cartesian coordinates
 Conversion from (radius,theta) to (x,y)
 }
 \author{
-Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

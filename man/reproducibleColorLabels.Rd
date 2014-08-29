@@ -27,7 +27,7 @@ showMe(reproducibleColorLabels(preprocess(oneImg)[[1]]$image[,,1]))
 }
 }
 \author{
-Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 \references{
 colorLabels in the EBImage package

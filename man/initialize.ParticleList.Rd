@@ -17,6 +17,6 @@ A ParticleList object with slots dedicated for the tracking pre-filled
 Initialize a ParticleList object for subsequent linking/tracking
 }
 \author{
-Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

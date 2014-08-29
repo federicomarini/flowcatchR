@@ -29,6 +29,6 @@ platelets.trajectories <- trajectories(candidate.platelets)
 plot2D.TrajectoryList(platelets.trajectories,MesenteriumSubset)
 }
 \author{
-Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

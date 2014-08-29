@@ -33,6 +33,6 @@ load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RDa
 rotate.FrameList(MesenteriumSubset,rotAngle = 40)
 }
 \author{
-Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

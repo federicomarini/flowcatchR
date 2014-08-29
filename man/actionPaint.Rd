@@ -17,6 +17,6 @@ An Image object that combines raw and segmented images, with objects painted sin
 actionPaint
 }
 \author{
-Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

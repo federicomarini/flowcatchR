@@ -29,6 +29,6 @@ load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.R
 \dontrun{export.particles(candidate.platelets)}
 }
 \author{
-Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

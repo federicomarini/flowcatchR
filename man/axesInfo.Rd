@@ -15,6 +15,6 @@ A list object, containing the extremes of the field of interest (x-y-z, where z 
 Auxiliary function to return the dimensions of the field of interest
 }
 \author{
-Federico Marini, \email{federico.marini@uni-mainz.de}, 2014
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 
