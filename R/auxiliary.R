@@ -194,7 +194,7 @@ inspect.frames <- function(framelist,
 #' 
 #' @examples
 #' load(file.path(system.file("extra", package = "flowcatchR"), "MesenteriumSubset.RData"))
-#' subset.FrameList(MesenteriumSubset, framesToKeep = c(1:10, 14:20))
+#' subset(MesenteriumSubset, framesToKeep = c(1:10, 14:20))
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014

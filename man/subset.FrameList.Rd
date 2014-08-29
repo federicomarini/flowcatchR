@@ -24,7 +24,7 @@ is presenting gaps (i.e. does not actually include a frame)
 }
 \examples{
 load(file.path(system.file("extra", package = "flowcatchR"), "MesenteriumSubset.RData"))
-subset.FrameList(MesenteriumSubset, framesToKeep = c(1:10, 14:20))
+subset(MesenteriumSubset, framesToKeep = c(1:10, 14:20))
 }
 \author{
 Federico Marini, \email{marinif@uni-mainz.de}, 2014

@@ -239,7 +239,7 @@ inspect.frames(plateletsMesenterium,nframes=9,display.method="raster")
 Steps such as denoising, smoothing and morphological operations (erosion/dilation, opening/closing) can be performed thanks to the general functions provided by EBImage. \flowcatchR offers a wrapper around a series of operations to be applied to all images in a FrameList object. The generic function preprocess has a method for FrameList objects, which is called via the command:
 
 <<segmentPreprocess>>=
-preprocessedPlatelets <- preprocess.FrameList(plateletsMesenterium,
+preprocessedPlatelets <- preprocess(plateletsMesenterium,
                                               brushSize = 3, brushShape = "disc",
                                               adaptOffset = 0.15, adaptWinWidth = 10, adaptWinHeight = 10,
                                               kernSize = 3, kernShape = "disc",
@@ -274,7 +274,7 @@ rotatedFrames
 If desired, it is possible to select just a subset of the frames belonging to a FrameList. This can be done via the subset method:
 
 <<subsetFrames>>=
-subsetFrames <- subset.FrameList(plateletsMesenterium,
+subsetFrames <- subset(plateletsMesenterium,
                                  framesToKeep=c(1:10,14:20))
 subsetFrames
 @
@@ -322,7 +322,7 @@ ffffg <- cut(x=frameList1,cutAll=20)
 
 cc <- createChannelsFrameList(frameList1)
 
-prepro <- preprocess.ChannelsFrameList(cc,"red")
+prepro <- preprocess(cc,"red")
 framelistProcessed <- prepro
 framelistRaw <- cc[[1]]
 
