@@ -12,7 +12,6 @@
 % put refs here
 \bibliography{flowcatchR}
 
-
 %%%%%%%%%%% user defined commands %%%%%%%%%%% 
 \newcommand{\bash}[1]{\texttt{#1}}
 \newcommand{\TODO}[1]{{\textbf{TODO:} \textit{\textcolor{green}{#1}}}}
