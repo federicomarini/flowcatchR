@@ -212,8 +212,6 @@ kinematics <- function(trajectorylist,
 #' 
 #' @return A numeric vector containing the values of the MSD
 #' 
-#' 
-#' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 computeMSD <- function(sx,sy,until=4)
 {

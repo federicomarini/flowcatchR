@@ -645,9 +645,6 @@ print.KinematicsFeatureSetList <- function(x,...)
 #' 
 #' @references http://cran.r-project.org/doc/contrib/R-and-octave.txt
 #' 
-#'
-#' 
-#' @export
 #' @author Robin Hankin, 2001
 repmat <- function(a,n,m) 
 {

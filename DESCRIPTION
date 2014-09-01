@@ -26,3 +26,7 @@ Depends:
     EBImage,
     rgl,
     colorRamps
+URL:
+    www.imbei.de
+biocViews:
+    Software, Visualization, CellBiology

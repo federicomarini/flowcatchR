@@ -90,7 +90,6 @@ trajectories <- function(particlelist,
 #' 
 #' @return A list object, containing the extremes of the field of interest (x-y-z, where z is time)
 #' 
-#' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 axesInfo <- function(framelist)
 {
