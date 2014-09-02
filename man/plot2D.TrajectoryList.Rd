@@ -3,7 +3,7 @@
 \alias{plot2D.TrajectoryList}
 \title{plot2D.TrajectoryList}
 \usage{
-plot2D.TrajectoryList(x, framelist, trajIDs = NULL, ...)
+plot2D.TrajectoryList(x, framelist, trajIDs = NULL, verbose = FALSE, ...)
 }
 \arguments{
 \item{x}{A TrajectoryList object}
@@ -11,6 +11,8 @@ plot2D.TrajectoryList(x, framelist, trajIDs = NULL, ...)
 \item{framelist}{A FrameList object, used here to identify the limits of the region of interest}
 
 \item{trajIDs}{A vector containing the ids of the desired trajectories}
+
+\item{verbose}{Logical, whether to provide additional output on the command line}
 
 \item{...}{Arguments to be passed to methods}
 }

@@ -76,7 +76,7 @@ Sys.setenv(TEXINPUTS=getwd(),
 
 
 \section{Introduction}\label{sec:intro}
-\flowcatchR{} is a set of tools to analyze in vivo microscopy imaging data, focused on tracking flowing blood cells. It guides throughout all the steps of bioimage processing, from segmentation to calculation of features, filtering out particles not of interest, providing also a set of utilities to help checking the quality of the performed operations. The main novel contribution investigates the issue of tracking flowing cells such as the ones in blood vessels, to categorize the particles in flowing, rolling and adherent by providing a comprehensive analysis of the identified trajectories. The extracted information is then applied in the study of phenomena such as hemostasis and study of thrombosis development. We expect this package to be potentially applied to a variety of essays, covering a wide range of applications founded on time-lapse microscopy.
+% \flowcatchR{} is a set of tools to analyze in vivo microscopy imaging data, focused on tracking flowing blood cells. It guides throughout all the steps of bioimage processing, from segmentation to calculation of features, filtering out particles not of interest, providing also a set of utilities to help checking the quality of the performed operations. The main novel contribution investigates the issue of tracking flowing cells such as the ones in blood vessels, to categorize the particles in flowing, rolling and adherent by providing a comprehensive analysis of the identified trajectories. The extracted information is then applied in the study of phenomena such as hemostasis and study of thrombosis development. We expect this package to be potentially applied to a variety of essays, covering a wide range of applications founded on time-lapse microscopy.
 
 This document offers an introduction and overview of the \R{}/\Bioconductor{} \cite{Rlang2014,Gentleman2004} package \flowcatchR{}, which provides a flexible and comprehensive set of tools to detect and track flowing blood cells in time-lapse microscopy. 
 
@@ -131,7 +131,7 @@ fullResults <- kinematics(trajectories(particles(channels(MesenteriumSubset)$red
 ptm <- proc.time()
 testResu <- kinematics(trajectories(particles(channels(MesenteriumSubset)$red)))
 # Print elapsed time
-elapsed = signif( (proc.time() - ptm)[['elapsed']], 4)
+elapsed = signif( (proc.time() - ptm)[['elapsed']], 3)
 gc(reset=T, verbose=F)
 elapsed
 @
@@ -331,13 +331,17 @@ trajPlatelets
 
 A \Rclass{TrajectoryList} object is returned in this case. It consists of a list for each trajectory, reporting the \Robject{trajectory} as a \Robject{data.frame}, the number of points \Robject{npoints} (often coinciding with the number of \Robject{nframes}, when no gaps \Robject{ngaps} are present) and its \Robject{ID}. A \Robject{keep} flag is used for subsequent user evaluation purposes.
 
-Before proceeding with the actual analysis of the trajectories, it is recommended to evaluate them by visual inspection. \flowcatchR{} provides two complementary methods to do this, either plotting them (\Rfunction{plot} or \Rfunction{plot2D.TrajectoryList}) or drawing the contours of the points on the original image(\Rfunction{add.contours}).
+Before proceeding with the actual analysis of the trajectories, it is recommended to evaluate them by visual inspection. \flowcatchR{} provides two complementary methods to do this, either plotting them (\Rfunction{plot} or \Rfunction{plot2D.TrajectoryList}) or drawing the contours of the points on the original image (\Rfunction{add.contours}).
 
 By plotting all trajectories in a 2D+time representation, it's possible to have an overview of all trajectories. 
+
+This command gives an interactive 3D (2D+time) view of all trajectories (Fig.\ref{fig:cubeTrajs}):
 
 <<cubeTrajs,rgl=TRUE,fig.cap="A 2D+time representation of the trajectories, produced by plotting a TrajectoryList object">>=
 plot(trajPlatelets,MesenteriumSubset)
 @
+
+The \Rfunction{plot2D.TrajectoryList} focuses on additional information and a different "point of view", but can just display the 2 dimensions of the identified trajectories (Fig.\ref{fig:overviewTrajs}).
 
 <<overviewTrajs,fig.height=4,fig.width=7.5,fig.cap='A 2D "flat" representation of the trajectories, more suitable to give an indication of the global movement'>>=
 plot2D.TrajectoryList(trajPlatelets,MesenteriumSubset)
@@ -403,12 +407,12 @@ for(i in 1:length(trajPlatelets))
                 nameStub=paste0("vignetteTest_evaluation_traj_oneByOne_",i),
                 createGif=TRUE,removeAfterCreatingGif=TRUE)
   
-  #### uncomment the code below to perform the interactive evaluation of the single trajectories
+  ### uncomment the code below to perform the interactive evaluation of the single trajectories
 
   #   cat("Should I keep this trajectory? --- 0: NO, 1:YES --- no other values allowed")
   #   userInput <- readLines(n = 1L)
   #   ## if neither 0 nor 1, do not update
-  #   ## otherwise, this becomes the value for the field keep in the TrajectoryList with evaluated trajectories
+  #   ## otherwise, this becomes the value for the field keep in the new TrajectoryList
   #   evaluatedTrajectories[[i]]$keep <- as.logical(as.numeric(userInput))
  
 }
@@ -423,7 +427,7 @@ allKinematicFeats.allPlatelets <- kinematics(trajPlatelets,
                                              trajectoryID=NULL, # will select all trajectory IDs 
                                              acquisitionFrequency=30, # value in milliseconds
                                              scala=50, # 1 pixel is equivalent to ... micrometer
-                                             feature=NULL) # again, selects all kinematic features available
+                                             feature=NULL) # all kinematic features available
 @
 
 As it is reported from the output, the function raises a warning for trajectories which have 3 or less points, as they might be spurious detections.
@@ -448,7 +452,7 @@ allVelocities <- kinematics(trajPlatelets,feature="curvilinearVelocity")
 
 hist(allVelocities, breaks=10, probability=T,col = "cadetblue",
      xlab="Curvilinear Velocities Distribution",
-     main="Trajectory Analysis: Curvilinear Velocities Histogram")
+     main="Trajectory Analysis: Curvilinear Velocities")
 lines(density(allVelocities,na.rm=T),col="steelblue",lwd = 2)
 @
 

@@ -113,6 +113,7 @@ print.FrameList <- function(x,...)
 #' @param nframes The number of frames to display (default value: 6)
 #' @param inspectAll Logical, whether to inspect all frames (overriding the default of 10 that can be used also when inspectAll is FALSE)
 #' @param display.method Method for displaying, can be either "raster" or "browser". Defaults to browser, by opening a window in the browser
+#' @param verbose Logical, whether to provide additional output on the command line alongside with the images themselves
 #' 
 #' @examples
 #' load(file.path(system.file("extra", package = "flowcatchR"), "MesenteriumSubset.RData"))
@@ -123,7 +124,8 @@ print.FrameList <- function(x,...)
 inspect.frames <- function(framelist,
                            nframes=NULL,
                            inspectAll=FALSE,
-                           display.method="browser")
+                           display.method="browser",
+                           verbose=FALSE)
 {
   if(is.null(nframes))
   {
@@ -145,7 +147,7 @@ inspect.frames <- function(framelist,
     
   }
   # nframes should also be more than the nr of frames available
-  cat("Displaying the first",nframes,"frames for the FrameList")
+  if (verbose) cat("Displaying the first",nframes,"frames for the FrameList")
   
   firstFrames <- list()
   

@@ -17,7 +17,6 @@
 #'   
 #' @return A KinematicsFeatureSet object
 #'   
-#' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 extractKinematics.traj <- function(trajectorylist,
                                    trajectoryID,

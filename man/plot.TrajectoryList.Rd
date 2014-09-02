@@ -3,7 +3,7 @@
 \alias{plot.TrajectoryList}
 \title{plot.TrajectoryList}
 \usage{
-\method{plot}{TrajectoryList}(x, framelist, ...)
+\method{plot}{TrajectoryList}(x, framelist, verbose = FALSE, ...)
 }
 \arguments{
 \item{x}{A TrajectoryList object}
@@ -11,6 +11,8 @@
 \item{framelist}{A FrameList object, used here to identify the limits of the region of interest}
 
 \item{...}{Arguments to be passed to methods}
+
+\item{verbose}{Logical, whether to provide additional output on the command line}
 }
 \description{
 Provides a visual representation of a TrajectoryList object

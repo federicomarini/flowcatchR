@@ -108,7 +108,8 @@ axesInfo <- function(framelist)
 #' @param x A TrajectoryList object
 #' @param framelist A FrameList object, used here to identify the limits of the region of interest 
 #' @param ... Arguments to be passed to methods
-#'
+#' @param verbose Logical, whether to provide additional output on the command line
+#' 
 #' @method plot TrajectoryList
 #' 
 #' @examples
@@ -119,10 +120,10 @@ axesInfo <- function(framelist)
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-plot.TrajectoryList <- function(x,framelist,...)
+plot.TrajectoryList <- function(x,framelist,verbose=FALSE,...)
 {
   trajectoryDataFrame <- do.call(rbind.data.frame,lapply(x,function(arg){arg$trajectory}))
-  cat("Plotting",length(x),"trajectories...\n")
+  if(verbose) cat("Plotting",length(x),"trajectories...\n")
   colcols <- rep(colorRamps::primary.colors(40,steps=10,F),6)
   for (i in 1:max(trajectoryDataFrame$trajLabel))
   {
@@ -149,6 +150,7 @@ plot.TrajectoryList <- function(x,framelist,...)
 #' @param x A TrajectoryList object
 #' @param framelist A FrameList object, used here to identify the limits of the region of interest 
 #' @param trajIDs A vector containing the ids of the desired trajectories
+#' @param verbose Logical, whether to provide additional output on the command line
 #' @param ... Arguments to be passed to methods
 
 #' @examples
@@ -159,7 +161,7 @@ plot.TrajectoryList <- function(x,framelist,...)
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-plot2D.TrajectoryList <- function(x,framelist,trajIDs=NULL,...)
+plot2D.TrajectoryList <- function(x,framelist,trajIDs=NULL,verbose=FALSE,...)
 {
   cubeLimits <- axesInfo(framelist)
   xlim <- cubeLimits$xlim
@@ -175,7 +177,7 @@ plot2D.TrajectoryList <- function(x,framelist,trajIDs=NULL,...)
     if(!all(trajIDs %in% allAvailableTrajectories))
       stop("You are supplying IDs of trajectories which are not included in the TrajectoryList object!")
   }
-  cat("Plotting",length(trajIDs),"trajectories (total available in the TrajectoryList:", length(x), ")...\n")
+  if(verbose) cat("Plotting",length(trajIDs),"trajectories (total available in the TrajectoryList:", length(x), ")...\n")
   
 #   trajectoryDataFrame <- do.call(rbind.data.frame,lapply(x,function(arg){arg$trajectory}))
   t <- trajIDs[1]

@@ -4,7 +4,7 @@
 \title{inspect.frames}
 \usage{
 inspect.frames(framelist, nframes = NULL, inspectAll = FALSE,
-  display.method = "browser")
+  display.method = "browser", verbose = FALSE)
 }
 \arguments{
 \item{framelist}{A FrameList object}
@@ -14,6 +14,8 @@ inspect.frames(framelist, nframes = NULL, inspectAll = FALSE,
 \item{inspectAll}{Logical, whether to inspect all frames (overriding the default of 10 that can be used also when inspectAll is FALSE)}
 
 \item{display.method}{Method for displaying, can be either "raster" or "browser". Defaults to browser, by opening a window in the browser}
+
+\item{verbose}{Logical, whether to provide additional output on the command line alongside with the images themselves}
 }
 \description{
 Explore the first frames of a FrameList
