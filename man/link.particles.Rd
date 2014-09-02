@@ -5,7 +5,7 @@
 \usage{
 link.particles(particlelist, L, R = 2, epsilon1 = 0.1, epsilon2 = 2,
   lambda1 = 1, lambda2 = 1, penaltyFunction = penaltyFunctionGenerator(),
-  nframes, verboseOutput = F, prog = F, include.intensity = TRUE,
+  nframes, verboseOutput = FALSE, prog = FALSE, include.intensity = TRUE,
   include.area = TRUE)
 }
 \arguments{

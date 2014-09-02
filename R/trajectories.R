@@ -124,16 +124,16 @@ plot.TrajectoryList <- function(x,framelist,verbose=FALSE,...)
 {
   trajectoryDataFrame <- do.call(rbind.data.frame,lapply(x,function(arg){arg$trajectory}))
   if(verbose) cat("Plotting",length(x),"trajectories...\n")
-  colcols <- rep(colorRamps::primary.colors(40,steps=10,F),6)
+  colcols <- rep(colorRamps::primary.colors(40,steps=10,FALSE),6)
   for (i in 1:max(trajectoryDataFrame$trajLabel))
   {
     singleTraj <- trajectoryDataFrame[which(trajectoryDataFrame$trajLabel==i),]
-    plot3d(singleTraj$xCoord, singleTraj$yCoord, singleTraj$frame, col=colcols[singleTraj$trajLabel],type="l",lwd = 3,add=T)
+    rgl::plot3d(singleTraj$xCoord, singleTraj$yCoord, singleTraj$frame, col=colcols[singleTraj$trajLabel],type="l",lwd = 3,add=TRUE)
     
   }
   cubeLimits <- axesInfo(framelist)
 #   
-  decorate3d(xlim=cubeLimits$xlim,ylim=cubeLimits$ylim,zlim=cubeLimits$tlim,xlab="",ylab="",zlab="Frame Number",aspect=T)
+  decorate3d(xlim=cubeLimits$xlim,ylim=cubeLimits$ylim,zlim=cubeLimits$tlim,xlab="",ylab="",zlab="Frame Number",aspect=TRUE)
   bg3d("black") 
 }
 
@@ -167,7 +167,7 @@ plot2D.TrajectoryList <- function(x,framelist,trajIDs=NULL,verbose=FALSE,...)
   xlim <- cubeLimits$xlim
   ylim <- cubeLimits$ylim
   
-  colcols <- rep(colorRamps::primary.colors(40,steps=10,F),6)
+  colcols <- rep(colorRamps::primary.colors(40,steps=10,FALSE),6)
   if(is.null(trajIDs))
   {
     trajIDs <- 1:length(x)
@@ -305,7 +305,7 @@ add.contours <- function(raw.frames,
     
     # actually does it for both cases above
 #     library(colorRamps)
-    colcols <- rep(colorRamps::primary.colors(40,steps=10,F),6)
+    colcols <- rep(colorRamps::primary.colors(40,steps=10,FALSE),6)
     out <- input.frames
     for(i in trajIds)
     {

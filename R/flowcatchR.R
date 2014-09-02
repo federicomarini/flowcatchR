@@ -13,6 +13,10 @@
 #' adherent. This classification is applied in the study of phenomena such as
 #' hemostasis and study of thrombosis development.
 #' 
+#' @import EBImage
+#' @import rgl
+#' @import colorRamps
+#' 
 #' @author
 #' Federico Marini \email{marinif@@uni-mainz.de},
 #' Johanna Mazur \email{mazur@@uni-mainz.de},

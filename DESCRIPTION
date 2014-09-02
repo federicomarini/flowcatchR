@@ -20,7 +20,7 @@ License: BSD_3_clause + file LICENSE
 VignetteBuilder: knitr
 Suggests:
     BiocStyle,
-    knitr
+    knitr 
 Depends:
     R (>= 2.10),
     EBImage,
@@ -29,4 +29,4 @@ Depends:
 URL:
     www.imbei.de
 biocViews:
-    Software, Visualization, CellBiology
+    Software, Visualization, CellBiology, Classification

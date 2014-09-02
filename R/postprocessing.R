@@ -11,8 +11,6 @@
 #' 
 #' @return A FrameList object, whose images are the combination of the raw images with the segmented objects drawn on them
 #' 
-#' 
-#' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 combine.preprocessedFrameList <- function(rawframelist,preprocessedframelist,col=NULL)
 {

@@ -48,7 +48,7 @@ read.frames <- function(image.files,
   if(is.dir){
     image.files <- image.files[1]
     cat("Reading images from directory", image.files,"...\n")
-    image.files <- list.files(image.files, pattern='*.jpg$|*.jpeg$|*.tiff$|*.tif$', full.names=T, ignore.case=T)
+    image.files <- list.files(image.files, pattern='*.jpg$|*.jpeg$|*.tiff$|*.tif$', full.names=TRUE, ignore.case=TRUE)
     if(length(image.files) == 0) 
       stop('No images with JPEG or JPG extension found. Images must be JPG format, please convert any non-JPG images to JPG')
   }
@@ -410,7 +410,7 @@ read.particles <- function(particle.files,
   if(is.dir){
     particle.files <- particle.files[1]
     cat("Reading particles from directory", particle.files,"...\n")
-    particle.files <- list.files(particle.files, pattern='*.tsv$', full.names=T, ignore.case=T)
+    particle.files <- list.files(particle.files, pattern='*.tsv$', full.names=TRUE, ignore.case=TRUE)
     if(length(particle.files) == 0) 
       stop('No particle files with .tsv extension found. Particles must be provided in .tsv format, please check whether the extension is .txt and change it ')
   }
@@ -505,9 +505,6 @@ print.LinkedParticleList <- function(x,...)
 #' 
 #' @return A ParticleList object with slots dedicated for the tracking pre-filled
 #' 
-#'
-#' 
-#' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 initialize.ParticleList <- function(particlelist,
                                     linkrange=1)       

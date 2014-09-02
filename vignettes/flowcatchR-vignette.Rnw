@@ -132,7 +132,7 @@ ptm <- proc.time()
 testResu <- kinematics(trajectories(particles(channels(MesenteriumSubset)$red)))
 # Print elapsed time
 elapsed = signif( (proc.time() - ptm)[['elapsed']], 3)
-gc(reset=T, verbose=F)
+gc(reset=TRUE, verbose=FALSE)
 elapsed
 @
 
@@ -161,7 +161,7 @@ fullData
 It is possible to inspect the first frames of a \Rclass{FrameList} object with the function \Rfunction{inspect.frames} (Fig.\ref{fig:inspectRaw}).
 
 <<inspectRaw,fig.height=4,fig.width=7.5,fig.cap="The first 9 frames of the MesenteriumSubset dataset. The red channel stores information about platelets, while the green channel is dedicated to leukocytes">>=
-inspect.frames(MesenteriumSubset,nframes=9,display.method="raster",inspectAll=T)
+inspect.frames(MesenteriumSubset,nframes=9,display.method="raster",inspectAll=TRUE)
 @
 
 By default, \Robject{display.method} is set to "browser", as in the EBImage function display. This opens up a window in the predefined browser (e.g. Mozilla Firefox), with navigable frames (arrows on the top left corner). For the vignette, we will set it to \Robject{raster}, for viewing them as raster graphics using R's native functions.
@@ -450,10 +450,10 @@ When asking for a single parameter, the value returned is structured in a vector
 <<allVelos,fig.cap="Histogram of the curvilinear velocities for all trajectories identified in the MesenteriumSubset dataset">>=
 allVelocities <- kinematics(trajPlatelets,feature="curvilinearVelocity")
 
-hist(allVelocities, breaks=10, probability=T,col = "cadetblue",
+hist(allVelocities, breaks=10, probability=TRUE,col = "cadetblue",
      xlab="Curvilinear Velocities Distribution",
      main="Trajectory Analysis: Curvilinear Velocities")
-lines(density(allVelocities,na.rm=T),col="steelblue",lwd = 2)
+lines(density(allVelocities,na.rm=TRUE),col="steelblue",lwd = 2)
 @
 
 

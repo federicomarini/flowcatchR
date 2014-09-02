@@ -38,8 +38,8 @@ link.particles <- function(particlelist,
                            lambda2=1,
                            penaltyFunction=penaltyFunctionGenerator(),
                            nframes, # could be used to restrict the range? frameStart to frameEnd?
-                           verboseOutput=F,
-                           prog=F,
+                           verboseOutput=FALSE,
+                           prog=FALSE,
                            include.intensity=TRUE,
                            include.area=TRUE)
 {
@@ -209,7 +209,7 @@ link.particles <- function(particlelist,
       }
       
       # convert link matrix to representation in the list format
-      links <- which(A[1:nop,]==1,arr.ind=T)
+      links <- which(A[1:nop,]==1,arr.ind=TRUE)
       Ilinks <- links[,1]
       Jlinks <- links[,2]
       # if link is to dummy particle, set index to -1
