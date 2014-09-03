@@ -121,6 +121,11 @@ library("flowcatchR")
 load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
 @
 
+<<meseLoaded>>=
+# printing summary information for the MesenteriumSubset object
+MesenteriumSubset
+@
+
 To obtain the set of trajectories identified from the analysis of the loaded frames, a very compact one-liner command is all that is needed:
 <<workflowCompact,eval=FALSE,results='hide'>>=
 # one command to seize them all :)
@@ -193,7 +198,7 @@ inspect.frames(plateletsMesenterium,nframes=9,display.method="raster")
 
 
 \section{Image preprocessing and analysis}\label{sec:prepro}
-Steps such as denoising, smoothing and morphological operations (erosion/dilation, opening/closing) can be performed thanks to the general functions provided by \Biocpkg{EBImage}. \flowcatchR{} offers a wrapper around a series of operations to be applied to all images in a \Rclass{FrameList} object. The generic function preprocess has a method for \Rclass{FrameList} objects, which is called via the command:
+Steps such as denoising, smoothing and morphological operations (erosion/dilation, opening/closing) can be performed thanks to the general functions provided by \Biocpkg{EBImage}. \flowcatchR{} offers a wrapper around a series of operations to be applied to all images in a \Rclass{FrameList} object. The generic function \Rfunction{preprocess} has a method for \Rclass{FrameList} objects, which is called via the command:
 
 <<segmentPreprocess>>=
 preprocessedPlatelets <- preprocess(plateletsMesenterium,
@@ -205,6 +210,7 @@ preprocessedPlatelets <- preprocess(plateletsMesenterium,
 preprocessedPlatelets
 @
 
+The result of this is displayed in Fig.\ref{fig:inspectSegm}. 
 For a detailed explanation of the parameters to better tweak the performances of this segmentation step, please refer to the help of \Rfunction{preprocess.FrameList}. To obtain an immediate feedback about the effects of the operations performed in the full preprocessing phase, we can call again \Rfunction{inspect.frames} on the \Rclass{FrameList} of segmented images.
 
 <<inspectSegm,fig.height=4,fig.width=7.5,fig.cap="The first 9 frames after preprocessing of the MesenteriumSubset dataset. The binarized image show the detected objects after thresholding.">>=
@@ -258,7 +264,7 @@ selectedPlatelets
 @
   
 This step can be done iteratively, with the help of the function \Rfunction{add.contours}. 
-If called with the parameter mode set to \Robject{particles}, then it will automatically generate a \Rclass{FrameList} object, with the contours of all particles drawn around the objects that passed the segmentation (and filtering) step.
+If called with the parameter mode set to \Robject{particles}, then it will automatically generate a \Rclass{FrameList} object, with the contours of all particles drawn around the objects that passed the segmentation (and filtering) step (Fig.\ref{fig:checkSelection}).
 
 <<checkSelection,fig.height=4,fig.width=7.5,fig.cap="Particles detected in the first 9 frames are shown in yellow, with their contours defined by the segmentation procedure.">>=
 paintedPlatelets <- add.contours(raw.frames=MesenteriumSubset,
@@ -364,7 +370,7 @@ As with any other \Rclass{FrameList} object, it is recommended to take a peek at
 inspect.frames(paintedTrajectories,nframes=9,display.method="raster")
 @
 
-To allow for a thorough evaluation of the single trajectories, \Rfunction{export.frames} is a valid helper, as it creates single images corresponding to each frame in the \Rclass{FrameList} object. We first extract for example trajectory 11 with this command:
+To allow for a thorough evaluation of the single trajectories, \Rfunction{export.frames} is a valid helper, as it creates single images corresponding to each frame in the \Rclass{FrameList} object. We first extract for example trajectory 11 (Fig.\ref{fig:traj11}) with this command:
 
 <<traj11,fig.height=4,fig.width=7.5,fig.cap="First 9 frames for trajectory with ID 11, as supplied to the trajIds argument of add.contours">>=
 traj11 <- add.contours(raw.frames=MesenteriumSubset,
@@ -445,7 +451,7 @@ A list of all available parameters is printed with an error message if the user 
 allKinematicFeats.allPlatelets <- kinematics(trajPlatelets,feature="?")
 @
 
-When asking for a single parameter, the value returned is structured in a vector, such that it is straightforward to proceed with further analysis, e.g. by plotting the distribution of the curvilinear velocities.
+When asking for a single parameter, the value returned is structured in a vector, such that it is straightforward to proceed with further analysis, e.g. by plotting the distribution of the curvilinear velocities (Fig.\ref{fig:allVelos}).
 
 <<allVelos,fig.cap="Histogram of the curvilinear velocities for all trajectories identified in the MesenteriumSubset dataset">>=
 allVelocities <- kinematics(trajPlatelets,feature="curvilinearVelocity")
