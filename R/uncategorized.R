@@ -17,8 +17,8 @@
 #' @examples
 #' \dontrun{
 #' oneImg <- subset.FrameList(MesenteriumSubset,framesToKeep = 1)
-#' showMe(preprocess(oneImg)[[1]]$image)
-#' showMe(reproducibleColorLabels(preprocess(oneImg)[[1]]$image[,,1]))
+#' display(preprocess(oneImg)[[1]]$image)
+#' display(reproducibleColorLabels(preprocess(oneImg)[[1]]$image[,,1]))
 #' }
 #' 
 #' @export

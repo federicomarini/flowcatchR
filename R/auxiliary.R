@@ -1,24 +1,3 @@
-#' Displays with raster
-#' 
-#' Displays images with R native functions, makes direct use of EBImage's display
-#' 
-#' @param imgObject an \code{Image} object
-#' @param dispMet Set to default as "raster", could be "browser"
-#' @param ... Arguments to be passed to display
-#' 
-#' @examples
-#' load(file.path(system.file("extra", package = "flowcatchR"), "MesenteriumSubset.RData"))
-#' showMe(MesenteriumSubset[[1]]$image)
-#' 
-#' @export
-#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-showMe <- function(imgObject, dispMet="raster",...)
-{
-  display(imgObject, method=dispMet)
-}
-
-
-
 #' read.frames
 #' 
 #' constructor for a FrameList object
