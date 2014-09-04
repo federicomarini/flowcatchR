@@ -3,8 +3,7 @@
 \alias{export.particles}
 \title{export.particles}
 \usage{
-export.particles(particlelist,
-  folder = "/Users/fede/TEMP/exportParticleList/",
+export.particles(particlelist, folder = "",
   nameStub = "testExport_particles_")
 }
 \arguments{

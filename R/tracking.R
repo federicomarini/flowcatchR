@@ -222,13 +222,13 @@ link.particles <- function(particlelist,
     # shrink curr_linkrange if needed at the end of the frames
     if(m==(frames_number-curr_linkrange) && curr_linkrange > 1)
     {
-      print(curr_linkrange)
+#       print(curr_linkrange)
       curr_linkrange <- curr_linkrange - 1
 #     browser()
-      cat("UPDATED LINKRANGE!!")
-      print(m)
-      print(frames_number)
-      print(curr_linkrange)
+#       cat("UPDATED LINKRANGE!!")
+#       print(m)
+#       print(frames_number)
+#       print(curr_linkrange)
     }
     if (prog)setTxtProgressBar(pb, (m / (frames_number - curr_linkrange + 1)*100))
   }

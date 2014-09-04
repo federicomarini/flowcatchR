@@ -1,3 +1,119 @@
+#' @export
+trajectories_v2 <- function(particlelist,
+                            provideExtraDetails=FALSE,
+                            ...) # parameters for the eventual tracking - is it possible to do so? ask harald!
+{
+  if(is(particlelist,"LinkedParticleList"))
+  {
+    cat("Generating trajectories...\n")
+    linkedparticlelist <- particlelist
+  } else {
+    if(is(particlelist,"ParticleList"))
+    {
+      cat("Input ParticleList is not a LinkedParticleList! \n")
+      cat("Performing linking first with some set of default parameters - you might want to change them according to your scenario...\n")
+      linkedparticlelist <- link.particles(particlelist,L=26,R=3,epsilon1=0,epsilon2=0,lambda1=1,lambda2=0)
+      print(linkedparticlelist)
+    }
+  }
+  
+  out <- vector(1,mode="list")
+  class(out) <- c("TrajectoryList",class(out))
+  
+  ntraj <- 0
+  linkrange <- ncol(linkedparticlelist[[1]]$nxt)
+  
+  for(i in 1:length(linkedparticlelist)) # looping over the frames
+  {
+    npart <- nrow(linkedparticlelist[[i]]$particles)
+    for(j in 1:npart)
+    {
+      if(linkedparticlelist[[i]]$special[j]==FALSE) # if it did not already got used
+      {
+        linkedparticlelist[[i]]$special[j] <- TRUE # set to true and proceed
+        found <- -1
+        for(n in 1:linkrange)
+        {
+          # if it is not a dummy particle, stop looking
+          if(linkedparticlelist[[i]]$nxt[j,n] != -1)
+          {
+            found <- n
+            break
+          }
+        }
+        
+        
+        # if this particle is not linked to any other, go to the next particle and do not add a trajectory
+        if(found == -1)
+        {
+          next
+        }
+        # if this particle is linked to a real particle that was ALREADY linked, break the trajectory and start agin from the next
+        # do not add a trajectory in this case
+        if(linkedparticlelist[[i+n]]$special[linkedparticlelist[[i]]$nxt[j,n]])
+        {
+          next
+        }
+        # BUUUT, if this particle is linked to a real particle NOT already linked, then we DO have a trajectory
+        ntraj <- ntraj+1
+        traj <- c(linkedparticlelist[[i]]$particles[j,1],linkedparticlelist[[i]]$particles[j,2],ntraj,i,j)
+        k <- i
+        m <- j
+        repeat
+        {
+          found <- -1
+          for(n in 1:linkrange)
+          {
+            if(linkedparticlelist[[k]]$nxt[m,n] != -1) # linked to a real particle -> continue building up the trajectory
+            {
+              if(linkedparticlelist[[k+n]]$special[linkedparticlelist[[k]]$nxt[m,n]] == FALSE) # which is not already linked
+              {
+                found <- n
+                break
+              } else {
+                # it is linked to a real one, but already taken, then stop building the trajectory
+                break
+              }
+            }
+          }
+          
+          if(found == -1)
+          {
+            break
+          }
+          m <- linkedparticlelist[[k]]$nxt[m,found]
+          k <- k + found 
+          # add to trajectory
+          traj <- rbind(traj,c(linkedparticlelist[[k]]$particles[m,1],linkedparticlelist[[k]]$particles[m,2],ntraj,k,m))
+          linkedparticlelist[[k]]$special[m] <- TRUE
+          
+          if(m == -1) # to replicate the do while
+          {
+            break
+          }
+        }
+        
+        # generating output
+        out[[ntraj]] <- list()
+        
+        colnames(traj) <- c("xCoord","yCoord","trajLabel","frame","frameobjectID")
+        rownames(traj) <- paste0(ntraj,"_",seq(1:nrow(traj)))
+        traj <- as.data.frame(traj)
+        out[[ntraj]]$trajectory <- traj
+        out[[ntraj]]$npoints <- nrow(traj)
+        out[[ntraj]]$nframes <- traj$frame[nrow(traj)]-traj$frame[1] + 1
+        out[[ntraj]]$ngaps <- out[[ntraj]]$nframes - out[[ntraj]]$npoints
+        out[[ntraj]]$keep <- NA # initialized, then set to 0 or 1
+        out[[ntraj]]$ID <- ntraj
+        
+        
+      }
+    }
+  }
+  return(out)
+}
+
+
 
 #' trajectories
 #' 
@@ -73,6 +189,7 @@ trajectories <- function(particlelist,
         out[[ntraj]]$keep <- NA # initialized, then set to 0 or 1
         out[[ntraj]]$ID <- ntraj
       }
+      
     }
   }
   
