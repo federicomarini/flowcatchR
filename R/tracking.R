@@ -72,7 +72,7 @@ link.particles <- function(particlelist,
   }
   
   # max cost = displacement^2
-  for(m in 1:(frames_number - curr_linkrange + 1)) # +2?!?! or + 0? need to do a very good round of debug on this!!
+  for(m in 1:(frames_number - curr_linkrange + 0)) # +2?!?! or + 0? need to do a very good round of debug on this!!
   {
     if(verboseOutput) cat("---------- Linking frame",m,"of",frames_number,"...........\n")
     nop <- nrow(out[[m]]$particles)
@@ -188,7 +188,7 @@ link.particles <- function(particlelist,
         mincost <- c(mincost,minc)
         
         # if minimum < 0, link addition is favorable
-        if(minc < 0)
+        if(!is.na(minc) & (minc < 0))
         {
           if(verboseOutput) cat("--> Performing change!\n")
           # add link and update dependencies to preserve the topology

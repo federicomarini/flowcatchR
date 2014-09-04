@@ -342,7 +342,7 @@ export.frames <- function(framelist,
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 export.particles <- function(particlelist,
-                          folder="/Users/fede/TEMP/exportParticleList/",
+                          folder="",
                           nameStub="testExport_particles_")
 {
   cat("Exporting the .tsv files for the particle lists...\n")
@@ -530,10 +530,9 @@ print.TrajectoryList <- function(x,...)
   cat("An object of the TrajectoryList class. \n\n")
   cat("TrajectoryList composed of",length(x),"trajectories\n\n")
   
-  cat("Trajectories cover a range of",max(unlist(lapply(x,function(arg){(arg$trajectory$frame)}))) + 1,"frames\n") # not taking things in frame100 or smthing else happens?
+  cat("Trajectories cover a range of",max(unlist(lapply(x,function(arg){(arg$trajectory$frame)}))),"frames\n") 
   cat("Displaying a segment of the first trajectory...\n")
   print(x[[1]]$trajectory[1:min(10,nrow(x[[1]]$trajectory)),])
-  
   
 }
 
