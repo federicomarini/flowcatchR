@@ -72,7 +72,7 @@ link.particles <- function(particlelist,
   }
   
   # max cost = displacement^2
-  for(m in 1:(frames_number - curr_linkrange + 0)) # +2?!?! or + 0? need to do a very good round of debug on this!!
+  for(m in 1:(frames_number - curr_linkrange + 1)) # +2?!?! or + 0? need to do a very good round of debug on this!!
   {
     if(verboseOutput) cat("---------- Linking frame",m,"of",frames_number,"...........\n")
     nop <- nrow(out[[m]]$particles)
@@ -171,6 +171,7 @@ link.particles <- function(particlelist,
         Jcand = floor((todo-1) / nop) + 1
         # determine the reduced cost Cred for each candidate insertion
         # initialize
+        
         Cred <- rep(0,length(todo))
         Xcand <- rep(0,length(todo))
         Ycand <- rep(0,length(todo))
@@ -219,9 +220,16 @@ link.particles <- function(particlelist,
       out[[m]]$nxt[Ilinks,n] <- Jlinks
     }
     # shrink curr_linkrange if needed at the end of the frames
-    if(m==(frames_number-curr_linkrange-1) && curr_linkrange > 1)
+    if(m-1==(frames_number-curr_linkrange) && curr_linkrange > 1)
+    {
+      print(curr_linkrange)
       curr_linkrange <- curr_linkrange - 1
 #     browser()
+      cat("UPDATED LINKRANGE!!")
+      print(m)
+      print(frames_number)
+      print(curr_linkrange)
+    }
     if (prog)setTxtProgressBar(pb, (m / (frames_number - curr_linkrange + 1)*100))
   }
   #   cat("I GOT HERE ----")
