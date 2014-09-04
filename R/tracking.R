@@ -72,7 +72,7 @@ link.particles <- function(particlelist,
   }
   
   # max cost = displacement^2
-  for(m in 1:(frames_number - curr_linkrange + 1)) # +2?!?! or + 0? need to do a very good round of debug on this!!
+  for(m in 1:(frames_number - 1)) # +2?!?! or + 0? need to do a very good round of debug on this!!
   {
     if(verboseOutput) cat("---------- Linking frame",m,"of",frames_number,"...........\n")
     nop <- nrow(out[[m]]$particles)
@@ -220,7 +220,7 @@ link.particles <- function(particlelist,
       out[[m]]$nxt[Ilinks,n] <- Jlinks
     }
     # shrink curr_linkrange if needed at the end of the frames
-    if(m-1==(frames_number-curr_linkrange) && curr_linkrange > 1)
+    if(m==(frames_number-curr_linkrange) && curr_linkrange > 1)
     {
       print(curr_linkrange)
       curr_linkrange <- curr_linkrange - 1
