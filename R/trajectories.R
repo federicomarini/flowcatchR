@@ -1,7 +1,22 @@
+#' trajectories
+#' 
+#' Generates a TrajectoryList object from a (Linked)ParticleList
+#' 
+#' @param particlelist A (Linked)ParticleList object
+#' @param provideExtraDetails Logical, currently not used - could be introduced for providing additional info on the trajectories
+#' @param ... Arguments to be passed to methods
+#' 
+#' @return A TrajectoryList object
+#' 
+#' @examples
+#' load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+#' platelets.trajectories <- trajectories(candidate.platelets)
+#' 
 #' @export
-trajectories_v2 <- function(particlelist,
-                            provideExtraDetails=FALSE,
-                            ...) # parameters for the eventual tracking - is it possible to do so? ask harald!
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
+trajectories <- function(particlelist,
+                         provideExtraDetails=FALSE,
+                         ...) # parameters for the eventual tracking - is it possible to do so? ask harald!
 {
   if(is(particlelist,"LinkedParticleList"))
   {
@@ -41,7 +56,6 @@ trajectories_v2 <- function(particlelist,
             break
           }
         }
-        
         
         # if this particle is not linked to any other, go to the next particle and do not add a trajectory
         if(found == -1)
@@ -105,95 +119,9 @@ trajectories_v2 <- function(particlelist,
         out[[ntraj]]$ngaps <- out[[ntraj]]$nframes - out[[ntraj]]$npoints
         out[[ntraj]]$keep <- NA # initialized, then set to 0 or 1
         out[[ntraj]]$ID <- ntraj
-        
-        
       }
     }
   }
-  return(out)
-}
-
-
-
-#' trajectories
-#' 
-#' Generates a TrajectoryList object from a (Linked)ParticleList
-#' 
-#' @param particlelist A (Linked)ParticleList object
-#' @param provideExtraDetails Logical, currently not used - could be introduced for providing additional info on the trajectories
-#' @param ... Arguments to be passed to methods
-#' 
-#' @return A TrajectoryList object
-#' 
-#' @examples
-#' load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
-#' platelets.trajectories <- trajectories(candidate.platelets)
-#' 
-#' @export
-#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-trajectories <- function(particlelist,
-                         provideExtraDetails=FALSE,
-                         ...) # parameters for the eventual tracking - is it possible to do so? ask harald!
-{
-  if(is(particlelist,"LinkedParticleList"))
-  {
-    cat("Generating trajectories...\n")
-    linkedparticlelist <- particlelist
-  } else {
-    if(is(particlelist,"ParticleList"))
-    {
-      cat("Input ParticleList is not a LinkedParticleList! \n")
-      cat("Performing linking first with some set of default parameters - you might want to change them according to your scenario...\n")
-      linkedparticlelist <- link.particles(particlelist,L=26,R=3,epsilon1=0,epsilon2=0,lambda1=1,lambda2=0)
-      print(linkedparticlelist)
-    }
-  }
-  
-  out <- vector(1,mode="list")
-  class(out) <- c("TrajectoryList",class(out))
-  
-  ntraj <- 0
-  linkrange <- ncol(linkedparticlelist[[1]]$nxt)
-  
-  for(ii in 1:length(linkedparticlelist)) # looping over the frames
-  {
-    npart <- nrow(linkedparticlelist[[ii]]$particles)
-    
-    for(ipart in 1:npart) # looping over the particles
-    {
-      iframe <- ii
-      nextOne <- linkedparticlelist[[iframe]]$nxt[ipart,1] # need to tweak the column!
-      if(nextOne > 0) # if the particle starts a trajectory, then follow it
-      {
-        ntraj <- ntraj+1
-        traj <- c(linkedparticlelist[[iframe]]$particles[ipart,1],linkedparticlelist[[iframe]]$particles[ipart,2],ntraj,iframe,ipart)
-        linkedparticlelist[[iframe]]$link[ipart] <- -2 # instead of -1
-        while(nextOne > 0)
-        {
-          iframe <- iframe + 1
-          traj <- rbind(traj,c(linkedparticlelist[[iframe]]$particles[nextOne,1],linkedparticlelist[[iframe]]$particles[nextOne,2],ntraj,iframe,nextOne))
-          nextOld <- nextOne
-          nextOne <- linkedparticlelist[[iframe]]$nxt[nextOne,1]
-          linkedparticlelist[[iframe]]$nxt[nextOld,1] <- -2
-        }
-        
-        out[[ntraj]] <- list()
-        
-        colnames(traj) <- c("xCoord","yCoord","trajLabel","frame","frameobjectID")
-        rownames(traj) <- paste0(ntraj,"_",seq(1:nrow(traj)))
-        traj <- as.data.frame(traj)
-        out[[ntraj]]$trajectory <- traj
-        out[[ntraj]]$npoints <- nrow(traj)
-        out[[ntraj]]$nframes <- traj$frame[nrow(traj)]-traj$frame[1] + 1
-        out[[ntraj]]$ngaps <- out[[ntraj]]$nframes - out[[ntraj]]$npoints
-        out[[ntraj]]$keep <- NA # initialized, then set to 0 or 1
-        out[[ntraj]]$ID <- ntraj
-      }
-      
-    }
-  }
-  
-  cat("Done!\n")
   return(out)
 }
 
