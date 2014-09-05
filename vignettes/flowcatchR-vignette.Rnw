@@ -14,15 +14,20 @@
            ]
            {caption} % for formatting the figure captions
 % for using cleverly the bibliography from mendeley 
-\usepackage[backend=bibtex, sorting=none]{biblatex}
+% \usepackage[backend=bibtex, sorting=none]{biblatex}
 % put refs here
-\bibliography{flowcatchR}
 
 %%%%%%%%%%% user defined commands %%%%%%%%%%% 
 \newcommand{\bash}[1]{\texttt{#1}}
 \newcommand{\TODO}[1]{{\textbf{TODO:} \textit{\textcolor{green}{#1}}}}
 \newcommand{\pval}{$p$-value}
 \newcommand{\flowcatchR}{\Biocpkg{flowcatchR}}
+
+<<biblioSetup,echo=FALSE,results='hide'>>=
+Sys.setenv(TEXINPUTS=getwd(),
+           BIBINPUTS=getwd(),
+           BSTINPUTS=getwd())
+@
 
 <<style-knitr, eval=TRUE, echo=FALSE, results="asis">>=
 BiocStyle::latex()
@@ -47,11 +52,6 @@ options(replace.assign=TRUE,width=80,'reindent.spaces'=2) # for tidying up the c
 knit_hooks$set(rgl = hook_rgl)
 @
 
-<<biblioSetup,echo=FALSE,results='hide'>>=
-Sys.setenv(TEXINPUTS=getwd(),
-           BIBINPUTS=getwd(),
-           BSTINPUTS=getwd())
-@
 
 
 \title{{\flowcatchR: A framework for tracking and analyzing flowing blood cells in time lapse microscopy images}}
@@ -485,8 +485,9 @@ We would like to thank the members of the Biostatistics division for valuable di
 toLatex(sessionInfo())
 # Sys.time()
 @
+\bibliography{flowcatchR}
 
-\printbibliography
+% \printbibliography
 
 \end{document}
   
