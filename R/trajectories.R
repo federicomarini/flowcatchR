@@ -161,7 +161,9 @@ axesInfo <- function(framelist)
 #' load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
 #' load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
 #' platelets.trajectories <- trajectories(candidate.platelets)
+#' \dontrun{
 #' plot(platelets.trajectories,MesenteriumSubset)
+#' }
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
