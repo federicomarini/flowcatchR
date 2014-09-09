@@ -48,7 +48,7 @@ knit_hooks$set(rgl = hook_rgl)
 
 
 
-\title{{\flowcatchR: A framework for tracking and analyzing flowing blood cells in time lapse microscopy images}}
+\title{{\flowcatchR{}: A framework for tracking and analyzing flowing blood cells in time lapse microscopy images}}
 \author{Federico Marini$^1$, Johanna Mazur, Harald Binder \\ [1em]Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI), \\ University Medical Center - Mainz (Germany)\\[1em] \email{$^1$marinif@uni-mainz.de}}
 \date{Edited: September 1, 2014; Compiled: \today}
 
@@ -60,7 +60,7 @@ knit_hooks$set(rgl = hook_rgl)
 \maketitle
 
 \begin{abstract}
-\flowcatchR{} is a set of tools to analyze in vivo microscopy imaging data, focused on tracking flowing blood cells. It guides throughout all the steps of bioimage processing, from segmentation to calculation of features, filtering out particles not of interest, providing also a set of utilities to help checking the quality of the performed operations. The main novel contribution investigates the issue of tracking flowing cells such as the ones in blood vessels, to categorize the particles in flowing, rolling and adherent by providing a comprehensive analysis of the identified trajectories. The extracted information is then applied in the study of phenomena such as hemostasis and study of thrombosis development. We expect this package to be potentially applied to a variety of essays, covering a wide range of applications founded on time-lapse microscopy.
+\flowcatchR{} is a set of tools to analyze in vivo microscopy imaging data, focused on tracking flowing blood cells. \flowcatchR{} guides throughout all the steps of bioimage processing, from segmentation to calculation of features, filtering out particles not of interest, providing also a set of utilities to help checking the quality of the performed operations. The main novel contribution investigates the issue of tracking flowing cells such as the ones in blood vessels, to categorize the particles in flowing, rolling, and adherent by providing a comprehensive analysis of the identified trajectories. The extracted information is then applied in the study of phenomena such as hemostasis and thrombosis development. We expect this package to be potentially applied to a variety of essays, covering a wide range of applications founded on time-lapse microscopy.
 \end{abstract}
 
 
@@ -77,7 +77,7 @@ This document offers an introduction and overview of the \R{}/\Bioconductor{} \c
 \flowcatchR{} builds upon functionalities provided by the \Biocpkg{EBImage} package \cite{Pau2010}, and extends them in order to analyze time-lapse microscopy images. Here we list some of the unique characteristics of the datasets \flowcatchR{} is designed for:
 
 \begin{itemize}
-\item The images come from intravital microscopy experiments. This means that the Signal-to-Noise Ratio (SNR) is not optimal, and very importantly there are potential major movements of the alive specimen, that can be confounded with the true movements of the particles of interest \cite{Meijering2008}
+\item The images come from intravital microscopy experiments. This means that the Signal-to-Noise Ratio (SNR) is not optimal, and, very importantly, there are potential major movements of the living specimen that can be confounded with the true movements of the particles of interest \cite{Meijering2008}
 \item Cells are densely distributed on the images, with particles that can enter and leave the field of view
 \item The acquisition frame rate is a compromise between allowing the fluorescent cells to be detected and detecting the movements properly % (typical values range around ...\TODO{details from Sven?})
 \item Cells can flow, temporarily adhere to the endothelial layer and/or be permanently adherent. Therefore, all movement modalities should be detected correctly throughout the entire acquisition. Cells can also cluster together and form (temporary) conglomerates
@@ -86,7 +86,7 @@ This document offers an introduction and overview of the \R{}/\Bioconductor{} \c
 Essential features \flowcatchR{} delivers to the user are:
 
 \begin{itemize}
-\item A simple and flexible, yet complete framework to analyze flowing blood cells (and more generally time-lapse) image sets , with a system of S3 classes such as \Rclass{FrameList}, \Rclass{ParticleList} and \Rclass{TrajectoryList} constituting the backbone of the procedures
+\item A simple and flexible, yet complete framework to analyze flowing blood cells (and more generally time-lapse) image sets, with a system of S3 classes such as \Rclass{FrameList}, \Rclass{ParticleList}, and \Rclass{TrajectoryList} constituting the backbone of the procedures
 \item Facilities for detection of objects in the segmentation step
 \item An algorithm for tracking the particles, adapted and improved from the proposal of Sbalzarini and Koumoutsakos (2005) \cite{Sbalzarini2005}, that reflects the directional aspect of the motion
 \item A wide set of functions inspecting the kinematic properties of the identified trajectories \cite{Beltman2009,Meijering2012a}, providing publication-ready summary statistics and visualization tools to help classifying identified objects
@@ -145,7 +145,7 @@ The following sections will provide additional details to the operations mention
 \section{Image acquisition}\label{sec:acquisition}
 A set of images is acquired, after a proper microscopy setup has been performed. This includes for example a careful choice of spatial and temporal resolution; often a compromise must be met to have a good frame rate and a good SNR to detect the particles in the single frames. For a good review on the steps to be taken, please refer to Meijering's work \cite{Meijering2008, Meijering2012a}. 
 
-\flowcatchR provides an S3 class that can store the information of a complete acquisition, namely \Rclass{FrameList}. A \Rclass{FrameList} object is structured as a list, whose elements are in turn a list too. The \Robject{image} and its \Robject{location} are stored in the respective slots. To construct a \Rclass{FrameList} from images, the \Rfunction{read.frames} function is used:
+\flowcatchR{} provides an S3 class that can store the information of a complete acquisition, namely \Rclass{FrameList}. A \Rclass{FrameList} object is structured as a list, whose elements are in turn a list too. The \Robject{image} and its \Robject{location} are stored in the respective slots. To construct a \Rclass{FrameList} from images, the \Rfunction{read.frames} function is used:
 
 <<newFrameList,eval=FALSE>>=
 # initialization
@@ -155,7 +155,7 @@ fullData <- read.frames(image.files = "/path/to/folder/containing/images/",nfram
 fullData
 @
 
-\Robject{nframes} specifies the number of frames that will constitute the FrameList object, whereas \Robject{image.files} is a vector of character strings with the full location of the (raw) images, or the path to the folder containing them (works automatically if images are in TIFF/JPG format). In this case we just loaded the full dataset, but for the demonstrational purpose of this vignette, we will proceed with the subset available in the \Robject{MesenteriumSubset.RData} object, which we previously loaded in Section \ref{sec:overview}.
+\Robject{nframes} specifies the number of frames that will constitute the \Rclass{FrameList} object, whereas \Robject{image.files} is a vector of character strings with the full location of the (raw) images, or the path to the folder containing them (works automatically if images are in TIFF/JPG format). In this case we just loaded the full dataset, but for the demonstrational purpose of this vignette, we will proceed with the subset available in the \Robject{MesenteriumSubset.RData} object, which we previously loaded in Section \ref{sec:overview}.
 
 It is possible to inspect the first frames of a \Rclass{FrameList} object with the function \Rfunction{inspect.frames} (Fig.\ref{fig:inspectRaw}).
 
@@ -183,7 +183,7 @@ plateletsMesenterium <- allChannelsMesenterium$red
 plateletsMesenterium
 @
 
-As we can see, by selecting one of the channels, we get in return a \Rclass{FrameList object}, that we inspect in its first 9 frames.
+As we can see, by selecting one of the channels, we get in return a \Rclass{FrameList} object, and we inspect it in its first 9 frames.
 
 <<inspectPlatelets,fig.height=4,fig.width=7.5,fig.cap="The first 9 frames of the MesenteriumSubset dataset, just displaying the signal of the red channel (for the thrombocytes)">>=
 inspect.frames(plateletsMesenterium,nframes=9,display.method="raster")
@@ -207,7 +207,7 @@ preprocessedPlatelets
 The result of this is displayed in Fig.\ref{fig:inspectSegm}. 
 For a detailed explanation of the parameters to better tweak the performances of this segmentation step, please refer to the help of \Rfunction{preprocess.FrameList}. To obtain an immediate feedback about the effects of the operations performed in the full preprocessing phase, we can call again \Rfunction{inspect.frames} on the \Rclass{FrameList} of segmented images.
 
-<<inspectSegm,fig.height=4,fig.width=7.5,fig.cap="The first 9 frames after preprocessing of the MesenteriumSubset dataset. The binarized image show the detected objects after thresholding.">>=
+<<inspectSegm,fig.height=4,fig.width=7.5,fig.cap="The first 9 frames after preprocessing of the MesenteriumSubset dataset. The binarized image shows the detected objects after thresholding.">>=
 inspect.frames(preprocessedPlatelets,nframes=9,display.method="raster")
 @
 
@@ -247,9 +247,9 @@ platelets
 
 As it can be seen from the summary information, each \Rclass{ParticleList} stores the essential information on all particles that were detected in the original images, alongside with a complete set of features, which are computed by integrating the information from both the raw and the segmented frames.
 
-A \Rclass{ParticleList} is also a list of lists, structured with the elements \Robject{particles} (storing the actual info), \Robject{imgSource} to help backtracking the operations performed, and \Robject{channel}, as selected in the initial steps.
+A \Rclass{ParticleList} is also a list of lists, composed by the elements \Robject{particles} (storing the actual info), \Robject{imgSource} to help backtracking the operations performed, and \Robject{channel}, as selected in the initial steps.
 
-It is possible to filter out particles according to their properties, such as area, shape and eccentricity. This is possible with the function \Rfunction{select.particles}. Thecurrent implementation regards only the surface extension, but any additional feature can be chosen and adopted to restrict the number of candidate particles according to particular properties which are expected and/or to remove potential noise that went through the preprocessing phase.
+It is possible to filter out particles according to their properties, such as area, shape and eccentricity. This is possible with the function \Rfunction{select.particles}. The current implementation regards only the surface extension, but any additional feature can be chosen and adopted to restrict the number of candidate particles according to particular properties which are expected and/or to remove potential noise that went through the preprocessing phase.
 
 <<selectParticles>>=
 selectedPlatelets <- select.particles(platelets,min.area=3)
@@ -275,7 +275,7 @@ To connect the particles from one frame to the other, we perform first the detec
 
 To establish the connections between particles, the function to be called is \Rfunction{link.particles}. The algorithm used to perform the tracking itself is an improved version of the original implementation of Sbalzarini and Koumotsakos \cite{Sbalzarini2005}. To summarize the method, it is a fast and efficient self-initializing feature point tracking algorithm (using the centroids of the objects as reference) \cite{Chenouard2014}. The initial version is based on a particle matching algorithm, approached via a graph theory technique. It allows for appearances/disappearances of particles from the field of view, also temporarily as it happens in case of occlusions and objects leaving the plane of focus. 
 
-Our implementation adds to the existing one by redefining the cost function used in the optimization phase of the link assignment, namely by adding two terms such as intensity variation and area variation, and mostly important with a function to penalize the movements that are either perpendicular or backwards with respect to the oriented flow of cells. Small unwanted movements, which may be present even after the registration phase, are handled with two jitter terms in a defined penalty function. Multiplicative factors can further influence the penalties given to each term.
+Our implementation adds to the existing one by redefining the cost function used in the optimization phase of the link assignment. It namely adds two terms, such as intensity variation and area variation, and mostly important implements a function to penalize the movements that are either perpendicular or backwards with respect to the oriented flow of cells. Small unwanted movements, which may be present even after the registration phase, are handled with two jitter terms in a defined penalty function. Multiplicative factors can further influence the penalties given to each term.
 
 In its default value, the penalty function is created via the \Rfunction{penaltyFunctionGenerator}. The user can exploit the parameter values in it to create a custom version of it, to match the particular needs stemming from the nature of the available data and phenomenon under inspection.
 
@@ -298,9 +298,9 @@ linkedPlatelets <- link.particles(platelets,
 linkedPlatelets
 @
 
-As it can be seen, \Robject{linkedPlatelets} is an object of the \Rclass{LinkedParticleList class}, which is also a \Rclass{ParticleList} class. 
+As it can be seen, \Robject{linkedPlatelets} is an object of the \Rclass{LinkedParticleList} class, which is also a \Rclass{ParticleList} class. 
 
-After inspecting the trajectories (see Section \ref{sec:trajanal}) it might be possible to filter a \Rclass{LinkedParticleList class} object, and subsequently reperform the linking on its updated version (e.g. some detected particles were found to be noise, and thus removed with \Rfunction{select.particles})
+After inspecting the trajectories (see Section \ref{sec:trajanal}) it might be possible to filter a \Rclass{LinkedParticleList} class object and subsequently reperform the linking on its updated version (e.g. some detected particles were found to be noise, and thus removed with \Rfunction{select.particles}).
 
 \flowcatchR{} provides function to export and import the identified particles, in order to offer an additional entry point for tracking and analyzing the trajectories (if particles were detected with other routines) and also to store separately the information per each frame about the objects that were primarily identified.
 
@@ -321,7 +321,7 @@ reimportedPlatelets <- read.particles("/path/to/export/folder/exportParticleList
 
 \section{Trajectory analysis}\label{sec:trajanal}
 
-It is possible to extract the trajectories with the correspondent omonymous function with the command
+It is possible to extract the trajectories with the correspondent omonymous function with the \Rfunction{trajectories} command:
 
 <<generateTrajs>>=
 trajPlatelets <- trajectories(linkedPlatelets)
@@ -358,7 +358,7 @@ paintedTrajectories <- add.contours(raw.frames=MesenteriumSubset,
 paintedTrajectories
 @
 
-As with any other \Rclass{FrameList} object, it is recommended to take a peek at it via the \Rfunction{inspect.frames} function
+As with any other \Rclass{FrameList} object, it is recommended to take a peek at it via the \Rfunction{inspect.frames} function:
 
 <<inspectTrajs,fig.height=4,fig.width=7.5,fig.cap="Particles detected in the first 9 frames are shown this time in colours corresponding to the identified trajectories, again with their contours defined by the segmentation procedure.">>=
 inspect.frames(paintedTrajectories,nframes=9,display.method="raster")
@@ -389,7 +389,7 @@ export.frames(traj11,nameStub="vignetteTest_traj11",
 
 \Rfunction{export.frames} offers multiple ways to export - animated gif (if \software{ImageMagick} is available and installed on the system) or multiple jpeg images.
 
-Of course the user might want to evaluate singularly each trajectory that was identified, and this can be done by looping on the trajectory IDs.
+Of course the user might want to singularly evaluate each trajectory that was identified, and this can be done by looping on the trajectory IDs.
 
 <<loopExport, cache=TRUE,eval=FALSE>>=
 evaluatedTrajectories <- trajPlatelets
