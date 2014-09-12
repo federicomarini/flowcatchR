@@ -31,6 +31,8 @@ biocLite(c("EBImage","BiocStyle"))
 install.packages(c("rgl","colorRamps","knitr"))
 ```
 
+In order to compile the vignette, it is required that a (full) TeX system (MikTeX, TeX Live, MaCTex) is also installed on your system.
+
 ### flowcatchR in a glimpse
 
 ```r
