@@ -23,3 +23,32 @@ install.packages("devtools") # if needed
 devtools::install_github("flowcatchR", "federicomarini")
 ```
 
+If required, install the dependencies:
+
+```r
+source("http://bioconductor.org/biocLite.R")
+biocLite(c("EBImage","BiocStyle"))
+
+install.packages(c("rgl","colorRamps","knitr"))
+```
+
+### flowcatchR in a glimpse
+
+```r
+library("flowcatchR")
+load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+fullResults <- kinematics(trajectories(particles(channels(MesenteriumSubset)$red)))
+```
+
+
+
+### Vignette
+
+To inspect the vignette and the code used in it, type:
+
+```r
+vignette("flowcatchR-vignette")
+## and/or
+browseVignettes("flowcatchR")
+```
+
