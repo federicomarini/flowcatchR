@@ -14,9 +14,8 @@ covering a wide range of applications founded on time-lapse microscopy.
 
 
 ### Installation
-To install the package **flowcatchR**, please start a current version of R and type 
+To install the package **flowcatchR**, please start a current version of R and type (using `devtools`):
 
-With `devtools`
 ```r 
 # currently this can be done via github
 install.packages("devtools") # if needed
