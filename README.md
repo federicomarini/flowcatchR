@@ -52,3 +52,7 @@ vignette("flowcatchR-vignette")
 browseVignettes("flowcatchR")
 ```
 
+### Contact
+For additional details regarding the functions of **flowcatchR**, please consult the documentation or write an email to marinif@uni-mainz.de. 
+
+
