@@ -475,6 +475,7 @@ We would like to thank the members of the Biostatistics division for valuable di
 \newpage
 
 \section{Session Information}
+This vignette was generated using the following package versions:
 <<sessioininfo,results='asis'>>=
 toLatex(sessionInfo())
 # Sys.time()
