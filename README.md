@@ -1,7 +1,7 @@
 flowcatchR
 ==========
 
-A framework for tracking and analyzing flowing blood cells in time lapse microscopy images
+#### A framework for tracking and analyzing flowing blood cells in time lapse microscopy images
 
 **flowcatchR** is a set of tools to analyze in vivo microscopy imaging data, focused on tracking flowing blood cells.
 It guides throughout all the steps of bioimage processing, from segmentation to calculation of features, filtering 
