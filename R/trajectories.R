@@ -1,12 +1,12 @@
-#' trajectories
+#' Generate trajectories
 #' 
-#' Generates a TrajectoryList object from a (Linked)ParticleList
+#' Generates a \code{TrajectoryList} object from a (\code{Linked})\code{ParticleList}
 #' 
-#' @param particlelist A (Linked)ParticleList object
+#' @param particlelist A (\code{Linked})\code{ParticleList} object
 #' @param provideExtraDetails Logical, currently not used - could be introduced for providing additional info on the trajectories
 #' @param ... Arguments to be passed to methods
 #' 
-#' @return A TrajectoryList object
+#' @return A \code{TrajectoryList} object
 #' 
 #' @examples
 #' data("candidate.platelets")
@@ -127,11 +127,11 @@ trajectories <- function(particlelist,
 
 
 
-#' axesInfo
+#' Info on the dimensions of the FOV
 #' 
 #' Auxiliary function to return the dimensions of the field of interest
 #'  
-#' @param framelist A FrameList object
+#' @param framelist A \code{FrameList} object
 #' 
 #' @return A list object, containing the extremes of the field of interest (x-y-z, where z is time)
 #' 
@@ -143,15 +143,17 @@ axesInfo <- function(framelist)
 }
 
 
-#' plot.TrajectoryList
+#' 3D representation of a \code{TrajectoryList} object
 #' 
-#' Provides a visual representation of a TrajectoryList object
+#' Provides a visual representation of a \code{TrajectoryList} object
 #' 
-#' Based on the rgl library, the function extracts the region of interests from the dimensions of an image of the FrameList object,
+#' 
+#' 
+#' Based on the \code{rgl} library, the function extracts the region of interests from the dimensions of an image of the \code{FrameList} object,
 #' and afterwards plots the x-y-time representation of the identified trajectories
 #' 
-#' @param x A TrajectoryList object
-#' @param framelist A FrameList object, used here to identify the limits of the region of interest 
+#' @param x A \code{TrajectoryList} object
+#' @param framelist A \code{FrameList} object, used here to identify the limits of the region of interest 
 #' @param ... Arguments to be passed to methods
 #' @param verbose Logical, whether to provide additional output on the command line
 #' 
@@ -186,16 +188,16 @@ plot.TrajectoryList <- function(x,framelist,verbose=FALSE,...)
 
 
 
-#' plot2D.TrajectoryList
+#' 2D projection of a \code{TrajectoryList} object
 #' 
-#' Provides a bird's eye view of a TrajectoryList object on a bidimensional space
+#' Provides a bird's eye view of a \code{TrajectoryList} object on a bidimensional space
 #' 
-#' Independent from the rgl library, the function extracts the region of interests from the dimensions of an image of the FrameList object,
-#' and afterwards plots the x-y-time representation of the identified trajectories on a 2d plane. It is possible to subset the TrajectoryList
+#' Independent from the \code{rgl} library, the function extracts the region of interests from the dimensions of an image of the \code{FrameList} object,
+#' and afterwards plots the x-y-time representation of the identified trajectories on a 2d plane. It is possible to subset the \code{TrajectoryList}
 #' object with the IDs of the desired trajectories
 #' 
-#' @param x A TrajectoryList object
-#' @param framelist A FrameList object, used here to identify the limits of the region of interest 
+#' @param x A \code{TrajectoryList} object
+#' @param framelist A \code{FrameList} object, used here to identify the limits of the region of interest 
 #' @param trajIDs A vector containing the ids of the desired trajectories
 #' @param verbose Logical, whether to provide additional output on the command line
 #' @param ... Arguments to be passed to methods
@@ -252,25 +254,25 @@ plot2D.TrajectoryList <- function(x,framelist,trajIDs=NULL,verbose=FALSE,...)
 
 
 
-#' add.contours
+#' Add object contours to a \code{FrameList} object
+#'  
+#' Creates a \code{FrameList} object containing raw information, combined with the segmented images and the relative trajectory under analysis
 #' 
-#' Creates a FrameList objects containing raw information, combined with the segmented images and the relative trajectory under analysis
-#' 
-#' If a TrajectoryList is provided and mode is set to "trajectories", returns a FrameList with all trajectories included in the IDs 
+#' If a \code{TrajectoryList} is provided and mode is set to \code{trajectories}, returns a \code{FrameList} with all trajectories included in the IDs 
 #' vector painted accordingly.
-#' If the mode is set to "particles", it will just plot the particles (all) on all frames.
-#' If no trajectoryList is provided, it will be computed with default parameters.
-#' If no binary.frames is provided, it will be computed also with default parameters
+#' If the mode is set to \code{particles}, it will just plot the particles (all) on all frames.
+#' If no \code{trajectoryList} is provided, it will be computed with default parameters.
+#' If no \code{binary.frames} is provided, it will be computed also with default parameters
 #' 
-#' @param raw.frames A FrameList object with raw images
-#' @param binary.frames A FrameList object with preprocessed frames
-#' @param trajectories A trajectories object
+#' @param raw.frames A \code{FrameList} object with raw images
+#' @param binary.frames A \code{FrameList} object with preprocessed frames
+#' @param trajectories A \code{TrajectoryList} object
 #' @param trajIds Numeric vector, the ID(s) of the trajectory.
-#' @param mode A character string, can assume the values "particles" or "trajectories". Defaults to "particles"
+#' @param mode A character string, can assume the values \code{particles} or \code{trajectories}. Defaults to \code{particles}
 #' @param col A vector of color strings
-#' @param channel A character string, to select which channel to process, if a ChannelsFrameList is supplied or if the FrameList in raw.frames has more than one channel
+#' @param channel A character string, to select which channel to process, if a \code{ChannelsFrameList} is supplied or if the \code{FrameList} in \code{raw.frames} has more than one channel
 #' 
-#' @return A new FrameList object
+#' @return A new \code{FrameList} object with contours of the objects added
 #' 
 #' @examples
 #' data("MesenteriumSubset")

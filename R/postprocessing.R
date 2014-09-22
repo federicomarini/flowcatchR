@@ -1,15 +1,14 @@
 
-#' combine.preprocessedFrameList
-#' 
-#' Combines the information from a raw FrameList object and the corresponding preprocessed one
+ 
+#' Combines the information from a raw \code{FrameList} object and the corresponding preprocessed one
 #' 
 #' All objects are painted with a unique colour - for sake of speed
 #'  
-#' @param rawframelist A FrameList object containing the raw images
-#' @param preprocessedframelist A FrameList object with the preprocessed versions of the images (e.g. segmented)
+#' @param rawframelist A \code{FrameList} object containing the raw images
+#' @param preprocessedframelist A \code{FrameList} object with the preprocessed versions of the images (e.g. segmented)
 #' @param col A color character string, to select which color will be used for drawing the contours of the particles. If not specified, it will default according to the objects provided
 #' 
-#' @return A FrameList object, whose images are the combination of the raw images with the segmented objects drawn on them
+#' @return A \code{FrameList} object, whose images are the combination of the raw images with the segmented objects drawn on them
 #' 
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 combine.preprocessedFrameList <- function(rawframelist,preprocessedframelist,col=NULL)
@@ -54,12 +53,12 @@ combine.preprocessedFrameList <- function(rawframelist,preprocessedframelist,col
 
 
 
-#' actionPaint
+#' Combines raw and segmented images
 #'  
-#' @param rawimg An Image object with the raw frame data
-#' @param segmimg An Image object with the segmented objects
+#' @param rawimg An \code{Image} object with the raw frame data
+#' @param segmimg An \code{Image} object with the segmented objects
 #' 
-#' @return An Image object that combines raw and segmented images, with objects painted singularly with different colours
+#' @return An \code{Image} object that combines raw and segmented images, with objects painted singularly with different colours
 #' 
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 actionPaint <- function(rawimg,segmimg)
@@ -80,18 +79,17 @@ actionPaint <- function(rawimg,segmimg)
 
 
 
-#' combineWcolor.preprocessedFrameList
-#' 
-#' Combines the information from a raw FrameList object and the corresponding preprocessed one,
+
+#' Combines the information from a raw \code{FrameList} object and the corresponding preprocessed one,
 #' but this time every object is painted with a different colour
 #' 
 #' Every object is now shown with a different colour. Care should be taken, as this function is rather slower
 #' than combine.preprocessedFrameList
 #'   
-#' @param rawframelist A FrameList object containing the raw images
-#' @param preprocessedframelist A FrameList object with the preprocessed versions of the images (e.g. segmented)
+#' @param rawframelist A \code{FrameList} object containing the raw images
+#' @param preprocessedframelist A \code{FrameList} object with the preprocessed versions of the images (e.g. segmented)
 #' 
-#' @return A FrameList object, whose images are the combination of the raw images with the segmented objects drawn on them,
+#' @return A \code{FrameList} object, whose images are the combination of the raw images with the segmented objects drawn on them,
 #' painted singularly with different colours
 #' 
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014

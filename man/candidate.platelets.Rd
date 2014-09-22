@@ -2,12 +2,9 @@
 \docType{data}
 \name{candidate.platelets}
 \alias{candidate.platelets}
-\title{candidate.platelets}
+\title{A sample \code{ParticleList} object}
 \description{
-A sample ParticleList object
-}
-\details{
-The sample ParticleList object is constituted by the platelets identified from the MesenteriumSubset data
+The sample \code{ParticleList} object is constituted by the platelets identified from the \code{MesenteriumSubset} data
 }
 \author{
 Federico Marini, \email{marinif@uni-mainz.de}, 2014

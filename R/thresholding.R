@@ -1,10 +1,10 @@
 
 
-#' otsuThreshold
+#' Calculate Otsu's threshold
 #' 
 #' Determines the value for the threshold grey level according to the Otsu method 
 #'  
-#' @param input_image An Image object
+#' @param input_image An \code{Image} object
 #' @param nr_bit Number of bits to use for discretizing the levels
 #' 
 #' @return A numeric value
@@ -97,11 +97,11 @@ otsuThreshold <- function (input_image,nr_bit=16)  # use all channels?
 
 ################
 
-#' kittlerillingerThreshold
+#' Calculate Kittler-Illinger's threshold
 #' 
 #' Determines the value for the threshold grey level according to the Kittler-Illinger method 
 #'   
-#' @param input_image An Image object
+#' @param input_image An \code{Image} object
 #' @param nr_bit Number of bits to use for discretizing the levels
 #' 
 #' @return A numeric value

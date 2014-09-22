@@ -1,9 +1,10 @@
-#' link.particles
+
+#' Links a \code{ParticleList} object
 #' 
 #' Performs linking of the particles by tracking them through the frames
+#'  
 #' 
-#' 
-#' @param particlelist A ParticleList object
+#' @param particlelist A \code{ParticleList} object
 #' @param L Maximum number of pixels an object can move in two consecutive frames
 #' @param R Linkrange, i.e. the number of consecutive frames to search for potential candidate links
 #' @param epsilon1 A numeric value, to be used in the formula. Jitter for allowing angular displacements
@@ -21,7 +22,7 @@
 #' In: Journal of structural biology 151.2 (Aug. 2005), pp. 182-95. ISSN: 1047-8477. DOI: 10.1016/j.jsb.2005.06.002.
 #' URL: http://www.ncbi.nlm.nih.gov/pubmed/16043363
 #' 
-#' @return A LinkedParticleList object
+#' @return A \code{LinkedParticleList} object
 #' 
 #' @examples
 #' data("candidate.platelets")
@@ -236,7 +237,7 @@ link.particles <- function(particlelist,
 
 
 
-#' penaltyFunctionGenerator
+#' Generate a penalty function
 #' 
 #' A function to generate penalty functions to use while linking particles
 #' 

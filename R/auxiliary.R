@@ -1,12 +1,10 @@
-#' read.frames
+#' Constructor for a \code{FrameList} object
 #' 
-#' constructor for a FrameList object
-#' 
-#' This function is used to create a FrameList object from a vector of images. 
+#' This function is used to create a \code{FrameList} object from a vector of images. 
 #' The number of frames is also specified, as just a subset of the images can be used for this
 #' 
 #' @param image.files Vector of strings containing the locations where the (raw) images are to be found, or alternatively, the path to the folder
-#' @param nframes Number of frames that will constitute the FrameList object
+#' @param nframes Number of frames that will constitute the \code{FrameList} object
 #'
 #' @return An object of the \code{FrameList} class, which holds the info on a list of frames, specifying for each the following elements:
 #' \item{image}{The \code{Image} object containing the image itself}
@@ -56,11 +54,10 @@ read.frames <- function(image.files,
   return(frameList)
 }
 
-#' print.FrameList
+
+#' Display conveniently a \code{FrameList} object
 #' 
-#' Method for displaying conveniently a FrameList object
-#' 
-#' @param x A FrameList object
+#' @param x A \code{FrameList} object
 #' @param ... Arguments to be passed to methods
 #'  
 #' @method print FrameList
@@ -81,19 +78,16 @@ print.FrameList <- function(x,...)
 
 
 
-
-#' inspect.frames
+#' Explore the first frames of a \code{FrameList}
 #' 
-#' Explore the first frames of a FrameList
-#' 
-#' The first frames of a FrameList are displayed in the browser, and are interactively navigable.
+#' The first frames of a \code{FrameList} are displayed in the browser, and are interactively navigable.
 #' Default number of shown frames is 4, can be set maximum to 8, as this function is purely for a 
 #' first inspection
 #' 
-#' @param framelist A FrameList object
+#' @param framelist A \code{FrameList} object
 #' @param nframes The number of frames to display (default value: 6)
-#' @param inspectAll Logical, whether to inspect all frames (overriding the default of 10 that can be used also when inspectAll is FALSE)
-#' @param display.method Method for displaying, can be either "raster" or "browser". Defaults to browser, by opening a window in the browser
+#' @param inspectAll Logical, whether to inspect all frames (overriding the default of 10 that can be used also when \code{inspectAll} is FALSE)
+#' @param display.method Method for displaying, can be either \code{raster} or \code{browser}. Defaults to \code{browser}, by opening a window in the browser
 #' @param verbose Logical, whether to provide additional output on the command line alongside with the images themselves
 #' 
 #' @examples
@@ -147,20 +141,16 @@ inspect.frames <- function(framelist,
 
 
 
-
-
-#' subset.FrameList
+#' Extracts subsets of frames from a \code{FrameList} object
 #' 
-#' Extracts a subset of frames from a FrameList object
-#' 
-#' An input FrameList object is subject to subsetting. This function is useful e.g. when the trajectory of interest 
+#' An input \code{FrameList} object is subject to subsetting. This function is useful e.g. when the trajectory of interest 
 #' is presenting gaps (i.e. does not actually include a frame)
 #' 
-#' @param x A FrameList object
+#' @param x A \code{FrameList} object
 #' @param framesToKeep A vector containing the indexes of the frames to keep in the selection
 #' @param ... Arguments to be passed to methods
 #' 
-#' @return A FrameList object, composed by the subset of frames of the input FrameList
+#' @return A \code{FrameList} object, composed by the subset of frames of the input \code{FrameList}
 #' 
 #' @method subset FrameList
 #' 
@@ -188,13 +178,11 @@ subset.FrameList <- function(x,framesToKeep,...)
 }
 
 
-#' channels
-#' 
-#' Creates a ChannelsFrameList object from a FrameList object, decomposed in the acquired channels
+#' Creates a \code{ChannelsFrameList} object from a \code{FrameList} object, decomposed in the acquired channels
 #'  
-#' @param framelist A FrameList object
+#' @param framelist A \code{FrameList} object
 #' 
-#' @return A ChannelsFrameList object, which is a list of 3 FrameList objects, named respectively red, green and blue
+#' @return A \code{ChannelsFrameList} object, which is a list of 3 \code{FrameList} objects, named respectively \code{red}, \code{green} and \code{blue}
 #' 
 #' @export
 #' 
@@ -230,15 +218,13 @@ channels <- function(framelist)
 
 
 
-#' export.frames
+#' Exports a \code{FrameList} object
 #' 
-#' Exports a FrameList object
-#' 
-#' Writes the images contained in the image slot of the FrameList object elements.
+#' Writes the images contained in the \code{image} slot of the \code{FrameList} object elements.
 #' The images can be exported as single frames, or as a .gif image that is composed
 #' by the single frames.
 #' 
-#' @param framelist A FrameList object
+#' @param framelist A \code{FrameList} object
 #' @param dir The path of the folder where the image should be written
 #' @param nameStub The stub for the file name, that will be used as a prefix for the exported images
 #' @param createGif Logical, whether to create or not an animated .gif file
@@ -284,14 +270,12 @@ export.frames <- function(framelist,
 
 
 
-#' export.particles
+#' Exports a \code{ParticleList} object
 #' 
-#' Exports a ParticleList object
-#' 
-#' Writes the particles contained in the particles data frame slot of the ParticleList object elements.
+#' Writes the particles contained in the \code{particles} data frame slot of the \code{ParticleList} object elements.
 #' A track of the provenience of the particles is stored as a comment line above the header
 #' 
-#' @param particlelist A ParticleList object
+#' @param particlelist A \code{ParticleList} object
 #' @param dir The path of the folder where the particle lists should be written
 #' @param nameStub The stub for the file name, that will be used as a prefix for the exported particle lists
 #' 
@@ -325,16 +309,15 @@ export.particles <- function(particlelist,
 }
 
 
-#' read.particles
+
+#' Constructor for a \code{ParticleList} object
 #' 
-#' constructor for a ParticleList object
-#' 
-#' This function is used to create a ParticleList object from a vector/list of tab separated text files, each of one containing one line for each 
+#' This function is used to create a \code{ParticleList} object from a vector/list of tab separated text files, each of one containing one line for each 
 #' particle in the related frame, alongside with its coordinates and if available, the computed features
 #' The number of frames is also specified, as just a subset of the particle lists can be used for this
 #' 
 #' @param particle.files Vector of strings containing the locations where the particle coordinates are to be found, or alternatively, the path to the folder
-#' @param nframes Number of frames that will constitute the ParticleList object
+#' @param nframes Number of frames that will constitute the \code{ParticleList} object
 #'
 #' @return An object of the \code{ParticleList} class 
 #' 
@@ -380,11 +363,9 @@ read.particles <- function(particle.files,
 }
 
 
-#' print.ParticleList
-#' 
-#' Method for displaying conveniently a ParticleList object
+#' Display conveniently a \code{ParticleList} object
 #'  
-#' @param x A ParticleList object
+#' @param x A \code{ParticleList} object
 #' @param ... Arguments to be passed to methods
 #' 
 #' @method print ParticleList
@@ -406,11 +387,10 @@ print.ParticleList <- function(x,...)
   cat("\nParticles identified on the",x[[1]]$channel,"channel\n")
 }
 
-#' print.LinkedParticleList
-#' 
-#' Method for displaying conveniently a LinkedParticleList object
+
+#' Display conveniently a \code{LinkedParticleList} object
 #'  
-#' @param x A LinkedParticleList object
+#' @param x A \code{LinkedParticleList} object
 #' @param ... Arguments to be passed to methods
 #' 
 #' @method print LinkedParticleList
@@ -439,9 +419,7 @@ print.LinkedParticleList <- function(x,...)
 
 
 
-#' initialize.ParticleList
-#' 
-#' Initialize a ParticleList object for subsequent linking/tracking
+#' Initialize a \code{ParticleList} object for subsequent linking/tracking
 #'  
 #' @param particlelist A ParticleList object
 #' @param linkrange The number of frames to look for candidate particles potentially belonging to the same track
@@ -473,11 +451,10 @@ initialize.ParticleList <- function(particlelist,
 
 
 
-#' print.TrajectoryList
-#' 
-#' Method for displaying conveniently a TrajectoryList object
+
+#' Display conveniently a \code{TrajectoryList} object
 #'  
-#' @param x A TrajectoryList object
+#' @param x A \code{TrajectoryList} object
 #' @param ... Arguments to be passed to methods
 #' 
 #' @method print TrajectoryList
@@ -502,11 +479,9 @@ print.TrajectoryList <- function(x,...)
 
 
 
-#' print.KinematicsFeatureSet
-#' 
-#' Method for displaying conveniently a KinematicsFeatureSet object
+#' Displaying conveniently a \code{KinematicsFeatureSet} object
 #'  
-#' @param x A KinematicsFeatureSet object
+#' @param x A \code{KinematicsFeatureSet} object
 #' @param ... Arguments to be passed to methods
 #' 
 #' @method print KinematicsFeatureSet
@@ -535,11 +510,9 @@ print.KinematicsFeatureSet <- function(x,...)
 }
 
 
-#' print.KinematicsFeatureSetList
-#' 
-#' Method for displaying conveniently a KinematicsFeatureSetList object
+#' Display conveniently a \code{KinematicsFeatureSetList} object
 #'  
-#' @param x A KinematicsFeatureSetList object
+#' @param x A \code{KinematicsFeatureSetList} object
 #' @param ... Arguments to be passed to methods
 #' 
 #' @method print KinematicsFeatureSetList
@@ -572,8 +545,7 @@ print.KinematicsFeatureSetList <- function(x,...)
 }
 
 
-#' repmat
-#' 
+
 #' Function equivalent for MATLAB's repmat - Replicate and tile arrays
 #' 
 #' A more flexible and stylish alternative to replicate the behaviour of the repmat function of MATLAB

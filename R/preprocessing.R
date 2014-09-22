@@ -1,20 +1,20 @@
-#' cut.FrameList
+#' Cut borders of a \code{FrameList} object
 #' 
-#' Performs cropping on the FrameList object, selecting how many pixels should be cut on each side
+#' Performs cropping on the \code{FrameList} object, selecting how many pixels should be cut on each side
 #' 
 #' Cropping can be performed with careful choice of all cutting sides, or cropping a single value from
 #' all sides
 #' 
-#' @param x An input FrameList object
+#' @param x An input \code{FrameList} object
 #' @param cutLeft Amount of pixels to be cut at the side
 #' @param cutRight Amount of pixels to be cut at the side
 #' @param cutUp Amount of pixels to be cut at the side
 #' @param cutDown Amount of pixels to be cut at the side
 #' @param cutAll Amount of pixels to be cut at all sides. Overrides the single side values
-#' @param testing Logical, whether to just test the cropping or to actually perform it. Default set to FALSE
+#' @param testing Logical, whether to just test the cropping or to actually perform it. Default set to \code{FALSE}
 #' @param ... Arguments to be passed to methods
 #' 
-#' @return A FrameList object, with cropped frames in the image slot
+#' @return A \code{FrameList} object, with cropped frames in the \code{image} slot
 #' 
 #' @examples 
 #' data("MesenteriumSubset")
@@ -59,19 +59,18 @@ cut.FrameList <- function(x,
 }
 
 
-#' rotate.FrameList
+
+#' Rotates all images in a \code{FrameList} object 
 #' 
-#' Rotates all images in a FrameList object 
+#' Rotation is performed exploiting the rotate function of the \code{EBImage} package. Could be automated if support for coordinate/pixel interaction is included
 #' 
-#' Rotation is performed exploiting the rotate function of the EBImage package. Could be automated if support for coordinate/pixel interaction is included
-#' 
-#' @param framelist A FrameList object
+#' @param framelist A \code{FrameList} object
 #' @param rotAngle The rotation angle (clockwise) specified in degrees
-#' @param testing Logical, whether to just test the rotation or to actually perform it. Default set to FALSE
+#' @param testing Logical, whether to just test the rotation or to actually perform it. Default set to \code{FALSE}
 #' @param output.origin A vector of 2 numbers indicating the dimension of the output image, as in the rotate function
-#' @param output.dim A vector of 2 numbers indicating the output coordinates of the origin in pixels, as in the rotate function
+#' @param output.dim A vector of 2 numbers indicating the output coordinates of the origin in pixels, as in the \code{rotate} function
 #'  
-#' @return A FrameList object containing the rotated frames
+#' @return A \code{FrameList} object containing the rotated frames
 #' 
 #' @examples 
 #' data("MesenteriumSubset")
@@ -121,14 +120,13 @@ rotate.FrameList <- function(framelist,
 
 
 
-#' preprocess
+
+#' Preprocessing images
 #' 
-#' Generic preprocessing function
-#' 
-#' Can be applied to FrameList or ChannelsFrameList objects. ChannelsFrameList are then subset to the chosen channel,
-#' and the method preprocess.FrameList is then applied, with its set of parameters
+#' Can be applied to \code{FrameList} or \code{ChannelsFrameList} objects. \code{ChannelsFrameList} are then subset to the chosen channel,
+#' and the method \code{preprocess.FrameList} is then applied, with its set of parameters
 #'  
-#' @param x A FrameList or a ChannelsFrameList object
+#' @param x A \code{FrameList} or a \code{ChannelsFrameList} object
 #' @param ... Arguments to be passed to methods, such as channel and/or preprocessing parameters
 #' 
 #' @export
@@ -139,17 +137,16 @@ preprocess <- function(x,...)
 }
 
 
-#' preprocess.ChannelsFrameList
+
+#' Preprocessing function for \code{ChannelsFrameList} objects
 #' 
-#' Preprocessing function for ChannelsFrameList objects
-#' 
-#' ChannelsFrameList are then subset to the chosen channel, and the method preprocess.FrameList is then applied, with its set of parameters
+#' \code{ChannelsFrameList} are then subset to the chosen channel, and the method \code{preprocess.FrameList} is then applied, with its set of parameters
 #'  
-#' @param x A ChannelsFrameList object
-#' @param channel Character string. The channel to perform the operations on. Can be "red", "green" or "blue"
+#' @param x A \code{ChannelsFrameList} object
+#' @param channel Character string. The channel to perform the operations on. Can be \code{red}, \code{green} or \code{blue}
 #' @param ... Arguments to be passed to methods
 #' 
-#' @return A FrameList object, whose frame images are the preprocessed versions of the input images
+#' @return A \code{FrameList} object, whose frame images are the preprocessed versions of the input images
 #' 
 #' @examples
 #' data("MesenteriumSubset")
@@ -179,14 +176,13 @@ preprocess.ChannelsFrameList <- function(x,
   return(out)
 }
 
-#' preprocess.FrameList
+
+#' Preprocessing function for \code{FrameList} objects
 #' 
-#' Preprocessing function for FrameList objects
-#' 
-#' FrameList objects are processed according to the chosen set of parameters. Many of them refer directly to 
-#' existing EBImage functions, please see the corresponding help for additional information
+#' \code{FrameList} objects are processed according to the chosen set of parameters. Many of them refer directly to 
+#' existing \code{EBImage} functions, please see the corresponding help for additional information
 #'  
-#' @param x A FrameList object
+#' @param x A \code{FrameList} object
 #' @param brush.size Size in pixels of the brush to be used for initial smoothing
 #' @param brush.shape Shape of the brush to be used for initial smoothing
 #' @param at.offset Offset to be used in the adaptive thresholding step
@@ -199,7 +195,7 @@ preprocess.ChannelsFrameList <- function(x,
 #' @param displayprocessing Logical, whether to display intermediate steps while performing preprocessing. Dismissed currently, it could increase runtime a lot
 #' @param ... Arguments to be passed to methods
 #' 
-#' @return A FrameList object, whose frame images are the preprocessed versions of the input images
+#' @return A \code{FrameList} object, whose frame images are the preprocessed versions of the input images
 #' 
 #' @examples
 #' data("MesenteriumSubset")
@@ -252,16 +248,15 @@ preprocess.FrameList <- function(x,
 
 
 
-#' particles
-#' 
-#' Extract particles from the images of a FrameList object. 
+
+#' Extracts particles from the images of a \code{FrameList} object. 
 #' 
 #'  
-#' @param framelistRaw A FrameList object with the raw images (mandatory)
-#' @param framelistPreprocessed A FrameList object with preprocessed images (optional, if not provided gets produced with standard default parameters)
-#' @param channel Character string. The channel to perform the operations on. Can be "red", "green" or "blue"
+#' @param framelistRaw A \code{FrameList} object with the raw images (mandatory)
+#' @param framelistPreprocessed A \code{FrameList} object with preprocessed images (optional, if not provided gets produced with standard default parameters)
+#' @param channel Character string. The channel to perform the operations on. Can be \code{red}, \code{green} or \code{blue}
 #' 
-#' @return A ParticleList object, containing all detected particles for each frame
+#' @return A \code{ParticleList} object, containing all detected particles for each frame
 #' 
 #' @examples
 #' data("MesenteriumSubset")
@@ -284,9 +279,9 @@ particles <- function(framelistRaw,
   
   if(is.null(framelistPreprocessed))
   {
-    cat("You did not provide a preprocessed FrameList alongside with the raw set of frames!\n")
-    cat("Don't worry, the raw FrameList object will be first preprocessed with a set of default parameter!\n")
-    cat("You can always change them afterwards if they do not fit to your scenario!")
+    cat("You did not provide a preprocessed FrameList alongside with the raw set of frames.\n")
+    cat("Don't worry, the raw FrameList object will be first preprocessed with a set of default parameter.\n")
+    cat("You can always change them afterwards if they do not fit to your scenario.\n")
     if(is(framelistRaw,"ChannelsFrameList"))
     {
 #       framelistRaw <- framelistRaw[[channel]]
@@ -326,19 +321,77 @@ particles <- function(framelistRaw,
 }
 
 
+# particles2 <- function(framelistRaw,
+#                       framelistPreprocessed=NULL,
+#                       channel=""  # if we provide the channelsFrameList as input 
+# )
+# {
+#   if(!is(framelistRaw,"FrameList") && !is(framelistRaw,"ChannelsFrameList"))
+#   {
+#     stop("You need to provide at least a FrameList/channelsFrameList object as input!")
+#   }
+#   if(is.null(framelistPreprocessed))
+#   {
+#     cat("You did not provide a preprocessed FrameList alongside with the raw set of frames.\n")
+#     cat("Don't worry, the raw FrameList object will be first preprocessed with a set of default parameter.\n")
+#     cat("You can always change them afterwards if they do not fit to your scenario.\n")
+#     if(is(framelistRaw,"ChannelsFrameList"))
+#     {
+#       #       framelistRaw <- framelistRaw[[channel]]
+#       framelistPreprocessed <- preprocess.ChannelsFrameList(framelistRaw[[channel]])
+#     } else {
+#       framelistPreprocessed <- preprocess.FrameList(framelistRaw)
+#     }
+#   }
+#   
+#   # check that both input framelists have same length
+#   if(length(framelistRaw) != length(framelistPreprocessed) )
+#   {
+#     stop("FrameList objects have different lengths!")
+#   } else {
+#     cat("Computing features...\n")
+#   }
+#   
+#   # returns a particle list - not linked yet
+#   
+#   
+#   
+#   
+#   
+#   ## here i should simplify the list
+#   out <- vector(length(framelistRaw),mode="list")
+#   class(out) <- c("ParticleList",class(out))
+#   
+#   for(i in 1:length(framelistRaw))
+#   {
+#     segmImg <- framelistPreprocessed[[i]]$image
+#     rawImg <- framelistRaw[[i]]$image
+#     
+#     imgFeatures <- as.data.frame(computeFeatures(segmImg,rawImg,xname="cell"))
+#     imgFeatures$shapeFactor <- (imgFeatures$cell.0.s.perimeter)^2 / (4*pi*imgFeatures$cell.0.s.area)
+#     
+#     out[[i]]$particles <- imgFeatures
+#     out[[i]]$imgSource <- framelistPreprocessed[[i]]$location
+#     out[[i]]$channel <- framelistPreprocessed[[i]]$channel
+#   }
+#   cat("Done!\n")
+#   return(out)
+# }
 
-#' select.particles
-#' 
-#' Performs filtering on a ParticleList object
+
+
+
+
+#' Performs filtering on a \code{ParticleList} object
 #' 
 #' According to parameters of interests, such as size, eccentricity/shape, filters out the particles that do not 
 #' satisfy the indicated requirements
 #' 
-#' @param particlelist A ParticleList object. A LinkedParticleList object can also be provided as input, yet the returned object will be a ParticleList object that 
+#' @param particlelist A \code{ParticleList} object. A \code{LinkedParticleList} object can also be provided as input, yet the returned object will be a \code{ParticleList} object that needs to be linked again 
 #' @param min.area Size in pixels of the minimum area needed to detect the object as a potential particle of interest
 #' @param max.area Size in pixels of the maximum area allowed to detect the object as a potential particle of interest
 #'  
-#' @return A ParticleList object
+#' @return A \code{ParticleList} object
 #' 
 #' @examples
 #' data("candidate.platelets")
