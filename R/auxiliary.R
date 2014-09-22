@@ -137,17 +137,17 @@ inspect.frames <- function(framelist,
   singleChannel <- !(length(dim(framelist[[1]]$image)) > 2)
   
   firstFrames[[1]] <- framelist[[1]]$image
-  if(singleChannel) 
-  {
-    colorMode(firstFrames[[1]]) <- Grayscale
-  }
+#   if(singleChannel) 
+#   {
+#     colorMode(firstFrames[[1]]) <- Grayscale
+#   }
   for (i in 2:nframes)
   {
     firstFrames[[i]] <- framelist[[i]]$image
-    if(singleChannel)
-    {
-      colorMode(firstFrames[[i]]) <- Grayscale
-    }
+#     if(singleChannel)
+#     {
+#       colorMode(firstFrames[[i]]) <- Grayscale
+#     }
   }
   
   firstFramesCombined <- combine(firstFrames)
@@ -225,11 +225,11 @@ channels <- function(framelist)
   
   for (i in 1:length(framelist))
   {
-    redCh[[i]]$image <- framelist[[i]]$image[,,1]
+    redCh[[i]]$image <- channel(framelist[[i]]$image,"red")
     redCh[[i]]$channel="red"
-    greenCh[[i]]$image <- framelist[[i]]$image[,,2]
+    greenCh[[i]]$image <- channel(framelist[[i]]$image,"green")
     greenCh[[i]]$channel <- "green"
-    blueCh[[i]]$image <- framelist[[i]]$image[,,3]
+    blueCh[[i]]$image <- channel(framelist[[i]]$image,"blue")
     blueCh[[i]]$channel <- "blue"
   }
   

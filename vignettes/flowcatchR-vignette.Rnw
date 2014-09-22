@@ -126,7 +126,7 @@ fullResults <- kinematics(trajectories(particles(channels(MesenteriumSubset)$red
 
 % microbenchmark(kinematics(trajectories(particles(channels(MesenteriumSubset)$red))))
 
-On a MAC OS X machine equipped with 2.8 Ghz Intel Core i7 processor and 16 GB RAM, the execution of this command takes $3.13$ seconds to run.
+On a MAC OS X machine equipped with 2.8 Ghz Intel Core i7 processor and 16 GB RAM, the execution of this command takes 3.13 seconds to run.
 
 The following sections will provide additional details to the operations mentioned above, with more also on the auxiliary functions that are available in \flowcatchR{}.
 
@@ -174,7 +174,7 @@ plateletsMesenterium <- allChannelsMesenterium$red
 plateletsMesenterium
 @
 
-As we can see, by selecting one of the channels, we get in return a \Rclass{FrameList} object, and we inspect it in its first 9 frames.
+As we can see, by selecting one of the channels, we get in return a \Rclass{FrameList} object, and we inspect it in its first 9 frames (Fig.\ref{fig:inspectPlatelets}).
 
 <<inspectPlatelets,fig.height=4,fig.width=7.5,fig.cap="The first 9 frames of the MesenteriumSubset dataset, just displaying the signal of the red channel (for the thrombocytes)">>=
 inspect.frames(plateletsMesenterium,nframes=9,display.method="raster")
@@ -196,7 +196,7 @@ preprocessedPlatelets
 @
 
 The result of this is displayed in Fig.\ref{fig:inspectSegm}. 
-For a detailed explanation of the parameters to better tweak the performances of this segmentation step, please refer to the help of \Rfunction{preprocess.FrameList}. To obtain an immediate feedback about the effects of the operations performed in the full preprocessing phase, we can call again \Rfunction{inspect.frames} on the \Rclass{FrameList} of segmented images.
+For a detailed explanation of the parameters to better tweak the performances of this segmentation step, please refer to the help of \Rfunction{preprocess.FrameList}. To obtain an immediate feedback about the effects of the operations performed in the full preprocessing phase, we can call again \Rfunction{inspect.frames} on the \Rclass{FrameList} of segmented images (Fig.\ref{fig:inspectSegm}).
 
 <<inspectSegm,fig.height=4,fig.width=7.5,fig.cap="The first 9 frames after preprocessing of the MesenteriumSubset dataset. The binarized image shows the detected objects after thresholding.">>=
 inspect.frames(preprocessedPlatelets,nframes=9,display.method="raster")
@@ -348,7 +348,7 @@ paintedTrajectories <- add.contours(raw.frames=MesenteriumSubset,
 paintedTrajectories
 @
 
-As with any other \Rclass{FrameList} object, it is recommended to take a peek at it via the \Rfunction{inspect.frames} function:
+As with any other \Rclass{FrameList} object, it is recommended to take a peek at it via the \Rfunction{inspect.frames} function (Fig.\ref{fig:inspectTrajs}):
 
 <<inspectTrajs,fig.height=4,fig.width=7.5,fig.cap="Particles detected in the first 9 frames are shown this time in colours corresponding to the identified trajectories, again with their contours defined by the segmentation procedure.">>=
 inspect.frames(paintedTrajectories,nframes=9,display.method="raster")
