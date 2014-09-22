@@ -35,10 +35,10 @@ If no trajectoryList is provided, it will be computed with default parameters.
 If no binary.frames is provided, it will be computed also with default parameters
 }
 \examples{
-load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+data("MesenteriumSubset")
 \dontrun{
-paintedTrajectories <- add.contours2(raw.frames = MesenteriumSubset, mode = "trajectories",channel="red")
-paintedParticles <- add.contours2(raw.frames = MesenteriumSubset, mode = "particles",channel="red")
+paintedTrajectories <- add.contours(raw.frames = MesenteriumSubset, mode = "trajectories",channel="red")
+paintedParticles <- add.contours(raw.frames = MesenteriumSubset, mode = "particles",channel="red")
 inspect.frames(paintedTrajectories)
 inspect.frames(paintedParticles)
 }

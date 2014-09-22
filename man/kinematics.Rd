@@ -36,7 +36,7 @@ performed for that trajectory alone. If a parameter is specified, only that
 parameter is reported, either for one or all trajectories
 }
 \examples{
-load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+data("candidate.platelets")
 platelets.trajectories <- trajectories(candidate.platelets)
 # for all trajectories, all features
 alltrajs.features <- kinematics(platelets.trajectories)

@@ -3,13 +3,13 @@
 \alias{export.particles}
 \title{export.particles}
 \usage{
-export.particles(particlelist, folder = "",
+export.particles(particlelist, dir = tempdir(),
   nameStub = "testExport_particles_")
 }
 \arguments{
 \item{particlelist}{A ParticleList object}
 
-\item{folder}{The path of the folder where the particle lists should be written}
+\item{dir}{The path of the folder where the particle lists should be written}
 
 \item{nameStub}{The stub for the file name, that will be used as a prefix for the exported particle lists}
 }
@@ -24,7 +24,7 @@ Writes the particles contained in the particles data frame slot of the ParticleL
 A track of the provenience of the particles is stored as a comment line above the header
 }
 \examples{
-load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+data("candidate.platelets")
 \dontrun{export.particles(candidate.platelets)}
 }
 \author{

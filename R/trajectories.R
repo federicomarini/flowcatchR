@@ -9,14 +9,14 @@
 #' @return A TrajectoryList object
 #' 
 #' @examples
-#' load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+#' data("candidate.platelets")
 #' platelets.trajectories <- trajectories(candidate.platelets)
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 trajectories <- function(particlelist,
                          provideExtraDetails=FALSE,
-                         ...) # parameters for the eventual tracking - is it possible to do so? ask harald!
+                         ...)
 {
   if(is(particlelist,"LinkedParticleList"))
   {
@@ -25,7 +25,7 @@ trajectories <- function(particlelist,
   } else {
     if(is(particlelist,"ParticleList"))
     {
-      cat("Input ParticleList is not a LinkedParticleList! \n")
+      cat("Input ParticleList is not a LinkedParticleList.\n")
       cat("Performing linking first with some set of default parameters - you might want to change them according to your scenario...\n")
       linkedparticlelist <- link.particles(particlelist,L=26,R=3,epsilon1=0,epsilon2=0,lambda1=1,lambda2=0)
       print(linkedparticlelist)
@@ -158,8 +158,8 @@ axesInfo <- function(framelist)
 #' @method plot TrajectoryList
 #' 
 #' @examples
-#' load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
-#' load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+#' data("MesenteriumSubset")
+#' data("candidate.platelets")
 #' platelets.trajectories <- trajectories(candidate.platelets)
 #' \dontrun{
 #' plot(platelets.trajectories,MesenteriumSubset)
@@ -201,8 +201,8 @@ plot.TrajectoryList <- function(x,framelist,verbose=FALSE,...)
 #' @param ... Arguments to be passed to methods
 
 #' @examples
-#' load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
-#' load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+#' data("MesenteriumSubset")
+#' data("candidate.platelets")
 #' platelets.trajectories <- trajectories(candidate.platelets)
 #' plot2D.TrajectoryList(platelets.trajectories,MesenteriumSubset)
 #' 
@@ -273,10 +273,10 @@ plot2D.TrajectoryList <- function(x,framelist,trajIDs=NULL,verbose=FALSE,...)
 #' @return A new FrameList object
 #' 
 #' @examples
-#' load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+#' data("MesenteriumSubset")
 #' \dontrun{
-#' paintedTrajectories <- add.contours2(raw.frames = MesenteriumSubset, mode = "trajectories",channel="red")
-#' paintedParticles <- add.contours2(raw.frames = MesenteriumSubset, mode = "particles",channel="red")
+#' paintedTrajectories <- add.contours(raw.frames = MesenteriumSubset, mode = "trajectories",channel="red")
+#' paintedParticles <- add.contours(raw.frames = MesenteriumSubset, mode = "particles",channel="red")
 #' inspect.frames(paintedTrajectories)
 #' inspect.frames(paintedParticles)
 #' }
@@ -296,7 +296,7 @@ add.contours <- function(raw.frames,
   # check whether the input has more than one channel in the FrameList
   if(is(raw.frames,"FrameList"))
   {
-    nrChannels <- getNumberOfFrames(raw.frames[[1]]$image)
+    nrChannels <- numberOfFrames(raw.frames[[1]]$image)
     if(nrChannels > 1)
     {
       raw.frames <- channels(raw.frames)
@@ -321,7 +321,8 @@ add.contours <- function(raw.frames,
     # check also whether trajectories are there already, if so throw an error # or a warning?
     if(!is.null(trajectories))
     {
-      stop("You are providing a TrajectoryList object, but no binary.frames FrameList! Please check whether you might have it in your workspace!")
+      stop("You are providing a TrajectoryList object, but no binary.frames FrameList!
+           Please check whether you might have it in your workspace")
     }
   }
 
@@ -346,7 +347,8 @@ add.contours <- function(raw.frames,
       # check that the trajectories are indeed "plottable"!
       if(!all(trajIds %in% availableIDs))
       {
-        stop("You are providing IDs of trajectories that are not available. Please run unlist(lapply(trajectories,function(arg){arg$ID})) on the trajectory object!")
+        stop("You are providing IDs of trajectories that are not available. 
+             Please run unlist(lapply(trajectories,function(arg){arg$ID})) on the trajectory object!")
       }
     }
     
@@ -386,8 +388,6 @@ add.contours <- function(raw.frames,
     stop("The mode parameter must assume one value of the following: 'particles' or 'trajectories'!")
   }
     
-
-
   return(out)
 }
 
@@ -397,70 +397,6 @@ add.contours <- function(raw.frames,
 
 
 
-
-
-
-
-
-
-
-## replaced basically by explicit text in the vignette
-# #' inspect.trajectory
-# #' 
-# #' A function to inspect single trajectories from a TrajectoryList object
-# #' 
-# #' Basically it add the contours to just one object, and returns a FrameList object which is a subset of the input one
-# #' The length of the returned object corresponds exactly the length of the identified trajectory, so uninteresting frames will be skipped
-# #' 
-# #' 
-# #' OLD: A pseudo-interactive function to inspect and accept/reject trajectories of a TrajectoryList object
-# #' OLD: The user gets the trajectories displayed singularly, and for each a keyboard input is required.
-# #' The slot corresponding to the user feedback is interactively filled in. The TrajectoryList object is then ready for further operations
-# #' 
-# #' @param trajectorylist A TrajectoryList object
-# #' @param rawframelist A FrameList object with raw images
-# #' @param preprocessedframelist A FrameList object with preprocessed frames
-# #' @param trajID A numeric value, storing the ID of trajectory which is under inspection
-# #' @param browse Logical, whether to automatically open the painted trajectory to inspect
-# #' 
-# #' @return A new TrajectoryList object -NO! Returns now a FrameList object, and this can be used to evaluate the trajectory
-# #'
-# #' @examples
-# #' ## see vignette
-# #' 
-# #' @export
-# #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-# inspect.trajectory <- function(trajectorylist,
-#                                  rawframelist,
-#                                  preprocessedframelist,
-#                                  trajID,
-#                                  browse=TRUE)
-# {
-#   currentTraj <- trajectories[[trajID]]$trajectory
-#   framesIncluded <- currentTraj$frame
-#   subsetRaw <- subset(rawframelist,framesToKeep=framesIncluded)
-#   subsetProcessed <- subset(preprocessedframelist,framesIncluded)
-#   
-#   out <- vector("list",length(framesIncluded))
-#   
-#   for (j in 1:length(out))
-#   {
-#     rawimg <- subsetRaw[[j]]$image
-#     segmimg <- subsetProcessed[[j]]$image
-#     singleObjectSegm <- segmimg
-#     singleObjectSegm[segmimg!=currentTraj$frameobjectID[j]] <- 0
-#     rawWithPaintedObj <- paintObjects(singleObjectSegm,rawimg,col="yellow") #  even more beautiful if i have red cells displayed and contour as YELLOW!
-#     
-#     out[[j]]$image <- rawWithPaintedObj 
-#   }
-#   class(out) <- c("FrameList",class(out))
-#   if(browse) inspect.frames(out)
-#   return(out)
-# }
-
-  
-  
-  
 
 
 

@@ -104,8 +104,7 @@ combineWcolor.preprocessedFrameList <- function(rawframelist,preprocessedframeli
   out <- vector("list",length(rawframelist))
   
   if(length(dim(rawframelist[[1]]$image))<3)
-    cat("Read the warning message!!\n")
-    warning("You are trying to paint coloured cells on a single channel - info will be not so useful, try instead combine.preprocessedFrameList, it should be much faster!")
+    warning("You are trying to paint coloured cells on a single channel - info will be not so useful, try instead combine.preprocessedFrameList, it should be much faster.")
   
   for (i in 1:length(out))
   {

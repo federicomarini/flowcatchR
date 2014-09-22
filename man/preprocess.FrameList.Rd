@@ -44,7 +44,7 @@ FrameList objects are processed according to the chosen set of parameters. Many 
 existing EBImage functions, please see the corresponding help for additional information
 }
 \examples{
-load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+data("MesenteriumSubset")
 platelets.framelist <- channels(MesenteriumSubset)$red
 preprocess(platelets.framelist)
 }

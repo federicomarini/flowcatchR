@@ -22,7 +22,7 @@ Preprocessing function for ChannelsFrameList objects
 ChannelsFrameList are then subset to the chosen channel, and the method preprocess.FrameList is then applied, with its set of parameters
 }
 \examples{
-load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+data("MesenteriumSubset")
 preprocess(channels(MesenteriumSubset),channel = "red")
 }
 \author{

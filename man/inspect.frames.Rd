@@ -26,7 +26,7 @@ Default number of shown frames is 4, can be set maximum to 8, as this function i
 first inspection
 }
 \examples{
-load(file.path(system.file("extra", package = "flowcatchR"), "MesenteriumSubset.RData"))
+data("MesenteriumSubset")
 \dontrun{inspect.frames(MesenteriumSubset)}
 }
 \author{

@@ -14,7 +14,7 @@
 Method for displaying conveniently a FrameList object
 }
 \examples{
-load(file.path(system.file("extra", package = "flowcatchR"), "MesenteriumSubset.RData"))
+data("MesenteriumSubset")
 print(MesenteriumSubset)
 }
 \author{

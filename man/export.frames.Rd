@@ -3,14 +3,13 @@
 \alias{export.frames}
 \title{export.frames}
 \usage{
-export.frames(framelist, folder = "/Users/fede/TEMP/exportFrameList/",
-  nameStub = "testExport", createGif = FALSE,
-  removeAfterCreatingGif = TRUE)
+export.frames(framelist, dir = tempdir(), nameStub = "testExport",
+  createGif = FALSE, removeAfterCreatingGif = TRUE)
 }
 \arguments{
 \item{framelist}{A FrameList object}
 
-\item{folder}{The path of the folder where the image should be written}
+\item{dir}{The path of the folder where the image should be written}
 
 \item{nameStub}{The stub for the file name, that will be used as a prefix for the exported images}
 
@@ -30,7 +29,7 @@ The images can be exported as single frames, or as a .gif image that is composed
 by the single frames.
 }
 \examples{
-load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+data("MesenteriumSubset")
 \dontrun{export.frames(MesenteriumSubset,nameStub="subset_export_",createGif=TRUE,removeAfterCreatingGif=FALSE)}
 }
 \author{

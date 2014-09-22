@@ -28,7 +28,7 @@ extractKinematics.traj <- function(trajectorylist,
   # throw a warning/message/error if the traj is below 3 points
   if(nrow(singleTraj) < 4)
   {
-    warning(paste0("The trajectory with ID ",trajectoryID," had 3 or less points, no features were computed!"))
+    warning(paste0("The trajectory with ID ",trajectoryID," had 3 or less points, no features were computed."))
     out <- list(delta.x=NA,
                 delta.t=NA,
                 delta.v=NA,
@@ -123,7 +123,7 @@ extractKinematics.traj <- function(trajectorylist,
 #'   or an atomic value, or a list(eventually coerced to a vector)
 #'   
 #' @examples
-#' load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+#' data("candidate.platelets")
 #' platelets.trajectories <- trajectories(candidate.platelets)
 #' # for all trajectories, all features
 #' alltrajs.features <- kinematics(platelets.trajectories)
@@ -238,7 +238,6 @@ computeMSD <- function(sx,sy,until=4)
 #' 
 #' @return A list containing Theta and Radius, as in polar coordinates
 #'  
-#' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 toPolarCoords <- function(x,y)
 {
@@ -259,7 +258,6 @@ toPolarCoords <- function(x,y)
 #' 
 #' @return A list containing Theta and Radius, as in polar coordinates
 #'  
-#' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 toCartesianCoords <- function(Theta,Radius)
 {
@@ -270,30 +268,4 @@ toCartesianCoords <- function(Theta,Radius)
 
 
 
-
-
-
-
-
-# #' distanceDiagnostics
-# #' @description
-# #' @details
-# #'  
-# #' @param
-# #' @param
-# #' 
-# #' @return
-# #' 
-# #' @keywords
-# #' @seealso
-# #' @references
-# #' 
-# #' @examples
-# #' 
-# #' @export
-# #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-# distanceDiagnostics <- function()
-# {
-#   cat("something computing distances intra-particles- raises a flag/warning if distances (normalized) are less than 1.5 radius or so...")
-# }
 

@@ -22,8 +22,8 @@ Based on the rgl library, the function extracts the region of interests from the
 and afterwards plots the x-y-time representation of the identified trajectories
 }
 \examples{
-load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
-load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+data("MesenteriumSubset")
+data("candidate.platelets")
 platelets.trajectories <- trajectories(candidate.platelets)
 \dontrun{
 plot(platelets.trajectories,MesenteriumSubset)

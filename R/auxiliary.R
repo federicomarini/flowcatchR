@@ -27,9 +27,10 @@ read.frames <- function(image.files,
   if(is.dir){
     image.files <- image.files[1]
     cat("Reading images from directory", image.files,"...\n")
-    image.files <- list.files(image.files, pattern='*.jpg$|*.jpeg$|*.tiff$|*.tif$', full.names=TRUE, ignore.case=TRUE)
+    image.files <- list.files(image.files, pattern='*.jpg$|*.jpeg$|*.tiff$|*.tif$|*.png$', full.names=TRUE, ignore.case=TRUE)
     if(length(image.files) == 0) 
-      stop('No images with JPEG or JPG extension found. Images must be JPG format, please convert any non-JPG images to JPG')
+      stop('No images with jpeg/jpg, png or tiff/tif extension found. Images must be available in one of these formats,
+           please convert them prior to importing into flowcatchR')
   }
   
   z <- sapply(image.files, file.exists)
@@ -51,7 +52,7 @@ read.frames <- function(image.files,
 
   }
   attr(frameList,"call") <- match.call()
-  cat("Created a frameList object of",nframes,"frames!\n")
+  cat("Created a frameList object of",nframes,"frames.\n")
   return(frameList)
 }
 
@@ -65,16 +66,17 @@ read.frames <- function(image.files,
 #' @method print FrameList
 #' 
 #' @examples
-#' load(file.path(system.file("extra", package = "flowcatchR"), "MesenteriumSubset.RData"))
+#' data("MesenteriumSubset")
 #' print(MesenteriumSubset)
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 print.FrameList <- function(x,...)
 {
+  d <- dim(x[[1]]$image)
   cat("An object of the FrameList class. \n\n")
   cat("List of frames for",length(x),"images\n")
-  cat("Images contain information on",ifelse(!is.na(dim(x[[1]]$image)[3]),dim(x[[1]]$image)[3],"1"),"channel(s)\n")
-  cat("Image dimensions:\t",dim(x[[1]]$image)[1:2],"\n")
+  cat("Images contain information on",ifelse(!is.na(d[3]),d[3],"1"),"channel(s)\n")
+  cat("Image dimensions:\t",d[1:2],"\n")
 }
 
 
@@ -95,7 +97,7 @@ print.FrameList <- function(x,...)
 #' @param verbose Logical, whether to provide additional output on the command line alongside with the images themselves
 #' 
 #' @examples
-#' load(file.path(system.file("extra", package = "flowcatchR"), "MesenteriumSubset.RData"))
+#' data("MesenteriumSubset")
 #' \dontrun{inspect.frames(MesenteriumSubset)}
 #' 
 #' @export
@@ -174,7 +176,7 @@ inspect.frames <- function(framelist,
 #' @method subset FrameList
 #' 
 #' @examples
-#' load(file.path(system.file("extra", package = "flowcatchR"), "MesenteriumSubset.RData"))
+#' data("MesenteriumSubset")
 #' subset(MesenteriumSubset, framesToKeep = c(1:10, 14:20))
 #' 
 #' @export
@@ -208,7 +210,7 @@ subset.FrameList <- function(x,framesToKeep,...)
 #' @export
 #' 
 #' @examples 
-#' load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+#' data("MesenteriumSubset")
 #' channels(MesenteriumSubset)
 #' plateletsFrameList <- channels(MesenteriumSubset)$red
 #' plateletsFrameList
@@ -248,7 +250,7 @@ channels <- function(framelist)
 #' by the single frames.
 #' 
 #' @param framelist A FrameList object
-#' @param folder The path of the folder where the image should be written
+#' @param dir The path of the folder where the image should be written
 #' @param nameStub The stub for the file name, that will be used as a prefix for the exported images
 #' @param createGif Logical, whether to create or not an animated .gif file
 #' @param removeAfterCreatingGif Logical, whether to remove the single exported .png images after creating the single .gif
@@ -256,23 +258,23 @@ channels <- function(framelist)
 #' @return Image files are written in the desired location
 #' 
 #' @examples
-#' load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+#' data("MesenteriumSubset")
 #' \dontrun{export.frames(MesenteriumSubset,nameStub="subset_export_",createGif=TRUE,removeAfterCreatingGif=FALSE)}
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 export.frames <- function(framelist,
-                          folder="/Users/fede/TEMP/exportFrameList/",
+                          dir=tempdir(),
                           nameStub="testExport",
                           createGif=FALSE,
                           removeAfterCreatingGif=TRUE)
 {
-  if(!file.exists(folder))
+  if(!file.exists(dir))
   {
-    dir.create(folder,showWarnings=FALSE) # if not already existing...
+    dir.create(dir,showWarnings=FALSE) # if not already existing...
   }
   imgNames <- lapply(1:length(framelist),
-                     function(arg){paste0(folder,nameStub,"_frame_",formatC(arg,nchar(length(framelist)),flag="0"),".png")})
+                     function(arg){paste0(dir,nameStub,"_frame_",formatC(arg,nchar(length(framelist)),flag="0"),".png")})
   for (i in 1:length(framelist))
   {
     writeImage(framelist[[i]]$image,imgNames[[i]])
@@ -280,45 +282,16 @@ export.frames <- function(framelist,
   if(createGif)
   {
     # using imagemagick
-    system(paste0("convert -delay 40 ",folder,nameStub,"_frame_*.png ",folder,nameStub,".gif"))
+    system(paste0("convert -delay 40 ",dir,nameStub,"_frame_*.png ",dir,nameStub,".gif"))
   }
   if(removeAfterCreatingGif)
   {
-    file.remove(list.files(path=folder,pattern=paste0(".png"),full.names=TRUE))
+    file.remove(list.files(path=dir,pattern=paste0(".png"),full.names=TRUE))
   }
   invisible()
 }
 
 
-
-# export.frames2 <- function(framelist,
-#                           folder="/Users/fede/TEMP/exportFrameList/",
-#                           nameStub="testExport",
-#                           createGif=FALSE,
-#                           ext="png",
-#                           removeAfterCreatingGif=TRUE)
-# {
-#   if(!file.exists(folder))
-#   {
-#     dir.create(folder,showWarnings=FALSE) # if not already existing...
-#   }
-#   imgNames <- lapply(1:length(framelist),
-#                      function(arg){paste0(folder,nameStub,"_frame_",formatC(arg,nchar(length(framelist)),flag="0"),".",ext)})
-#   for (i in 1:length(framelist))
-#   {
-#     writeImage(framelist[[i]]$image,imgNames[[i]])
-#   }
-#   if(createGif)
-#   {
-#     # using imagemagick
-#     system(paste0("convert -delay 40 ",folder,nameStub,"_frame_*.",ext," ",folder,nameStub,".gif"))
-#   }
-#   if(removeAfterCreatingGif)
-#   {
-#     file.remove(list.files(path=folder,pattern=paste0(".png"),full.names=TRUE))
-#   }
-#   invisible()
-# }
 
 
 
@@ -330,28 +303,28 @@ export.frames <- function(framelist,
 #' A track of the provenience of the particles is stored as a comment line above the header
 #' 
 #' @param particlelist A ParticleList object
-#' @param folder The path of the folder where the particle lists should be written
+#' @param dir The path of the folder where the particle lists should be written
 #' @param nameStub The stub for the file name, that will be used as a prefix for the exported particle lists
 #' 
 #' @return Particle list files are written in the desired location
 #' 
 #' @examples
-#' load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+#' data("candidate.platelets")
 #' \dontrun{export.particles(candidate.platelets)}
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 export.particles <- function(particlelist,
-                          folder="",
+                          dir=tempdir(),
                           nameStub="testExport_particles_")
 {
   cat("Exporting the .tsv files for the particle lists...\n")
-  if(!file.exists(folder))
+  if(!file.exists(dir))
   {
-    dir.create(folder,showWarnings=FALSE) # if not already existing...
+    dir.create(dir,showWarnings=FALSE) # if not already existing...
   }
   particleNames <- lapply(1:length(particlelist),
-                          function(arg){paste0(folder,nameStub,"_frame_",formatC(arg,nchar(length(particlelist)),flag="0"),".tsv")})
+                          function(arg){paste0(dir,nameStub,"_frame_",formatC(arg,nchar(length(particlelist)),flag="0"),".tsv")})
   for (i in 1:length(particlelist))
   {
     writeLines(paste("#",particlelist[[i]]$imgSource,particlelist[[i]]$channel,sep = "|"),particleNames[[i]])
@@ -413,7 +386,7 @@ read.particles <- function(particle.files,
     particleList[[i]]$channel <- unlist(strsplit(commentLine,split = "|",fixed=TRUE))[3]
   }
 #   attr(particleList,"call") <- match.call()
-  cat("Created a particleList object of",nframes,"frames!\n")
+  cat("Created a particleList object of",nframes,"frames.\n")
   return(particleList)
 }
 
@@ -428,18 +401,19 @@ read.particles <- function(particle.files,
 #' @method print ParticleList
 #' 
 #' @examples
-#' load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+#' data("candidate.platelets")
 #' print(candidate.platelets)
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 print.ParticleList <- function(x,...)
 {
+  firstFrameParticles <- x[[1]]$particles
   cat("An object of the ParticleList class. \n\n")
   cat("List of particles for",length(x),"images\n\n")
-  cat("Displaying a subset of the features of the",nrow(x[[1]]$particles),"particles found in the first image...\n")
-  linesToShow <- min(5,nrow(x[[1]]$particles))
-  print(x[[1]]$particles[1:linesToShow,1:8])
+  cat("Displaying a subset of the features of the",nrow(firstFrameParticles),"particles found in the first image...\n")
+  linesToShow <- min(5,nrow(firstFrameParticles))
+  print(firstFrameParticles[1:linesToShow,1:8])
   cat("\nParticles identified on the",x[[1]]$channel,"channel\n")
 }
 
@@ -453,7 +427,7 @@ print.ParticleList <- function(x,...)
 #' @method print LinkedParticleList
 #' 
 #' @examples
-#' load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+#' data("candidate.platelets")
 #' linked.platelets <- link.particles(candidate.platelets,L=26,R=3,epsilon1=0,
 #' epsilon2=0,lambda1=1,lambda2=0,penaltyFunction=penaltyFunctionGenerator(),
 #' nframes=20,include.area=FALSE)
@@ -463,13 +437,14 @@ print.ParticleList <- function(x,...)
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 print.LinkedParticleList <- function(x,...)
 {
+  firstFrameParticles <- x[[1]]$particles
   cat("An object of the LinkedParticleList class. \n\n")
   cat("List of linked particles for",length(x),"images\n\n")
   cat("Particles were tracked throughout the subsequent",ncol(x[[1]]$nxt),"frame(s)\n\n" )
   
-  cat("Displaying a subset of the features of the",nrow(x[[1]]$particles),"particles found in the first image...\n")
-  linesToShow <- min(5,nrow(x[[1]]$particles))
-  print(x[[1]]$particles[1:linesToShow,1:8])
+  cat("Displaying a subset of the features of the",nrow(firstFrameParticles),"particles found in the first image...\n")
+  linesToShow <- min(5,nrow(firstFrameParticles))
+  print(firstFrameParticles[1:linesToShow,1:8])
   cat("\nParticles identified on the",x[[1]]$channel,"channel\n")
 }
 
@@ -519,7 +494,7 @@ initialize.ParticleList <- function(particlelist,
 #' @method print TrajectoryList
 #' 
 #' @examples 
-#' load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+#' data("candidate.platelets")
 #' platelets.trajectories <- trajectories(candidate.platelets)
 #' print(platelets.trajectories)
 #' 
@@ -548,7 +523,7 @@ print.TrajectoryList <- function(x,...)
 #' @method print KinematicsFeatureSet
 #' 
 #' @examples 
-#' load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+#' data("candidate.platelets")
 #' platelets.trajectories <- trajectories(candidate.platelets)
 #' traj11features <- kinematics(platelets.trajectories,trajectoryID = 11)
 #' print(traj11features)
@@ -581,7 +556,7 @@ print.KinematicsFeatureSet <- function(x,...)
 #' @method print KinematicsFeatureSetList
 #' 
 #' @examples 
-#' load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+#' data("candidate.platelets")
 #' platelets.trajectories <- trajectories(candidate.platelets)
 #' alltrajs.features <- kinematics(platelets.trajectories)
 #' print(alltrajs.features)

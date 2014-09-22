@@ -17,7 +17,7 @@
 #' @return A FrameList object, with cropped frames in the image slot
 #' 
 #' @examples 
-#' load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+#' data("MesenteriumSubset")
 #' cut(MesenteriumSubset)
 #' 
 #' @export
@@ -40,7 +40,7 @@ cut.FrameList <- function(x,
     for(i in 1:length(x))
     {
       img <- x[[i]]$image
-      if (getNumberOfFrames(img)==3)
+      if (numberOfFrames(img)==3)
         cutoutImg <- img[cutLeft:(dim(img)[1]-cutRight),cutUp:(dim(img)[2]-cutDown),]
       else
         cutoutImg <- img[cutLeft:(dim(img)[1]-cutRight),cutUp:(dim(img)[2]-cutDown)]
@@ -74,7 +74,7 @@ cut.FrameList <- function(x,
 #' @return A FrameList object containing the rotated frames
 #' 
 #' @examples 
-#' load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+#' data("MesenteriumSubset")
 #' rotate.FrameList(MesenteriumSubset,rotAngle = 40)
 #' 
 #' @export
@@ -152,7 +152,7 @@ preprocess <- function(x,...)
 #' @return A FrameList object, whose frame images are the preprocessed versions of the input images
 #' 
 #' @examples
-#' load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+#' data("MesenteriumSubset")
 #' preprocess(channels(MesenteriumSubset),channel = "red")
 #' 
 #' @export
@@ -167,15 +167,15 @@ preprocess.ChannelsFrameList <- function(x,
   # call on blue
   switch(channel,
          red={
-           cat("Preprocessing the red channel!\n")
+           cat("Preprocessing the red channel...\n")
            out <- preprocess.FrameList(x[[1]])
            }, 
          green={
-           cat("Preprocessing the green channel!\n")
+           cat("Preprocessing the green channel...\n")
            out <- preprocess.FrameList(x[[2]])
          },
          blue={
-           cat("Preprocessing the blue channel!\n")
+           cat("Preprocessing the blue channel...\n")
            out <- preprocess.FrameList(x[[3]])
          },
          stop("You did not choose any of the value for the channel - allowed values= red | green | blue")
@@ -206,7 +206,7 @@ preprocess.ChannelsFrameList <- function(x,
 #' @return A FrameList object, whose frame images are the preprocessed versions of the input images
 #' 
 #' @examples
-#' load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+#' data("MesenteriumSubset")
 #' platelets.framelist <- channels(MesenteriumSubset)$red
 #' preprocess(platelets.framelist)
 #' 
@@ -268,7 +268,7 @@ preprocess.FrameList <- function(x,
 #' @return A ParticleList object, containing all detected particles for each frame
 #' 
 #' @examples
-#' load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+#' data("MesenteriumSubset")
 #' platelets.framelist <- channels(MesenteriumSubset)$red
 #' platelets.preprocessed <- preprocess(platelets.framelist)
 #' particles.platelets <- particles(platelets.framelist, platelets.preprocessed)
@@ -280,7 +280,7 @@ particles <- function(framelistRaw,
                       channel=""  # if we provide the channelsFrameList as input 
                       )
 {
-  if(!is(framelistRaw,"FrameList") & !is(framelistRaw,"ChannelsFrameList"))
+  if(!is(framelistRaw,"FrameList") && !is(framelistRaw,"ChannelsFrameList"))
   {
     stop("You need to provide at least a FrameList/channelsFrameList object as input!")
   }
@@ -300,7 +300,7 @@ particles <- function(framelistRaw,
     }
   }
   
-  # check that both input framelists have same length!
+  # check that both input framelists have same length
   if(length(framelistRaw) != length(framelistPreprocessed) )
   {
     stop("FrameList objects have different lengths!")
@@ -345,7 +345,7 @@ particles <- function(framelistRaw,
 #' @return A ParticleList object
 #' 
 #' @examples
-#' load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+#' data("candidate.platelets")
 #' selected.platelets <- select.particles(candidate.platelets, min.area = 5)
 #' selected.platelets
 #' 
@@ -363,7 +363,7 @@ select.particles <- function(particlelist,
   if(is(particlelist,"linkedParticleList"))
   {
     class(out) <- c("ParticleList",class(out))
-    cat("Warning, you are filtering particles that were previously linked by tracking them - reperform the linking afterwards!\n")
+    cat("Warning, you are filtering particles that were previously linked by tracking them - reperform the linking afterwards.\n")
   } else {
     if(is(particlelist,"ParticleList")) 
     {

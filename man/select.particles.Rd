@@ -23,7 +23,7 @@ According to parameters of interests, such as size, eccentricity/shape, filters 
 satisfy the indicated requirements
 }
 \examples{
-load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+data("candidate.platelets")
 selected.platelets <- select.particles(candidate.platelets, min.area = 5)
 selected.platelets
 }

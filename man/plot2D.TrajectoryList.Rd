@@ -25,8 +25,8 @@ and afterwards plots the x-y-time representation of the identified trajectories 
 object with the IDs of the desired trajectories
 }
 \examples{
-load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
-load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+data("MesenteriumSubset")
+data("candidate.platelets")
 platelets.trajectories <- trajectories(candidate.platelets)
 plot2D.TrajectoryList(platelets.trajectories,MesenteriumSubset)
 }

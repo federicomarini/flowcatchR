@@ -42,7 +42,7 @@ A LinkedParticleList object
 Performs linking of the particles by tracking them through the frames
 }
 \examples{
-load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+data("candidate.platelets")
 tracked.platelets <- link.particles(candidate.platelets, L= 40)
 }
 \author{

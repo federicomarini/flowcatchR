@@ -14,7 +14,7 @@
 Method for displaying conveniently a KinematicsFeatureSet object
 }
 \examples{
-load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+data("candidate.platelets")
 platelets.trajectories <- trajectories(candidate.platelets)
 traj11features <- kinematics(platelets.trajectories,trajectoryID = 11)
 print(traj11features)

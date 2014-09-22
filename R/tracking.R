@@ -24,7 +24,7 @@
 #' @return A LinkedParticleList object
 #' 
 #' @examples
-#' load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+#' data("candidate.platelets")
 #' tracked.platelets <- link.particles(candidate.platelets, L= 40)
 #' 
 #' @export
@@ -60,9 +60,7 @@ link.particles <- function(particlelist,
   # we need at least two frames
   if(frames_number < 2) 
   {
-    # error
-#     cat("At least",R+1,"frames are needed!!! - INTERRUPTING!!!\n")
-    stop("At least",R+1,"frames are needed!!! - INTERRUPTING!!!\n")
+    stop("At least",R+1,"frames are needed! - Interrupting the tracking...\n")
   }
   
   # if the linkrange is too big, set it to the right value
@@ -71,8 +69,7 @@ link.particles <- function(particlelist,
     curr_linkrange <- frames_number - 1
   }
   
-  # max cost = displacement^2
-  for(m in 1:(frames_number - 1)) # +2?!?! or + 0? need to do a very good round of debug on this!!
+  for(m in 1:(frames_number - 1)) 
   {
     if(verboseOutput) cat("---------- Linking frame",m,"of",frames_number,"...........\n")
     nop <- nrow(out[[m]]$particles)
@@ -142,17 +139,15 @@ link.particles <- function(particlelist,
         iidx <- 1
         dumidx <- which(srtidx==nop_next+1)
         # search for available particle of smallest cost or dummy
-        while(sum(A[,srtidx[iidx]])!=0 & (iidx < dumidx))
+        while(sum(A[,srtidx[iidx]])!=0 && (iidx < dumidx))
         {
           iidx <- iidx +1      
         }
         A[i,srtidx[iidx]] <- 1
       }   
       # set dummy particle for columns with no entry
-      s <- colSums(A) # or colSums here?!
+      s <- colSums(A) 
       A[nop+1,which(s<1)] <- 1
-      #   s <- colSums(A)
-      #   A[which(s<1),n+1] <- 1
       # dummy corresponds to dummy
       A[nop+1,nop_next+1] <- 1
       # consistency checks
@@ -189,9 +184,9 @@ link.particles <- function(particlelist,
         mincost <- c(mincost,minc)
         
         # if minimum < 0, link addition is favorable
-        if(!is.na(minc) & (minc < 0))
+        if(!is.na(minc) && (minc < 0))
         {
-          if(verboseOutput) cat("--> Performing change!\n")
+          if(verboseOutput) cat("--> Performing change.\n")
           # add link and update dependencies to preserve the topology
           A[Icand[mini],Jcand[mini]] <- 1
           A[Ycand[mini],Jcand[mini]] <- 0
@@ -201,7 +196,7 @@ link.particles <- function(particlelist,
         } else {
           # the best is already done and there is no room for improving the cost function
           finished <- TRUE
-          if(verboseOutput) cat("--> Found OPTIMAL solution for the current cost function!\n")
+          if(verboseOutput) cat("--> Found optimal solution for the current cost function!\n")
         }
         
         # consistency checks--..
@@ -222,17 +217,10 @@ link.particles <- function(particlelist,
     # shrink curr_linkrange if needed at the end of the frames
     if(m==(frames_number-curr_linkrange) && curr_linkrange > 1)
     {
-#       print(curr_linkrange)
       curr_linkrange <- curr_linkrange - 1
-#     browser()
-#       cat("UPDATED LINKRANGE!!")
-#       print(m)
-#       print(frames_number)
-#       print(curr_linkrange)
     }
     if (prog)setTxtProgressBar(pb, (m / (frames_number - curr_linkrange + 1)*100))
   }
-  #   cat("I GOT HERE ----")
   # terminate all links at the list objects at the very last frame
   out[[frames_number]]$special[] <- FALSE
   out[[frames_number]]$nxt[,] <- -1 

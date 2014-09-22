@@ -19,7 +19,7 @@ A TrajectoryList object
 Generates a TrajectoryList object from a (Linked)ParticleList
 }
 \examples{
-load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+data("candidate.platelets")
 platelets.trajectories <- trajectories(candidate.platelets)
 }
 \author{

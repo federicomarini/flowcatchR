@@ -23,7 +23,7 @@ An input FrameList object is subject to subsetting. This function is useful e.g.
 is presenting gaps (i.e. does not actually include a frame)
 }
 \examples{
-load(file.path(system.file("extra", package = "flowcatchR"), "MesenteriumSubset.RData"))
+data("MesenteriumSubset")
 subset(MesenteriumSubset, framesToKeep = c(1:10, 14:20))
 }
 \author{

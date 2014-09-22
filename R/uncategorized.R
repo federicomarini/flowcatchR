@@ -15,6 +15,7 @@
 #' @references colorLabels in the EBImage package
 #' 
 #' @examples
+#' data("MesenteriumSubset")
 #' \dontrun{
 #' oneImg <- subset.FrameList(MesenteriumSubset,framesToKeep = 1)
 #' display(preprocess(oneImg)[[1]]$image)

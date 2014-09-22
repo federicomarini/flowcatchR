@@ -14,7 +14,7 @@
 Method for displaying conveniently a ParticleList object
 }
 \examples{
-load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+data("candidate.platelets")
 print(candidate.platelets)
 }
 \author{

@@ -34,7 +34,7 @@ Cropping can be performed with careful choice of all cutting sides, or cropping 
 all sides
 }
 \examples{
-load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
+data("MesenteriumSubset")
 cut(MesenteriumSubset)
 }
 \author{

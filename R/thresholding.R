@@ -9,7 +9,6 @@
 #' 
 #' @return A numeric value
 #'  
-#' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 otsuThreshold <- function (input_image,nr_bit=16)  # use all channels?
 {
@@ -108,7 +107,6 @@ otsuThreshold <- function (input_image,nr_bit=16)  # use all channels?
 #' @return A numeric value
 #' 
 #' 
-#' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 kittlerillingerThreshold <- function (input_image,nr_bit=8)  # use all channels?
 {

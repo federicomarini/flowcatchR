@@ -20,6 +20,7 @@ Color codes the labels of object masks by a random permutation
 The labels of object masks are coloured this time in a "random but reproducible way", by setting a seed at the beginning of the function
 }
 \examples{
+data("MesenteriumSubset")
 \dontrun{
 oneImg <- subset.FrameList(MesenteriumSubset,framesToKeep = 1)
 display(preprocess(oneImg)[[1]]$image)

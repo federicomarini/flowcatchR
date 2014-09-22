@@ -14,7 +14,7 @@
 Method for displaying conveniently a TrajectoryList object
 }
 \examples{
-load(file.path(system.file("extra", package="flowcatchR"),"candidate.platelets.RData"))
+data("candidate.platelets")
 platelets.trajectories <- trajectories(candidate.platelets)
 print(platelets.trajectories)
 }
