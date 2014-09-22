@@ -68,7 +68,7 @@ NULL
 NULL
 
 
-# .FLOWCATCHR_VERSION <- '0.2'
+# .FLOWCATCHR_VERSION <- '0.99.1'
 # #'
 # #'
 # .onAttach <- function(lib, pkg, ...) {
