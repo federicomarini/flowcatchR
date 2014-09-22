@@ -471,7 +471,6 @@ We would like to thank the members of the Biostatistics division for valuable di
 This vignette was generated using the following package versions:
 <<sessioininfo,results='asis'>>=
 toLatex(sessionInfo())
-# Sys.time()
 @
 \bibliography{flowcatchR}
 

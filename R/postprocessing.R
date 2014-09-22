@@ -69,7 +69,6 @@ actionPaint <- function(rawimg,segmimg)
   {
     elab_singleObj <- segmimg
     elab_singleObj[segmimg!=obj] <- 0
-    #         buildUp <- paintObjects(Image(elab_singleObject,colormode="Grayscale"),buildingUp_green,col=colors()[52+obj])
     builtUp <- paintObjects(elab_singleObj,buildingUp,col=colors()[52+obj])
     buildingUp <- builtUp
   }
@@ -114,22 +113,7 @@ combineWcolor.preprocessedFrameList <- function(rawframelist,preprocessedframeli
     # works well if rawimg has still all 3 frames, otherwise i guess it stays B/W
     if(length(dim(rawimg))>2)
     {
-      rawWithObj <- actionPaint(rawimg,segmimg)
-      
-      # TODO a slower version that paints all objects singularly but of different colours?
-      # similar to this..
-      #   segm <- wsthre_green
-      #   buildingUp_green <- rawimg
-      #   for(obj in 1:max(segm))
-      #   {
-      #     
-      #     elab_singleObject <- segm
-      #     elab_singleObject[segm!=obj]<- 0  
-      #     buildUp_green <- paintObjects(Image(elab_singleObject,colormode="Grayscale"),buildingUp_green,col=colors()[52+obj])
-      #     buildingUp_green <- buildUp_green
-      #   }
-      #   
-      
+      rawWithObj <- actionPaint(rawimg,segmimg)    
     } else {
       channel <- rawframelist[[i]]$channel
       

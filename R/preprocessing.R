@@ -159,12 +159,8 @@ preprocess <- function(x,...)
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 preprocess.ChannelsFrameList <- function(x,
                                          channel="",
-                                         ...) # HARALD: should i put here also the ...? and also in the function code too?
+                                         ...) 
 {
-#   cat("do that")
-  # call on red OR
-  # call on green OR
-  # call on blue
   switch(channel,
          red={
            cat("Preprocessing the red channel...\n")
@@ -232,7 +228,7 @@ preprocess.FrameList <- function(x,
   for(i in 1:length(x))
   {
     rawimg <- x[[i]]$image
-    colorMode(rawimg) <- Grayscale
+#     colorMode(rawimg) <- Grayscale
     
     flo = makeBrush(brush.size, brush.shape, step=FALSE)^2
     flo <- flo/sum(flo)

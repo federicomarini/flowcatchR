@@ -132,22 +132,11 @@ inspect.frames <- function(framelist,
   
   firstFrames <- list()
   
-  # need to set the colorMode to Grayscale if it is only one channel so that combine works!!
-  
-  singleChannel <- !(length(dim(framelist[[1]]$image)) > 2)
-  
+    
   firstFrames[[1]] <- framelist[[1]]$image
-#   if(singleChannel) 
-#   {
-#     colorMode(firstFrames[[1]]) <- Grayscale
-#   }
   for (i in 2:nframes)
   {
     firstFrames[[i]] <- framelist[[i]]$image
-#     if(singleChannel)
-#     {
-#       colorMode(firstFrames[[i]]) <- Grayscale
-#     }
   }
   
   firstFramesCombined <- combine(firstFrames)
