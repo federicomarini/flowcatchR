@@ -4,8 +4,16 @@
 \title{Function equivalent for MATLAB's repmat - Replicate and tile arrays}
 \usage{
 repmat(a, n, m)
+
+repmat(a, n, m)
 }
 \arguments{
+\item{a}{The matrix to copy}
+
+\item{n}{The n value for the tiling}
+
+\item{m}{The m value for the tiling}
+
 \item{a}{The matrix to copy}
 
 \item{n}{The n value for the tiling}
@@ -14,14 +22,22 @@ repmat(a, n, m)
 }
 \value{
 Creates a large matrix consisting of an m-by-n tiling of copies of a.
+
+Creates a large matrix consisting of an m-by-n tiling of copies of a.
 }
 \description{
+A more flexible and stylish alternative to replicate the behaviour of the repmat function of MATLAB
+
 A more flexible and stylish alternative to replicate the behaviour of the repmat function of MATLAB
 }
 \author{
 Robin Hankin, 2001
+
+Robin Hankin, 2001
 }
 \references{
+http://cran.r-project.org/doc/contrib/R-and-octave.txt
+
 http://cran.r-project.org/doc/contrib/R-and-octave.txt
 }
 

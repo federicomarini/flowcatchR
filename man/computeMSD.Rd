@@ -4,8 +4,16 @@
 \title{Calculates the Mean Squared Displacement for a trajectory}
 \usage{
 computeMSD(sx, sy, until = 4)
+
+computeMSD(sx, sy, until = 4)
 }
 \arguments{
+\item{sx}{x axis positions along the trajectory}
+
+\item{sy}{y axis positions along the trajectory}
+
+\item{until}{how many points should be included in the Mean Squared Displacement curve}
+
 \item{sx}{x axis positions along the trajectory}
 
 \item{sy}{y axis positions along the trajectory}
@@ -14,11 +22,17 @@ computeMSD(sx, sy, until = 4)
 }
 \value{
 A numeric vector containing the values of the MSD
+
+A numeric vector containing the values of the MSD
 }
 \description{
 Calculates the Mean Squared Displacement for a trajectory
+
+Calculates the Mean Squared Displacement for a trajectory
 }
 \author{
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
+
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

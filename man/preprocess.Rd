@@ -4,8 +4,14 @@
 \title{Preprocessing images}
 \usage{
 preprocess(x, ...)
+
+preprocess(x, ...)
 }
 \arguments{
+\item{x}{A \code{FrameList} or a \code{ChannelsFrameList} object}
+
+\item{...}{Arguments to be passed to methods, such as channel and/or preprocessing parameters}
+
 \item{x}{A \code{FrameList} or a \code{ChannelsFrameList} object}
 
 \item{...}{Arguments to be passed to methods, such as channel and/or preprocessing parameters}
@@ -13,8 +19,13 @@ preprocess(x, ...)
 \description{
 Can be applied to \code{FrameList} or \code{ChannelsFrameList} objects. \code{ChannelsFrameList} are then subset to the chosen channel,
 and the method \code{preprocess.FrameList} is then applied, with its set of parameters
+
+Can be applied to \code{FrameList} or \code{ChannelsFrameList} objects. \code{ChannelsFrameList} are then subset to the chosen channel,
+and the method \code{preprocess.FrameList} is then applied, with its set of parameters
 }
 \author{
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
+
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

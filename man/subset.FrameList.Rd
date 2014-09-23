@@ -4,8 +4,16 @@
 \title{Extracts subsets of frames from a \code{FrameList} object}
 \usage{
 \method{subset}{FrameList}(x, framesToKeep, ...)
+
+\method{subset}{FrameList}(x, framesToKeep, ...)
 }
 \arguments{
+\item{x}{A \code{FrameList} object}
+
+\item{framesToKeep}{A vector containing the indexes of the frames to keep in the selection}
+
+\item{...}{Arguments to be passed to methods}
+
 \item{x}{A \code{FrameList} object}
 
 \item{framesToKeep}{A vector containing the indexes of the frames to keep in the selection}
@@ -14,16 +22,25 @@
 }
 \value{
 A \code{FrameList} object, composed by the subset of frames of the input \code{FrameList}
+
+A \code{FrameList} object, composed by the subset of frames of the input \code{FrameList}
 }
 \description{
+An input \code{FrameList} object is subject to subsetting. This function is useful e.g. when the trajectory of interest
+is presenting gaps (i.e. does not actually include a frame)
+
 An input \code{FrameList} object is subject to subsetting. This function is useful e.g. when the trajectory of interest
 is presenting gaps (i.e. does not actually include a frame)
 }
 \examples{
 data("MesenteriumSubset")
 subset(MesenteriumSubset, framesToKeep = c(1:10, 14:20))
+data("MesenteriumSubset")
+subset(MesenteriumSubset, framesToKeep = c(1:10, 14:20))
 }
 \author{
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
+
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

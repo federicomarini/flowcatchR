@@ -4,19 +4,31 @@
 \title{Converts cartesian coordinates to polar coordinates}
 \usage{
 toPolarCoords(x, y)
+
+toPolarCoords(x, y)
 }
 \arguments{
+\item{x}{x coordinate}
+
+\item{y}{y coordinate}
+
 \item{x}{x coordinate}
 
 \item{y}{y coordinate}
 }
 \value{
 A list containing Theta and Radius, as in polar coordinates
+
+A list containing Theta and Radius, as in polar coordinates
 }
 \description{
 Conversion from (x,y) to (radius,theta)
+
+Conversion from (x,y) to (radius,theta)
 }
 \author{
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
+
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

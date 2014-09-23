@@ -4,14 +4,22 @@
 \title{Creates a \code{ChannelsFrameList} object from a \code{FrameList} object, decomposed in the acquired channels}
 \usage{
 channels(framelist)
+
+channels(framelist)
 }
 \arguments{
+\item{framelist}{A \code{FrameList} object}
+
 \item{framelist}{A \code{FrameList} object}
 }
 \value{
 A \code{ChannelsFrameList} object, which is a list of 3 \code{FrameList} objects, named respectively \code{red}, \code{green} and \code{blue}
+
+A \code{ChannelsFrameList} object, which is a list of 3 \code{FrameList} objects, named respectively \code{red}, \code{green} and \code{blue}
 }
 \description{
+Creates a \code{ChannelsFrameList} object from a \code{FrameList} object, decomposed in the acquired channels
+
 Creates a \code{ChannelsFrameList} object from a \code{FrameList} object, decomposed in the acquired channels
 }
 \examples{
@@ -19,8 +27,14 @@ data("MesenteriumSubset")
 channels(MesenteriumSubset)
 plateletsFrameList <- channels(MesenteriumSubset)$red
 plateletsFrameList
+data("MesenteriumSubset")
+channels(MesenteriumSubset)
+plateletsFrameList <- channels(MesenteriumSubset)$red
+plateletsFrameList
 }
 \author{
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
+
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

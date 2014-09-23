@@ -5,8 +5,17 @@
 \usage{
 export.particles(particlelist, dir = tempdir(),
   nameStub = "testExport_particles_")
+
+export.particles(particlelist, dir = tempdir(),
+  nameStub = "testExport_particles_")
 }
 \arguments{
+\item{particlelist}{A \code{ParticleList} object}
+
+\item{dir}{The path of the folder where the particle lists should be written}
+
+\item{nameStub}{The stub for the file name, that will be used as a prefix for the exported particle lists}
+
 \item{particlelist}{A \code{ParticleList} object}
 
 \item{dir}{The path of the folder where the particle lists should be written}
@@ -15,16 +24,25 @@ export.particles(particlelist, dir = tempdir(),
 }
 \value{
 Particle list files are written in the desired location
+
+Particle list files are written in the desired location
 }
 \description{
+Writes the particles contained in the \code{particles} data frame slot of the \code{ParticleList} object elements.
+A track of the provenience of the particles is stored as a comment line above the header
+
 Writes the particles contained in the \code{particles} data frame slot of the \code{ParticleList} object elements.
 A track of the provenience of the particles is stored as a comment line above the header
 }
 \examples{
 data("candidate.platelets")
 \dontrun{export.particles(candidate.platelets)}
+data("candidate.platelets")
+\dontrun{export.particles(candidate.platelets)}
 }
 \author{
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
+
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

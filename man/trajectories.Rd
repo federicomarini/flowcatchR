@@ -4,8 +4,16 @@
 \title{Generate trajectories}
 \usage{
 trajectories(particlelist, provideExtraDetails = FALSE, ...)
+
+trajectories(particlelist, provideExtraDetails = FALSE, ...)
 }
 \arguments{
+\item{particlelist}{A (\code{Linked})\code{ParticleList} object}
+
+\item{provideExtraDetails}{Logical, currently not used - could be introduced for providing additional info on the trajectories}
+
+\item{...}{Arguments to be passed to methods}
+
 \item{particlelist}{A (\code{Linked})\code{ParticleList} object}
 
 \item{provideExtraDetails}{Logical, currently not used - could be introduced for providing additional info on the trajectories}
@@ -14,15 +22,23 @@ trajectories(particlelist, provideExtraDetails = FALSE, ...)
 }
 \value{
 A \code{TrajectoryList} object
+
+A \code{TrajectoryList} object
 }
 \description{
+Generates a \code{TrajectoryList} object from a (\code{Linked})\code{ParticleList}
+
 Generates a \code{TrajectoryList} object from a (\code{Linked})\code{ParticleList}
 }
 \examples{
 data("candidate.platelets")
 platelets.trajectories <- trajectories(candidate.platelets)
+data("candidate.platelets")
+platelets.trajectories <- trajectories(candidate.platelets)
 }
 \author{
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
+
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

@@ -4,8 +4,16 @@
 \title{Combines the information from a raw \code{FrameList} object and the corresponding preprocessed one}
 \usage{
 combine.preprocessedFrameList(rawframelist, preprocessedframelist, col = NULL)
+
+combine.preprocessedFrameList(rawframelist, preprocessedframelist, col = NULL)
 }
 \arguments{
+\item{rawframelist}{A \code{FrameList} object containing the raw images}
+
+\item{preprocessedframelist}{A \code{FrameList} object with the preprocessed versions of the images (e.g. segmented)}
+
+\item{col}{A color character string, to select which color will be used for drawing the contours of the particles. If not specified, it will default according to the objects provided}
+
 \item{rawframelist}{A \code{FrameList} object containing the raw images}
 
 \item{preprocessedframelist}{A \code{FrameList} object with the preprocessed versions of the images (e.g. segmented)}
@@ -14,11 +22,17 @@ combine.preprocessedFrameList(rawframelist, preprocessedframelist, col = NULL)
 }
 \value{
 A \code{FrameList} object, whose images are the combination of the raw images with the segmented objects drawn on them
+
+A \code{FrameList} object, whose images are the combination of the raw images with the segmented objects drawn on them
 }
 \description{
 All objects are painted with a unique colour - for sake of speed
+
+All objects are painted with a unique colour - for sake of speed
 }
 \author{
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
+
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

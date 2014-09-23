@@ -5,8 +5,14 @@
 but this time every object is painted with a different colour}
 \usage{
 combineWcolor.preprocessedFrameList(rawframelist, preprocessedframelist)
+
+combineWcolor.preprocessedFrameList(rawframelist, preprocessedframelist)
 }
 \arguments{
+\item{rawframelist}{A \code{FrameList} object containing the raw images}
+
+\item{preprocessedframelist}{A \code{FrameList} object with the preprocessed versions of the images (e.g. segmented)}
+
 \item{rawframelist}{A \code{FrameList} object containing the raw images}
 
 \item{preprocessedframelist}{A \code{FrameList} object with the preprocessed versions of the images (e.g. segmented)}
@@ -14,12 +20,20 @@ combineWcolor.preprocessedFrameList(rawframelist, preprocessedframelist)
 \value{
 A \code{FrameList} object, whose images are the combination of the raw images with the segmented objects drawn on them,
 painted singularly with different colours
+
+A \code{FrameList} object, whose images are the combination of the raw images with the segmented objects drawn on them,
+painted singularly with different colours
 }
 \description{
 Every object is now shown with a different colour. Care should be taken, as this function is rather slower
 than combine.preprocessedFrameList
+
+Every object is now shown with a different colour. Care should be taken, as this function is rather slower
+than combine.preprocessedFrameList
 }
 \author{
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
+
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

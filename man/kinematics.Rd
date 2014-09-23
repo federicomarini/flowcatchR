@@ -5,8 +5,23 @@
 \usage{
 kinematics(trajectorylist, trajectoryID = NULL, acquisitionFrequency = 30,
   scala = 50, feature = NULL)
+
+kinematics(trajectorylist, trajectoryID = NULL, acquisitionFrequency = 30,
+  scala = 50, feature = NULL)
 }
 \arguments{
+\item{trajectorylist}{A \code{TrajectoryList} object}
+
+\item{trajectoryID}{The ID of a single trajectory}
+
+\item{acquisitionFrequency}{The frame rate of acquisition for the images, in
+milliseconds}
+
+\item{scala}{The value of micro(?)meters to which each single pixel
+corresponds}
+
+\item{feature}{Character string, the name of the feature to be computed}
+
 \item{trajectorylist}{A \code{TrajectoryList} object}
 
 \item{trajectoryID}{The ID of a single trajectory}
@@ -22,8 +37,19 @@ corresponds}
 \value{
 A \code{KinematicsFeatureSetList} object, or a \code{KinematicsFeatureSet} object,
   or an atomic value, or a list(eventually coerced to a vector)
+
+A \code{KinematicsFeatureSetList} object, or a \code{KinematicsFeatureSet} object,
+  or an atomic value, or a list(eventually coerced to a vector)
 }
 \description{
+The computed set of parameters include \code{delta.x}, \code{delta.t} and \code{delta.v}
+(displacements and instantaneous velocity), \code{totalTime}, \code{totalDistance},
+\code{distStartToEnd}, \code{curvilinearVelocity}, \code{straightLineVelocity} and
+\code{linearityForwardProgression}, Mean Squared Displacement, velocity
+autocorrelation, and more. If a single trajectory is specified, the computation is
+performed for that trajectory alone. If a parameter is specified, only that
+parameter is reported, either for one or all trajectories
+
 The computed set of parameters include \code{delta.x}, \code{delta.t} and \code{delta.v}
 (displacements and instantaneous velocity), \code{totalTime}, \code{totalDistance},
 \code{distStartToEnd}, \code{curvilinearVelocity}, \code{straightLineVelocity} and
@@ -41,8 +67,18 @@ alltrajs.features <- kinematics(platelets.trajectories)
 traj11features <- kinematics(platelets.trajectories,trajectoryID = 11)
 # for all trajectories, one feature
 alltrajs.curvVel <- kinematics(platelets.trajectories,feature = "curvilinearVelocity")
+data("candidate.platelets")
+platelets.trajectories <- trajectories(candidate.platelets)
+# for all trajectories, all features
+alltrajs.features <- kinematics(platelets.trajectories)
+# for one trajectory, all features
+traj11features <- kinematics(platelets.trajectories,trajectoryID = 11)
+# for all trajectories, one feature
+alltrajs.curvVel <- kinematics(platelets.trajectories,feature = "curvilinearVelocity")
 }
 \author{
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
+
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

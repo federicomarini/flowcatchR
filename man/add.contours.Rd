@@ -5,8 +5,25 @@
 \usage{
 add.contours(raw.frames, binary.frames = NULL, trajectories = NULL,
   trajIds = NULL, mode = "particles", col = NULL, channel = NULL)
+
+add.contours(raw.frames, binary.frames = NULL, trajectories = NULL,
+  trajIds = NULL, mode = "particles", col = NULL, channel = NULL)
 }
 \arguments{
+\item{raw.frames}{A \code{FrameList} object with raw images}
+
+\item{binary.frames}{A \code{FrameList} object with preprocessed frames}
+
+\item{trajectories}{A \code{TrajectoryList} object}
+
+\item{trajIds}{Numeric vector, the ID(s) of the trajectory.}
+
+\item{mode}{A character string, can assume the values \code{particles} or \code{trajectories}. Defaults to \code{particles}}
+
+\item{col}{A vector of color strings}
+
+\item{channel}{A character string, to select which channel to process, if a \code{ChannelsFrameList} is supplied or if the \code{FrameList} in \code{raw.frames} has more than one channel}
+
 \item{raw.frames}{A \code{FrameList} object with raw images}
 
 \item{binary.frames}{A \code{FrameList} object with preprocessed frames}
@@ -23,11 +40,21 @@ add.contours(raw.frames, binary.frames = NULL, trajectories = NULL,
 }
 \value{
 A new \code{FrameList} object with contours of the objects added
+
+A new \code{FrameList} object with contours of the objects added
 }
 \description{
 Creates a \code{FrameList} object containing raw information, combined with the segmented images and the relative trajectory under analysis
+
+Creates a \code{FrameList} object containing raw information, combined with the segmented images and the relative trajectory under analysis
 }
 \details{
+If a \code{TrajectoryList} is provided and mode is set to \code{trajectories}, returns a \code{FrameList} with all trajectories included in the IDs
+vector painted accordingly.
+If the mode is set to \code{particles}, it will just plot the particles (all) on all frames.
+If no \code{trajectoryList} is provided, it will be computed with default parameters.
+If no \code{binary.frames} is provided, it will be computed also with default parameters
+
 If a \code{TrajectoryList} is provided and mode is set to \code{trajectories}, returns a \code{FrameList} with all trajectories included in the IDs
 vector painted accordingly.
 If the mode is set to \code{particles}, it will just plot the particles (all) on all frames.
@@ -42,8 +69,17 @@ paintedParticles <- add.contours(raw.frames = MesenteriumSubset, mode = "particl
 inspect.frames(paintedTrajectories)
 inspect.frames(paintedParticles)
 }
+data("MesenteriumSubset")
+\dontrun{
+paintedTrajectories <- add.contours(raw.frames = MesenteriumSubset, mode = "trajectories",channel="red")
+paintedParticles <- add.contours(raw.frames = MesenteriumSubset, mode = "particles",channel="red")
+inspect.frames(paintedTrajectories)
+inspect.frames(paintedParticles)
+}
 }
 \author{
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
+
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

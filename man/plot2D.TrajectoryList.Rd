@@ -4,8 +4,20 @@
 \title{2D projection of a \code{TrajectoryList} object}
 \usage{
 plot2D.TrajectoryList(x, framelist, trajIDs = NULL, verbose = FALSE, ...)
+
+plot2D.TrajectoryList(x, framelist, trajIDs = NULL, verbose = FALSE, ...)
 }
 \arguments{
+\item{x}{A \code{TrajectoryList} object}
+
+\item{framelist}{A \code{FrameList} object, used here to identify the limits of the region of interest}
+
+\item{trajIDs}{A vector containing the ids of the desired trajectories}
+
+\item{verbose}{Logical, whether to provide additional output on the command line}
+
+\item{...}{Arguments to be passed to methods}
+
 \item{x}{A \code{TrajectoryList} object}
 
 \item{framelist}{A \code{FrameList} object, used here to identify the limits of the region of interest}
@@ -18,8 +30,14 @@ plot2D.TrajectoryList(x, framelist, trajIDs = NULL, verbose = FALSE, ...)
 }
 \description{
 Provides a bird's eye view of a \code{TrajectoryList} object on a bidimensional space
+
+Provides a bird's eye view of a \code{TrajectoryList} object on a bidimensional space
 }
 \details{
+Independent from the \code{rgl} library, the function extracts the region of interests from the dimensions of an image of the \code{FrameList} object,
+and afterwards plots the x-y-time representation of the identified trajectories on a 2d plane. It is possible to subset the \code{TrajectoryList}
+object with the IDs of the desired trajectories
+
 Independent from the \code{rgl} library, the function extracts the region of interests from the dimensions of an image of the \code{FrameList} object,
 and afterwards plots the x-y-time representation of the identified trajectories on a 2d plane. It is possible to subset the \code{TrajectoryList}
 object with the IDs of the desired trajectories
@@ -29,8 +47,14 @@ data("MesenteriumSubset")
 data("candidate.platelets")
 platelets.trajectories <- trajectories(candidate.platelets)
 plot2D.TrajectoryList(platelets.trajectories,MesenteriumSubset)
+data("MesenteriumSubset")
+data("candidate.platelets")
+platelets.trajectories <- trajectories(candidate.platelets)
+plot2D.TrajectoryList(platelets.trajectories,MesenteriumSubset)
 }
 \author{
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
+
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

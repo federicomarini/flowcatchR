@@ -4,19 +4,31 @@
 \title{Combines raw and segmented images}
 \usage{
 actionPaint(rawimg, segmimg)
+
+actionPaint(rawimg, segmimg)
 }
 \arguments{
+\item{rawimg}{An \code{Image} object with the raw frame data}
+
+\item{segmimg}{An \code{Image} object with the segmented objects}
+
 \item{rawimg}{An \code{Image} object with the raw frame data}
 
 \item{segmimg}{An \code{Image} object with the segmented objects}
 }
 \value{
 An \code{Image} object that combines raw and segmented images, with objects painted singularly with different colours
+
+An \code{Image} object that combines raw and segmented images, with objects painted singularly with different colours
 }
 \description{
 Combines raw and segmented images
+
+Combines raw and segmented images
 }
 \author{
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
+
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

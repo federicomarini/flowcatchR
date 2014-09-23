@@ -16,6 +16,7 @@
 #' @import EBImage
 #' @import rgl
 #' @import colorRamps
+#' @import methods
 #' 
 #' @author
 #' Federico Marini \email{marinif@@uni-mainz.de},

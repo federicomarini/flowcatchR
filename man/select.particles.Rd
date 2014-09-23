@@ -4,8 +4,16 @@
 \title{Performs filtering on a \code{ParticleList} object}
 \usage{
 select.particles(particlelist, min.area = 1, max.area = 1000)
+
+select.particles(particlelist, min.area = 1, max.area = 1000)
 }
 \arguments{
+\item{particlelist}{A \code{ParticleList} object. A \code{LinkedParticleList} object can also be provided as input, yet the returned object will be a \code{ParticleList} object that needs to be linked again}
+
+\item{min.area}{Size in pixels of the minimum area needed to detect the object as a potential particle of interest}
+
+\item{max.area}{Size in pixels of the maximum area allowed to detect the object as a potential particle of interest}
+
 \item{particlelist}{A \code{ParticleList} object. A \code{LinkedParticleList} object can also be provided as input, yet the returned object will be a \code{ParticleList} object that needs to be linked again}
 
 \item{min.area}{Size in pixels of the minimum area needed to detect the object as a potential particle of interest}
@@ -14,8 +22,13 @@ select.particles(particlelist, min.area = 1, max.area = 1000)
 }
 \value{
 A \code{ParticleList} object
+
+A \code{ParticleList} object
 }
 \description{
+According to parameters of interests, such as size, eccentricity/shape, filters out the particles that do not
+satisfy the indicated requirements
+
 According to parameters of interests, such as size, eccentricity/shape, filters out the particles that do not
 satisfy the indicated requirements
 }
@@ -23,8 +36,13 @@ satisfy the indicated requirements
 data("candidate.platelets")
 selected.platelets <- select.particles(candidate.platelets, min.area = 5)
 selected.platelets
+data("candidate.platelets")
+selected.platelets <- select.particles(candidate.platelets, min.area = 5)
+selected.platelets
 }
 \author{
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
+
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

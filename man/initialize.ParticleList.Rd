@@ -4,19 +4,31 @@
 \title{Initialize a \code{ParticleList} object for subsequent linking/tracking}
 \usage{
 initialize.ParticleList(particlelist, linkrange = 1)
+
+initialize.ParticleList(particlelist, linkrange = 1)
 }
 \arguments{
+\item{particlelist}{A ParticleList object}
+
+\item{linkrange}{The number of frames to look for candidate particles potentially belonging to the same track}
+
 \item{particlelist}{A ParticleList object}
 
 \item{linkrange}{The number of frames to look for candidate particles potentially belonging to the same track}
 }
 \value{
 A ParticleList object with slots dedicated for the tracking pre-filled
+
+A ParticleList object with slots dedicated for the tracking pre-filled
 }
 \description{
 Initialize a \code{ParticleList} object for subsequent linking/tracking
+
+Initialize a \code{ParticleList} object for subsequent linking/tracking
 }
 \author{
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
+
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

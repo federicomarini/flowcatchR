@@ -7,8 +7,39 @@ link.particles(particlelist, L, R = 2, epsilon1 = 0.1, epsilon2 = 2,
   lambda1 = 1, lambda2 = 1, penaltyFunction = penaltyFunctionGenerator(),
   nframes, verboseOutput = FALSE, prog = FALSE, include.intensity = TRUE,
   include.area = TRUE)
+
+link.particles(particlelist, L, R = 2, epsilon1 = 0.1, epsilon2 = 2,
+  lambda1 = 1, lambda2 = 1, penaltyFunction = penaltyFunctionGenerator(),
+  nframes, verboseOutput = FALSE, prog = FALSE, include.intensity = TRUE,
+  include.area = TRUE)
 }
 \arguments{
+\item{particlelist}{A \code{ParticleList} object}
+
+\item{L}{Maximum number of pixels an object can move in two consecutive frames}
+
+\item{R}{Linkrange, i.e. the number of consecutive frames to search for potential candidate links}
+
+\item{epsilon1}{A numeric value, to be used in the formula. Jitter for allowing angular displacements}
+
+\item{epsilon2}{A numeric value, to be used in the formula. Jitter for allowing spatial displacements}
+
+\item{lambda1}{A numeric value. Multiplicative factor for the penalty function}
+
+\item{lambda2}{A numeric value. Multiplicative factor applied to the angular displacement}
+
+\item{penaltyFunction}{A function structured in such a way to be applied as penalty function in the linking}
+
+\item{nframes}{Numeric value. Number of frames where the linking should be performed}
+
+\item{verboseOutput}{Logical, whether the output should report additional intermediate steps. For debugging use mainly}
+
+\item{prog}{Logical, whether the a progress bar should be shown during the tracking phase}
+
+\item{include.intensity}{Logical, whether to include also intensity change of the particles in the cost function calculation}
+
+\item{include.area}{Logical, whether to include also area change of the particles in the cost function calculation}
+
 \item{particlelist}{A \code{ParticleList} object}
 
 \item{L}{Maximum number of pixels an object can move in two consecutive frames}
@@ -37,18 +68,30 @@ link.particles(particlelist, L, R = 2, epsilon1 = 0.1, epsilon2 = 2,
 }
 \value{
 A \code{LinkedParticleList} object
+
+A \code{LinkedParticleList} object
 }
 \description{
+Performs linking of the particles by tracking them through the frames
+
 Performs linking of the particles by tracking them through the frames
 }
 \examples{
 data("candidate.platelets")
 tracked.platelets <- link.particles(candidate.platelets, L= 40)
+data("candidate.platelets")
+tracked.platelets <- link.particles(candidate.platelets, L= 40)
 }
 \author{
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
+
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 \references{
+I F Sbalzarini and P Koumoutsakos."Feature point tracking and trajectory analysis for video imaging in cell biology."
+In: Journal of structural biology 151.2 (Aug. 2005), pp. 182-95. ISSN: 1047-8477. DOI: 10.1016/j.jsb.2005.06.002.
+URL: http://www.ncbi.nlm.nih.gov/pubmed/16043363
+
 I F Sbalzarini and P Koumoutsakos."Feature point tracking and trajectory analysis for video imaging in cell biology."
 In: Journal of structural biology 151.2 (Aug. 2005), pp. 182-95. ISSN: 1047-8477. DOI: 10.1016/j.jsb.2005.06.002.
 URL: http://www.ncbi.nlm.nih.gov/pubmed/16043363

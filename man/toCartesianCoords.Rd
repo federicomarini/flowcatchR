@@ -4,19 +4,31 @@
 \title{Converts polar coordinates to cartesian coordinates}
 \usage{
 toCartesianCoords(Theta, Radius)
+
+toCartesianCoords(Theta, Radius)
 }
 \arguments{
+\item{Theta}{The Theta angle}
+
+\item{Radius}{The radius value in polar coordinates}
+
 \item{Theta}{The Theta angle}
 
 \item{Radius}{The radius value in polar coordinates}
 }
 \value{
 A list containing Theta and Radius, as in polar coordinates
+
+A list containing Theta and Radius, as in polar coordinates
 }
 \description{
 Conversion from (radius,theta) to (x,y)
+
+Conversion from (radius,theta) to (x,y)
 }
 \author{
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
+
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

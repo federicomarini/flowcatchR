@@ -4,13 +4,21 @@
 \title{Display conveniently a \code{LinkedParticleList} object}
 \usage{
 \method{print}{LinkedParticleList}(x, ...)
+
+\method{print}{LinkedParticleList}(x, ...)
 }
 \arguments{
 \item{x}{A \code{LinkedParticleList} object}
 
 \item{...}{Arguments to be passed to methods}
+
+\item{x}{A \code{LinkedParticleList} object}
+
+\item{...}{Arguments to be passed to methods}
 }
 \description{
+Display conveniently a \code{LinkedParticleList} object
+
 Display conveniently a \code{LinkedParticleList} object
 }
 \examples{
@@ -19,8 +27,15 @@ linked.platelets <- link.particles(candidate.platelets,L=26,R=3,epsilon1=0,
 epsilon2=0,lambda1=1,lambda2=0,penaltyFunction=penaltyFunctionGenerator(),
 nframes=20,include.area=FALSE)
 print(linked.platelets)
+data("candidate.platelets")
+linked.platelets <- link.particles(candidate.platelets,L=26,R=3,epsilon1=0,
+epsilon2=0,lambda1=1,lambda2=0,penaltyFunction=penaltyFunctionGenerator(),
+nframes=20,include.area=FALSE)
+print(linked.platelets)
 }
 \author{
+Federico Marini, \email{marinif@uni-mainz.de}, 2014
+
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 
