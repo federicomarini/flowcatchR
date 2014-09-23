@@ -23,6 +23,7 @@ Suggests:
     knitr
 Depends:
     R (>= 2.10),
+    methods,
     EBImage,
     rgl,
     colorRamps

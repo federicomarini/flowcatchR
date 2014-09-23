@@ -249,7 +249,7 @@ export.frames <- function(framelist,
     dir.create(dir,showWarnings=FALSE) # if not already existing...
   }
   imgNames <- lapply(1:length(framelist),
-                     function(arg){paste0(dir,nameStub,"_frame_",formatC(arg,nchar(length(framelist)),flag="0"),".png")})
+                     function(arg){paste0(dir,"/",nameStub,"_frame_",formatC(arg,nchar(length(framelist)),flag="0"),".png")})
   for (i in 1:length(framelist))
   {
     writeImage(framelist[[i]]$image,imgNames[[i]])
@@ -259,7 +259,7 @@ export.frames <- function(framelist,
     # using imagemagick
     system(paste0("convert -delay 40 ",dir,nameStub,"_frame_*.png ",dir,nameStub,".gif"))
   }
-  if(removeAfterCreatingGif)
+  if(removeAfterCreatingGif && createGif)
   {
     file.remove(list.files(path=dir,pattern=paste0(".png"),full.names=TRUE))
   }

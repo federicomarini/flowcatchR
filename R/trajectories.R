@@ -355,14 +355,10 @@ add.contours <- function(raw.frames,
     }
     
     # actually does it for both cases above
-#     library(colorRamps)
     colcols <- rep(colorRamps::primary.colors(40,steps=10,FALSE),6)
     out <- input.frames
     for(i in trajIds)
     {
-      # same as above actually -> make it a function? # compacted like this
-#       cat("Doing",i,"-\n")
-#       browser()
       currentTraj <- trajectories[[i]]$trajectory
       counter <- 1
       for(j in currentTraj$frame)
@@ -371,12 +367,10 @@ add.contours <- function(raw.frames,
         segmimg <- binary.frames[[j]]$image
         singleObjectSegm <- segmimg
         singleObjectSegm[segmimg!=currentTraj$frameobjectID[counter]] <- 0
-#         cat("max obj",max(segmimg),"---",length(as.data.frame(table(singleObjectSegm))$singleObjectSegm)-1,"\t\t")
-        
+
         rawWithPaintedObj <- paintObjects(singleObjectSegm,rawimg,col=colcols[i])
-#         cat(paste0("traj",i, "\tframe",j,"\t",colcols[i]))
+
         out[[j]]$image <- rawWithPaintedObj 
-#         cat("\n")
         counter <- counter +1
       }
     }  
