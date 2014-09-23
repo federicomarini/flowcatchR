@@ -85,7 +85,7 @@ Essential features \flowcatchR{} delivers to the user are:
 
 \begin{itemize}
 \item A simple and flexible, yet complete framework to analyze flowing blood cells (and more generally time-lapse) image sets, with a system of S3 classes such as \Rclass{FrameList}, \Rclass{ParticleList}, and \Rclass{TrajectoryList} constituting the backbone of the procedures
-\item Facilities for detection of objects in the segmentation step
+\item Techniques for aiding the detection of objects in the segmentation step
 \item An algorithm for tracking the particles, adapted and improved from the proposal of Sbalzarini and Koumoutsakos (2005) \cite{Sbalzarini2005}, that reflects the directional aspect of the motion
 \item A wide set of functions inspecting the kinematic properties of the identified trajectories \cite{Beltman2009,Meijering2012a}, providing publication-ready summary statistics and visualization tools to help classifying identified objects
 \end{itemize}
@@ -311,7 +311,7 @@ reimportedPlatelets <- read.particles(particle.files = "/path/to/export/folder/e
 
 \section{Trajectory analysis}\label{sec:trajanal}
 
-It is possible to extract the trajectories with the correspondent omonymous function with the \Rfunction{trajectories} command:
+It is possible to extract the trajectories with the correspondent \Rfunction{trajectories} function:
 
 <<generateTrajs>>=
 trajPlatelets <- trajectories(linkedPlatelets)
