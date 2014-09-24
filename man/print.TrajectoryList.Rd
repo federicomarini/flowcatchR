@@ -4,34 +4,21 @@
 \title{Display conveniently a \code{TrajectoryList} object}
 \usage{
 \method{print}{TrajectoryList}(x, ...)
-
-\method{print}{TrajectoryList}(x, ...)
 }
 \arguments{
-\item{x}{A \code{TrajectoryList} object}
-
-\item{...}{Arguments to be passed to methods}
-
 \item{x}{A \code{TrajectoryList} object}
 
 \item{...}{Arguments to be passed to methods}
 }
 \description{
 Display conveniently a \code{TrajectoryList} object
-
-Display conveniently a \code{TrajectoryList} object
 }
 \examples{
 data("candidate.platelets")
 platelets.trajectories <- trajectories(candidate.platelets)
 print(platelets.trajectories)
-data("candidate.platelets")
-platelets.trajectories <- trajectories(candidate.platelets)
-print(platelets.trajectories)
 }
 \author{
-Federico Marini, \email{marinif@uni-mainz.de}, 2014
-
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

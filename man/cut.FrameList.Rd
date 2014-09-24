@@ -5,27 +5,8 @@
 \usage{
 \method{cut}{FrameList}(x, cutLeft = 5, cutRight = 5, cutUp = 5,
   cutDown = 5, cutAll = 0, testing = FALSE, ...)
-
-\method{cut}{FrameList}(x, cutLeft = 5, cutRight = 5, cutUp = 5,
-  cutDown = 5, cutAll = 0, testing = FALSE, ...)
 }
 \arguments{
-\item{x}{An input \code{FrameList} object}
-
-\item{cutLeft}{Amount of pixels to be cut at the side}
-
-\item{cutRight}{Amount of pixels to be cut at the side}
-
-\item{cutUp}{Amount of pixels to be cut at the side}
-
-\item{cutDown}{Amount of pixels to be cut at the side}
-
-\item{cutAll}{Amount of pixels to be cut at all sides. Overrides the single side values}
-
-\item{testing}{Logical, whether to just test the cropping or to actually perform it. Default set to \code{FALSE}}
-
-\item{...}{Arguments to be passed to methods}
-
 \item{x}{An input \code{FrameList} object}
 
 \item{cutLeft}{Amount of pixels to be cut at the side}
@@ -44,30 +25,19 @@
 }
 \value{
 A \code{FrameList} object, with cropped frames in the \code{image} slot
-
-A \code{FrameList} object, with cropped frames in the \code{image} slot
 }
 \description{
 Performs cropping on the \code{FrameList} object, selecting how many pixels should be cut on each side
-
-Performs cropping on the \code{FrameList} object, selecting how many pixels should be cut on each side
 }
 \details{
-Cropping can be performed with careful choice of all cutting sides, or cropping a single value from
-all sides
-
 Cropping can be performed with careful choice of all cutting sides, or cropping a single value from
 all sides
 }
 \examples{
 data("MesenteriumSubset")
 cut(MesenteriumSubset)
-data("MesenteriumSubset")
-cut(MesenteriumSubset)
 }
 \author{
-Federico Marini, \email{marinif@uni-mainz.de}, 2014
-
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

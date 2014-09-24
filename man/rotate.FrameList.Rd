@@ -7,23 +7,8 @@ rotate.FrameList(framelist, rotAngle = 0, testing = FALSE,
   output.origin = c(dim(framelist[[i]]$image)[1]/3,
   dim(framelist[[i]]$image)[2]/3), output.dim = c(dim(framelist[[i]]$image)[1]
   * 1.5, dim(framelist[[i]]$image)[2] * 1.5))
-
-rotate.FrameList(framelist, rotAngle = 0, testing = FALSE,
-  output.origin = c(dim(framelist[[i]]$image)[1]/3,
-  dim(framelist[[i]]$image)[2]/3), output.dim = c(dim(framelist[[i]]$image)[1]
-  * 1.5, dim(framelist[[i]]$image)[2] * 1.5))
 }
 \arguments{
-\item{framelist}{A \code{FrameList} object}
-
-\item{rotAngle}{The rotation angle (clockwise) specified in degrees}
-
-\item{testing}{Logical, whether to just test the rotation or to actually perform it. Default set to \code{FALSE}}
-
-\item{output.origin}{A vector of 2 numbers indicating the dimension of the output image, as in the rotate function}
-
-\item{output.dim}{A vector of 2 numbers indicating the output coordinates of the origin in pixels, as in the \code{rotate} function}
-
 \item{framelist}{A \code{FrameList} object}
 
 \item{rotAngle}{The rotation angle (clockwise) specified in degrees}
@@ -36,23 +21,15 @@ rotate.FrameList(framelist, rotAngle = 0, testing = FALSE,
 }
 \value{
 A \code{FrameList} object containing the rotated frames
-
-A \code{FrameList} object containing the rotated frames
 }
 \description{
-Rotation is performed exploiting the rotate function of the \code{EBImage} package. Could be automated if support for coordinate/pixel interaction is included
-
 Rotation is performed exploiting the rotate function of the \code{EBImage} package. Could be automated if support for coordinate/pixel interaction is included
 }
 \examples{
 data("MesenteriumSubset")
 rotate.FrameList(MesenteriumSubset,rotAngle = 40)
-data("MesenteriumSubset")
-rotate.FrameList(MesenteriumSubset,rotAngle = 40)
 }
 \author{
-Federico Marini, \email{marinif@uni-mainz.de}, 2014
-
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 
