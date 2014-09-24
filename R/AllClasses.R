@@ -38,16 +38,13 @@ setClass("TrajectorySet",
          )
 
 setClass("KinematicsFeatures",
-         slots = c(
-           Data = "list"
-           )
-)
+         contains = "list"
+        )
+
 
 setClass("KinematicsFeaturesSet",
-         slots = c(
-           Data = "list"
-           )
-         )
+         contains = "list"
+        )
 
 
 ## and their constructors

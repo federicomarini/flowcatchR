@@ -525,20 +525,34 @@ setMethod("show",
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-print.KinematicsFeatureSet <- function(x,...)
-{
-  cat("An object of the KinematicsFeatureSet class. \n\n")
-  cat("KinematicsFeatureSet composed of",length(x) - 1,"atomic/vectorial features\n\n")
-  cat("The features describe a trajectory of",length(x$delta.x) + 1,"points\n")
-  
-  cat("Available features:\n")
-  print(names(x))
-  cat("\n")
-  cat("Curvilinear Velocity:",x$curvilinearVelocity,"\n")
-  cat("Total Distance:",x$totalDistance,"\n")
-  cat("Total Time:",x$totalTime,"\n")
-  
-}
+# print.KinematicsFeatureSet <- function(x,...)
+# {
+#   cat("An object of the KinematicsFeatureSet class. \n\n")
+#   cat("KinematicsFeatureSet composed of",length(x) - 1,"atomic/vectorial features\n\n")
+#   cat("The features describe a trajectory of",length(x$delta.x) + 1,"points\n")
+#   
+#   cat("Available features:\n")
+#   print(names(x))
+#   cat("\n")
+#   cat("Curvilinear Velocity:",x$curvilinearVelocity,"\n")
+#   cat("Total Distance:",x$totalDistance,"\n")
+#   cat("Total Time:",x$totalTime,"\n")
+#   
+# }
+setMethod("show",
+          signature = "KinematicsFeatures",
+          definition = function(object){
+            cat("An object of the KinematicsFeatures class. \n\n")
+            cat("KinematicsFeatures composed of",length(object) - 1,"atomic/vectorial features\n\n")
+            cat("The features describe a trajectory of",length(object$delta.x) + 1,"points\n")
+            
+            cat("Available features:\n")
+            print(names(object))
+            cat("\n")
+            cat("Curvilinear Velocity:",object$curvilinearVelocity,"\n")
+            cat("Total Distance:",object$totalDistance,"\n")
+            cat("Total Time:",object$totalTime,"\n")          
+          })
 
 
 #' Display conveniently a \code{KinematicsFeatureSetList} object
@@ -692,13 +706,13 @@ NULL
 #' @return A \code{KinematicsFeatureSet} object
 #'   
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-extractKinematics.traj <- function(trajectorylist,
+extractKinematics.traj <- function(trajectoryset,
                                    trajectoryID,
                                    acquisitionFrequency=30, # in milliseconds
                                    scala=50 # 1 pixel is ... micrometer
 )
 {
-  singleTraj <- trajectorylist[[trajectoryID]]$trajectory
+  singleTraj <- trajectoryset[[trajectoryID]]$trajectory
   # throw a warning/message/error if the traj is below 3 points
   if(nrow(singleTraj) < 4)
   {
@@ -719,8 +733,9 @@ extractKinematics.traj <- function(trajectorylist,
                 dirAutoCorr=NA,
                 paramsNotComputed=TRUE
     )
-    class(out) <- c("KinematicsFeatureSet",class(out))
-    return(out)
+#     class(out) <- c("KinematicsFeatureSet",class(out))
+    y <- new("KinematicsFeatures",out)
+    return(y)
   }
   sx <- singleTraj$xCoord
   sy <- singleTraj$yCoord
@@ -767,8 +782,9 @@ extractKinematics.traj <- function(trajectorylist,
               dirAutoCorr=dirAutoCorr,
               paramsNotComputed=FALSE
   )
-  class(out) <- c("KinematicsFeatureSet",class(out))
-  return(out)
+#   class(out) <- c("KinematicsFeatureSet",class(out))
+  y <- new("KinematicsFeatures",out)
+  return(y)
 }
 
 
@@ -806,7 +822,7 @@ extractKinematics.traj <- function(trajectorylist,
 #'   
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-kinematics <- function(trajectorylist,
+kinematics <- function(trajectoryset,
                        trajectoryID=NULL,
                        acquisitionFrequency=30, # in milliseconds
                        scala=50, # 1 pixel is ... micrometer
@@ -826,7 +842,7 @@ kinematics <- function(trajectorylist,
   if(!is.null(trajectoryID)) # then operate on a single trajectory
   {
     
-    kineSet.out <- extractKinematics.traj(trajectorylist,trajectoryID,acquisitionFrequency=acquisitionFrequency,scala=scala) # returns a KinematicsFeatureSet object
+    kineSet.out <- extractKinematics.traj(trajectoryset,trajectoryID,acquisitionFrequency=acquisitionFrequency,scala=scala) # returns a KinematicsFeatureSet object
     # then eventually just report the desired kinematic feature
     if(is.null(feature))
     {
@@ -840,34 +856,33 @@ kinematics <- function(trajectorylist,
     }
     
   } else { # it will be done on all trajectories of the trajectorylist
-{
-  kineSetList.out <- list()
-  for(i in 1:length(trajectorylist))
-  {
-    kineOne <- extractKinematics.traj(trajectorylist,i,acquisitionFrequency=acquisitionFrequency,scala=scala) #, acquisitionFrequency=30, # in milliseconds, scala=50
-    kineSetList.out[[length(kineSetList.out) + 1]] <- kineOne
+    tmp <- list()
+    for(i in 1:length(trajectoryset))
+    {
+      kineOne <- extractKinematics.traj(trajectoryset,i,acquisitionFrequency=acquisitionFrequency,scala=scala) #, acquisitionFrequency=30, # in milliseconds, scala=50
+      tmp[[length(tmp) + 1]] <- kineOne
+    }
+    # additional class attribute?
+    #   class(kineSetList.out) <- c("KinematicsFeatureSetList",class(kineSetList.out)) # it is a list of KinematicsFeatureSet objects
+    kineSetList.out <- new("KinematicsFeaturesSet",tmp)
+    # then eventually just report the desired kinematic feature
+    if(is.null(feature))
+    {
+      return(kineSetList.out)
+    } else {
+      kineFeatList.out <- lapply(kineSetList.out,function(arg){arg[[feature]]})
+      if(all(unlist(lapply(kineFeatList.out,function(arg){is.null(arg)})))) stop("You selected a feature whose name is not available in the set (or was not computed because
+                                                                                 the trajectory was too short). Please select one among delta.x, delta.t, delta.v, totalTime,
+                                                                                 totalDistance, distStartToEnd, curvilinearVelocity, straightLineVelocity, 
+                                                                                 linearityForwardProgression, trajMSD or velocityAutoCorr")
+      if(feature %in% c("totalTime","totalDistance","distStartToEnd","curvilinearVelocity","straightLineVelocity","linearityForwardProgression"))
+      {
+        kineFeatList.out <- unlist(kineFeatList.out)
+      }
+      return(kineFeatList.out)
+    }
   }
-  # additional class attribute?
-  class(kineSetList.out) <- c("KinematicsFeatureSetList",class(kineSetList.out)) # it is a list of KinematicsFeatureSet objects
 }
-# then eventually just report the desired kinematic feature
-if(is.null(feature))
-{
-  return(kineSetList.out)
-} else {
-  kineFeatList.out <- lapply(kineSetList.out,function(arg){arg[[feature]]})
-  if(all(unlist(lapply(kineFeatList.out,function(arg){is.null(arg)})))) stop("You selected a feature whose name is not available in the set (or was not computed because
-                                                                             the trajectory was too short). Please select one among delta.x, delta.t, delta.v, totalTime,
-                                                                             totalDistance, distStartToEnd, curvilinearVelocity, straightLineVelocity, 
-                                                                             linearityForwardProgression, trajMSD or velocityAutoCorr")
-  if(feature %in% c("totalTime","totalDistance","distStartToEnd","curvilinearVelocity","straightLineVelocity","linearityForwardProgression"))
-  {
-    kineFeatList.out <- unlist(kineFeatList.out)
-  }
-  return(kineFeatList.out)
-}
-  }
-  }
 
 
 

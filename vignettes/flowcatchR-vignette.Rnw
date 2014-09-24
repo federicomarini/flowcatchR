@@ -366,7 +366,7 @@ traj11
 inspect.frames(traj11,nframes=9,display.method="raster")
 @
 
-The \Rclass{FrameList} object \Robject{traj11} can be printed to the terminal:
+The data for trajectory 11 in the \Rclass{TrajectoryList} object can be printed to the terminal: 
 
 <<viewTraj11>>=
 trajPlatelets[[11]]
