@@ -19,13 +19,15 @@ setClass("LinkedParticleSet",
          slots = c(
            channel = "character",
            tracking = "list"
-         )
-)
+          )
+        )
+
 
 
 setClass("TrajectorySet",
+         contains = "list",
          slots = c(
-           Data = "list"
+           channel = "character"
            )
          )
 
