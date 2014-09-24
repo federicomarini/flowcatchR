@@ -4,32 +4,20 @@
 \title{Display conveniently a \code{ParticleList} object}
 \usage{
 \method{print}{ParticleList}(x, ...)
-
-\method{print}{ParticleList}(x, ...)
 }
 \arguments{
-\item{x}{A \code{ParticleList} object}
-
-\item{...}{Arguments to be passed to methods}
-
 \item{x}{A \code{ParticleList} object}
 
 \item{...}{Arguments to be passed to methods}
 }
 \description{
 Display conveniently a \code{ParticleList} object
-
-Display conveniently a \code{ParticleList} object
 }
 \examples{
 data("candidate.platelets")
 print(candidate.platelets)
-data("candidate.platelets")
-print(candidate.platelets)
 }
 \author{
-Federico Marini, \email{marinif@uni-mainz.de}, 2014
-
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

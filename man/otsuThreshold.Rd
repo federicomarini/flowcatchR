@@ -4,31 +4,19 @@
 \title{Calculate Otsu's threshold}
 \usage{
 otsuThreshold(input_image, nr_bit = 16)
-
-otsuThreshold(input_image, nr_bit = 16)
 }
 \arguments{
-\item{input_image}{An \code{Image} object}
-
-\item{nr_bit}{Number of bits to use for discretizing the levels}
-
 \item{input_image}{An \code{Image} object}
 
 \item{nr_bit}{Number of bits to use for discretizing the levels}
 }
 \value{
 A numeric value
-
-A numeric value
 }
 \description{
 Determines the value for the threshold grey level according to the Otsu method
-
-Determines the value for the threshold grey level according to the Otsu method
 }
 \author{
-Federico Marini, \email{marinif@uni-mainz.de}, 2014
-
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 
