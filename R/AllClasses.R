@@ -40,3 +40,16 @@ setClass("KinematicsFeaturesSet",
            )
          )
 
+
+## and their constructors
+Frames = function(x, channel) {
+  if(channel=="all")
+    new("Frames", x, channel = channel)
+  else
+  {
+    if(channel=="red"||channel=="green"||channel=="blue")
+      new("Frames", channel(x, channel), channel = channel)
+    else
+      stop("You need to provide one of the following values for the channel: 'red', 'green', 'blue', or 'all'")
+  }
+}
