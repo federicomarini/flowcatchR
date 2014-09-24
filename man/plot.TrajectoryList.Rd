@@ -4,8 +4,6 @@
 \title{3D representation of a \code{TrajectoryList} object}
 \usage{
 \method{plot}{TrajectoryList}(x, framelist, verbose = FALSE, ...)
-
-\method{plot}{TrajectoryList}(x, framelist, verbose = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{TrajectoryList} object}
@@ -15,26 +13,11 @@
 \item{verbose}{Logical, whether to provide additional output on the command line}
 
 \item{...}{Arguments to be passed to methods}
-
-\item{x}{A \code{TrajectoryList} object}
-
-\item{framelist}{A \code{FrameList} object, used here to identify the limits of the region of interest}
-
-\item{...}{Arguments to be passed to methods}
-
-\item{verbose}{Logical, whether to provide additional output on the command line}
 }
 \description{
 Provides a visual representation of a \code{TrajectoryList} object
-
-Provides a visual representation of a \code{TrajectoryList} object
 }
 \details{
-
-
-Based on the \code{rgl} library, the function extracts the region of interests from the dimensions of an image of the \code{FrameList} object,
-and afterwards plots the x-y-time representation of the identified trajectories
-
 
 
 Based on the \code{rgl} library, the function extracts the region of interests from the dimensions of an image of the \code{FrameList} object,
@@ -47,16 +30,8 @@ platelets.trajectories <- trajectories(candidate.platelets)
 \dontrun{
 plot(platelets.trajectories,MesenteriumSubset)
 }
-data("MesenteriumSubset")
-data("candidate.platelets")
-platelets.trajectories <- trajectories(candidate.platelets)
-\dontrun{
-plot(platelets.trajectories,MesenteriumSubset)
-}
 }
 \author{
-Federico Marini, \email{marinif@uni-mainz.de}, 2014
-
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

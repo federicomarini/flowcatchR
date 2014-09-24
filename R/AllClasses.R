@@ -14,14 +14,20 @@ setClass("ParticleSet",
            )
          )
 
-setClass("LinkedParticleSet",
-         contains = "list",
-         slots = c(
-           channel = "character",
-           tracking = "list"
-          )
-        )
+# setClass("LinkedParticleSet",
+#          contains = "list",
+#          slots = c(
+#            channel = "character",
+#            tracking = "list"
+#           )
+#         )
 
+setClass("LinkedParticleSet",
+         contains = "ParticleSet",
+         slots = c(
+           tracking = "list"
+           )
+        )
 
 
 setClass("TrajectorySet",
