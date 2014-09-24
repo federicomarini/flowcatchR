@@ -4,16 +4,8 @@
 \title{Preprocessing function for \code{ChannelsFrameList} objects}
 \usage{
 \method{preprocess}{ChannelsFrameList}(x, channel = "", ...)
-
-\method{preprocess}{ChannelsFrameList}(x, channel = "", ...)
 }
 \arguments{
-\item{x}{A \code{ChannelsFrameList} object}
-
-\item{channel}{Character string. The channel to perform the operations on. Can be \code{red}, \code{green} or \code{blue}}
-
-\item{...}{Arguments to be passed to methods}
-
 \item{x}{A \code{ChannelsFrameList} object}
 
 \item{channel}{Character string. The channel to perform the operations on. Can be \code{red}, \code{green} or \code{blue}}
@@ -22,23 +14,15 @@
 }
 \value{
 A \code{FrameList} object, whose frame images are the preprocessed versions of the input images
-
-A \code{FrameList} object, whose frame images are the preprocessed versions of the input images
 }
 \description{
-\code{ChannelsFrameList} are then subset to the chosen channel, and the method \code{preprocess.FrameList} is then applied, with its set of parameters
-
 \code{ChannelsFrameList} are then subset to the chosen channel, and the method \code{preprocess.FrameList} is then applied, with its set of parameters
 }
 \examples{
 data("MesenteriumSubset")
 preprocess(channels(MesenteriumSubset),channel = "red")
-data("MesenteriumSubset")
-preprocess(channels(MesenteriumSubset),channel = "red")
 }
 \author{
-Federico Marini, \email{marinif@uni-mainz.de}, 2014
-
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

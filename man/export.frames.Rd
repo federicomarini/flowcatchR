@@ -5,21 +5,8 @@
 \usage{
 export.frames(framelist, dir = tempdir(), nameStub = "testExport",
   createGif = FALSE, removeAfterCreatingGif = TRUE)
-
-export.frames(framelist, dir = tempdir(), nameStub = "testExport",
-  createGif = FALSE, removeAfterCreatingGif = TRUE)
 }
 \arguments{
-\item{framelist}{A \code{FrameList} object}
-
-\item{dir}{The path of the folder where the image should be written}
-
-\item{nameStub}{The stub for the file name, that will be used as a prefix for the exported images}
-
-\item{createGif}{Logical, whether to create or not an animated .gif file}
-
-\item{removeAfterCreatingGif}{Logical, whether to remove the single exported .png images after creating the single .gif}
-
 \item{framelist}{A \code{FrameList} object}
 
 \item{dir}{The path of the folder where the image should be written}
@@ -32,14 +19,8 @@ export.frames(framelist, dir = tempdir(), nameStub = "testExport",
 }
 \value{
 Image files are written in the desired location
-
-Image files are written in the desired location
 }
 \description{
-Writes the images contained in the \code{image} slot of the \code{FrameList} object elements.
-The images can be exported as single frames, or as a .gif image that is composed
-by the single frames.
-
 Writes the images contained in the \code{image} slot of the \code{FrameList} object elements.
 The images can be exported as single frames, or as a .gif image that is composed
 by the single frames.
@@ -47,12 +28,8 @@ by the single frames.
 \examples{
 data("MesenteriumSubset")
 \dontrun{export.frames(MesenteriumSubset,nameStub="subset_export_",createGif=TRUE,removeAfterCreatingGif=FALSE)}
-data("MesenteriumSubset")
-\dontrun{export.frames(MesenteriumSubset,nameStub="subset_export_",createGif=TRUE,removeAfterCreatingGif=FALSE)}
 }
 \author{
-Federico Marini, \email{marinif@uni-mainz.de}, 2014
-
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

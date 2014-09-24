@@ -8,18 +8,19 @@ setClass("Frames",
          )
 
 setClass("ParticleSet",
+         contains = "list",
          slots = c(
-           Data = "list",
            channel = "character"
            )
          )
 
 setClass("LinkedParticleSet",
+         contains = "list",
          slots = c(
-           Data = "list",
-           channel = "character"
-           )
+           channel = "character",
+           tracking = "list"
          )
+)
 
 
 setClass("TrajectorySet",
@@ -42,7 +43,7 @@ setClass("KinematicsFeaturesSet",
 
 
 ## and their constructors
-Frames = function(x, channel) {
+Frames <- function(x, channel) {
   if(channel=="all")
     new("Frames", x, channel = channel)
   else
@@ -53,3 +54,13 @@ Frames = function(x, channel) {
       stop("You need to provide one of the following values for the channel: 'red', 'green', 'blue', or 'all'")
   }
 }
+
+
+ParticleSet <- function(x = list(), channel){
+  new("ParticleSet",x,channel=channel)
+}
+
+
+
+
+

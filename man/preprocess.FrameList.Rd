@@ -7,37 +7,8 @@
   at.offset = 0.15, at.wwidth = 10, at.wheight = 10, kern.size = 3,
   kern.shape = "disc", ws.tolerance = 1, ws.radius = 1,
   displayprocessing = FALSE, ...)
-
-\method{preprocess}{FrameList}(x, brush.size = 3, brush.shape = "disc",
-  at.offset = 0.15, at.wwidth = 10, at.wheight = 10, kern.size = 3,
-  kern.shape = "disc", ws.tolerance = 1, ws.radius = 1,
-  displayprocessing = FALSE, ...)
 }
 \arguments{
-\item{x}{A \code{FrameList} object}
-
-\item{brush.size}{Size in pixels of the brush to be used for initial smoothing}
-
-\item{brush.shape}{Shape of the brush to be used for initial smoothing}
-
-\item{at.offset}{Offset to be used in the adaptive thresholding step}
-
-\item{at.wwidth}{Width of the window for the adaptive thresholding step}
-
-\item{at.wheight}{Height of the window for the adaptive thresholding step}
-
-\item{kern.size}{Size in pixels of the kernel used for morphological operations}
-
-\item{kern.shape}{Shape of the kernel used for morphological operations}
-
-\item{ws.tolerance}{Tolerance allowed in performing the watershed-based segmentation}
-
-\item{ws.radius}{Radius for the watershed-based segmentation}
-
-\item{displayprocessing}{Logical, whether to display intermediate steps while performing preprocessing. Dismissed currently, it could increase runtime a lot}
-
-\item{...}{Arguments to be passed to methods}
-
 \item{x}{A \code{FrameList} object}
 
 \item{brush.size}{Size in pixels of the brush to be used for initial smoothing}
@@ -64,13 +35,8 @@
 }
 \value{
 A \code{FrameList} object, whose frame images are the preprocessed versions of the input images
-
-A \code{FrameList} object, whose frame images are the preprocessed versions of the input images
 }
 \description{
-\code{FrameList} objects are processed according to the chosen set of parameters. Many of them refer directly to
-existing \code{EBImage} functions, please see the corresponding help for additional information
-
 \code{FrameList} objects are processed according to the chosen set of parameters. Many of them refer directly to
 existing \code{EBImage} functions, please see the corresponding help for additional information
 }
@@ -78,13 +44,8 @@ existing \code{EBImage} functions, please see the corresponding help for additio
 data("MesenteriumSubset")
 platelets.framelist <- channels(MesenteriumSubset)$red
 preprocess(platelets.framelist)
-data("MesenteriumSubset")
-platelets.framelist <- channels(MesenteriumSubset)$red
-preprocess(platelets.framelist)
 }
 \author{
-Federico Marini, \email{marinif@uni-mainz.de}, 2014
-
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

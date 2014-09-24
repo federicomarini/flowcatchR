@@ -5,21 +5,8 @@
 \usage{
 inspect.frames(framelist, nframes = NULL, inspectAll = FALSE,
   display.method = "browser", verbose = FALSE)
-
-inspect.frames(framelist, nframes = NULL, inspectAll = FALSE,
-  display.method = "browser", verbose = FALSE)
 }
 \arguments{
-\item{framelist}{A \code{FrameList} object}
-
-\item{nframes}{The number of frames to display (default value: 6)}
-
-\item{inspectAll}{Logical, whether to inspect all frames (overriding the default of 10 that can be used also when \code{inspectAll} is FALSE)}
-
-\item{display.method}{Method for displaying, can be either \code{raster} or \code{browser}. Defaults to \code{browser}, by opening a window in the browser}
-
-\item{verbose}{Logical, whether to provide additional output on the command line alongside with the images themselves}
-
 \item{framelist}{A \code{FrameList} object}
 
 \item{nframes}{The number of frames to display (default value: 6)}
@@ -34,20 +21,12 @@ inspect.frames(framelist, nframes = NULL, inspectAll = FALSE,
 The first frames of a \code{FrameList} are displayed in the browser, and are interactively navigable.
 Default number of shown frames is 4, can be set maximum to 8, as this function is purely for a
 first inspection
-
-The first frames of a \code{FrameList} are displayed in the browser, and are interactively navigable.
-Default number of shown frames is 4, can be set maximum to 8, as this function is purely for a
-first inspection
 }
 \examples{
 data("MesenteriumSubset")
 \dontrun{inspect.frames(MesenteriumSubset)}
-data("MesenteriumSubset")
-\dontrun{inspect.frames(MesenteriumSubset)}
 }
 \author{
-Federico Marini, \email{marinif@uni-mainz.de}, 2014
-
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 
