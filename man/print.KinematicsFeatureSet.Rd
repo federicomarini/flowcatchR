@@ -4,21 +4,13 @@
 \title{Displaying conveniently a \code{KinematicsFeatureSet} object}
 \usage{
 \method{print}{KinematicsFeatureSet}(x, ...)
-
-\method{print}{KinematicsFeatureSet}(x, ...)
 }
 \arguments{
 \item{x}{A \code{KinematicsFeatureSet} object}
 
 \item{...}{Arguments to be passed to methods}
-
-\item{x}{A \code{KinematicsFeatureSet} object}
-
-\item{...}{Arguments to be passed to methods}
 }
 \description{
-Displaying conveniently a \code{KinematicsFeatureSet} object
-
 Displaying conveniently a \code{KinematicsFeatureSet} object
 }
 \examples{
@@ -26,14 +18,8 @@ data("candidate.platelets")
 platelets.trajectories <- trajectories(candidate.platelets)
 traj11features <- kinematics(platelets.trajectories,trajectoryID = 11)
 print(traj11features)
-data("candidate.platelets")
-platelets.trajectories <- trajectories(candidate.platelets)
-traj11features <- kinematics(platelets.trajectories,trajectoryID = 11)
-print(traj11features)
 }
 \author{
-Federico Marini, \email{marinif@uni-mainz.de}, 2014
-
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

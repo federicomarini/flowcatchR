@@ -16,7 +16,7 @@ trajectories(particlelist, provideExtraDetails = FALSE, ...)
 
 \item{particleset}{A (\code{Linked})\code{ParticleList} object}
 
-\item{provideExtraDetails}{Logical, currently not used - could be introduced for providing additional info on the trajectories}
+\item{verbose}{Logical, currently not used - could be introduced for providing additional info on the trajectories}
 
 \item{...}{Arguments to be passed to methods}
 }

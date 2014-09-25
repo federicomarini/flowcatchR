@@ -24,13 +24,13 @@ add.contours(raw.frames, binary.frames = NULL, trajectories = NULL,
 
 \item{channel}{A character string, to select which channel to process, if a \code{ChannelsFrameList} is supplied or if the \code{FrameList} in \code{raw.frames} has more than one channel}
 
+\item{trajIDs}{Numeric vector, the ID(s) of the trajectory.}
+
 \item{raw.frames}{A \code{FrameList} object with raw images}
 
 \item{binary.frames}{A \code{FrameList} object with preprocessed frames}
 
 \item{trajectories}{A \code{TrajectoryList} object}
-
-\item{trajIds}{Numeric vector, the ID(s) of the trajectory.}
 
 \item{mode}{A character string, can assume the values \code{particles} or \code{trajectories}. Defaults to \code{particles}}
 

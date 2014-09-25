@@ -588,6 +588,25 @@ print.KinematicsFeatureSetList <- function(x,...)
   cat("Average Total Time:",mean(unlist(lapply(x,function(arg){arg[["totalTime"]]})),na.rm=TRUE),"\n")
   
 }
+setMethod("show",
+          signature = "KinematicsFeaturesSet",
+          definition = function(object){
+            cat("An object of the KinematicsFeaturesSet class. \n\n")
+            cat("KinematicsFeaturesSet composed of",length(object)," KinematicsFeatures objects\n\n")
+            
+            cat("Available features (shown for the first trajectory):\n")
+            print(names(object[[1]]))
+            cat("\n")
+            cat("Curvilinear Velocity:",object[[1]]$curvilinearVelocity,"\n")
+            cat("Total Distance:",object[[1]]$totalDistance,"\n")
+            cat("Total Time:",object[[1]]$totalTime,"\n\n")
+            
+            cat("Average values (calculated on",sum(unlist(lapply(object,function(arg){arg[["paramsNotComputed"]]}))),"trajectories where parameters were computed)\n")
+            cat("Average Curvilinear Velocity:",mean(unlist(lapply(object,function(arg){arg[["curvilinearVelocity"]]})),na.rm=TRUE),"\n")
+            cat("Average Total Distance:",mean(unlist(lapply(object,function(arg){arg[["totalDistance"]]})),na.rm=TRUE),"\n")
+            cat("Average Total Time:",mean(unlist(lapply(object,function(arg){arg[["totalTime"]]})),na.rm=TRUE),"\n")
+            
+          })
 
 
 
@@ -1428,47 +1447,47 @@ particles <- function(framelistRaw,
   return(out)
 }
 
-particles3 <- function(frames.raw,
-                       frames.binary=NULL,
+particles3 <- function(raw.frames,
+                       binary.frames=NULL,
                        channel=NULL  
 )
 {
   # if still storing all channels, select one
-  if(frames.raw@channel == "all" && is.null(channel))
+  if(raw.frames@channel == "all" && is.null(channel))
     stop("Please select one channel to work on. Choose one among 'red','green' and 'blue'")
-  if(frames.raw@channel == "all" && !is.null(channel))
-    frames.raw <- channel.Frames(raw.frames,mode = channel)
+  if(raw.frames@channel == "all" && !is.null(channel))
+    raw.frames <- channel.Frames(raw.frames,mode = channel)
   if ( missing(channel) ) stop("Please provide a channel name to process")
-  if(frames.raw@channel != "all" && channel != frames.raw@channel)
+  if(raw.frames@channel != "all" && channel != raw.frames@channel)
     stop("You are selecting to work on a channel not stored in your current Frames object")
-  if(!is.null(frames.binary) && (frames.raw@channel != frames.binary@channel))
-    stop("Your frames.raw and frames.binary objects store data related to different channels")
+  if(!is.null(binary.frames) && (raw.frames@channel != binary.frames@channel))
+    stop("Your raw.frames and binary.frames objects store data related to different channels")
   
   
-  if(missing(frames.binary)){
+  if(missing(binary.frames)){
     cat("You did not provide a preprocessed FrameList alongside with the raw set of frames.\n")
     cat("Don't worry, the raw FrameList object will be first preprocessed with a set of default parameter.\n")
     cat("You can always change them afterwards if they do not fit to your scenario.\n")
-    frames.binary = preprocess.Frames(frames.raw)
+    binary.frames = preprocess.Frames(raw.frames)
   }
-  if ( length.Frames(frames.raw) != length.Frames(frames.binary) ) {
+  if ( length.Frames(raw.frames) != length.Frames(binary.frames) ) {
     stop("Raw and preprocessed Frames objects have different number of frames!")
   } else {
     cat("Computing features...\n")
   }
   
   # returns a particle list - not linked yet
-  out <- ParticleSet(channel = frames.binary@channel)
+  out <- ParticleSet(channel = binary.frames@channel)
   
-  for(i in 1:length.Frames(frames.raw))  {
-    segmImg <- getFrame(frames.binary, i)
-    rawImg <- getFrame(frames.raw, i)
+  for(i in 1:length.Frames(raw.frames))  {
+    segmImg <- getFrame(binary.frames, i)
+    rawImg <- getFrame(raw.frames, i)
     
     imgFeatures <- as.data.frame(computeFeatures(segmImg,rawImg,xname="cell"))
     imgFeatures$shapeFactor <- (imgFeatures$cell.0.s.perimeter)^2 / (4*pi*imgFeatures$cell.0.s.area)
     
     # with the locations now saved as names
-    out[[dimnames(frames.binary)[[3]][i]]] <- imgFeatures
+    out[[dimnames(binary.frames)[[3]][i]]] <- imgFeatures
   }
   cat("Done!\n")
   return(out)
@@ -2081,7 +2100,7 @@ penaltyFunctionGenerator <- function(epsilon1=0.1,
 #' Generates a \code{TrajectoryList} object from a (\code{Linked})\code{ParticleList}
 #' 
 #' @param particleset A (\code{Linked})\code{ParticleList} object
-#' @param provideExtraDetails Logical, currently not used - could be introduced for providing additional info on the trajectories
+#' @param verbose Logical, currently not used - could be introduced for providing additional info on the trajectories
 #' @param ... Arguments to be passed to methods
 #' 
 #' @return A \code{TrajectoryList} object
@@ -2093,7 +2112,7 @@ penaltyFunctionGenerator <- function(epsilon1=0.1,
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 trajectories <- function(particleset,
-                         provideExtraDetails=FALSE,
+                         verbose=FALSE,
                          ...)
 {
   if(is(particleset,"LinkedParticleSet"))
@@ -2106,7 +2125,7 @@ trajectories <- function(particleset,
       cat("Input ParticleList is not a LinkedParticleSet.\n")
       cat("Performing linking first with some set of default parameters - you might want to change them according to your scenario...\n")
       linkedparticleset <- link.particles(particleset,L=26,R=3,epsilon1=0,epsilon2=0,lambda1=1,lambda2=0)
-      if(provideExtraDetails) linkedparticleset
+      if(verbose) linkedparticleset
     }
   }
   
@@ -2250,7 +2269,7 @@ axesInfo <- function(frames)
 plot.TrajectorySet <- function(trajectoryset,frames,verbose=FALSE,...)
 {
   trajectoryDataFrame <- do.call(rbind.data.frame,lapply(trajectoryset,function(arg){arg$trajectory}))
-  if(verbose) cat("Plotting",length(x),"trajectories...\n")
+  if(verbose) cat("Plotting",length(trajectoryset),"trajectories...\n")
   colcols <- rep(colorRamps::primary.colors(40,steps=10,FALSE),6)
   for (i in 1:max(trajectoryDataFrame$trajLabel))
   {
@@ -2304,7 +2323,7 @@ plot2D.TrajectorySet <- function(trajectoryset,frames,trajIDs=NULL,verbose=FALSE
     if(!all(trajIDs %in% allAvailableTrajectories))
       stop("You are supplying IDs of trajectories which are not included in the TrajectoryList object!")
   }
-  if(verbose) cat("Plotting",length(trajIDs),"trajectories (total available in the TrajectoryList:", length(trajectory), ")...\n")
+  if(verbose) cat("Plotting",length(trajIDs),"trajectories (total available in the TrajectoryList:", length(trajectoryset), ")...\n")
   
   #   trajectoryDataFrame <- do.call(rbind.data.frame,lapply(trajectoryset,function(arg){arg$trajectory}))
   t <- trajIDs[1]
@@ -2342,7 +2361,7 @@ plot2D.TrajectorySet <- function(trajectoryset,frames,trajIDs=NULL,verbose=FALSE
 #' @param raw.frames A \code{FrameList} object with raw images
 #' @param binary.frames A \code{FrameList} object with preprocessed frames
 #' @param trajectories A \code{TrajectoryList} object
-#' @param trajIds Numeric vector, the ID(s) of the trajectory.
+#' @param trajIDs Numeric vector, the ID(s) of the trajectory.
 #' @param mode A character string, can assume the values \code{particles} or \code{trajectories}. Defaults to \code{particles}
 #' @param col A vector of color strings
 #' @param channel A character string, to select which channel to process, if a \code{ChannelsFrameList} is supplied or if the \code{FrameList} in \code{raw.frames} has more than one channel
@@ -2363,7 +2382,7 @@ plot2D.TrajectorySet <- function(trajectoryset,frames,trajIDs=NULL,verbose=FALSE
 add.contours <- function(raw.frames,
                          binary.frames=NULL,
                          trajectoryset=NULL,
-                         trajIds=NULL,
+                         trajIDs=NULL,
                          mode="particles", # could assume also "trajectories" as a value
                          col=NULL, 
                          channel=NULL)
@@ -2399,22 +2418,22 @@ add.contours <- function(raw.frames,
     
     availableIDs <- unlist(lapply(trajectoryset,function(arg){arg$ID}))
     # if no single ids are provided, do it for all
-    if(is.null(trajIds))
+    if(is.null(trajIDs))
     {
       # will do it on all, so update it to all the available ones
-      trajIds <- availableIDs
+      trajIDs <- availableIDs
       
     } else {
       # will do it by looping on the length of the provided trajectory IDs vector
       # check that the trajectories are indeed "plottable"!
-      if(!all(trajIds %in% availableIDs))
+      if(!all(trajIDs %in% availableIDs))
       {
         stop("You are providing IDs of trajectories that are not available. 
              Please run unlist(lapply(trajectoryset,function(arg){arg$ID})) on the trajectory object!")
       }
     }
     
-    out <- addTrajectories(raw.frames,binary.frames,trajectoryset,trajIds)
+    out <- addTrajectories(raw.frames,binary.frames,trajectoryset,trajIDs)
     
   } else if(mode=="particles") # there is actually no need for the trajectorylist/trajId, and the col can be just one value ;)
   {
@@ -2431,10 +2450,10 @@ add.contours <- function(raw.frames,
 
 
 
-addTrajectories <- function(raw.frames,binary.frames,trajectoryset,trajIds){
+addTrajectories <- function(raw.frames,binary.frames,trajectoryset,trajIDs){
   tmpFL <- lapply(1:length.Frames(raw.frames),function(i) Image(getFrame(raw.frames,i,"render")))
   colcols <- rep(colorRamps::primary.colors(40,steps=10,FALSE),6)
-  for(i in trajIds)
+  for(i in trajIDs)
   {
     currentTraj <- trajectoryset[[i]]$trajectory
     counter <- 1
