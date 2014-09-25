@@ -594,9 +594,6 @@ kinematics <- function(trajectoryset,
 
 
 
-
-
-
 #' Calculates the Mean Squared Displacement for a trajectory
 #'  
 #' @param sx x axis positions along the trajectory
