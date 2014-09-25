@@ -2,17 +2,17 @@
 \docType{methods}
 \name{show,ParticleSet-method}
 \alias{show,ParticleSet-method}
-\title{Display conveniently a \code{ParticleList} object}
+\title{Display conveniently a \code{ParticleSet} object}
 \usage{
 \S4method{show}{ParticleSet}(object)
 }
 \arguments{
-\item{object}{A \code{ParticleList} object}
+\item{object}{A \code{ParticleSet} object}
 
 \item{...}{Arguments to be passed to methods}
 }
 \description{
-Display conveniently a \code{ParticleList} object
+Display conveniently a \code{ParticleSet} object
 }
 \examples{
 data("candidate.platelets")

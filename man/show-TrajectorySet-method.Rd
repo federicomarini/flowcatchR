@@ -2,17 +2,17 @@
 \docType{methods}
 \name{show,TrajectorySet-method}
 \alias{show,TrajectorySet-method}
-\title{Display conveniently a \code{TrajectoryList} object}
+\title{Display conveniently a \code{TrajectorySet} object}
 \usage{
 \S4method{show}{TrajectorySet}(object)
 }
 \arguments{
-\item{object}{A \code{TrajectoryList} object}
+\item{object}{A \code{TrajectorySet} object}
 
 \item{...}{Arguments to be passed to methods}
 }
 \description{
-Display conveniently a \code{TrajectoryList} object
+Display conveniently a \code{TrajectorySet} object
 }
 \examples{
 data("candidate.platelets")

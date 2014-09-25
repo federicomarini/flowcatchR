@@ -5,7 +5,7 @@
 #' @param object A \code{Frames} object
 #' @param ... Arguments to be passed to methods
 #'  
-#' @method print FrameList
+#' @method print Frames
 #' 
 #' @examples
 #' data("MesenteriumSubset")
@@ -28,12 +28,12 @@ setMethod("show",
           })
 
 
-#' Display conveniently a \code{ParticleList} object
+#' Display conveniently a \code{ParticleSet} object
 #'  
-#' @param object A \code{ParticleList} object
+#' @param object A \code{ParticleSet} object
 #' @param ... Arguments to be passed to methods
 #' 
-#' @method print ParticleList
+#' @method print ParticleSet
 #' 
 #' @examples
 #' data("candidate.platelets")
@@ -54,12 +54,12 @@ setMethod("show",
           })
 
 
-#' Display conveniently a \code{LinkedParticleList} object
+#' Display conveniently a \code{LinkedParticleSet} object
 #'  
-#' @param object A \code{LinkedParticleList} object
+#' @param object A \code{LinkedParticleSet} object
 #' @param ... Arguments to be passed to methods
 #' 
-#' @method print LinkedParticleList
+#' @method print LinkedParticleSet
 #' 
 #' @examples
 #' data("candidate.platelets")
@@ -86,12 +86,12 @@ setMethod("show",
 
 
 
-#' Display conveniently a \code{TrajectoryList} object
+#' Display conveniently a \code{TrajectorySet} object
 #'  
-#' @param object A \code{TrajectoryList} object
+#' @param object A \code{TrajectorySet} object
 #' @param ... Arguments to be passed to methods
 #' 
-#' @method print TrajectoryList
+#' @method print TrajectorySet
 #' 
 #' @examples 
 #' data("candidate.platelets")
@@ -116,12 +116,12 @@ setMethod("show",
 
 
 
-#' Displaying conveniently a \code{KinematicsFeatureSet} object
+#' Displaying conveniently a \code{KinematicsFeatures} object
 #'  
-#' @param object A \code{KinematicsFeatureSet} object
+#' @param object A \code{KinematicsFeatures} object
 #' @param ... Arguments to be passed to methods
 #' 
-#' @method print KinematicsFeatureSet
+#' @method print KinematicsFeatures
 #' 
 #' @examples 
 #' data("candidate.platelets")
@@ -131,20 +131,6 @@ setMethod("show",
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-# print.KinematicsFeatureSet <- function(x,...)
-# {
-#   cat("An object of the KinematicsFeatureSet class. \n\n")
-#   cat("KinematicsFeatureSet composed of",length(x) - 1,"atomic/vectorial features\n\n")
-#   cat("The features describe a trajectory of",length(x$delta.x) + 1,"points\n")
-#   
-#   cat("Available features:\n")
-#   print(names(x))
-#   cat("\n")
-#   cat("Curvilinear Velocity:",x$curvilinearVelocity,"\n")
-#   cat("Total Distance:",x$totalDistance,"\n")
-#   cat("Total Time:",x$totalTime,"\n")
-#   
-# }
 setMethod("show",
           signature = "KinematicsFeatures",
           definition = function(object){
@@ -161,9 +147,9 @@ setMethod("show",
           })
 
 
-#' Display conveniently a \code{KinematicsFeatureSetList} object
+#' Display conveniently a \code{KinematicsFeatureSet} object
 #'  
-#' @param object A \code{KinematicsFeatureSetList} object
+#' @param object A \code{KinematicsFeatureSet} object
 #' @param ... Arguments to be passed to methods
 #' 
 #' 

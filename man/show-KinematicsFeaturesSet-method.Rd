@@ -2,17 +2,17 @@
 \docType{methods}
 \name{show,KinematicsFeaturesSet-method}
 \alias{show,KinematicsFeaturesSet-method}
-\title{Display conveniently a \code{KinematicsFeatureSetList} object}
+\title{Display conveniently a \code{KinematicsFeatureSet} object}
 \usage{
 \S4method{show}{KinematicsFeaturesSet}(object)
 }
 \arguments{
-\item{object}{A \code{KinematicsFeatureSetList} object}
+\item{object}{A \code{KinematicsFeatureSet} object}
 
 \item{...}{Arguments to be passed to methods}
 }
 \description{
-Display conveniently a \code{KinematicsFeatureSetList} object
+Display conveniently a \code{KinematicsFeatureSet} object
 }
 \examples{
 data("candidate.platelets")

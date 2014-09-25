@@ -6,17 +6,17 @@
 trajectories(particleset, verbose = FALSE, ...)
 }
 \arguments{
-\item{particleset}{A (\code{Linked})\code{ParticleList} object}
+\item{particleset}{A (\code{Linked})\code{ParticleSet} object}
 
 \item{verbose}{Logical, currently not used - could be introduced for providing additional info on the trajectories}
 
 \item{...}{Arguments to be passed to methods}
 }
 \value{
-A \code{TrajectoryList} object
+A \code{TrajectorySet} object
 }
 \description{
-Generates a \code{TrajectoryList} object from a (\code{Linked})\code{ParticleList}
+Generates a \code{TrajectorySet} object from a (\code{Linked})\code{ParticleSet}
 }
 \examples{
 data("candidate.platelets")

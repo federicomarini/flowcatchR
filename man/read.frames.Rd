@@ -11,7 +11,7 @@ read.Frames(image.files, nframes = NULL)
 \item{nframes}{Number of frames that will constitute the \code{Frames} object}
 }
 \value{
-An object of the \code{FrameList} class, which holds the info on a list of frames, specifying for each the following elements:
+An object of the \code{Frames} class, which holds the info on a list of frames, specifying for each the following elements:
 \item{image}{The \code{Image} object containing the image itself}
 \item{location}{The complete path to the location of the original image}
 }
@@ -22,7 +22,7 @@ The number of frames is also specified, as just a subset of the images can be us
 }
 \examples{
 ## see vignette
-\dontrun{fullData <- read.frames(image.files = "/path/to/the/directory", nframes = 100)}
+\dontrun{fullData <- read.Frames(image.files = "/path/to/the/directory", nframes = 100)}
 }
 \author{
 Federico Marini, \email{marinif@uni-mainz.de}, 2014

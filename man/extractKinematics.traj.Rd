@@ -7,6 +7,8 @@ extractKinematics.traj(trajectoryset, trajectoryID, acquisitionFrequency = 30,
   scala = 50)
 }
 \arguments{
+\item{trajectoryset}{A \code{TrajectorySet} object}
+
 \item{trajectoryID}{The ID of a single trajectory}
 
 \item{acquisitionFrequency}{The frame rate of acquisition for the images, in
@@ -14,11 +16,9 @@ milliseconds}
 
 \item{scala}{The value of micro(?)meters to which each single pixel
   corresponds}
-
-\item{trajectorylist}{A \code{TrajectoryList} object}
 }
 \value{
-A \code{KinematicsFeatureSet} object
+A \code{KinematicsFeatures} object
 }
 \description{
 The computed set of parameters include \code{delta.x}, \code{delta.t} and \code{delta.v}

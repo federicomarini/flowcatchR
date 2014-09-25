@@ -6,7 +6,7 @@
 axesInfo(frames)
 }
 \arguments{
-\item{framelist}{A \code{FrameList} object}
+\item{frames}{A \code{Frames} object}
 }
 \value{
 A list object, containing the extremes of the field of interest (x-y-z, where z is time)

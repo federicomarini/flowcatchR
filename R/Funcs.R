@@ -13,14 +13,14 @@
 #' @param image.files Vector of strings containing the locations where the (raw) images are to be found, or alternatively, the path to the folder
 #' @param nframes Number of frames that will constitute the \code{Frames} object
 #'
-#' @return An object of the \code{FrameList} class, which holds the info on a list of frames, specifying for each the following elements:
+#' @return An object of the \code{Frames} class, which holds the info on a list of frames, specifying for each the following elements:
 #' \item{image}{The \code{Image} object containing the image itself}
 #' \item{location}{The complete path to the location of the original image}
 #' 
 #'
 #' @examples
 #' ## see vignette
-#' \dontrun{fullData <- read.frames(image.files = "/path/to/the/directory", nframes = 100)}
+#' \dontrun{fullData <- read.Frames(image.files = "/path/to/the/directory", nframes = 100)}
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
@@ -86,21 +86,19 @@ read.Frames <- function(image.files, # ../exportedMesenteriumSubset
 
 
 
-#' Explore the first frames of a \code{FrameList}
+#' Explore the frames of a \code{Frames}
 #' 
-#' The first frames of a \code{FrameList} are displayed in the browser, and are interactively navigable.
-#' Default number of shown frames is 4, can be set maximum to 8, as this function is purely for a 
-#' first inspection
+#' The first frames of a \code{Frames} are displayed in the browser, and are interactively navigable.
 #' 
-#' @param framelist A \code{FrameList} object
-#' @param nframes The number of frames to display (default value: 6)
-#' @param inspectAll Logical, whether to inspect all frames (overriding the default of 10 that can be used also when \code{inspectAll} is FALSE)
+#' 
+#' @param frames A \code{Frames} object
+#' @param nframes The number of frames to display (default value: \code{NULL}, all are displayed )
 #' @param display.method Method for displaying, can be either \code{raster} or \code{browser}. Defaults to \code{browser}, by opening a window in the browser
 #' @param verbose Logical, whether to provide additional output on the command line alongside with the images themselves
 #' 
 #' @examples
 #' data("MesenteriumSubset")
-#' \dontrun{inspect.frames(MesenteriumSubset)}
+#' \dontrun{inspect.Frames(MesenteriumSubset)}
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
@@ -128,16 +126,16 @@ inspect.Frames <- function(frames,
 
 
 
-#' Extracts subsets of frames from a \code{FrameList} object
+#' Extracts subsets of frames from a \code{Frames} object
 #' 
-#' An input \code{FrameList} object is subject to subsetting. This function is useful e.g. when the trajectory of interest 
+#' An input \code{Frames} object is subject to subsetting. This function is useful e.g. when the trajectory of interest 
 #' is presenting gaps (i.e. does not actually include a frame)
 #' 
-#' @param x A \code{FrameList} object
+#' @param frames A \code{Frames} object
 #' @param framesToKeep A vector containing the indexes of the frames to keep in the selection
 #' @param ... Arguments to be passed to methods
 #' 
-#' @return A \code{FrameList} object, composed by the subset of frames of the input \code{FrameList}
+#' @return A \code{Frames} object, composed by the subset of frames of the input \code{Frames}
 #' 
 #' 
 #' @examples
@@ -146,10 +144,6 @@ inspect.Frames <- function(frames,
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-
-
-
-#' @export
 select.Frames <- function(frames,framesToKeep=1,...)
 {
   # check if all framesToKeep are actually available in the Frames object
@@ -167,56 +161,30 @@ select.Frames <- function(frames,framesToKeep=1,...)
 
 
 
-
-#' Creates a \code{ChannelsFrameList} object from a \code{FrameList} object, decomposed in the acquired channels
-#'  
-#' @param framelist A \code{FrameList} object
+#' Compute the length of render frames in a \code{Frames} object
 #' 
-#' @return A \code{ChannelsFrameList} object, which is a list of 3 \code{FrameList} objects, named respectively \code{red}, \code{green} and \code{blue}
+#' @param x A \code{Frames} object
+#' 
+#' @return An integer number
+#' @examples
+#' data("MesenteriumSubset")
+#' length(MesenteriumSubset)
 #' 
 #' @export
-#' 
-#' @examples 
-#' data("MesenteriumSubset")
-#' 
-#' 
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-# channels <- function(framelist)
-# {
-#   # check if the framelist indeed has more than one channel, first of all! -> needs to be done TODO
-#   redCh <- framelist
-#   greenCh <- framelist
-#   blueCh <- framelist
-#   
-#   for (i in 1:length(framelist))
-#   {
-#     redCh[[i]]$image <- channel(framelist[[i]]$image,"red")
-#     redCh[[i]]$channel="red"
-#     greenCh[[i]]$image <- channel(framelist[[i]]$image,"green")
-#     greenCh[[i]]$channel <- "green"
-#     blueCh[[i]]$image <- channel(framelist[[i]]$image,"blue")
-#     blueCh[[i]]$channel <- "blue"
-#   }
-#   
-#   channelsframelist <- list(red=redCh,green=greenCh,blue=blueCh)
-#   class(channelsframelist) <- c("ChannelsFrameList",class(channelsframelist))
-#   return(channelsframelist)
-# }
-
-#' export
 length.Frames <- function(x)
 {
   numberOfFrames(x,"render")
 }
 
 
-#' Exports a \code{FrameList} object
+#' Exports a \code{Frames} object
 #' 
-#' Writes the images contained in the \code{image} slot of the \code{FrameList} object elements.
+#' Writes the images contained in the \code{image} slot of the \code{Frames} object elements.
 #' The images can be exported as single frames, or as a .gif image that is composed
 #' by the single frames.
 #' 
-#' @param framelist A \code{FrameList} object
+#' @param frames A \code{Frames} object
 #' @param dir The path of the folder where the image should be written
 #' @param nameStub The stub for the file name, that will be used as a prefix for the exported images
 #' @param createGif Logical, whether to create or not an animated .gif file
@@ -226,7 +194,7 @@ length.Frames <- function(x)
 #' 
 #' @examples
 #' data("MesenteriumSubset")
-#' \dontrun{export.frames(MesenteriumSubset,nameStub="subset_export_",createGif=TRUE,removeAfterCreatingGif=FALSE)}
+#' \dontrun{export.Frames(MesenteriumSubset,nameStub="subset_export_",createGif=TRUE,removeAfterCreatingGif=FALSE)}
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
@@ -261,16 +229,16 @@ export.Frames <- function(frames,
 
 
 
-#' Exports a \code{ParticleList} object
+#' Exports a \code{ParticleSet} object
 #' 
-#' Writes the particles contained in the \code{particles} data frame slot of the \code{ParticleList} object elements.
+#' Writes the particles contained in the \code{particles} data frame slot of the \code{ParticleSet} object elements.
 #' A track of the provenience of the particles is stored as a comment line above the header
 #' 
-#' @param particlelist A \code{ParticleList} object
-#' @param dir The path of the folder where the particle lists should be written
-#' @param nameStub The stub for the file name, that will be used as a prefix for the exported particle lists
+#' @param particleset A \code{ParticleSet} object
+#' @param dir The path of the folder where the particle sets should be written
+#' @param nameStub The stub for the file name, that will be used as a prefix for the exported particle sets
 #' 
-#' @return Particle list files are written in the desired location
+#' @return Particle sets files are written in the desired location
 #' 
 #' @examples
 #' data("candidate.platelets")
@@ -301,16 +269,16 @@ export.particles <- function(particleset,
 
 
 
-#' Constructor for a \code{ParticleList} object
+#' Constructor for a \code{ParticleSet} object
 #' 
-#' This function is used to create a \code{ParticleList} object from a vector/list of tab separated text files, each of one containing one line for each 
+#' This function is used to create a \code{ParticleSet} object from a vector/list of tab separated text files, each of one containing one line for each 
 #' particle in the related frame, alongside with its coordinates and if available, the computed features
 #' The number of frames is also specified, as just a subset of the particle lists can be used for this
 #' 
 #' @param particle.files Vector of strings containing the locations where the particle coordinates are to be found, or alternatively, the path to the folder
-#' @param nframes Number of frames that will constitute the \code{ParticleList} object
+#' @param nframes Number of frames that will constitute the \code{ParticleSet} object
 #'
-#' @return An object of the \code{ParticleList} class 
+#' @return An object of the \code{ParticleSet} class 
 #' 
 #' @examples
 #' ## see vignette and export.particles
@@ -338,9 +306,7 @@ read.particles <- function(particle.files,
     nframes <- length(particle.files)
   
   # check that nframes coincides with the number of images available -throw an error otherwise?
-#   particleList <- vector(nframes,mode="list")
-#   class(particleList) <- c("ParticleList",class(particleList))
-# 
+
   importedChannel <- unlist(strsplit(readLines(particle.files[1],n=1),split = "|",fixed=TRUE))[3]
   out <- ParticleSet(channel = importedChannel)
   
@@ -348,11 +314,7 @@ read.particles <- function(particle.files,
   {
     imgSource <- unlist(strsplit(readLines(particle.files[i],n=1),split = "|",fixed=TRUE))[2]
     out[[imgSource]] <- read.table(particle.files[i],sep="\t",comment.char = "#",header=TRUE,stringsAsFactors = FALSE)
-#     commentLine <- readLines(particle.files[i],n=1)
-#     particleList[[i]]$imgSource <- unlist(strsplit(commentLine,split = "|",fixed=TRUE))[2]
-#     particleList[[i]]$channel <- unlist(strsplit(commentLine,split = "|",fixed=TRUE))[3]
   }
-  #   attr(particleList,"call") <- match.call()
   cat("Created a ParticleSet object of",nframes,"frames.\n")
   return(out)
 }
@@ -362,12 +324,12 @@ read.particles <- function(particle.files,
 
 
 
-#' Initialize a \code{ParticleList} object for subsequent linking/tracking
+#' Initialize a \code{ParticleSet} object for subsequent linking/tracking
 #'  
-#' @param particlelist A ParticleList object
+#' @param particleset A \code{ParticleSet} object
 #' @param linkrange The number of frames to look for candidate particles potentially belonging to the same track
 #' 
-#' @return A ParticleList object with slots dedicated for the tracking pre-filled
+#' @return A \code{ParticleSet} object with slots dedicated for the tracking pre-filled
 #' 
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 initialize.LinkedParticleSet <- function(particleset,
@@ -387,8 +349,6 @@ initialize.LinkedParticleSet <- function(particleset,
     tmp[[i]]$special <- rep(TRUE,particleNr)
     tmp[[i]]$nxt <- matrix(0,nrow=particleNr,ncol=linkrange)
     
-    #     out[[i]]$imgSource <- particlelist[[i]]$imgSource
-    #     out[[i]]$channel <- particlelist[[i]]$channel
   }
   out@tracking <- tmp
 
@@ -444,14 +404,14 @@ repmat <- function(a,n,m)
 #' \code{linearityForwardProgression}, Mean Squared Displacement, velocity
 #' autocorrelation, and more
 #' 
-#' @param trajectorylist A \code{TrajectoryList} object
+#' @param trajectoryset A \code{TrajectorySet} object
 #' @param trajectoryID The ID of a single trajectory
 #' @param acquisitionFrequency The frame rate of acquisition for the images, in
 #'   milliseconds
 #' @param scala The value of micro(?)meters to which each single pixel
 #'   corresponds
 #'   
-#' @return A \code{KinematicsFeatureSet} object
+#' @return A \code{KinematicsFeatures} object
 #'   
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 extractKinematics.traj <- function(trajectoryset,
@@ -537,7 +497,7 @@ extractKinematics.traj <- function(trajectoryset,
 
 
 
-#' Calculate a set of kinematics parameter from a \code{TrajectoryList} object, or a single parameter, or from a single trajectory (all possible combinations)
+#' Calculate a set of kinematics parameter from a \code{TrajectorySet} object, or a single parameter, or from a single trajectory (all possible combinations)
 #' 
 #' The computed set of parameters include \code{delta.x}, \code{delta.t} and \code{delta.v}
 #' (displacements and instantaneous velocity), \code{totalTime}, \code{totalDistance},
@@ -547,7 +507,7 @@ extractKinematics.traj <- function(trajectoryset,
 #' performed for that trajectory alone. If a parameter is specified, only that
 #' parameter is reported, either for one or all trajectories
 #' 
-#' @param trajectorylist A \code{TrajectoryList} object
+#' @param trajectoryset A \code{TrajectorySet} object
 #' @param trajectoryIDs The ID of a single trajectory
 #' @param acquisitionFrequency The frame rate of acquisition for the images, in
 #'   milliseconds
@@ -555,7 +515,7 @@ extractKinematics.traj <- function(trajectoryset,
 #'   corresponds
 #' @param feature Character string, the name of the feature to be computed
 #'   
-#' @return A \code{KinematicsFeatureSetList} object, or a \code{KinematicsFeatureSet} object,
+#' @return A \code{KinematicsFeaturesSet} object, or a \code{KinematicsFeatures} object,
 #'   or an atomic value, or a list(eventually coerced to a vector)
 #'   
 #' @examples
@@ -603,7 +563,7 @@ kinematics <- function(trajectoryset,
       return(kineFeat.out)
     }
     
-  } else { # it will be done on all trajectories of the trajectorylist
+  } else { # it will be done on all trajectories of the trajectoryset
     tmp <- list()
     for(i in 1:length(trajectoryset))
     {
@@ -611,7 +571,7 @@ kinematics <- function(trajectoryset,
       tmp[[length(tmp) + 1]] <- kineOne
     }
     # additional class attribute?
-    #   class(kineSetList.out) <- c("KinematicsFeatureSetList",class(kineSetList.out)) # it is a list of KinematicsFeatureSet objects
+
     kineSetList.out <- new("KinematicsFeaturesSet",tmp)
     # then eventually just report the desired kinematic feature
     if(is.null(feature))
@@ -705,20 +665,19 @@ toCartesianCoords <- function(Theta,Radius)
 #################### newfile ######################
 
 
-#' Combines the information from a raw \code{FrameList} object and the corresponding preprocessed one
+#' Combines the information from a raw \code{Frames} object and the corresponding preprocessed one
 #' 
 #' All objects are painted with a unique colour - for sake of speed
 #'  
-#' @param rawframelist A \code{FrameList} object containing the raw images
-#' @param preprocessedframelist A \code{FrameList} object with the preprocessed versions of the images (e.g. segmented)
+#' @param raw.frames A \code{Frames} object containing the raw images
+#' @param binary.frames A \code{Frames} object with the preprocessed versions of the images (e.g. segmented)
 #' @param col A color character string, to select which color will be used for drawing the contours of the particles. If not specified, it will default according to the objects provided
 #' 
-#' @return A \code{FrameList} object, whose images are the combination of the raw images with the segmented objects drawn on them
+#' @return A \code{Frames} object, whose images are the combination of the raw images with the segmented objects drawn on them
 #' 
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 addParticles <- function(raw.frames,binary.frames,col=NULL)
 {
-#   out <- vector("list",length(rawframelist))
   tmpFL <- list()
   for (i in 1:length.Frames(raw.frames))
   {
@@ -737,88 +696,8 @@ addParticles <- function(raw.frames,binary.frames,col=NULL)
 
 
 
-# #' Combines raw and segmented images
-# #'  
-# #' @param rawimg An \code{Image} object with the raw frame data
-# #' @param segmimg An \code{Image} object with the segmented objects
-# #' 
-# #' @return An \code{Image} object that combines raw and segmented images, with objects painted singularly with different colours
-# #' 
-# #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-# actionPaint <- function(rawimg,segmimg)
-# {
-#   buildingUp <- rawimg
-#   for(obj in 1:max(segmimg))
-#   {
-#     elab_singleObj <- segmimg
-#     elab_singleObj[segmimg!=obj] <- 0
-#     builtUp <- paintObjects(elab_singleObj,buildingUp,col=colors()[52+obj])
-#     buildingUp <- builtUp
-#   }
-#   return(builtUp)
-# }
 
 
-
-
-
-
-
-#' Combines the information from a raw \code{FrameList} object and the corresponding preprocessed one,
-#' but this time every object is painted with a different colour
-#' 
-#' Every object is now shown with a different colour. Care should be taken, as this function is rather slower
-#' than combine.preprocessedFrameList
-#'   
-#' @param rawframelist A \code{FrameList} object containing the raw images
-#' @param preprocessedframelist A \code{FrameList} object with the preprocessed versions of the images (e.g. segmented)
-#' 
-#' @return A \code{FrameList} object, whose images are the combination of the raw images with the segmented objects drawn on them,
-#' painted singularly with different colours
-#' 
-#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-# combineWcolor.preprocessedFrameList <- function(rawframelist,preprocessedframelist) 
-#   # careful, it's kind of slower for painting all single objects separately and of different colors!
-#   # currently works best only when input raw image is in colorMode Color - as the colours there have actually a meaning 
-#   # maybe do a function actionPaint that actually is internally called here - params: rawimg, segmimg -> DONE
-# {
-#   out <- vector("list",length(rawframelist))
-#   
-#   if(length(dim(rawframelist[[1]]$image))<3)
-#     warning("You are trying to paint coloured cells on a single channel - info will be not so useful, try instead combine.preprocessedFrameList, it should be much faster.")
-#   
-#   for (i in 1:length(out))
-#   {
-#     rawimg <- rawframelist[[i]]$image
-#     segmimg <- preprocessedframelist[[i]]$image
-#     
-#     # works well if rawimg has still all 3 frames, otherwise i guess it stays B/W
-#     if(length(dim(rawimg))>2)
-#     {
-#       rawWithObj <- actionPaint(rawimg,segmimg)    
-#     } else {
-#       channel <- rawframelist[[i]]$channel
-#       
-#       switch(channel,
-#              red={
-#                rawWithObj <- rgbImage(red=actionPaint(rawimg,segmimg))
-#              }, 
-#              green={
-#                rawWithObj <- rgbImage(green=actionPaint(rawimg,segmimg))
-#              },
-#              blue={
-#                rawWithObj <- rgbImage(blue=actionPaint(rawimg,segmimg))
-#              },
-#              stop("No channel value was stored in the appropriate slot!")
-#       )
-#     }
-#     out[[i]]$image <- rawWithObj
-#   }
-#   
-#   class(out) <- c("FrameList",class(out))
-#   return(out)
-#   
-# }
 
 
 
@@ -830,14 +709,14 @@ addParticles <- function(raw.frames,binary.frames,col=NULL)
 
 
 #################### newfile ######################
-#' Cut borders of a \code{FrameList} object
+#' Cut borders of a \code{Frames} object
 #' 
-#' Performs cropping on the \code{FrameList} object, selecting how many pixels should be cut on each side
+#' Performs cropping on the \code{Frames} object, selecting how many pixels should be cut on each side
 #' 
 #' Cropping can be performed with careful choice of all cutting sides, or cropping a single value from
 #' all sides
 #' 
-#' @param x An input \code{FrameList} object
+#' @param frames An input \code{Frames} object
 #' @param cutLeft Amount of pixels to be cut at the side
 #' @param cutRight Amount of pixels to be cut at the side
 #' @param cutUp Amount of pixels to be cut at the side
@@ -846,7 +725,7 @@ addParticles <- function(raw.frames,binary.frames,col=NULL)
 #' @param testing Logical, whether to just test the cropping or to actually perform it. Default set to \code{FALSE}
 #' @param ... Arguments to be passed to methods
 #' 
-#' @return A \code{FrameList} object, with cropped frames in the \code{image} slot
+#' @return A \code{Frames} object, with cropped frames in the \code{image} slot
 #' 
 #' @examples 
 #' data("MesenteriumSubset")
@@ -860,8 +739,6 @@ crop.Frames <- function(frames,
                           testing=FALSE,
                           ...)
 {
-#   out <- vector(length(x),mode="list")
-#   class(out) <- c("FrameList",class(out))
   tmpFL <- vector(length.Frames(frames),mode="list")
   if(cutAll > 0)
   {
@@ -896,17 +773,17 @@ crop.Frames <- function(frames,
 
 
 
-#' Rotates all images in a \code{FrameList} object 
+#' Rotates all images in a \code{Frames} object 
 #' 
 #' Rotation is performed exploiting the rotate function of the \code{EBImage} package. Could be automated if support for coordinate/pixel interaction is included
 #' 
-#' @param framelist A \code{FrameList} object
-#' @param rotAngle The rotation angle (clockwise) specified in degrees
+#' @param frames A \code{Frames} object
+#' @param angle The rotation angle (clockwise) specified in degrees
 #' @param testing Logical, whether to just test the rotation or to actually perform it. Default set to \code{FALSE}
 #' @param output.origin A vector of 2 numbers indicating the dimension of the output image, as in the rotate function
 #' @param output.dim A vector of 2 numbers indicating the output coordinates of the origin in pixels, as in the \code{rotate} function
 #'  
-#' @return A \code{FrameList} object containing the rotated frames
+#' @return A \code{Frames} object containing the rotated frames
 #' 
 #' @examples 
 #' data("MesenteriumSubset")
@@ -960,38 +837,15 @@ channel.Frames <- function(frames,mode)
 
 
 
-#' Preprocessing images
-#' 
-#' Can be applied to \code{FrameList} or \code{ChannelsFrameList} objects. \code{ChannelsFrameList} are then subset to the chosen channel,
-#' and the method \code{preprocess.FrameList} is then applied, with its set of parameters
-#'  
-#' @param x A \code{FrameList} or a \code{ChannelsFrameList} object
-#' @param ... Arguments to be passed to methods, such as channel and/or preprocessing parameters
-#' 
 
-#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-#' #' Preprocessing function for \code{ChannelsFrameList} objects
-#' 
-#' \code{ChannelsFrameList} are then subset to the chosen channel, and the method \code{preprocess.FrameList} is then applied, with its set of parameters
-#'  
-#' @param x A \code{ChannelsFrameList} object
-#' @param channel Character string. The channel to perform the operations on. Can be \code{red}, \code{green} or \code{blue}
-#' @param ... Arguments to be passed to methods
-#' 
-#' @return A \code{FrameList} object, whose frame images are the preprocessed versions of the input images
-#' 
-#' @examples
-#' data("MesenteriumSubset")
-#' # preprocess(channels(MesenteriumSubset),channel = "red")
-#' 
 
-#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-#' Preprocessing function for \code{FrameList} objects
+
+#' Preprocessing function for \code{Frames} objects
 #' 
-#' \code{FrameList} objects are processed according to the chosen set of parameters. Many of them refer directly to 
+#' \code{Frames} objects are processed according to the chosen set of parameters. Many of them refer directly to 
 #' existing \code{EBImage} functions, please see the corresponding help for additional information
 #'  
-#' @param x A \code{FrameList} object
+#' @param frames A \code{Frames} object
 #' @param brush.size Size in pixels of the brush to be used for initial smoothing
 #' @param brush.shape Shape of the brush to be used for initial smoothing
 #' @param at.offset Offset to be used in the adaptive thresholding step
@@ -1004,17 +858,14 @@ channel.Frames <- function(frames,mode)
 #' @param displayprocessing Logical, whether to display intermediate steps while performing preprocessing. Dismissed currently, it could increase runtime a lot
 #' @param ... Arguments to be passed to methods
 #' 
-#' @return A \code{FrameList} object, whose frame images are the preprocessed versions of the input images
+#' @return A \code{Frames} object, whose frame images are the preprocessed versions of the input images
 #' 
 #' @examples
 #' data("MesenteriumSubset")
-
+#' preprocess.Frames(channel.Frames(MesenteriumSubset,"red"))
 #' 
-
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 #' 
-#' 
-
 #' @export
 preprocess.Frames <- function(frames,
                         brush.size=3,
@@ -1049,82 +900,19 @@ preprocess.Frames <- function(frames,
 }
 
 
-# preprocess.ChannelsFrameList <- function(x,
-#                                          channel="",
-#                                          ...) 
-# {
-#   switch(channel,
-#          red={
-#            cat("Preprocessing the red channel...\n")
-#            out <- preprocess.FrameList(x[[1]])
-#          }, 
-#          green={
-#            cat("Preprocessing the green channel...\n")
-#            out <- preprocess.FrameList(x[[2]])
-#          },
-#          blue={
-#            cat("Preprocessing the blue channel...\n")
-#            out <- preprocess.FrameList(x[[3]])
-#          },
-#          stop("You did not choose any of the value for the channel - allowed values= red | green | blue")
-#   )
-#   return(out)
-# }
-
-
-# preprocess.FrameList <- function(x,
-#                                  brush.size=3,
-#                                  brush.shape="disc",
-#                                  at.offset=0.15,
-#                                  at.wwidth=10,
-#                                  at.wheight=10,
-#                                  kern.size=3,
-#                                  kern.shape="disc",
-#                                  ws.tolerance=1,
-#                                  ws.radius=1,
-#                                  displayprocessing=FALSE,
-#                                  ...) # for the single channel images/for one channel of multi-channel images
-# {
-#   #   cat("do this - processing the single channel")
-#   out <- vector(length(x),mode="list")
-#   class(out) <- c("FrameList",class(out))
-#   
-#   for(i in 1:length(x))
-#   {
-#     rawimg <- x[[i]]$image
-#     #     colorMode(rawimg) <- Grayscale
-#     
-#     flo = makeBrush(brush.size, brush.shape, step=FALSE)^2
-#     flo <- flo/sum(flo)
-#     
-#     thresh_img <- thresh(filter2(rawimg,flo),w=at.wwidth,h=at.wheight,offset=at.offset)
-#     
-#     # if needed with a step of smoothing & co (operations of opening,...)
-#     kern <- makeBrush(size=kern.size,shape=kern.shape)
-#     
-#     distmap_thre <- distmap(thresh_img)
-#     watershed_thre <- watershed(distmap_thre,tolerance=ws.tolerance,ext=ws.radius) 
-#     
-#     out[[i]]$image <- watershed_thre
-#     out[[i]]$channel <- x[[i]]$channel
-#     out[[i]]$location <- x[[i]]$location  # or maybe call it location raw? 
-#   }
-#   return(out)
-# }
 
 
 
 
 
-
-#' Extracts particles from the images of a \code{FrameList} object. 
+#' Extracts particles from the images of a \code{Frames} object. 
 #' 
 #'  
-#' @param framelistRaw A \code{FrameList} object with the raw images (mandatory)
-#' @param framelistPreprocessed A \code{FrameList} object with preprocessed images (optional, if not provided gets produced with standard default parameters)
+#' @param raw.frames A \code{Frames} object with the raw images (mandatory)
+#' @param binary.frames A \code{Frames} object with preprocessed images (optional, if not provided gets produced with standard default parameters)
 #' @param channel Character string. The channel to perform the operations on. Can be \code{red}, \code{green} or \code{blue}
 #' 
-#' @return A \code{ParticleList} object, containing all detected particles for each frame
+#' @return A \code{ParticleSet} object, containing all detected particles for each frame
 #' 
 #' @examples
 #' data("MesenteriumSubset")
@@ -1132,61 +920,6 @@ preprocess.Frames <- function(frames,
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-# particles <- function(framelistRaw,
-#                       framelistPreprocessed=NULL,
-#                       channel=""  # if we provide the channelsFrameList as input 
-# )
-# {
-#   if(!is(framelistRaw,"FrameList") && !is(framelistRaw,"ChannelsFrameList"))
-#   {
-#     stop("You need to provide at least a FrameList/channelsFrameList object as input!")
-#   }
-#   
-#   
-#   if(is.null(framelistPreprocessed))
-#   {
-#     cat("You did not provide a preprocessed FrameList alongside with the raw set of frames.\n")
-#     cat("Don't worry, the raw FrameList object will be first preprocessed with a set of default parameter.\n")
-#     cat("You can always change them afterwards if they do not fit to your scenario.\n")
-#     if(is(framelistRaw,"ChannelsFrameList"))
-#     {
-#       #       framelistRaw <- framelistRaw[[channel]]
-#       framelistPreprocessed <- preprocess.ChannelsFrameList(framelistRaw[[channel]])
-#     } else {
-#       framelistPreprocessed <- preprocess.FrameList(framelistRaw)
-#     }
-#   }
-#   
-#   # check that both input framelists have same length
-#   if(length(framelistRaw) != length(framelistPreprocessed) )
-#   {
-#     stop("FrameList objects have different lengths!")
-#   } else {
-#     cat("Computing features...\n")
-#   }
-#   
-#   # returns a particle list - not linked yet
-#   
-#   out <- vector(length(framelistRaw),mode="list")
-#   class(out) <- c("ParticleList",class(out))
-#   
-#   for(i in 1:length(framelistRaw))
-#   {
-#     segmImg <- framelistPreprocessed[[i]]$image
-#     rawImg <- framelistRaw[[i]]$image
-#     
-#     imgFeatures <- as.data.frame(computeFeatures(segmImg,rawImg,xname="cell"))
-#     imgFeatures$shapeFactor <- (imgFeatures$cell.0.s.perimeter)^2 / (4*pi*imgFeatures$cell.0.s.area)
-#     
-#     out[[i]]$particles <- imgFeatures
-#     out[[i]]$imgSource <- framelistPreprocessed[[i]]$location
-#     out[[i]]$channel <- framelistPreprocessed[[i]]$channel
-#   }
-#   cat("Done!\n")
-#   return(out)
-# }
-
-#' @export
 particles <- function(raw.frames,
                        binary.frames=NULL,
                        channel=NULL  
@@ -1206,8 +939,8 @@ particles <- function(raw.frames,
   
   
   if(missing(binary.frames)){
-    cat("You did not provide a preprocessed FrameList alongside with the raw set of frames.\n")
-    cat("Don't worry, the raw FrameList object will be first preprocessed with a set of default parameter.\n")
+    cat("You did not provide a preprocessed Frames object alongside with the raw set of frames.\n")
+    cat("Don't worry, the raw Frames object object will be first preprocessed with a set of default parameter.\n")
     cat("You can always change them afterwards if they do not fit to your scenario.\n")
     binary.frames = preprocess.Frames(raw.frames)
   }
@@ -1234,77 +967,19 @@ particles <- function(raw.frames,
   return(out)
 }
 
-# particles2 <- function(framelistRaw,
-#                       framelistPreprocessed=NULL,
-#                       channel=""  # if we provide the channelsFrameList as input 
-# )
-# {
-#   if(!is(framelistRaw,"FrameList") && !is(framelistRaw,"ChannelsFrameList"))
-#   {
-#     stop("You need to provide at least a FrameList/channelsFrameList object as input!")
-#   }
-#   if(is.null(framelistPreprocessed))
-#   {
-#     cat("You did not provide a preprocessed FrameList alongside with the raw set of frames.\n")
-#     cat("Don't worry, the raw FrameList object will be first preprocessed with a set of default parameter.\n")
-#     cat("You can always change them afterwards if they do not fit to your scenario.\n")
-#     if(is(framelistRaw,"ChannelsFrameList"))
-#     {
-#       #       framelistRaw <- framelistRaw[[channel]]
-#       framelistPreprocessed <- preprocess.ChannelsFrameList(framelistRaw[[channel]])
-#     } else {
-#       framelistPreprocessed <- preprocess.FrameList(framelistRaw)
-#     }
-#   }
-#   
-#   # check that both input framelists have same length
-#   if(length(framelistRaw) != length(framelistPreprocessed) )
-#   {
-#     stop("FrameList objects have different lengths!")
-#   } else {
-#     cat("Computing features...\n")
-#   }
-#   
-#   # returns a particle list - not linked yet
-#   
-#   
-#   
-#   
-#   
-#   ## here i should simplify the list
-#   out <- vector(length(framelistRaw),mode="list")
-#   class(out) <- c("ParticleList",class(out))
-#   
-#   for(i in 1:length(framelistRaw))
-#   {
-#     segmImg <- framelistPreprocessed[[i]]$image
-#     rawImg <- framelistRaw[[i]]$image
-#     
-#     imgFeatures <- as.data.frame(computeFeatures(segmImg,rawImg,xname="cell"))
-#     imgFeatures$shapeFactor <- (imgFeatures$cell.0.s.perimeter)^2 / (4*pi*imgFeatures$cell.0.s.area)
-#     
-#     out[[i]]$particles <- imgFeatures
-#     out[[i]]$imgSource <- framelistPreprocessed[[i]]$location
-#     out[[i]]$channel <- framelistPreprocessed[[i]]$channel
-#   }
-#   cat("Done!\n")
-#   return(out)
-# }
 
 
 
-
-
-#' Performs filtering on a \code{ParticleList} object
+#' Performs filtering on a \code{ParticleSet} object
 #' 
 #' According to parameters of interests, such as size, eccentricity/shape, filters out the particles that do not 
 #' satisfy the indicated requirements
 #' 
-#' @param particlelist A \code{ParticleList} object. A \code{LinkedParticleList} object can also be provided as input, yet the returned object will be a \code{ParticleList} object that needs to be linked again 
+#' @param particleset A \code{ParticleSet} object. A \code{LinkedParticleSet} object can also be provided as input, yet the returned object will be a \code{ParticleSet} object that needs to be linked again 
 #' @param min.area Size in pixels of the minimum area needed to detect the object as a potential particle of interest
 #' @param max.area Size in pixels of the maximum area allowed to detect the object as a potential particle of interest
 #'  
-#' @return A \code{ParticleList} object
+#' @return A \code{ParticleSet} object
 #' 
 #' @examples
 #' data("candidate.platelets")
@@ -1320,7 +995,7 @@ select.particles <- function(particleset,
                              #eccentricityThreshold = 0.7 # currently not so efficient with so small particles available in the images!!
 )
 {
-  # returns a particle list - not linked yet
+  # returns a particleset - not linked yet
   
   if(is(particleset,"LinkedParticleSet"))
   {
@@ -1374,208 +1049,16 @@ select.particles <- function(particleset,
 #################### newfile ######################
 
 
-#' Calculate Otsu's threshold
-#' 
-#' Determines the value for the threshold grey level according to the Otsu method 
-#'  
-#' @param input_image An \code{Image} object
-#' @param nr_bit Number of bits to use for discretizing the levels
-#' 
-#' @return A numeric value
-#'  
-#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-# otsuThreshold <- function (input_image,nr_bit=16)  # use all channels?
-# {
-#   # image is read through readImage from EBImage
-#   # returns the level where the variance between classes is maximized
-#   ##STEPS NOT NEEDED!!!!    
-#   # transform into grey levels
-#   #  greyImg <- EBImage::channel(input_image,"grey")
-#   # the matrix gets stretched into a vec
-#   #  greyVec <- as.vector(greyImg)
-#   
-#   
-#   ## in order to treat properly the different channels, "step out like this"
-#   
-#   greyVec <- input_image
-#   totPixels <- length(greyVec)
-#   # and the values are rescaled
-#   #  greyLevels <- greyVec * 255
-#   #  greyLevels <- round(greyLevels)
-#   
-#   #  tableGrey <- tabulate(greyLevels)
-#   # tableGrey <- tableGrey + 0.0001
-#   
-#   #  n_i <- tableGrey
-#   #  p_i <- n_i/totPixels
-#   # careful, sum is not exactly 1...
-#   
-#   ## coding in 16 bit, slightly better
-#   greyLevels <- greyVec * (2^nr_bit -1) 
-#   
-#   #### modified!!
-#   greyLevels <- as.vector(greyLevels)
-#   
-#   
-#   greyLevels <- round(greyLevels)
-#   
-#   tableGrey <- tabulate(greyLevels)
-#   tableGrey <- tableGrey + 0.000001
-#   
-#   n_i <- tableGrey
-#   p_i <- n_i/totPixels
-#   # careful, sum is not exactly 1...
-#   
-#   ## defining functions for means and probabilities - what goes afterwards in the otsu formula to maximize
-#   ##
-#   mean_T <- function(p, L) #L=length(tableGrey) )
-#   {
-#     ind <- 1:L
-#     s <- ind * p[1:L]
-#     z <- sum(s)
-#     return(z)
-#   }
-#   ##
-#   mean_k <- function(p, k, L)
-#   {
-#     ind <- 1:k
-#     s <- ind * p[1:k]
-#     z <- sum(s)
-#     return(z)
-#   }
-#   ##
-#   w_k <- function(p, k)
-#   {
-#     s <- sum(p[1:k])
-#     return(s)
-#   }
-#   
-#   ## define the function to optimize
-#   sigma_B_k <- function(p, L, k)
-#   {
-#     ( mean_T(p,L) * w_k(p,k) - mean_k(p,k) )^2 / ( w_k(p,k) * (1 - w_k(p,k)) )
-#   }
-#   
-#   ## actually do the optimization (max required)
-#   o <- optimize(sigma_B_k, c(1,length(tableGrey)), maximum=TRUE, L=length(tableGrey), p=p_i )
-#   otsu_threshold <- o$maximum/(2^nr_bit-1) 
-#   
-#   cat("Calculated value with Otsu thresholding method...")
-#   cat(otsu_threshold)
-#   cat("\n")
-#   
-#   return(otsu_threshold)
-#   
-# }
-# 
-# 
-# ################
-# 
-# #' Calculate Kittler-Illinger's threshold
-# #' 
-# #' Determines the value for the threshold grey level according to the Kittler-Illinger method 
-# #'   
-# #' @param input_image An \code{Image} object
-# #' @param nr_bit Number of bits to use for discretizing the levels
-# #' 
-# #' @return A numeric value
-# #' 
-# #' 
-# #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-# kittlerillingerThreshold <- function (input_image,nr_bit=8)  # use all channels?
-# {
-#   greyVec <- input_image
-#   totPixels <- length(greyVec)
-#   ## coding in 16 bit, slightly better
-#   greyLevels <- greyVec * (2^nr_bit -1) # parametrizable? nrBit <- 16
-#   # greyLevels <- greyVec * (2^8 -1) # parametrizable? nrBit <- 16
-#   #### modified!!
-#   greyLevels <- as.vector(greyLevels)
-#   greyLevels <- round(greyLevels)
-#   
-#   tableGrey <- tabulate(greyLevels)
-#   tableGrey <- tableGrey + 0.000001
-#   
-#   
-#   n_i <- tableGrey
-#   p_i <- n_i/totPixels
-#   # careful, sum is not exactly 1...
-#   
-#   
-#   P_t <- function(p, k)
-#   {
-#     s <- sum(p[0:k])
-#     return(s)
-#   }
-#   
-#   
-#   ##
-#   mean_f <- function(p, k, L)
-#   {
-#     ind <- 1:k
-#     s <- ind * p[1:k]
-#     z <- sum(s)
-#     return(z)
-#   }
-#   
-#   mean_b <- function(p, k, L)
-#   {
-#     ind <- (k+1):L
-#     s <- ind * p[(k+1):L]
-#     z <- sum(s)
-#     return(z)
-#   }
-#   
-#   sigma_f_t <- function(p, k, L)
-#   {
-#     s <- 0
-#     mu <- mean_f(p,k,L)
-#     for (i in 1:k)
-#     {
-#       s <- s + ( (i - mu)^2 * p[i] )
-#     }
-#     return(sqrt(s))
-#   }
-#   
-#   sigma_b_t <- function(p, k, L)
-#   {
-#     s <- 0
-#     mu <- mean_f(p,k,L)
-#     for (i in (k+1):L)
-#     {
-#       s <- s + ( (i - mu)^2 * p[i] )
-#     }
-#     return(sqrt(s))
-#   }
-#   
-#   
-#   ## define the function to optimize
-#   kittIll <- function(p, L, k)
-#   {
-#     P_t(p,k)*log(sigma_f_t(p,k,L)) + (1-P_t(p,k))*log(sigma_b_t(p,k,L)) - P_t(p,k)*log(P_t(p,k)) - (1-P_t(p,k))*log((1-P_t(p,k)))
-#   }
-#   
-#   ## actually do the optimization (max required)
-#   o <- optimize(kittIll, c(1,length(tableGrey)), maximum=FALSE, L=length(tableGrey), p=p_i )
-#   kittlerillinger_threshold <- o$minimum/((2^nr_bit)-1) 
-#   
-#   cat("Calculated value with Kittler-Illinger thresholding method...")
-#   cat(kittlerillinger_threshold)
-#   cat("\n")
-#   
-#   return(kittlerillinger_threshold)
-#   
-# }
 
 
 #################### newfile ######################
 
-#' Links a \code{ParticleList} object
+#' Links a \code{ParticleSet} object
 #' 
 #' Performs linking of the particles by tracking them through the frames
 #'  
 #' 
-#' @param particlelist A \code{ParticleList} object
+#' @param particleset A \code{ParticleSet} object
 #' @param L Maximum number of pixels an object can move in two consecutive frames
 #' @param R Linkrange, i.e. the number of consecutive frames to search for potential candidate links
 #' @param epsilon1 A numeric value, to be used in the formula. Jitter for allowing angular displacements
@@ -1583,7 +1066,6 @@ select.particles <- function(particleset,
 #' @param lambda1 A numeric value. Multiplicative factor for the penalty function
 #' @param lambda2 A numeric value. Multiplicative factor applied to the angular displacement
 #' @param penaltyFunction A function structured in such a way to be applied as penalty function in the linking
-#' @param nframes Numeric value. Number of frames where the linking should be performed 
 #' @param verboseOutput Logical, whether the output should report additional intermediate steps. For debugging use mainly
 #' @param prog Logical, whether the a progress bar should be shown during the tracking phase
 #' @param include.intensity Logical, whether to include also intensity change of the particles in the cost function calculation
@@ -1593,7 +1075,7 @@ select.particles <- function(particleset,
 #' In: Journal of structural biology 151.2 (Aug. 2005), pp. 182-95. ISSN: 1047-8477. DOI: 10.1016/j.jsb.2005.06.002.
 #' URL: http://www.ncbi.nlm.nih.gov/pubmed/16043363
 #' 
-#' @return A \code{LinkedParticleList} object
+#' @return A \code{LinkedParticleSet} object
 #' 
 #' @examples
 #' data("candidate.platelets")
@@ -1798,7 +1280,6 @@ link.particles <- function(particleset,
     setTxtProgressBar(pb, 100)
     close(pb)
   }
-#   class(out) <- c("LinkedParticleList",class(out))
   return(out)  
 }
 
@@ -1838,13 +1319,13 @@ penaltyFunctionGenerator <- function(epsilon1=0.1,
 #################### newfile ######################
 #' Generate trajectories
 #' 
-#' Generates a \code{TrajectoryList} object from a (\code{Linked})\code{ParticleList}
+#' Generates a \code{TrajectorySet} object from a (\code{Linked})\code{ParticleSet}
 #' 
-#' @param particleset A (\code{Linked})\code{ParticleList} object
+#' @param particleset A (\code{Linked})\code{ParticleSet} object
 #' @param verbose Logical, currently not used - could be introduced for providing additional info on the trajectories
 #' @param ... Arguments to be passed to methods
 #' 
-#' @return A \code{TrajectoryList} object
+#' @return A \code{TrajectorySet} object
 #' 
 #' @examples
 #' data("candidate.platelets")
@@ -1863,7 +1344,7 @@ trajectories <- function(particleset,
   } else {
     if(is(particleset,"ParticleSet"))
     {
-      cat("Input ParticleList is not a LinkedParticleSet.\n")
+      cat("Input ParticleSet is not a LinkedParticleSet.\n")
       cat("Performing linking first with some set of default parameters - you might want to change them according to your scenario...\n")
       linkedparticleset <- link.particles(particleset,L=26,R=3,epsilon1=0,epsilon2=0,lambda1=1,lambda2=0)
       if(verbose) linkedparticleset
@@ -1968,7 +1449,7 @@ trajectories <- function(particleset,
 #' 
 #' Auxiliary function to return the dimensions of the field of interest
 #'  
-#' @param framelist A \code{FrameList} object
+#' @param frames A \code{Frames} object
 #' 
 #' @return A list object, containing the extremes of the field of interest (x-y-z, where z is time)
 #' 
@@ -1981,17 +1462,17 @@ axesInfo <- function(frames)
 }
 
 
-#' 3D representation of a \code{TrajectoryList} object
+#' 3D representation of a \code{TrajectorySet} object
 #' 
-#' Provides a visual representation of a \code{TrajectoryList} object
+#' Provides a visual representation of a \code{TrajectorySet} object
 #' 
 #' 
 #' 
-#' Based on the \code{rgl} library, the function extracts the region of interests from the dimensions of an image of the \code{FrameList} object,
+#' Based on the \code{rgl} library, the function extracts the region of interests from the dimensions of an image of the \code{Frames} object,
 #' and afterwards plots the x-y-time representation of the identified trajectories
 #' 
-#' @param x A \code{TrajectoryList} object
-#' @param framelist A \code{FrameList} object, used here to identify the limits of the region of interest 
+#' @param x A \code{TrajectorySet} object
+#' @param frames A \code{Frames} object, used here to identify the limits of the region of interest 
 #' @param ... Arguments to be passed to methods
 #' @param verbose Logical, whether to provide additional output on the command line
 #' 
@@ -2025,16 +1506,16 @@ plot.TrajectorySet <- function(x,frames,verbose=FALSE,...)
 
 
 
-#' 2D projection of a \code{TrajectoryList} object
+#' 2D projection of a \code{TrajectorySet} object
 #' 
-#' Provides a bird's eye view of a \code{TrajectoryList} object on a bidimensional space
+#' Provides a bird's eye view of a \code{TrajectorySet} object on a bidimensional space
 #' 
-#' Independent from the \code{rgl} library, the function extracts the region of interests from the dimensions of an image of the \code{FrameList} object,
-#' and afterwards plots the x-y-time representation of the identified trajectories on a 2d plane. It is possible to subset the \code{TrajectoryList}
+#' Independent from the \code{rgl} library, the function extracts the region of interests from the dimensions of an image of the \code{Frames} object,
+#' and afterwards plots the x-y-time representation of the identified trajectories on a 2d plane. It is possible to subset the \code{TrajectorySet}
 #' object with the IDs of the desired trajectories
 #' 
-#' @param x A \code{TrajectoryList} object
-#' @param framelist A \code{FrameList} object, used here to identify the limits of the region of interest 
+#' @param trajectoryset A \code{TrajectorySet} object
+#' @param frames A \code{Frames} object, used here to identify the limits of the region of interest 
 #' @param trajIDs A vector containing the ids of the desired trajectories
 #' @param verbose Logical, whether to provide additional output on the command line
 #' @param ... Arguments to be passed to methods
@@ -2043,7 +1524,7 @@ plot.TrajectorySet <- function(x,frames,verbose=FALSE,...)
 #' data("MesenteriumSubset")
 #' data("candidate.platelets")
 #' platelets.trajectories <- trajectories(candidate.platelets)
-#' # plot2D.TrajectoryList(platelets.trajectories,MesenteriumSubset)
+#' plot2D.TrajectorySet(platelets.trajectories,MesenteriumSubset)
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
@@ -2061,9 +1542,9 @@ plot2D.TrajectorySet <- function(trajectoryset,frames,trajIDs=NULL,verbose=FALSE
     # check the IDs are correctly given
     allAvailableTrajectories <- sapply(trajectoryset,function(arg){unique(arg$trajectory$trajLabel)})
     if(!all(trajIDs %in% allAvailableTrajectories))
-      stop("You are supplying IDs of trajectories which are not included in the TrajectoryList object!")
+      stop("You are supplying IDs of trajectories which are not included in the TrajectorySet object!")
   }
-  if(verbose) cat("Plotting",length(trajIDs),"trajectories (total available in the TrajectoryList:", length(trajectoryset), ")...\n")
+  if(verbose) cat("Plotting",length(trajIDs),"trajectories (total available in the TrajectorySet:", length(trajectoryset), ")...\n")
   
   #   trajectoryDataFrame <- do.call(rbind.data.frame,lapply(trajectoryset,function(arg){arg$trajectory}))
   t <- trajIDs[1]
@@ -2088,33 +1569,33 @@ plot2D.TrajectorySet <- function(trajectoryset,frames,trajIDs=NULL,verbose=FALSE
 
 
 
-#' Add object contours to a \code{FrameList} object
+#' Add object contours to a \code{Frames} object
 #'  
-#' Creates a \code{FrameList} object containing raw information, combined with the segmented images and the relative trajectory under analysis
+#' Creates a \code{Frames} object containing raw information, combined with the segmented images and the relative trajectory under analysis
 #' 
-#' If a \code{TrajectoryList} is provided and mode is set to \code{trajectories}, returns a \code{FrameList} with all trajectories included in the IDs 
+#' If a \code{TrajectorySet} is provided and mode is set to \code{trajectories}, returns a \code{Frames} with all trajectories included in the IDs 
 #' vector painted accordingly.
 #' If the mode is set to \code{particles}, it will just plot the particles (all) on all frames.
-#' If no \code{trajectoryList} is provided, it will be computed with default parameters.
+#' If no \code{TrajectorySet} is provided, it will be computed with default parameters.
 #' If no \code{binary.frames} is provided, it will be computed also with default parameters
 #' 
-#' @param raw.frames A \code{FrameList} object with raw images
-#' @param binary.frames A \code{FrameList} object with preprocessed frames
-#' @param trajectories A \code{TrajectoryList} object
+#' @param raw.frames A \code{Frames} object with raw images
+#' @param binary.frames A \code{Frames} object with preprocessed frames
+#' @param trajectoryset A \code{TrajectorySet} object
 #' @param trajIDs Numeric vector, the ID(s) of the trajectory.
 #' @param mode A character string, can assume the values \code{particles} or \code{trajectories}. Defaults to \code{particles}
 #' @param col A vector of color strings
-#' @param channel A character string, to select which channel to process, if a \code{ChannelsFrameList} is supplied or if the \code{FrameList} in \code{raw.frames} has more than one channel
+#' @param channel A character string, to select which channel to process
 #' 
-#' @return A new \code{FrameList} object with contours of the objects added
+#' @return A new \code{Frames} object with contours of the objects added
 #' 
 #' @examples
 #' data("MesenteriumSubset")
 #' \dontrun{
 #' paintedTrajectories <- add.contours(raw.frames = MesenteriumSubset, mode = "trajectories",channel="red")
 #' paintedParticles <- add.contours(raw.frames = MesenteriumSubset, mode = "particles",channel="red")
-#' inspect.frames(paintedTrajectories)
-#' inspect.frames(paintedParticles)
+#' inspect.Frames(paintedTrajectories)
+#' inspect.Frames(paintedParticles)
 #' }
 #' 
 #' @export
@@ -2141,7 +1622,7 @@ add.contours <- function(raw.frames,
     # check also whether trajectories are there already, if so throw an error # or a warning?
     if(!is.null(trajectoryset))
     {
-      stop("You are providing a TrajectoryList object, but no binary.frames FrameList!
+      stop("You are providing a TrajectorySet object, but no binary.frames Frames object!
            Please check whether you might have it in your workspace")
     }
   }
@@ -2150,7 +1631,7 @@ add.contours <- function(raw.frames,
   # 
   if(mode=="trajectories") # additional checks on the trajectoryset object provided 
   {
-    # if no trajectorylist is provided, compute it
+    # if no trajectoryset is provided, compute it
     if(is.null(trajectoryset))
     {
       trajectoryset <- trajectories(particles(raw.frames,binary.frames,channel=channel))
@@ -2175,7 +1656,7 @@ add.contours <- function(raw.frames,
     
     out <- addTrajectories(raw.frames,binary.frames,trajectoryset,trajIDs)
     
-  } else if(mode=="particles") # there is actually no need for the trajectorylist/trajId, and the col can be just one value ;)
+  } else if(mode=="particles") # there is actually no need for the trajectoryset/trajId, and the col can be just one value ;)
   {
     out <- addParticles(raw.frames,binary.frames,col)
     

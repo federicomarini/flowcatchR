@@ -2,17 +2,17 @@
 \docType{methods}
 \name{show,LinkedParticleSet-method}
 \alias{show,LinkedParticleSet-method}
-\title{Display conveniently a \code{LinkedParticleList} object}
+\title{Display conveniently a \code{LinkedParticleSet} object}
 \usage{
 \S4method{show}{LinkedParticleSet}(object)
 }
 \arguments{
-\item{object}{A \code{LinkedParticleList} object}
+\item{object}{A \code{LinkedParticleSet} object}
 
 \item{...}{Arguments to be passed to methods}
 }
 \description{
-Display conveniently a \code{LinkedParticleList} object
+Display conveniently a \code{LinkedParticleSet} object
 }
 \examples{
 data("candidate.platelets")
