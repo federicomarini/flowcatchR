@@ -180,8 +180,8 @@ select.Frames <- function(frames,framesToKeep=1,...)
     stop("You are selecting frames that are not available in the original Frames object")
   
   
-  multiImg <- combine(lapply(framesToKeep,function(i) getFrame(frames,i,type = "render")))
-  y <- Frames(multiImg,channel=frames@channel)
+  y <- combine(lapply(framesToKeep,function(i) getFrame(frames,i,type = "render")))
+#   y <- Frames(multiImg,channel=frames@channel)
 
   return(y)
 }
@@ -272,7 +272,7 @@ export.Frames <- function(frames,
   if(createGif)
   {
     # using imagemagick
-    system(paste0("convert -delay 40 ",dir,nameStub,"_frame_*.png ",dir,nameStub,".gif"))
+    system(paste0("convert -delay 40 ",dir,"/",nameStub,"_frame_*.png ",dir,"/",nameStub,".gif"))
   }
   if(removeAfterCreatingGif && createGif)
   {
@@ -520,7 +520,7 @@ setMethod("show",
 #' @examples 
 #' data("candidate.platelets")
 #' platelets.trajectories <- trajectories(candidate.platelets)
-#' traj11features <- kinematics(platelets.trajectories,trajectoryID = 11)
+#' traj11features <- kinematics(platelets.trajectories,trajectoryIDs = 11)
 #' print(traj11features)
 #' 
 #' @export
@@ -819,7 +819,7 @@ extractKinematics.traj <- function(trajectoryset,
 #' parameter is reported, either for one or all trajectories
 #' 
 #' @param trajectorylist A \code{TrajectoryList} object
-#' @param trajectoryID The ID of a single trajectory
+#' @param trajectoryIDs The ID of a single trajectory
 #' @param acquisitionFrequency The frame rate of acquisition for the images, in
 #'   milliseconds
 #' @param scala The value of micro(?)meters to which each single pixel
@@ -835,14 +835,14 @@ extractKinematics.traj <- function(trajectoryset,
 #' # for all trajectories, all features
 #' alltrajs.features <- kinematics(platelets.trajectories)
 #' # for one trajectory, all features
-#' traj11features <- kinematics(platelets.trajectories,trajectoryID = 11)
+#' traj11features <- kinematics(platelets.trajectories,trajectoryIDs = 11)
 #' # for all trajectories, one feature
 #' alltrajs.curvVel <- kinematics(platelets.trajectories,feature = "curvilinearVelocity")
 #'   
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 kinematics <- function(trajectoryset,
-                       trajectoryID=NULL,
+                       trajectoryIDs=NULL,
                        acquisitionFrequency=30, # in milliseconds
                        scala=50, # 1 pixel is ... micrometer
                        feature=NULL)
@@ -858,10 +858,10 @@ kinematics <- function(trajectoryset,
     }
   }
   # compute all, for one or all trajectories
-  if(!is.null(trajectoryID)) # then operate on a single trajectory
+  if(!is.null(trajectoryIDs)) # then operate on a single trajectory
   {
     
-    kineSet.out <- extractKinematics.traj(trajectoryset,trajectoryID,acquisitionFrequency=acquisitionFrequency,scala=scala) # returns a KinematicsFeatureSet object
+    kineSet.out <- extractKinematics.traj(trajectoryset,trajectoryIDs,acquisitionFrequency=acquisitionFrequency,scala=scala) # returns a KinematicsFeatureSet object
     # then eventually just report the desired kinematic feature
     if(is.null(feature))
     {
@@ -1125,14 +1125,15 @@ addParticles <- function(raw.frames,binary.frames,col=NULL)
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-crop.Frames <- function(x,
+crop.Frames <- function(frames,
                           cutLeft=5,cutRight=5,cutUp=5,cutDown=5,
                           cutAll=0,
                           testing=FALSE,
                           ...)
 {
-  out <- vector(length(x),mode="list")
-  class(out) <- c("FrameList",class(out))
+#   out <- vector(length(x),mode="list")
+#   class(out) <- c("FrameList",class(out))
+  tmpFL <- vector(length.Frames(frames),mode="list")
   if(cutAll > 0)
   {
     cutLeft <- cutRight <- cutUp <- cutDown <- cutAll
@@ -1140,22 +1141,25 @@ crop.Frames <- function(x,
   
   if(!testing)
   {
-    for(i in 1:length(x))
+    for(i in 1:length.Frames(frames))
     {
-      img <- x[[i]]$image
+      img <- getFrame(frames,i,"render")
       if (numberOfFrames(img)==3)
         cutoutImg <- img[cutLeft:(dim(img)[1]-cutRight),cutUp:(dim(img)[2]-cutDown),]
       else
         cutoutImg <- img[cutLeft:(dim(img)[1]-cutRight),cutUp:(dim(img)[2]-cutDown)]
       
-      out[[i]]$image <- cutoutImg
-      out[[i]]$location <- NA # it is modified from an existing object -> maybe provide the name of the object it got created from?
+      tmpFL[[i]] <- cutoutImg
     }
+    out <- combine(tmpFL)
     return(out)
   } else {
     # just check on one image, the first one
-    img <- x[[1]]$image
-    cutoutImg <- img[cutLeft:(dim(img)[1]-cutRight),cutUp:(dim(img)[2]-cutDown),]
+    img <- getFrame(frames,i,"render")
+    if (numberOfFrames(img)==3)
+      cutoutImg <- img[cutLeft:(dim(img)[1]-cutRight),cutUp:(dim(img)[2]-cutDown),]
+    else
+      cutoutImg <- img[cutLeft:(dim(img)[1]-cutRight),cutUp:(dim(img)[2]-cutDown)]
     display(cutoutImg)
     return(cutoutImg)
   }
@@ -1457,7 +1461,8 @@ particles3 <- function(raw.frames,
     stop("Please select one channel to work on. Choose one among 'red','green' and 'blue'")
   if(raw.frames@channel == "all" && !is.null(channel))
     raw.frames <- channel.Frames(raw.frames,mode = channel)
-  if ( missing(channel) ) stop("Please provide a channel name to process")
+  if ( missing(channel) ) # stop("Please provide a channel name to process")
+    channel <- raw.frames@channel
   if(raw.frames@channel != "all" && channel != raw.frames@channel)
     stop("You are selecting to work on a channel not stored in your current Frames object")
   if(!is.null(binary.frames) && (raw.frames@channel != binary.frames@channel))

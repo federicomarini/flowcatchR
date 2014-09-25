@@ -110,18 +110,18 @@ devtools::install_github("flowcatchR", "federicomarini")
 
 <<loadData,results='hide',message=TRUE>>=
 library("flowcatchR")
-data("MesenteriumSubset")
+data("MesenteriumSubset2")
 @
 
 <<meseLoaded>>=
 # printing summary information for the MesenteriumSubset object
-MesenteriumSubset
+MesenteriumSubset2
 @
 
 To obtain the set of trajectories identified from the analysis of the loaded frames, a very compact one-liner command is all that is needed:
 <<workflowCompact,eval=FALSE,results='hide'>>=
 # one command to seize them all :)
-fullResults <- kinematics(trajectories(particles(channels(MesenteriumSubset)$red)))
+fullResults <- kinematics(trajectories(particles3(channel.Frames(MesenteriumSubset2,"red"))))
 @
 
 % microbenchmark(kinematics(trajectories(particles(channels(MesenteriumSubset)$red))))
@@ -140,7 +140,7 @@ A set of images is acquired, after a proper microscopy setup has been performed.
 
 <<newFrameList,eval=FALSE>>=
 # initialization
-fullData <- read.frames(image.files = "/path/to/folder/containing/images/",nframes=100) 
+fullData <- read.Frames(image.files = "/path/to/folder/containing/images/",nframes=100) 
 
 # printing summary information for the FrameList object
 fullData
@@ -151,7 +151,7 @@ fullData
 It is possible to inspect the first frames of a \Rclass{FrameList} object with the function \Rfunction{inspect.frames} (Fig.\ref{fig:inspectRaw}).
 
 <<inspectRaw,fig.height=4,fig.width=7.5,fig.cap="The first 9 frames of the MesenteriumSubset dataset. The red channel stores information about platelets, while the green channel is dedicated to leukocytes">>=
-inspect.frames(MesenteriumSubset,nframes=9,display.method="raster",inspectAll=TRUE)
+inspect.Frames(MesenteriumSubset2,nframes=9,display.method="raster")
 @
 
 By default, \Robject{display.method} is set to "browser", as in the EBImage function display. This opens up a window in the predefined browser (e.g. Mozilla Firefox), with navigable frames (arrows on the top left corner). For the vignette, we will set it to \Robject{raster}, for viewing them as raster graphics using R's native functions.
@@ -161,15 +161,15 @@ Importantly, these image sets were already registered and rotated in such a way 
 For the following steps, we will focus on the information contained in the red channel, corresponding in this case to blood platelets. We do so by calling:
 
 <<decomposeChannels>>=
-allChannelsMesenterium <- channels(MesenteriumSubset)
-
-allChannelsMesenterium
+# allChannelsMesenterium <- channels(MesenteriumSubset)
+# 
+# allChannelsMesenterium
 @
 
 This creates an object of the class \Rclass{ChannelsFrameList}, which is in turn a list of three \Rclass{FrameList} objects (one for each color channel).
 
 <<selectRed>>=
-plateletsMesenterium <- allChannelsMesenterium$red
+plateletsMesenterium <- channel.Frames(MesenteriumSubset2,"red")
 
 plateletsMesenterium
 @
@@ -186,7 +186,7 @@ inspect.frames(plateletsMesenterium,nframes=9,display.method="raster")
 Steps such as denoising, smoothing and morphological operations (erosion/dilation, opening/closing) can be performed thanks to the general functions provided by \Biocpkg{EBImage}. \flowcatchR{} offers a wrapper around a series of operations to be applied to all images in a \Rclass{FrameList} object. The generic function \Rfunction{preprocess} has a method for \Rclass{FrameList} objects, which is called via the command:
 
 <<segmentPreprocess>>=
-preprocessedPlatelets <- preprocess(plateletsMesenterium,
+preprocessedPlatelets <- preprocess.Frames(plateletsMesenterium,
                                     brushSize = 3, brushShape = "disc",
                                     adaptOffset = 0.15, adaptWinWidth = 10, adaptWinHeight = 10,
                                     kernSize = 3, kernShape = "disc",
@@ -199,13 +199,13 @@ The result of this is displayed in Fig.\ref{fig:inspectSegm}.
 For a detailed explanation of the parameters to better tweak the performances of this segmentation step, please refer to the help of \Rfunction{preprocess.FrameList}. To obtain an immediate feedback about the effects of the operations performed in the full preprocessing phase, we can call again \Rfunction{inspect.frames} on the \Rclass{FrameList} of segmented images (Fig.\ref{fig:inspectSegm}).
 
 <<inspectSegm,fig.height=4,fig.width=7.5,fig.cap="The first 9 frames after preprocessing of the MesenteriumSubset dataset. The binarized image shows the detected objects after thresholding.">>=
-inspect.frames(preprocessedPlatelets,nframes=9,display.method="raster")
+inspect.Frames(preprocessedPlatelets,nframes=9,display.method="raster")
 @
 
 The frames could be cropped, if e.g. it is needed to remove background noise that might be present close to the edges. This is done with the method for the generic function \Rfunction{cut}.
 
 <<cutFrames>>=
-croppedFrames <- cut(plateletsMesenterium,
+croppedFrames <- crop.Frames(plateletsMesenterium,
                      cutLeft=6,cutRight=6,
                      cutUp=3,cutDown=3,
                      testing=FALSE)
@@ -215,14 +215,14 @@ croppedFrames
 If \Robject{testing} is set to true, the function just displays the first cropped frame, to get a feeling whether the choice of parameters was adequate. Similarly, for the function \Rfunction{rotate.FrameList} the same behaviour is expected, whereas the rotation in degrees is specified by the parameter \Robject{rotAngle}.
 
 <<rotateFrames>>=
-rotatedFrames <- rotate.FrameList(plateletsMesenterium, rotAngle=30)
+rotatedFrames <- rotate.Frames(plateletsMesenterium,angle = 30)
 rotatedFrames
 @
 
 If desired, it is possible to select just a subset of the frames belonging to a \Rclass{FrameList}. This can be done via the \Rfunction{subset} method available for \Rclass{FrameList} objects:
 
 <<subsetFrames>>=
-subsetFrames <- subset(plateletsMesenterium,
+subsetFrames <- select.Frames(plateletsMesenterium,
                        framesToKeep=c(1:10,14:20))
 subsetFrames
 @
@@ -231,7 +231,7 @@ subsetFrames
 The user can choose any combination of the operations in order to segment the images provided as input, but preprocess is a very convenient high level function for proceeding in the workflow. It is also possible, as it was shown in the introductory one-liner, to call just \Rfunction{particles} on the raw \Rclass{FrameList} object. In this latter case, \Rfunction{particles} computes the preprocessed \Rclass{FrameList} object according to default parameters. Still, in either situation, the output for this step is an object of the \Rclass{ParticleList} class.
 
 <<particleList>>=
-platelets <- particles(plateletsMesenterium,preprocessedPlatelets)
+platelets <- particles3(plateletsMesenterium,preprocessedPlatelets)
 platelets
 @
 
@@ -251,10 +251,10 @@ This step can be done iteratively, with the help of the function \Rfunction{add.
 If called with the parameter mode set to \Robject{particles}, then it will automatically generate a \Rclass{FrameList} object, with the contours of all particles drawn around the objects that passed the segmentation (and filtering) step (Fig.\ref{fig:checkSelection}).
 
 <<checkSelection,fig.height=4,fig.width=7.5,fig.cap="Particles detected in the first 9 frames are shown in yellow, with their contours defined by the segmentation procedure.">>=
-paintedPlatelets <- add.contours(raw.frames=MesenteriumSubset,
+paintedPlatelets <- add.contours(raw.frames=MesenteriumSubset2,
                                  binary.frames=preprocessedPlatelets,
                                  mode="particles")
-inspect.frames(paintedPlatelets,nframes=9,display.method="raster")
+inspect.Frames(paintedPlatelets,nframes=9,display.method="raster")
 @
 
 To connect the particles from one frame to the other, we perform first the detection of particles on all images. Only in a successive phase, we establish the links between the so identified objects. This topic will be covered in detail in the following section.
@@ -282,7 +282,6 @@ linkedPlatelets <- link.particles(platelets,
                                   epsilon1=0,epsilon2=0,
                                   lambda1=1,lambda2=0,
                                   penaltyFunction=penaltyFunctionGenerator(),
-                                  nframes=20,
                                   include.area=FALSE)
 
 linkedPlatelets
@@ -328,22 +327,22 @@ By plotting all trajectories in a 2D+time representation, it's possible to have 
 The following command gives an interactive 3D (2D+time) view of all trajectories (output is not included in this vignette): % (Fig.\ref{fig:cubeTrajs}):
 
 <<cubeTrajs,rgl=TRUE,fig.cap="A 2D+time representation of the trajectories, produced by plotting a TrajectoryList object",eval=FALSE>>=
-plot(trajPlatelets,MesenteriumSubset)
+plot.TrajectorySet(trajPlatelets,MesenteriumSubset2)
 @
 
 The \Rfunction{plot2D.TrajectoryList} focuses on additional information and a different "point of view", but can just display a two dimensional projection of the identified trajectories (Fig.\ref{fig:overviewTrajs}).
 
 <<overviewTrajs,fig.height=4,fig.width=7.5,fig.cap='A 2D "flat" representation of the trajectories, more suitable to give an indication of the global movement'>>=
-plot2D.TrajectoryList(trajPlatelets,MesenteriumSubset)
+plot2D.TrajectorySet(trajPlatelets,MesenteriumSubset2)
 @
 
 
 To have more insights on single trajectories, or on a subset of them, \Rfunction{add.contours} offers a mode \Robject{trajectories}. Particles are drawn on the raw images with colours corresponding to the trajectory IDs. \Rfunction{add.contours} plots by default all trajectories, but the user can supply a vector of the IDs of interest to override this behaviour.
 
 <<contourTrajs>>=
-paintedTrajectories <- add.contours(raw.frames=MesenteriumSubset,
-                                    binary.frames=preprocessedPlatelets,
-                                    trajectories=trajPlatelets,
+paintedTrajectories <- add.contours(raw.frames=MesenteriumSubset2,
+                                    binary.frames=preprocessedPlatelets,  
+                                    trajectoryset=trajPlatelets,
                                     mode="trajectories")
 paintedTrajectories
 @
@@ -351,19 +350,19 @@ paintedTrajectories
 As with any other \Rclass{FrameList} object, it is recommended to take a peek at it via the \Rfunction{inspect.frames} function (Fig.\ref{fig:inspectTrajs}):
 
 <<inspectTrajs,fig.height=4,fig.width=7.5,fig.cap="Particles detected in the first 9 frames are shown this time in colours corresponding to the identified trajectories, again with their contours defined by the segmentation procedure.">>=
-inspect.frames(paintedTrajectories,nframes=9,display.method="raster")
+inspect.Frames(paintedTrajectories,nframes=9,display.method="raster")
 @
 
 To allow for a thorough evaluation of the single trajectories, \Rfunction{export.frames} is a valid helper, as it creates single images corresponding to each frame in the \Rclass{FrameList} object. We first extract for example trajectory 11 (Fig.\ref{fig:traj11}) with the following command:
 
 <<traj11,fig.height=4,fig.width=7.5,fig.cap="First 9 frames for trajectory with ID 11, as supplied to the trajIds argument of add.contours">>=
-traj11 <- add.contours(raw.frames=MesenteriumSubset,
+traj11 <- add.contours(raw.frames=MesenteriumSubset2,
                        binary.frames=preprocessedPlatelets,
-                       trajectories=trajPlatelets,
+                       trajectoryset=trajPlatelets,
                        mode="trajectories",
                        trajIds=11)
 traj11
-inspect.frames(traj11,nframes=9,display.method="raster")
+inspect.Frames(traj11,nframes=9,display.method="raster")
 @
 
 The data for trajectory 11 in the \Rclass{TrajectoryList} object can be printed to the terminal: 
@@ -375,7 +374,7 @@ trajPlatelets[[11]]
 After that, it can also be exported with the following command (the \Robject{dir} parameter must be changed accordingly):
 
 <<exportTraj11,eval=FALSE>>=
-export.frames(traj11,dir = tempdir(),nameStub="vignetteTest_traj11",
+export.Frames(traj11,dir = tempdir(),nameStub="vignetteTest_traj11",
               createGif=TRUE,removeAfterCreatingGif=FALSE)
 @
 
@@ -388,14 +387,14 @@ evaluatedTrajectories <- trajPlatelets
 
 for(i in 1:length(trajPlatelets))
 {
-  paintedTraj <- add.contours(raw.frames=MesenteriumSubset,
+  paintedTraj <- add.contours(raw.frames=MesenteriumSubset2,
                               binary.frames=preprocessedPlatelets,
-                              trajectories=trajPlatelets,
+                              trajectoryset=trajPlatelets,
                               mode="trajectories",
                               col="yellow",
-                              trajIds=i)
+                              trajIDs=i)
   
-  export.frames(paintedTraj,
+  export.Frames(paintedTraj,
                 nameStub=paste0("vignetteTest_evaluation_traj_oneByOne_",i),
                 createGif=TRUE,removeAfterCreatingGif=TRUE)
   
@@ -405,7 +404,7 @@ for(i in 1:length(trajPlatelets))
   #   userInput <- readLines(n = 1L)
   #   ## if neither 0 nor 1, do not update
   #   ## otherwise, this becomes the value for the field keep in the new TrajectoryList
-  #   evaluatedTrajectories[[i]]$keep <- as.logical(as.numeric(userInput))
+  #   evaluatedTrajectories@.Data[[i]]$keep <- as.logical(as.numeric(userInput))
  
 }
 @
@@ -416,7 +415,7 @@ Once all trajectories have been selected, we can proceed to calculate (a set of)
 
 <<kinemFeats>>=
 allKinematicFeats.allPlatelets <- kinematics(trajPlatelets,
-                                             trajectoryID=NULL, # will select all trajectory IDs 
+                                             trajectoryIDs=NULL, # will select all trajectory IDs 
                                              acquisitionFrequency=30, # value in milliseconds
                                              scala=50, # 1 pixel is equivalent to ... micrometer
                                              feature=NULL) # all kinematic features available

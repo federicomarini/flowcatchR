@@ -22,9 +22,9 @@ corresponds}
 
 \item{feature}{Character string, the name of the feature to be computed}
 
-\item{trajectorylist}{A \code{TrajectoryList} object}
+\item{trajectoryIDs}{The ID of a single trajectory}
 
-\item{trajectoryID}{The ID of a single trajectory}
+\item{trajectorylist}{A \code{TrajectoryList} object}
 
 \item{acquisitionFrequency}{The frame rate of acquisition for the images, in
 milliseconds}
@@ -64,7 +64,7 @@ platelets.trajectories <- trajectories(candidate.platelets)
 # for all trajectories, all features
 alltrajs.features <- kinematics(platelets.trajectories)
 # for one trajectory, all features
-traj11features <- kinematics(platelets.trajectories,trajectoryID = 11)
+traj11features <- kinematics(platelets.trajectories,trajectoryIDs = 11)
 # for all trajectories, one feature
 alltrajs.curvVel <- kinematics(platelets.trajectories,feature = "curvilinearVelocity")
 data("candidate.platelets")
