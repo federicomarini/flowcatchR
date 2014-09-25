@@ -54,7 +54,7 @@ and the method \code{preprocess.FrameList} is then applied, with its set of para
 }
 \examples{
 data("MesenteriumSubset")
-preprocess(channels(MesenteriumSubset),channel = "red")
+# preprocess(channels(MesenteriumSubset),channel = "red")
 }
 \author{
 Federico Marini, \email{marinif@uni-mainz.de}, 2014

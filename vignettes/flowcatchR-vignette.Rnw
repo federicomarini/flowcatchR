@@ -121,7 +121,7 @@ MesenteriumSubset
 To obtain the set of trajectories identified from the analysis of the loaded frames, a very compact one-liner command is all that is needed:
 <<workflowCompact,eval=FALSE,results='hide'>>=
 # one command to seize them all :)
-fullResults <- kinematics(trajectories(particles3(channel.Frames(MesenteriumSubset,"red"))))
+fullResults <- kinematics(trajectories(particles(channel.Frames(MesenteriumSubset,"red"))))
 @
 
 % microbenchmark(kinematics(trajectories(particles(channels(MesenteriumSubset)$red))))
@@ -231,7 +231,7 @@ subsetFrames
 The user can choose any combination of the operations in order to segment the images provided as input, but preprocess is a very convenient high level function for proceeding in the workflow. It is also possible, as it was shown in the introductory one-liner, to call just \Rfunction{particles} on the raw \Rclass{FrameList} object. In this latter case, \Rfunction{particles} computes the preprocessed \Rclass{FrameList} object according to default parameters. Still, in either situation, the output for this step is an object of the \Rclass{ParticleList} class.
 
 <<particleList>>=
-platelets <- particles3(plateletsMesenterium,preprocessedPlatelets)
+platelets <- particles(plateletsMesenterium,preprocessedPlatelets)
 platelets
 @
 

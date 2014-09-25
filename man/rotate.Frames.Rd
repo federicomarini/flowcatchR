@@ -26,7 +26,7 @@ Rotation is performed exploiting the rotate function of the \code{EBImage} packa
 }
 \examples{
 data("MesenteriumSubset")
-rotate.FrameList(MesenteriumSubset,rotAngle = 40)
+rotate.Frames(MesenteriumSubset,angle = 40)
 }
 \author{
 Federico Marini, \email{marinif@uni-mainz.de}, 2014

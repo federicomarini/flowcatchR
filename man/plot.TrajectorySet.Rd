@@ -3,14 +3,14 @@
 \alias{plot.TrajectorySet}
 \title{3D representation of a \code{TrajectoryList} object}
 \usage{
-\method{plot}{TrajectorySet}(trajectoryset, frames, verbose = FALSE, ...)
+\method{plot}{TrajectorySet}(x, frames, verbose = FALSE, ...)
 }
 \arguments{
+\item{x}{A \code{TrajectoryList} object}
+
 \item{verbose}{Logical, whether to provide additional output on the command line}
 
 \item{...}{Arguments to be passed to methods}
-
-\item{x}{A \code{TrajectoryList} object}
 
 \item{framelist}{A \code{FrameList} object, used here to identify the limits of the region of interest}
 }

@@ -7,7 +7,7 @@
 \S4method{show}{KinematicsFeatures}(object)
 }
 \arguments{
-\item{x}{A \code{KinematicsFeatureSet} object}
+\item{object}{A \code{KinematicsFeatureSet} object}
 
 \item{...}{Arguments to be passed to methods}
 }

@@ -21,7 +21,7 @@ is presenting gaps (i.e. does not actually include a frame)
 }
 \examples{
 data("MesenteriumSubset")
-subset(MesenteriumSubset, framesToKeep = c(1:10, 14:20))
+select.Frames(MesenteriumSubset, framesToKeep = c(1:10, 14:20))
 }
 \author{
 Federico Marini, \email{marinif@uni-mainz.de}, 2014

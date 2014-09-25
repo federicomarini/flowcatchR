@@ -3,14 +3,14 @@
 \alias{particles}
 \title{Extracts particles from the images of a \code{FrameList} object.}
 \usage{
-particles(framelistRaw, framelistPreprocessed = NULL, channel = "")
+particles(raw.frames, binary.frames = NULL, channel = NULL)
 }
 \arguments{
+\item{channel}{Character string. The channel to perform the operations on. Can be \code{red}, \code{green} or \code{blue}}
+
 \item{framelistRaw}{A \code{FrameList} object with the raw images (mandatory)}
 
 \item{framelistPreprocessed}{A \code{FrameList} object with preprocessed images (optional, if not provided gets produced with standard default parameters)}
-
-\item{channel}{Character string. The channel to perform the operations on. Can be \code{red}, \code{green} or \code{blue}}
 }
 \value{
 A \code{ParticleList} object, containing all detected particles for each frame
@@ -20,9 +20,6 @@ Extracts particles from the images of a \code{FrameList} object.
 }
 \examples{
 data("MesenteriumSubset")
-platelets.framelist <- channels(MesenteriumSubset)$red
-platelets.preprocessed <- preprocess(platelets.framelist)
-particles.platelets <- particles(platelets.framelist, platelets.preprocessed)
 }
 \author{
 Federico Marini, \email{marinif@uni-mainz.de}, 2014

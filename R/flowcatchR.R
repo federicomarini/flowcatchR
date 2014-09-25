@@ -30,29 +30,29 @@ NULL
 
 
 
-# 
-# #' A sample \code{FrameList object} 
-# #' 
-# #' The sample \code{FrameList} object is constituted by a subset of a time-lapse intravital microscopy imaging dataset.
-# #' Green channel marks leukocytes, red channel focuses on blood platelets. 20 frames are provided in this subset.
-# #' Images are kindly provided by Sven Jaeckel (\email{Sven.Jaeckel@@unimedizin-mainz.de}).
-# #' 
-# #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-# #' @name MesenteriumSubset
-# #' @docType data
-# NULL
-# 
-# 
-# 
-# #' A sample \code{ParticleList} object
-# #' 
-# #' The sample \code{ParticleList} object is constituted by the platelets identified from the \code{MesenteriumSubset} data
-# #' 
-# #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-# #' @name candidate.platelets
-# #' @docType data
-# NULL
-# 
+
+#' A sample \code{Frames object} 
+#' 
+#' The sample \code{Frames} object is constituted by a subset of a time-lapse intravital microscopy imaging dataset.
+#' Green channel marks leukocytes, red channel focuses on blood platelets. 20 frames are provided in this subset.
+#' Images are kindly provided by Sven Jaeckel (\email{Sven.Jaeckel@@unimedizin-mainz.de}).
+#' 
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
+#' @name MesenteriumSubset
+#' @docType data
+NULL
+
+
+
+#' A sample \code{ParticleSet} object
+#' 
+#' The sample \code{ParticleSet} object is constituted by the platelets identified from the \code{MesenteriumSubset} data
+#' 
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
+#' @name candidate.platelets
+#' @docType data
+NULL
+
 
 
 # .FLOWCATCHR_VERSION <- '0.99.1'

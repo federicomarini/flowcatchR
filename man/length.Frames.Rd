@@ -3,7 +3,7 @@
 \alias{length.Frames}
 \title{Creates a \code{ChannelsFrameList} object from a \code{FrameList} object, decomposed in the acquired channels}
 \usage{
-\method{length}{Frames}(frames)
+\method{length}{Frames}(x)
 }
 \arguments{
 \item{framelist}{A \code{FrameList} object}
@@ -16,9 +16,6 @@ Creates a \code{ChannelsFrameList} object from a \code{FrameList} object, decomp
 }
 \examples{
 data("MesenteriumSubset")
-channels(MesenteriumSubset)
-plateletsFrameList <- channels(MesenteriumSubset)$red
-plateletsFrameList
 }
 \author{
 Federico Marini, \email{marinif@uni-mainz.de}, 2014

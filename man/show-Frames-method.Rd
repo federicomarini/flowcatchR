@@ -2,17 +2,17 @@
 \docType{methods}
 \name{show,Frames-method}
 \alias{show,Frames-method}
-\title{Display conveniently a \code{FrameList} object}
+\title{Display conveniently a \code{Frames} object}
 \usage{
 \S4method{show}{Frames}(object)
 }
 \arguments{
-\item{x}{A \code{FrameList} object}
+\item{object}{A \code{Frames} object}
 
 \item{...}{Arguments to be passed to methods}
 }
 \description{
-Display conveniently a \code{FrameList} object
+Display conveniently a \code{Frames} object
 }
 \examples{
 data("MesenteriumSubset")

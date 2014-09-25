@@ -7,7 +7,7 @@
 \S4method{show}{ParticleSet}(object)
 }
 \arguments{
-\item{x}{A \code{ParticleList} object}
+\item{object}{A \code{ParticleList} object}
 
 \item{...}{Arguments to be passed to methods}
 }

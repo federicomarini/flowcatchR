@@ -52,8 +52,8 @@ A \code{FrameList} object, with cropped frames in the \code{image} slot
 #
 }
 \examples{
-data("MesenteriumSubset2")
-crop.Frames(MesenteriumSubset2)
+data("MesenteriumSubset")
+crop.Frames(MesenteriumSubset)
 }
 \author{
 Federico Marini, \email{marinif@uni-mainz.de}, 2014

@@ -2,9 +2,9 @@
 \docType{data}
 \name{MesenteriumSubset}
 \alias{MesenteriumSubset}
-\title{A sample \code{FrameList object}}
+\title{A sample \code{Frames object}}
 \description{
-The sample \code{FrameList} object is constituted by a subset of a time-lapse intravital microscopy imaging dataset.
+The sample \code{Frames} object is constituted by a subset of a time-lapse intravital microscopy imaging dataset.
 Green channel marks leukocytes, red channel focuses on blood platelets. 20 frames are provided in this subset.
 Images are kindly provided by Sven Jaeckel (\email{Sven.Jaeckel@unimedizin-mainz.de}).
 }

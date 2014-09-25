@@ -7,7 +7,7 @@
 \S4method{show}{LinkedParticleSet}(object)
 }
 \arguments{
-\item{x}{A \code{LinkedParticleList} object}
+\item{object}{A \code{LinkedParticleList} object}
 
 \item{...}{Arguments to be passed to methods}
 }
@@ -18,7 +18,7 @@ Display conveniently a \code{LinkedParticleList} object
 data("candidate.platelets")
 linked.platelets <- link.particles(candidate.platelets,L=26,R=3,epsilon1=0,
 epsilon2=0,lambda1=1,lambda2=0,penaltyFunction=penaltyFunctionGenerator(),
-nframes=20,include.area=FALSE)
+include.area=FALSE)
 print(linked.platelets)
 }
 \author{

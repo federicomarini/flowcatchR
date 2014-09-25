@@ -79,32 +79,7 @@ read.Frames <- function(image.files, # ../exportedMesenteriumSubset
 
 
 
-#' Display conveniently a \code{FrameList} object
-#' 
-#' @param x A \code{FrameList} object
-#' @param ... Arguments to be passed to methods
-#'  
-#' @method print FrameList
-#' 
-#' @examples
-#' data("MesenteriumSubset")
-#' print(MesenteriumSubset)
-#' @export
-#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-setMethod("show",
-          signature = "Frames",
-          definition = function(object){
-            d <- dim(object)
-            cat("Frames\n")
-            cat("An object of the Frames class. \n\n")
-#             cat("Multi-dimensional Image with", numberOfFrames(object,"render"),"frames\n")
-#             cat("Images contain information on",ifelse(!is.na(d[3]),d[3],"1"),"channel(s)\n")
-#             cat("Image dimensions:\t",d[1:2],"\n\n")
-            
-            cat("Displaying information for the first Image in the Frames object...\n\n")
-            callNextMethod(object)
-            
-          })
+
 
 
 
@@ -167,7 +142,7 @@ inspect.Frames <- function(frames,
 #' 
 #' @examples
 #' data("MesenteriumSubset")
-#' subset(MesenteriumSubset, framesToKeep = c(1:10, 14:20))
+#' select.Frames(MesenteriumSubset, framesToKeep = c(1:10, 14:20))
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
@@ -203,9 +178,7 @@ select.Frames <- function(frames,framesToKeep=1,...)
 #' 
 #' @examples 
 #' data("MesenteriumSubset")
-#' channels(MesenteriumSubset)
-#' plateletsFrameList <- channels(MesenteriumSubset)$red
-#' plateletsFrameList
+#' 
 #' 
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 # channels <- function(framelist)
@@ -231,9 +204,9 @@ select.Frames <- function(frames,framesToKeep=1,...)
 # }
 
 #' export
-length.Frames <- function(frames)
+length.Frames <- function(x)
 {
-  numberOfFrames(frames,"render")
+  numberOfFrames(x,"render")
 }
 
 
@@ -385,62 +358,6 @@ read.particles <- function(particle.files,
 }
 
 
-#' Display conveniently a \code{ParticleList} object
-#'  
-#' @param x A \code{ParticleList} object
-#' @param ... Arguments to be passed to methods
-#' 
-#' @method print ParticleList
-#' 
-#' @examples
-#' data("candidate.platelets")
-#' print(candidate.platelets)
-#' 
-#' @export
-#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-setMethod("show",
-          signature = "ParticleSet",
-          definition = function(object){
-            firstFrameParticles <- object[[1]]
-            cat("An object of the ParticleSet class. \n\n")
-            cat("Set of particles for",length(object),"images\n\n")
-            cat("Displaying a subset of the features of the",nrow(firstFrameParticles),"particles found in the first image...\n")
-            linesToShow <- min(5,nrow(firstFrameParticles))
-            print(firstFrameParticles[1:linesToShow,1:8])
-            cat("\nParticles identified on the",object$channel,"channel\n")          
-          })
-
-
-#' Display conveniently a \code{LinkedParticleList} object
-#'  
-#' @param x A \code{LinkedParticleList} object
-#' @param ... Arguments to be passed to methods
-#' 
-#' @method print LinkedParticleList
-#' 
-#' @examples
-#' data("candidate.platelets")
-#' linked.platelets <- link.particles(candidate.platelets,L=26,R=3,epsilon1=0,
-#' epsilon2=0,lambda1=1,lambda2=0,penaltyFunction=penaltyFunctionGenerator(),
-#' nframes=20,include.area=FALSE)
-#' print(linked.platelets)
-#' 
-#' @export
-#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-setMethod("show",
-          signature = "LinkedParticleSet",
-          definition = function(object){
-            firstFrameParticles <- object[[1]]
-            cat("An object of the LinkedParticleSet class. \n\n")
-            cat("Set of particles for",length(object),"images\n\n")
-            cat("Particles are tracked throughout the subsequent",ncol(object@tracking[[1]]$nxt),"frame(s)\n\n" )
-            
-            cat("Displaying a subset of the features of the",nrow(firstFrameParticles),"particles found in the first image...\n")
-            linesToShow <- min(5,nrow(firstFrameParticles))
-            print(firstFrameParticles[1:linesToShow,1:8])
-            cat("\nParticles identified on the",object@channel,"channel\n")          
-          })
-
 
 
 
@@ -483,132 +400,6 @@ initialize.LinkedParticleSet <- function(particleset,
 
 
 
-#' Display conveniently a \code{TrajectoryList} object
-#'  
-#' @param x A \code{TrajectoryList} object
-#' @param ... Arguments to be passed to methods
-#' 
-#' @method print TrajectoryList
-#' 
-#' @examples 
-#' data("candidate.platelets")
-#' platelets.trajectories <- trajectories(candidate.platelets)
-#' print(platelets.trajectories)
-#' 
-#' @export
-#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-
-setMethod("show",
-          signature = "TrajectorySet",
-          definition = function(object){
-            cat("An object of the TrajectorySet class. \n\n")
-            cat("TrajectorySet composed of",length(object),"trajectories\n\n")
-            
-            cat("Trajectories cover a range of",max(unlist(lapply(object@.Data,function(arg){(arg$trajectory$frame)}))),"frames\n") 
-            cat("Displaying a segment of the first trajectory...\n")
-            print(object[[1]]$trajectory[1:min(10,nrow(object[[1]]$trajectory)),])
-            
-            cat("\nTrajectories are related to articles identified on the",object@channel,"channel\n")          
-          })
-
-
-
-#' Displaying conveniently a \code{KinematicsFeatureSet} object
-#'  
-#' @param x A \code{KinematicsFeatureSet} object
-#' @param ... Arguments to be passed to methods
-#' 
-#' @method print KinematicsFeatureSet
-#' 
-#' @examples 
-#' data("candidate.platelets")
-#' platelets.trajectories <- trajectories(candidate.platelets)
-#' traj11features <- kinematics(platelets.trajectories,trajectoryIDs = 11)
-#' print(traj11features)
-#' 
-#' @export
-#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-# print.KinematicsFeatureSet <- function(x,...)
-# {
-#   cat("An object of the KinematicsFeatureSet class. \n\n")
-#   cat("KinematicsFeatureSet composed of",length(x) - 1,"atomic/vectorial features\n\n")
-#   cat("The features describe a trajectory of",length(x$delta.x) + 1,"points\n")
-#   
-#   cat("Available features:\n")
-#   print(names(x))
-#   cat("\n")
-#   cat("Curvilinear Velocity:",x$curvilinearVelocity,"\n")
-#   cat("Total Distance:",x$totalDistance,"\n")
-#   cat("Total Time:",x$totalTime,"\n")
-#   
-# }
-setMethod("show",
-          signature = "KinematicsFeatures",
-          definition = function(object){
-            cat("An object of the KinematicsFeatures class. \n\n")
-            cat("KinematicsFeatures composed of",length(object) - 1,"atomic/vectorial features\n\n")
-            cat("The features describe a trajectory of",length(object$delta.x) + 1,"points\n")
-            
-            cat("Available features:\n")
-            print(names(object))
-            cat("\n")
-            cat("Curvilinear Velocity:",object$curvilinearVelocity,"\n")
-            cat("Total Distance:",object$totalDistance,"\n")
-            cat("Total Time:",object$totalTime,"\n")          
-          })
-
-
-#' Display conveniently a \code{KinematicsFeatureSetList} object
-#'  
-#' @param x A \code{KinematicsFeatureSetList} object
-#' @param ... Arguments to be passed to methods
-#' 
-#' 
-#' @examples 
-#' data("candidate.platelets")
-#' platelets.trajectories <- trajectories(candidate.platelets)
-#' alltrajs.features <- kinematics(platelets.trajectories)
-#' print(alltrajs.features)
-#'
-#' @export
-#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-print.KinematicsFeatureSetList <- function(x,...)
-{
-  cat("An object of the KinematicsFeatureSetList class. \n\n")
-  cat("KinematicsFeatureSetList composed of",length(x)," KinematicsFeatureSet objects\n\n")
-  
-  cat("Available features (shown for the first trajectory):\n")
-  print(names(x[[1]]))
-  cat("\n")
-  cat("Curvilinear Velocity:",x[[1]]$curvilinearVelocity,"\n")
-  cat("Total Distance:",x[[1]]$totalDistance,"\n")
-  cat("Total Time:",x[[1]]$totalTime,"\n\n")
-  
-  cat("Average values (calculated on",sum(unlist(lapply(x,function(arg){arg[["paramsNotComputed"]]}))),"trajectories where parameters were computed)\n")
-  cat("Average Curvilinear Velocity:",mean(unlist(lapply(x,function(arg){arg[["curvilinearVelocity"]]})),na.rm=TRUE),"\n")
-  cat("Average Total Distance:",mean(unlist(lapply(x,function(arg){arg[["totalDistance"]]})),na.rm=TRUE),"\n")
-  cat("Average Total Time:",mean(unlist(lapply(x,function(arg){arg[["totalTime"]]})),na.rm=TRUE),"\n")
-  
-}
-setMethod("show",
-          signature = "KinematicsFeaturesSet",
-          definition = function(object){
-            cat("An object of the KinematicsFeaturesSet class. \n\n")
-            cat("KinematicsFeaturesSet composed of",length(object)," KinematicsFeatures objects\n\n")
-            
-            cat("Available features (shown for the first trajectory):\n")
-            print(names(object[[1]]))
-            cat("\n")
-            cat("Curvilinear Velocity:",object[[1]]$curvilinearVelocity,"\n")
-            cat("Total Distance:",object[[1]]$totalDistance,"\n")
-            cat("Total Time:",object[[1]]$totalTime,"\n\n")
-            
-            cat("Average values (calculated on",sum(unlist(lapply(object,function(arg){arg[["paramsNotComputed"]]}))),"trajectories where parameters were computed)\n")
-            cat("Average Curvilinear Velocity:",mean(unlist(lapply(object,function(arg){arg[["curvilinearVelocity"]]})),na.rm=TRUE),"\n")
-            cat("Average Total Distance:",mean(unlist(lapply(object,function(arg){arg[["totalDistance"]]})),na.rm=TRUE),"\n")
-            cat("Average Total Time:",mean(unlist(lapply(object,function(arg){arg[["totalTime"]]})),na.rm=TRUE),"\n")
-            
-          })
 
 
 
@@ -637,72 +428,8 @@ repmat <- function(a,n,m)
 
 
 
-#################### newfile ######################
-#' flowcatchR: analyzing time-lapse microscopy imaging, from detection to tracking
-#'
-#' A toolset to analyze in vivo microscopy imaging data focused on tracking
-#' flowing blood cells.
-#' 
-#' flowcatchR is a set of tools to analyze in vivo microscopy imaging
-#' data, focused on tracking flowing blood cells. It guides the steps from
-#' segmentation to calculation of features, filtering out particles not of
-#' interest, providing also a set of utilities to help checking the quality of
-#' the performed operations (e.g. how good the segmentation was). The main
-#' novel contribution investigates the issue of tracking flowing cells such as
-#' in blood vessels, to categorize the particles in flowing, rolling and
-#' adherent. This classification is applied in the study of phenomena such as
-#' hemostasis and study of thrombosis development.
-#' 
-#' @import EBImage
-#' @import rgl
-#' @import colorRamps
-#' @import methods
-#' 
-#' @author
-#' Federico Marini \email{marinif@@uni-mainz.de},
-#' Johanna Mazur \email{mazur@@uni-mainz.de},
-#' Harald Binder \email{binderh@@uni-mainz.de}
-#'
-#' Maintainer: Federico Marini \email{marinif@@uni-mainz.de}
-#' @name flowcatchR
-#' @docType package
-NULL
 
 
-
-
-#' A sample \code{FrameList object} 
-#' 
-#' The sample \code{FrameList} object is constituted by a subset of a time-lapse intravital microscopy imaging dataset.
-#' Green channel marks leukocytes, red channel focuses on blood platelets. 20 frames are provided in this subset.
-#' Images are kindly provided by Sven Jaeckel (\email{Sven.Jaeckel@@unimedizin-mainz.de}).
-#' 
-#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-#' @name MesenteriumSubset
-#' @docType data
-NULL
-
-
-
-#' A sample \code{ParticleList} object
-#' 
-#' The sample \code{ParticleList} object is constituted by the platelets identified from the \code{MesenteriumSubset} data
-#' 
-#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-#' @name candidate.platelets
-#' @docType data
-NULL
-
-
-
-# .FLOWCATCHR_VERSION <- '0.99.1'
-# #'
-# #'
-# .onAttach <- function(lib, pkg, ...) {
-# packageStartupMessage(sprintf("\nThis is flowcatchR version %s - A toolset to analyze in vivo microscopy imaging data
-# for tracking flowing blood cells. Copyright (C) 2014 Federico Marini\n
-# Type '?flowcatchR' for help or see www.imbei.de for more details", .FLOWCATCHR_VERSION))
-# }
 
 
 
@@ -1122,8 +849,8 @@ addParticles <- function(raw.frames,binary.frames,col=NULL)
 #' @return A \code{FrameList} object, with cropped frames in the \code{image} slot
 #' 
 #' @examples 
-#' data("MesenteriumSubset2")
-#' crop.Frames(MesenteriumSubset2)
+#' data("MesenteriumSubset")
+#' crop.Frames(MesenteriumSubset)
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
@@ -1183,7 +910,7 @@ crop.Frames <- function(frames,
 #' 
 #' @examples 
 #' data("MesenteriumSubset")
-#' rotate.FrameList(MesenteriumSubset,rotAngle = 40)
+#' rotate.Frames(MesenteriumSubset,angle = 40)
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
@@ -1215,8 +942,13 @@ rotate.Frames <- function(frames,
 
 
 
-
-
+#' Channel extraction for \code{objects}
+#' 
+#' \code{channel}
+#' 
+#' @param frames A \code{Frames} object
+#' @param mode A character value specifying the target mode for conversion.
+#' 
 #' @export
 channel.Frames <- function(frames,mode)
 {
@@ -1250,7 +982,7 @@ channel.Frames <- function(frames,mode)
 #' 
 #' @examples
 #' data("MesenteriumSubset")
-#' preprocess(channels(MesenteriumSubset),channel = "red")
+#' # preprocess(channels(MesenteriumSubset),channel = "red")
 #' 
 
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
@@ -1276,8 +1008,7 @@ channel.Frames <- function(frames,mode)
 #' 
 #' @examples
 #' data("MesenteriumSubset")
-#' platelets.framelist <- channels(MesenteriumSubset)$red
-#' preprocess(platelets.framelist)
+
 #' 
 
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
@@ -1397,68 +1128,66 @@ preprocess.Frames <- function(frames,
 #' 
 #' @examples
 #' data("MesenteriumSubset")
-#' platelets.framelist <- channels(MesenteriumSubset)$red
-#' platelets.preprocessed <- preprocess(platelets.framelist)
-#' particles.platelets <- particles(platelets.framelist, platelets.preprocessed)
+#
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-particles <- function(framelistRaw,
-                      framelistPreprocessed=NULL,
-                      channel=""  # if we provide the channelsFrameList as input 
-)
-{
-  if(!is(framelistRaw,"FrameList") && !is(framelistRaw,"ChannelsFrameList"))
-  {
-    stop("You need to provide at least a FrameList/channelsFrameList object as input!")
-  }
-  
-  
-  if(is.null(framelistPreprocessed))
-  {
-    cat("You did not provide a preprocessed FrameList alongside with the raw set of frames.\n")
-    cat("Don't worry, the raw FrameList object will be first preprocessed with a set of default parameter.\n")
-    cat("You can always change them afterwards if they do not fit to your scenario.\n")
-    if(is(framelistRaw,"ChannelsFrameList"))
-    {
-      #       framelistRaw <- framelistRaw[[channel]]
-      framelistPreprocessed <- preprocess.ChannelsFrameList(framelistRaw[[channel]])
-    } else {
-      framelistPreprocessed <- preprocess.FrameList(framelistRaw)
-    }
-  }
-  
-  # check that both input framelists have same length
-  if(length(framelistRaw) != length(framelistPreprocessed) )
-  {
-    stop("FrameList objects have different lengths!")
-  } else {
-    cat("Computing features...\n")
-  }
-  
-  # returns a particle list - not linked yet
-  
-  out <- vector(length(framelistRaw),mode="list")
-  class(out) <- c("ParticleList",class(out))
-  
-  for(i in 1:length(framelistRaw))
-  {
-    segmImg <- framelistPreprocessed[[i]]$image
-    rawImg <- framelistRaw[[i]]$image
-    
-    imgFeatures <- as.data.frame(computeFeatures(segmImg,rawImg,xname="cell"))
-    imgFeatures$shapeFactor <- (imgFeatures$cell.0.s.perimeter)^2 / (4*pi*imgFeatures$cell.0.s.area)
-    
-    out[[i]]$particles <- imgFeatures
-    out[[i]]$imgSource <- framelistPreprocessed[[i]]$location
-    out[[i]]$channel <- framelistPreprocessed[[i]]$channel
-  }
-  cat("Done!\n")
-  return(out)
-}
+# particles <- function(framelistRaw,
+#                       framelistPreprocessed=NULL,
+#                       channel=""  # if we provide the channelsFrameList as input 
+# )
+# {
+#   if(!is(framelistRaw,"FrameList") && !is(framelistRaw,"ChannelsFrameList"))
+#   {
+#     stop("You need to provide at least a FrameList/channelsFrameList object as input!")
+#   }
+#   
+#   
+#   if(is.null(framelistPreprocessed))
+#   {
+#     cat("You did not provide a preprocessed FrameList alongside with the raw set of frames.\n")
+#     cat("Don't worry, the raw FrameList object will be first preprocessed with a set of default parameter.\n")
+#     cat("You can always change them afterwards if they do not fit to your scenario.\n")
+#     if(is(framelistRaw,"ChannelsFrameList"))
+#     {
+#       #       framelistRaw <- framelistRaw[[channel]]
+#       framelistPreprocessed <- preprocess.ChannelsFrameList(framelistRaw[[channel]])
+#     } else {
+#       framelistPreprocessed <- preprocess.FrameList(framelistRaw)
+#     }
+#   }
+#   
+#   # check that both input framelists have same length
+#   if(length(framelistRaw) != length(framelistPreprocessed) )
+#   {
+#     stop("FrameList objects have different lengths!")
+#   } else {
+#     cat("Computing features...\n")
+#   }
+#   
+#   # returns a particle list - not linked yet
+#   
+#   out <- vector(length(framelistRaw),mode="list")
+#   class(out) <- c("ParticleList",class(out))
+#   
+#   for(i in 1:length(framelistRaw))
+#   {
+#     segmImg <- framelistPreprocessed[[i]]$image
+#     rawImg <- framelistRaw[[i]]$image
+#     
+#     imgFeatures <- as.data.frame(computeFeatures(segmImg,rawImg,xname="cell"))
+#     imgFeatures$shapeFactor <- (imgFeatures$cell.0.s.perimeter)^2 / (4*pi*imgFeatures$cell.0.s.area)
+#     
+#     out[[i]]$particles <- imgFeatures
+#     out[[i]]$imgSource <- framelistPreprocessed[[i]]$location
+#     out[[i]]$channel <- framelistPreprocessed[[i]]$channel
+#   }
+#   cat("Done!\n")
+#   return(out)
+# }
 
 #' @export
-particles3 <- function(raw.frames,
+particles <- function(raw.frames,
                        binary.frames=NULL,
                        channel=NULL  
 )
@@ -2277,10 +2006,10 @@ axesInfo <- function(frames)
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-plot.TrajectorySet <- function(trajectoryset,frames,verbose=FALSE,...)
+plot.TrajectorySet <- function(x,frames,verbose=FALSE,...)
 {
-  trajectoryDataFrame <- do.call(rbind.data.frame,lapply(trajectoryset,function(arg){arg$trajectory}))
-  if(verbose) cat("Plotting",length(trajectoryset),"trajectories...\n")
+  trajectoryDataFrame <- do.call(rbind.data.frame,lapply(x,function(arg){arg$trajectory}))
+  if(verbose) cat("Plotting",length(x),"trajectories...\n")
   colcols <- rep(colorRamps::primary.colors(40,steps=10,FALSE),6)
   for (i in 1:max(trajectoryDataFrame$trajLabel))
   {
@@ -2314,7 +2043,7 @@ plot.TrajectorySet <- function(trajectoryset,frames,verbose=FALSE,...)
 #' data("MesenteriumSubset")
 #' data("candidate.platelets")
 #' platelets.trajectories <- trajectories(candidate.platelets)
-#' plot2D.TrajectoryList(platelets.trajectories,MesenteriumSubset)
+#' # plot2D.TrajectoryList(platelets.trajectories,MesenteriumSubset)
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
@@ -2424,7 +2153,7 @@ add.contours <- function(raw.frames,
     # if no trajectorylist is provided, compute it
     if(is.null(trajectoryset))
     {
-      trajectoryset <- trajectories(particles3(raw.frames,binary.frames,channel=channel))
+      trajectoryset <- trajectories(particles(raw.frames,binary.frames,channel=channel))
     }
     
     availableIDs <- unlist(lapply(trajectoryset,function(arg){arg$ID}))

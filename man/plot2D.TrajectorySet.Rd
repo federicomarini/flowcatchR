@@ -29,7 +29,7 @@ object with the IDs of the desired trajectories
 data("MesenteriumSubset")
 data("candidate.platelets")
 platelets.trajectories <- trajectories(candidate.platelets)
-plot2D.TrajectoryList(platelets.trajectories,MesenteriumSubset)
+# plot2D.TrajectoryList(platelets.trajectories,MesenteriumSubset)
 }
 \author{
 Federico Marini, \email{marinif@uni-mainz.de}, 2014

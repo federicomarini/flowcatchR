@@ -7,7 +7,7 @@
 \S4method{show}{TrajectorySet}(object)
 }
 \arguments{
-\item{x}{A \code{TrajectoryList} object}
+\item{object}{A \code{TrajectoryList} object}
 
 \item{...}{Arguments to be passed to methods}
 }
