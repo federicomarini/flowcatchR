@@ -110,18 +110,18 @@ devtools::install_github("flowcatchR", "federicomarini")
 
 <<loadData,results='hide',message=TRUE>>=
 library("flowcatchR")
-data("MesenteriumSubset2")
+data("MesenteriumSubset")
 @
 
 <<meseLoaded>>=
 # printing summary information for the MesenteriumSubset object
-MesenteriumSubset2
+MesenteriumSubset
 @
 
 To obtain the set of trajectories identified from the analysis of the loaded frames, a very compact one-liner command is all that is needed:
 <<workflowCompact,eval=FALSE,results='hide'>>=
 # one command to seize them all :)
-fullResults <- kinematics(trajectories(particles3(channel.Frames(MesenteriumSubset2,"red"))))
+fullResults <- kinematics(trajectories(particles3(channel.Frames(MesenteriumSubset,"red"))))
 @
 
 % microbenchmark(kinematics(trajectories(particles(channels(MesenteriumSubset)$red))))
@@ -151,7 +151,7 @@ fullData
 It is possible to inspect the first frames of a \Rclass{FrameList} object with the function \Rfunction{inspect.frames} (Fig.\ref{fig:inspectRaw}).
 
 <<inspectRaw,fig.height=4,fig.width=7.5,fig.cap="The first 9 frames of the MesenteriumSubset dataset. The red channel stores information about platelets, while the green channel is dedicated to leukocytes">>=
-inspect.Frames(MesenteriumSubset2,nframes=9,display.method="raster")
+inspect.Frames(MesenteriumSubset,nframes=9,display.method="raster")
 @
 
 By default, \Robject{display.method} is set to "browser", as in the EBImage function display. This opens up a window in the predefined browser (e.g. Mozilla Firefox), with navigable frames (arrows on the top left corner). For the vignette, we will set it to \Robject{raster}, for viewing them as raster graphics using R's native functions.
@@ -169,7 +169,7 @@ For the following steps, we will focus on the information contained in the red c
 This creates an object of the class \Rclass{ChannelsFrameList}, which is in turn a list of three \Rclass{FrameList} objects (one for each color channel).
 
 <<selectRed>>=
-plateletsMesenterium <- channel.Frames(MesenteriumSubset2,"red")
+plateletsMesenterium <- channel.Frames(MesenteriumSubset,"red")
 
 plateletsMesenterium
 @
@@ -251,7 +251,7 @@ This step can be done iteratively, with the help of the function \Rfunction{add.
 If called with the parameter mode set to \Robject{particles}, then it will automatically generate a \Rclass{FrameList} object, with the contours of all particles drawn around the objects that passed the segmentation (and filtering) step (Fig.\ref{fig:checkSelection}).
 
 <<checkSelection,fig.height=4,fig.width=7.5,fig.cap="Particles detected in the first 9 frames are shown in yellow, with their contours defined by the segmentation procedure.">>=
-paintedPlatelets <- add.contours(raw.frames=MesenteriumSubset2,
+paintedPlatelets <- add.contours(raw.frames=MesenteriumSubset,
                                  binary.frames=preprocessedPlatelets,
                                  mode="particles")
 inspect.Frames(paintedPlatelets,nframes=9,display.method="raster")
@@ -327,20 +327,20 @@ By plotting all trajectories in a 2D+time representation, it's possible to have 
 The following command gives an interactive 3D (2D+time) view of all trajectories (output is not included in this vignette): % (Fig.\ref{fig:cubeTrajs}):
 
 <<cubeTrajs,rgl=TRUE,fig.cap="A 2D+time representation of the trajectories, produced by plotting a TrajectoryList object",eval=FALSE>>=
-plot.TrajectorySet(trajPlatelets,MesenteriumSubset2)
+plot.TrajectorySet(trajPlatelets,MesenteriumSubset)
 @
 
 The \Rfunction{plot2D.TrajectoryList} focuses on additional information and a different "point of view", but can just display a two dimensional projection of the identified trajectories (Fig.\ref{fig:overviewTrajs}).
 
 <<overviewTrajs,fig.height=4,fig.width=7.5,fig.cap='A 2D "flat" representation of the trajectories, more suitable to give an indication of the global movement'>>=
-plot2D.TrajectorySet(trajPlatelets,MesenteriumSubset2)
+plot2D.TrajectorySet(trajPlatelets,MesenteriumSubset)
 @
 
 
 To have more insights on single trajectories, or on a subset of them, \Rfunction{add.contours} offers a mode \Robject{trajectories}. Particles are drawn on the raw images with colours corresponding to the trajectory IDs. \Rfunction{add.contours} plots by default all trajectories, but the user can supply a vector of the IDs of interest to override this behaviour.
 
 <<contourTrajs>>=
-paintedTrajectories <- add.contours(raw.frames=MesenteriumSubset2,
+paintedTrajectories <- add.contours(raw.frames=MesenteriumSubset,
                                     binary.frames=preprocessedPlatelets,  
                                     trajectoryset=trajPlatelets,
                                     mode="trajectories")
@@ -356,11 +356,11 @@ inspect.Frames(paintedTrajectories,nframes=9,display.method="raster")
 To allow for a thorough evaluation of the single trajectories, \Rfunction{export.frames} is a valid helper, as it creates single images corresponding to each frame in the \Rclass{FrameList} object. We first extract for example trajectory 11 (Fig.\ref{fig:traj11}) with the following command:
 
 <<traj11,fig.height=4,fig.width=7.5,fig.cap="First 9 frames for trajectory with ID 11, as supplied to the trajIds argument of add.contours">>=
-traj11 <- add.contours(raw.frames=MesenteriumSubset2,
+traj11 <- add.contours(raw.frames=MesenteriumSubset,
                        binary.frames=preprocessedPlatelets,
                        trajectoryset=trajPlatelets,
                        mode="trajectories",
-                       trajIds=11)
+                       trajIDs=11)
 traj11
 inspect.Frames(traj11,nframes=9,display.method="raster")
 @
@@ -387,7 +387,7 @@ evaluatedTrajectories <- trajPlatelets
 
 for(i in 1:length(trajPlatelets))
 {
-  paintedTraj <- add.contours(raw.frames=MesenteriumSubset2,
+  paintedTraj <- add.contours(raw.frames=MesenteriumSubset,
                               binary.frames=preprocessedPlatelets,
                               trajectoryset=trajPlatelets,
                               mode="trajectories",
@@ -464,13 +464,14 @@ This package was developed at the Institute of Medical Biostatistics, Epidemiolo
 
 We would like to thank the members of the Biostatistics division for valuable discussions, and additionally Isabella Zwiener for contributing to the first ideas on the project.
 
-\newpage
-
 \section{Session Information}
 This vignette was generated using the following package versions:
 <<sessioininfo,results='asis'>>=
 toLatex(sessionInfo())
 @
+
+\newpage
+
 \bibliography{flowcatchR}
 
 % \printbibliography

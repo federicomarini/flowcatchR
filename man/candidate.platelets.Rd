@@ -5,12 +5,8 @@
 \title{A sample \code{ParticleList} object}
 \description{
 The sample \code{ParticleList} object is constituted by the platelets identified from the \code{MesenteriumSubset} data
-
-The sample \code{ParticleList} object is constituted by the platelets identified from the \code{MesenteriumSubset} data
 }
 \author{
-Federico Marini, \email{marinif@uni-mainz.de}, 2014
-
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

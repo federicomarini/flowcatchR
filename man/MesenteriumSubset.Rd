@@ -7,14 +7,8 @@
 The sample \code{FrameList} object is constituted by a subset of a time-lapse intravital microscopy imaging dataset.
 Green channel marks leukocytes, red channel focuses on blood platelets. 20 frames are provided in this subset.
 Images are kindly provided by Sven Jaeckel (\email{Sven.Jaeckel@unimedizin-mainz.de}).
-
-The sample \code{FrameList} object is constituted by a subset of a time-lapse intravital microscopy imaging dataset.
-Green channel marks leukocytes, red channel focuses on blood platelets. 20 frames are provided in this subset.
-Images are kindly provided by Sven Jaeckel (\email{Sven.Jaeckel@unimedizin-mainz.de}).
 }
 \author{
-Federico Marini, \email{marinif@uni-mainz.de}, 2014
-
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

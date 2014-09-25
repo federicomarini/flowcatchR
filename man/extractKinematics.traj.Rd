@@ -5,15 +5,10 @@
 #
 Calculate a set of kinematics parameters from a single trajectory}
 \usage{
-extractKinematics.traj(trajectorylist, trajectoryID,
-  acquisitionFrequency = 30, scala = 50)
-
-extractKinematics.traj(trajectorylist, trajectoryID,
-  acquisitionFrequency = 30, scala = 50)
+extractKinematics.traj(trajectoryset, trajectoryID, acquisitionFrequency = 30,
+  scala = 50)
 }
 \arguments{
-\item{trajectorylist}{A \code{TrajectoryList} object}
-
 \item{trajectoryID}{The ID of a single trajectory}
 
 \item{acquisitionFrequency}{The frame rate of acquisition for the images, in
@@ -23,18 +18,8 @@ milliseconds}
   corresponds}
 
 \item{trajectorylist}{A \code{TrajectoryList} object}
-
-\item{trajectoryID}{The ID of a single trajectory}
-
-\item{acquisitionFrequency}{The frame rate of acquisition for the images, in
-milliseconds}
-
-\item{scala}{The value of micro(?)meters to which each single pixel
-  corresponds}
 }
 \value{
-A \code{KinematicsFeatureSet} object
-
 A \code{KinematicsFeatureSet} object
 }
 \description{
@@ -43,16 +28,8 @@ The computed set of parameters include \code{delta.x}, \code{delta.t} and \code{
 \code{distStartToEnd}, \code{curvilinearVelocity}, \code{straightLineVelocity} and
 \code{linearityForwardProgression}, Mean Squared Displacement, velocity
 autocorrelation, and more
-
-The computed set of parameters include \code{delta.x}, \code{delta.t} and \code{delta.v}
-(displacements and instantaneous velocity), \code{totalTime}, \code{totalDistance},
-\code{distStartToEnd}, \code{curvilinearVelocity}, \code{straightLineVelocity} and
-\code{linearityForwardProgression}, Mean Squared Displacement, velocity
-autocorrelation, and more
 }
 \author{
-Federico Marini, \email{marinif@uni-mainz.de}, 2014
-
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

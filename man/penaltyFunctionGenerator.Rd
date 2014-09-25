@@ -5,19 +5,8 @@
 \usage{
 penaltyFunctionGenerator(epsilon1 = 0.1, epsilon2 = 2, lambda1 = 1,
   lambda2 = 1)
-
-penaltyFunctionGenerator(epsilon1 = 0.1, epsilon2 = 2, lambda1 = 1,
-  lambda2 = 1)
 }
 \arguments{
-\item{epsilon1}{A numeric value, to be used in the formula. Jitter for allowing angular displacements}
-
-\item{epsilon2}{A numeric value, to be used in the formula. Jitter for allowing spatial displacements}
-
-\item{lambda1}{A numeric value. Multiplicative factor for the penalty function}
-
-\item{lambda2}{A numeric value. Multiplicative factor applied to the angular displacement}
-
 \item{epsilon1}{A numeric value, to be used in the formula. Jitter for allowing angular displacements}
 
 \item{epsilon2}{A numeric value, to be used in the formula. Jitter for allowing spatial displacements}
@@ -28,21 +17,14 @@ penaltyFunctionGenerator(epsilon1 = 0.1, epsilon2 = 2, lambda1 = 1,
 }
 \value{
 A function object, to be used as penalty function
-
-A function object, to be used as penalty function
 }
 \description{
-A function to generate penalty functions to use while linking particles
-
 A function to generate penalty functions to use while linking particles
 }
 \examples{
 custom.function <- penaltyFunctionGenerator(epsilon1=0.1,epsilon2=6,lambda1=1.5,lambda2=0)
-custom.function <- penaltyFunctionGenerator(epsilon1=0.1,epsilon2=6,lambda1=1.5,lambda2=0)
 }
 \author{
-Federico Marini, \email{marinif@uni-mainz.de}, 2014
-
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

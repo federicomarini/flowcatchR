@@ -3,28 +3,18 @@
 \alias{axesInfo}
 \title{Info on the dimensions of the FOV}
 \usage{
-axesInfo(framelist)
-
-axesInfo(framelist)
+axesInfo(frames)
 }
 \arguments{
-\item{framelist}{A \code{FrameList} object}
-
 \item{framelist}{A \code{FrameList} object}
 }
 \value{
 A list object, containing the extremes of the field of interest (x-y-z, where z is time)
-
-A list object, containing the extremes of the field of interest (x-y-z, where z is time)
 }
 \description{
 Auxiliary function to return the dimensions of the field of interest
-
-Auxiliary function to return the dimensions of the field of interest
 }
 \author{
-Federico Marini, \email{marinif@uni-mainz.de}, 2014
-
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 

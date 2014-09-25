@@ -164,7 +164,6 @@ inspect.Frames <- function(frames,
 #' 
 #' @return A \code{FrameList} object, composed by the subset of frames of the input \code{FrameList}
 #' 
-#' @method subset FrameList
 #' 
 #' @examples
 #' data("MesenteriumSubset")
@@ -172,7 +171,6 @@ inspect.Frames <- function(frames,
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-
 
 
 
@@ -232,7 +230,7 @@ select.Frames <- function(frames,framesToKeep=1,...)
 #   return(channelsframelist)
 # }
 
-
+#' export
 length.Frames <- function(frames)
 {
   numberOfFrames(frames,"render")
@@ -565,7 +563,6 @@ setMethod("show",
 #' @param x A \code{KinematicsFeatureSetList} object
 #' @param ... Arguments to be passed to methods
 #' 
-#' @method print KinematicsFeatureSetList
 #' 
 #' @examples 
 #' data("candidate.platelets")
@@ -1125,8 +1122,8 @@ addParticles <- function(raw.frames,binary.frames,col=NULL)
 #' @return A \code{FrameList} object, with cropped frames in the \code{image} slot
 #' 
 #' @examples 
-#' data("MesenteriumSubset")
-#' cut(MesenteriumSubset)
+#' data("MesenteriumSubset2")
+#' crop.Frames(MesenteriumSubset2)
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
@@ -1460,6 +1457,7 @@ particles <- function(framelistRaw,
   return(out)
 }
 
+#' @export
 particles3 <- function(raw.frames,
                        binary.frames=NULL,
                        channel=NULL  
@@ -2268,7 +2266,6 @@ axesInfo <- function(frames)
 #' @param ... Arguments to be passed to methods
 #' @param verbose Logical, whether to provide additional output on the command line
 #' 
-#' @method plot TrajectoryList
 #' 
 #' @examples
 #' data("MesenteriumSubset")

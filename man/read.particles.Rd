@@ -4,39 +4,24 @@
 \title{Constructor for a \code{ParticleList} object}
 \usage{
 read.particles(particle.files, nframes = NULL)
-
-read.particles(particle.files, nframes = NULL)
 }
 \arguments{
-\item{particle.files}{Vector of strings containing the locations where the particle coordinates are to be found, or alternatively, the path to the folder}
-
-\item{nframes}{Number of frames that will constitute the \code{ParticleList} object}
-
 \item{particle.files}{Vector of strings containing the locations where the particle coordinates are to be found, or alternatively, the path to the folder}
 
 \item{nframes}{Number of frames that will constitute the \code{ParticleList} object}
 }
 \value{
 An object of the \code{ParticleList} class
-
-An object of the \code{ParticleList} class
 }
 \description{
-This function is used to create a \code{ParticleList} object from a vector/list of tab separated text files, each of one containing one line for each
-particle in the related frame, alongside with its coordinates and if available, the computed features
-The number of frames is also specified, as just a subset of the particle lists can be used for this
-
 This function is used to create a \code{ParticleList} object from a vector/list of tab separated text files, each of one containing one line for each
 particle in the related frame, alongside with its coordinates and if available, the computed features
 The number of frames is also specified, as just a subset of the particle lists can be used for this
 }
 \examples{
 ## see vignette and export.particles
-## see vignette and export.particles
 }
 \author{
-Federico Marini, \email{marinif@uni-mainz.de}, 2014
-
 Federico Marini, \email{marinif@uni-mainz.de}, 2014
 }
 
