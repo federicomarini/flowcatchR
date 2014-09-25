@@ -172,6 +172,11 @@ inspect.Frames <- function(frames,
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
+
+
+
+
+#' @export
 select.Frames <- function(frames,framesToKeep=1,...)
 {
   # check if all framesToKeep are actually available in the Frames object
@@ -1215,7 +1220,7 @@ rotate.Frames <- function(frames,
 
 
 
-
+#' @export
 channel.Frames <- function(frames,mode)
 {
   y <- Frames(EBImage::channel(frames,mode),channel="all")
@@ -1234,7 +1239,7 @@ channel.Frames <- function(frames,mode)
 #' @param x A \code{FrameList} or a \code{ChannelsFrameList} object
 #' @param ... Arguments to be passed to methods, such as channel and/or preprocessing parameters
 #' 
-#' @export
+
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 #' #' Preprocessing function for \code{ChannelsFrameList} objects
 #' 
@@ -1250,7 +1255,7 @@ channel.Frames <- function(frames,mode)
 #' data("MesenteriumSubset")
 #' preprocess(channels(MesenteriumSubset),channel = "red")
 #' 
-#' @export
+
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 #' Preprocessing function for \code{FrameList} objects
 #' 
@@ -1277,8 +1282,12 @@ channel.Frames <- function(frames,mode)
 #' platelets.framelist <- channels(MesenteriumSubset)$red
 #' preprocess(platelets.framelist)
 #' 
-#' @export
+
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
+#' 
+#' 
+
+#' @export
 preprocess.Frames <- function(frames,
                         brush.size=3,
                         brush.shape="disc",

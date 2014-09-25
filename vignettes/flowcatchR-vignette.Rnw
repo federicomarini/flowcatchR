@@ -177,7 +177,7 @@ plateletsMesenterium
 As we can see, by selecting one of the channels, we get in return a \Rclass{FrameList} object, and we inspect it in its first 9 frames (Fig.\ref{fig:inspectPlatelets}).
 
 <<inspectPlatelets,fig.height=4,fig.width=7.5,fig.cap="The first 9 frames of the MesenteriumSubset dataset, just displaying the signal of the red channel (for the thrombocytes)">>=
-inspect.frames(plateletsMesenterium,nframes=9,display.method="raster")
+inspect.Frames(plateletsMesenterium,nframes=9,display.method="raster")
 @
 
 

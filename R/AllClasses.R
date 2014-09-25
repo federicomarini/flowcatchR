@@ -1,12 +1,13 @@
 ## all classes
 
+#' @exportClass Frames
 setClass("Frames",
          contains = "Image",
          slots = c(
            channel = "character"
            )
          )
-
+#' @exportClass ParticleSet
 setClass("ParticleSet",
          contains = "list",
          slots = c(
@@ -22,6 +23,8 @@ setClass("ParticleSet",
 #           )
 #         )
 
+
+#' @exportClass LinkedParticleSet
 setClass("LinkedParticleSet",
          contains = "ParticleSet",
          slots = c(
@@ -29,19 +32,19 @@ setClass("LinkedParticleSet",
            )
         )
 
-
+#' @exportClass TrajectorySet
 setClass("TrajectorySet",
          contains = "list",
          slots = c(
            channel = "character"
            )
          )
-
+#' @exportClass KinematicsFeatures
 setClass("KinematicsFeatures",
          contains = "list"
         )
 
-
+#' @exportClass KinematicsFeaturesSet
 setClass("KinematicsFeaturesSet",
          contains = "list"
         )
