@@ -10,7 +10,14 @@ channel.Frames(frames, mode)
 
 \item{mode}{A character value specifying the target mode for conversion.}
 }
+\value{
+A \code{Frames} object with just the infotmation on the selected channel
+}
 \description{
 \code{channel}
+}
+\examples{
+data("MesenteriumSubset")
+channel.Frames(MesenteriumSubset,"red")
 }
 

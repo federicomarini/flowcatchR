@@ -31,7 +31,7 @@ NULL
 
 
 
-#' A sample \code{Frames object} 
+#' A sample \code{Frames} object 
 #' 
 #' The sample \code{Frames} object is constituted by a subset of a time-lapse intravital microscopy imaging dataset.
 #' Green channel marks leukocytes, red channel focuses on blood platelets. 20 frames are provided in this subset.
