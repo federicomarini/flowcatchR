@@ -42,6 +42,7 @@ opts_chunk$set(fig.path='./figures/flowcatchR-',
                results='hold',
                tidy=FALSE)
 options(replace.assign=TRUE,width=80,'reindent.spaces'=2) # for tidying up the code
+options(rgl.useNULL=TRUE)
 knit_hooks$set(rgl = hook_rgl)
 @
 
