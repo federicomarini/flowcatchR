@@ -112,8 +112,7 @@ particles <- function(raw.frames,
   for(i in 1:length.Frames(raw.frames))  {
     segmImg <- getFrame(binary.frames, i)
     rawImg <- getFrame(raw.frames, i)
-    
-    imgFeatures <- as.data.frame(computeFeatures(segmImg,rawImg,xname="cell"))
+    imgFeatures <- as.data.frame(EBImage::computeFeatures(segmImg,rawImg,xname="cell"))
     imgFeatures$shapeFactor <- (imgFeatures$cell.0.s.perimeter)^2 / (4*pi*imgFeatures$cell.0.s.area)
     
     # with the locations now saved as names
