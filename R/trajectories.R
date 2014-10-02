@@ -168,6 +168,7 @@ axesInfo <- function(frames)
 #' \dontrun{
 #' plot(platelets.trajectories,MesenteriumSubset)
 #' }
+#' @return \code{plot.TrajectorySet} returns an invisible \code{NULL}.
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
@@ -186,6 +187,7 @@ plot.TrajectorySet <- function(x,frames,verbose=FALSE,...)
   #   
   decorate3d(xlim=cubeLimits$xlim,ylim=cubeLimits$ylim,zlim=cubeLimits$tlim,xlab="",ylab="",zlab="Frame Number",aspect=TRUE)
   bg3d("black") 
+  invisible(NULL)
 }
 
 
@@ -209,6 +211,8 @@ plot.TrajectorySet <- function(x,frames,verbose=FALSE,...)
 #' data("candidate.platelets")
 #' platelets.trajectories <- trajectories(candidate.platelets)
 #' plot2D.TrajectorySet(platelets.trajectories,MesenteriumSubset)
+#' 
+#' @return \code{plot2D.TrajectorySet} returns an invisible \code{NULL}.
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
@@ -248,6 +252,7 @@ plot2D.TrajectorySet <- function(trajectoryset,frames,trajIDs=NULL,verbose=FALSE
     text((yCoord[1] + 4)~xCoord[1], data = trajectoryset[[t]]$trajectory, labels=t,
          col=colcols[t])
   }
+  invisible(NULL)
 }
 
 

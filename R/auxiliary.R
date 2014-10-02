@@ -55,6 +55,8 @@ channel.Frames <- function(frames,mode)
 #' data("MesenteriumSubset")
 #' \dontrun{inspect.Frames(MesenteriumSubset)}
 #' 
+#' @return \code{inspect.Frames} returns an invisible \code{NULL}.
+#' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 inspect.Frames <- function(frames,
@@ -75,6 +77,7 @@ inspect.Frames <- function(frames,
   if (verbose) cat("Displaying",nframes,"frames of a Frames object composed in total of",totframes,"images")
   
   display(frames,all=TRUE,method=display.method)
+  invisible(NULL)
 }
 
 

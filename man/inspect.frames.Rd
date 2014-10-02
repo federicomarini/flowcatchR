@@ -15,6 +15,9 @@ inspect.Frames(frames, nframes = NULL, display.method = "browser",
 
 \item{verbose}{Logical, whether to provide additional output on the command line alongside with the images themselves}
 }
+\value{
+\code{inspect.Frames} returns an invisible \code{NULL}.
+}
 \description{
 The first frames of a \code{Frames} are displayed in the browser, and are interactively navigable.
 }

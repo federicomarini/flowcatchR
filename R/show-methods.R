@@ -6,7 +6,7 @@
 #' @param ... Arguments to be passed to methods
 #'  
 #' @method print Frames
-#' 
+#' @return This returns an invisible \code{NULL}.
 #' @examples
 #' data("MesenteriumSubset")
 #' print(MesenteriumSubset)
@@ -24,7 +24,7 @@ setMethod("show",
             
             cat("Displaying information for the first Image in the Frames object...\n\n")
             callNextMethod(object)
-            
+            invisible(NULL)
           })
 
 
@@ -39,6 +39,7 @@ setMethod("show",
 #' data("candidate.platelets")
 #' print(candidate.platelets)
 #' 
+#' @return This returns an invisible \code{NULL}.
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 setMethod("show",
@@ -50,7 +51,8 @@ setMethod("show",
             cat("Displaying a subset of the features of the",nrow(firstFrameParticles),"particles found in the first image...\n")
             linesToShow <- min(5,nrow(firstFrameParticles))
             print(firstFrameParticles[1:linesToShow,1:8])
-            cat("\nParticles identified on the",object$channel,"channel\n")          
+            cat("\nParticles identified on the",object$channel,"channel\n") 
+            invisible(NULL)
           })
 
 
@@ -68,6 +70,7 @@ setMethod("show",
 #' include.area=FALSE)
 #' print(linked.platelets)
 #' 
+#' @return This returns an invisible \code{NULL}.
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 setMethod("show",
@@ -81,7 +84,8 @@ setMethod("show",
             cat("Displaying a subset of the features of the",nrow(firstFrameParticles),"particles found in the first image...\n")
             linesToShow <- min(5,nrow(firstFrameParticles))
             print(firstFrameParticles[1:linesToShow,1:8])
-            cat("\nParticles identified on the",object@channel,"channel\n")          
+            cat("\nParticles identified on the",object@channel,"channel\n")         
+            invisible(NULL)
           })
 
 
@@ -98,6 +102,8 @@ setMethod("show",
 #' platelets.trajectories <- trajectories(candidate.platelets)
 #' print(platelets.trajectories)
 #' 
+#' @return This returns an invisible \code{NULL}.
+#' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 
@@ -111,7 +117,8 @@ setMethod("show",
             cat("Displaying a segment of the first trajectory...\n")
             print(object[[1]]$trajectory[1:min(10,nrow(object[[1]]$trajectory)),])
             
-            cat("\nTrajectories are related to articles identified on the",object@channel,"channel\n")          
+            cat("\nTrajectories are related to articles identified on the",object@channel,"channel\n")        
+            invisible(NULL)
           })
 
 
@@ -129,6 +136,8 @@ setMethod("show",
 #' traj11features <- kinematics(platelets.trajectories,trajectoryIDs = 11)
 #' print(traj11features)
 #' 
+#' @return This returns an invisible \code{NULL}.
+#' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 setMethod("show",
@@ -143,7 +152,8 @@ setMethod("show",
             cat("\n")
             cat("Curvilinear Velocity:",object$curvilinearVelocity,"\n")
             cat("Total Distance:",object$totalDistance,"\n")
-            cat("Total Time:",object$totalTime,"\n")          
+            cat("Total Time:",object$totalTime,"\n")       
+            invisible(NULL)
           })
 
 
@@ -159,6 +169,8 @@ setMethod("show",
 #' alltrajs.features <- kinematics(platelets.trajectories)
 #' print(alltrajs.features)
 #'
+#' @return This returns an invisible \code{NULL}.
+#' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 setMethod("show",
@@ -178,7 +190,7 @@ setMethod("show",
             cat("Average Curvilinear Velocity:",mean(unlist(lapply(object,function(arg){arg[["curvilinearVelocity"]]})),na.rm=TRUE),"\n")
             cat("Average Total Distance:",mean(unlist(lapply(object,function(arg){arg[["totalDistance"]]})),na.rm=TRUE),"\n")
             cat("Average Total Time:",mean(unlist(lapply(object,function(arg){arg[["totalTime"]]})),na.rm=TRUE),"\n")
-            
+            invisible(NULL)
           })
 
 

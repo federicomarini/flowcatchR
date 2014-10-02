@@ -11,6 +11,9 @@
 
 \item{...}{Arguments to be passed to methods}
 }
+\value{
+This returns an invisible \code{NULL}.
+}
 \description{
 Display conveniently a \code{ParticleSet} object
 }

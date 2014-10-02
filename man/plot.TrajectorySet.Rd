@@ -14,6 +14,9 @@
 
 \item{...}{Arguments to be passed to methods}
 }
+\value{
+\code{plot.TrajectorySet} returns an invisible \code{NULL}.
+}
 \description{
 Provides a visual representation of a \code{TrajectorySet} object
 }

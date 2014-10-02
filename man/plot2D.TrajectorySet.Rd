@@ -17,6 +17,9 @@ plot2D.TrajectorySet(trajectoryset, frames, trajIDs = NULL, verbose = FALSE,
 
 \item{...}{Arguments to be passed to methods}
 }
+\value{
+\code{plot2D.TrajectorySet} returns an invisible \code{NULL}.
+}
 \description{
 Provides a bird's eye view of a \code{TrajectorySet} object on a bidimensional space
 }
