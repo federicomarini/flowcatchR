@@ -175,18 +175,18 @@ export.Frames <- function(frames,
     dir.create(dir,showWarnings=FALSE) # if not already existing...
   }
   totframes <- length.Frames(frames)
-  imgNames <- unlist(lapply(1:totframes,
-                            function(arg){paste0(dir,"/",nameStub,"_frame_",formatC(arg,nchar(length.Frames(Frames)),flag="0"),".png")}))
+  imgNames <- file.path(dir, paste0(nameStub, "_frame_", 
+                                     formatC(1:totframes,width=nchar(totframes), flag="0"), ".png"))
   writeImage(frames,imgNames)
   
   if(createGif)
   {
     # using imagemagick
-    system(paste0("convert -delay 40 ",dir,"/",nameStub,"_frame_*.png ",dir,"/",nameStub,".gif"))
+    system(sprintf("convert -delay 40 %s %s.gif", paste(imgNames, collapse = ""), file.path(dir, nameStub)))
   }
   if(removeAfterCreatingGif && createGif)
   {
-    file.remove(list.files(path=dir,pattern=paste0(".png"),full.names=TRUE))
+    file.remove(imgNames)
   }
   invisible()
 }
@@ -313,9 +313,10 @@ export.particles <- function(particleset,
   {
     dir.create(dir,showWarnings=FALSE) # if not already existing...
   }
-  particleNames <- lapply(1:length(particleset),
-                          function(arg){paste0(dir,"/",nameStub,"_frame_",formatC(arg,nchar(length(particleset)),flag="0"),".tsv")})
-  for (i in 1:length(particleset))
+  totframes <- length(particleset)
+  particleNames <- file.path(dir, paste0(nameStub, "_frame_", formatC(1:totframes,
+                                                                  width=nchar(totframes), flag="0"), ".tsv"))
+  for (i in 1:totframes)
   {
     writeLines(paste0("#|",names(particleset)[i],"|",particleset@channel),particleNames[[i]])
     write.table(particleset@.Data[[i]],particleNames[[i]],append = TRUE,sep = "\t",quote = FALSE,col.names = TRUE,row.names= FALSE)

@@ -27,14 +27,14 @@
 BiocStyle::latex()
 @
 
-<<setup, include=FALSE, cache=FALSE, eval = TRUE, echo = FALSE>>=
+<<setup, include=FALSE, cache=FALSE, eval=TRUE, echo=FALSE>>=
 library(knitr)
 opts_chunk$set(fig.path='./figures/flowcatchR-',
                fig.align='center', fig.show='asis', #fig.show='hold',dev="png",
-               eval = TRUE,
-               fig.width = 4.5,
-               fig.height = 4.5,
-               message = FALSE,
+               eval=TRUE,
+               fig.width=4.5,
+               fig.height=4.5,
+               message=FALSE,
                size='small',
                comment='##',
                prompt=FALSE,
@@ -43,7 +43,7 @@ opts_chunk$set(fig.path='./figures/flowcatchR-',
                tidy=FALSE)
 options(replace.assign=TRUE,width=80,'reindent.spaces'=2) # for tidying up the code
 options(rgl.useNULL=TRUE)
-knit_hooks$set(rgl = hook_rgl)
+knit_hooks$set(rgl=hook_rgl)
 @
 
 
@@ -116,7 +116,7 @@ data("MesenteriumSubset")
 
 <<meseLoaded>>=
 # printing summary information for the MesenteriumSubset object
-MesenteriumSubset
+print(MesenteriumSubset)
 @
 
 To obtain the set of trajectories identified from the analysis of the loaded frames, a very compact one-line command is all that is needed:
@@ -125,7 +125,7 @@ To obtain the set of trajectories identified from the analysis of the loaded fra
 fullResults <- kinematics(trajectories(particles(channel.Frames(MesenteriumSubset,"red"))))
 @
 
-% microbenchmark(kinematics(trajectories(particles(channels(MesenteriumSubset)$red))))
+% microbenchmark(kinematics(trajectories(particles(channel.Frames(MesenteriumSubset,"red")))))
 
 On a MAC OS X machine equipped with 2.8 Ghz Intel Core i7 processor and 16 GB RAM, the execution of this command takes 3.91 seconds to run.
 
@@ -141,10 +141,10 @@ A set of images is acquired, after a proper microscopy setup has been performed.
 
 <<newFrames,eval=FALSE>>=
 # initialization
-fullData <- read.Frames(image.files = "/path/to/folder/containing/images/",nframes=100) 
+fullData <- read.Frames(image.files="/path/to/folder/containing/images/", nframes=100) 
 
 # printing summary information for the Frames object
-fullData
+print(fullData)
 @
 
 \Robject{nframes} specifies the number of frames that will constitute the \Rclass{Frames} object, whereas \Robject{image.files} is a vector of character strings with the full location of the (raw) images, or the path to the folder containing them (works automatically if images are in TIFF/JPG/PNG format). In this case we just loaded the full dataset, but for the demonstrational purpose of this vignette, we will proceed with the subset available in the \Robject{MesenteriumSubset} object, which we previously loaded in Section \ref{sec:overview}.
@@ -152,7 +152,7 @@ fullData
 It is possible to inspect the images composing a \Rclass{Frames} object with the function \Rfunction{inspect.Frames} (Fig.\ref{fig:inspectRaw}).
 
 <<inspectRaw,fig.height=4,fig.width=7.5,fig.cap="The first 9 frames of the MesenteriumSubset dataset. The red channel stores information about platelets, while the green channel is dedicated to leukocytes">>=
-inspect.Frames(MesenteriumSubset,nframes=9,display.method="raster")
+inspect.Frames(MesenteriumSubset, nframes=9, display.method="raster")
 @
 
 By default, \Robject{display.method} is set to "browser", as in the \Biocpkg{EBImage} function display. This opens up a window in the predefined browser (e.g. Mozilla Firefox), with navigable frames (arrows on the top left corner). For the vignette, we will set it to \Robject{raster}, for viewing them as raster graphics using R's native functions.
@@ -162,15 +162,15 @@ Importantly, these image sets were already registered and rotated in such a way 
 For the following steps, we will focus on the information contained in the red channel, corresponding in this case to blood platelets. We do so by calling the \Rfunction{channel.Frames} function:
 
 <<selectRed>>=
-plateletsMesenterium <- channel.Frames(MesenteriumSubset,"red")
+plateletsMesenterium <- channel.Frames(MesenteriumSubset, mode="red")
 
-plateletsMesenterium
+print(plateletsMesenterium)
 @
 
 This creates another instance of the class \Rclass{Frames}, and we inspect it in its first 9 frames (Fig.\ref{fig:inspectPlatelets}).
 
 <<inspectPlatelets,fig.height=4,fig.width=7.5,fig.cap="The first 9 frames of the MesenteriumSubset dataset, just displaying the GrayScale signal for the red channel stored in plateletsMesenterium (for the thrombocytes)">>=
-inspect.Frames(plateletsMesenterium,nframes=9,display.method="raster")
+inspect.Frames(plateletsMesenterium, nframes=9, display.method="raster")
 @
 
 
@@ -180,36 +180,36 @@ Steps such as denoising, smoothing and morphological operations (erosion/dilatio
 
 <<segmentPreprocess>>=
 preprocessedPlatelets <- preprocess.Frames(plateletsMesenterium,
-                                    brushSize = 3, brushShape = "disc",
-                                    adaptOffset = 0.15, adaptWinWidth = 10, adaptWinHeight = 10,
-                                    kernSize = 3, kernShape = "disc",
-                                    watershedTolerance = 1, watershedRadius = 1,
-                                    areaThresholdMin = 5, areaThresholdMax = 100)
-preprocessedPlatelets
+                                    brushSize=3, brushShape="disc",
+                                    adaptOffset=0.15, adaptWinWidth=10, adaptWinHeight=10,
+                                    kernSize=3, kernShape="disc",
+                                    watershedTolerance=1, watershedRadius=1,
+                                    areaThresholdMin=5, areaThresholdMax=100)
+print(preprocessedPlatelets)
 @
 
 The result of this is displayed in Fig.\ref{fig:inspectSegm}. 
 For a detailed explanation of the parameters to better tweak the performances of this segmentation step, please refer to the help of \Rfunction{preprocess.Frames}. To obtain an immediate feedback about the effects of the operations performed in the full preprocessing phase, we can call again \Rfunction{inspect.Frames} on the \Rclass{Frames} of segmented images (Fig.\ref{fig:inspectSegm}).
 
 <<inspectSegm,fig.height=4,fig.width=7.5,fig.cap="The first 9 frames after preprocessing of the MesenteriumSubset dataset. The binarized image shows the detected objects after thresholding.">>=
-inspect.Frames(preprocessedPlatelets,nframes=9,display.method="raster")
+inspect.Frames(preprocessedPlatelets, nframes=9, display.method="raster")
 @
 
 The frames could be cropped, if e.g. it is needed to remove background noise that might be present close to the edges. This is done with the function \Rfunction{crop.Frames}.
 
 <<cropFrames>>=
 croppedFrames <- crop.Frames(plateletsMesenterium,
-                     cutLeft=6,cutRight=6,
-                     cutUp=3,cutDown=3,
+                     cutLeft=6, cutRight=6,
+                     cutUp=3, cutDown=3,
                      testing=FALSE)
-croppedFrames
+print(croppedFrames)
 @
 
 If \Robject{testing} is set to true, the function just displays the first cropped frame, to get a feeling whether the choice of parameters was adequate. Similarly, for the function \Rfunction{rotate.Frames} the same behaviour is expected, whereas the rotation in degrees is specified by the parameter \Robject{angle}.
 
 <<rotateFrames>>=
-rotatedFrames <- rotate.Frames(plateletsMesenterium,angle = 30)
-rotatedFrames
+rotatedFrames <- rotate.Frames(plateletsMesenterium, angle=30)
+print(rotatedFrames)
 @
 
 If desired, it is possible to select just a subset of the frames belonging to a \Rclass{Frames}. This can be done via the \Rfunction{select.Frames} function:
@@ -217,15 +217,15 @@ If desired, it is possible to select just a subset of the frames belonging to a 
 <<selectFrames>>=
 subsetFrames <- select.Frames(plateletsMesenterium,
                        framesToKeep=c(1:10,14:20))
-subsetFrames
+print(subsetFrames)
 @
 
 
 The user can choose any combination of the operations in order to segment the images provided as input, but \Rfunction{preprocess.Frames} is a very convenient high level function for proceeding in the workflow. It is also possible, as it was shown in the introductory one-liner, to call just \Rfunction{particles} on the raw \Rclass{Frames} object. In this latter case, \Rfunction{particles} computes the preprocessed \Rclass{Frames} object according to default parameters. Still, in either situation, the output for this step is an object of the \Rclass{ParticleSet} class.
 
 <<particleSet>>=
-platelets <- particles(plateletsMesenterium,preprocessedPlatelets)
-platelets
+platelets <- particles(plateletsMesenterium, preprocessedPlatelets)
+print(platelets)
 @
 
 As it can be seen from the summary information, each \Rclass{ParticleSet} stores the essential information on all particles that were detected in the original images, alongside with a complete set of features, which are computed by integrating the information from both the raw and the segmented frames.
@@ -235,9 +235,9 @@ A \Rclass{ParticleSet} can be seen as a named list, where each element is a \Rob
 It is possible to filter out particles according to their properties, such as area, shape and eccentricity. This is possible with the function \Rfunction{select.particles}. The current implementation regards only the surface extension, but any additional feature can be chosen and adopted to restrict the number of candidate particles according to particular properties which are expected and/or to remove potential noise that went through the preprocessing phase.
 
 <<selectParticles>>=
-selectedPlatelets <- select.particles(platelets,min.area=3)
+selectedPlatelets <- select.particles(platelets, min.area=3)
 
-selectedPlatelets
+print(selectedPlatelets)
 @
   
 This step can be done iteratively, with the help of the function \Rfunction{add.contours}. 
@@ -247,7 +247,7 @@ If called with the parameter \Robject{mode} set to \Robject{particles}, then it 
 paintedPlatelets <- add.contours(raw.frames=MesenteriumSubset,
                                  binary.frames=preprocessedPlatelets,
                                  mode="particles")
-inspect.Frames(paintedPlatelets,nframes=9,display.method="raster")
+inspect.Frames(paintedPlatelets, nframes=9, display.method="raster")
 @
 
 To connect the particles from one frame to the other, we perform first the detection of particles on all images. Only in a successive phase, we establish the links between the so identified objects. This topic will be covered in detail in the following section.
@@ -264,20 +264,20 @@ In its default value, the penalty function is created via the \Rfunction{penalty
 
 <<penFunc>>=
 defaultPenalty <- penaltyFunctionGenerator()
-defaultPenalty
+print(defaultPenalty)
 @
 
 As mentioned above, to perform the linking of the particles, we use \Rfunction{link.particles}. Fundamental parameters are \Robject{L} and \Robject{R}, named as in the original implementation. \Robject{L} is the maximum displacement in pixels that a particle is expected to have in two consecutive frames, and \Robject{R} is the value for the link range, i.e. the number of future frames to be considered for the linking (typically assumes values between 1 - when no occlusions are known to happen - and 3). An extended explanation of the parameters is in the documentation of the package.
 
 <<linkParticles>>=
 linkedPlatelets <- link.particles(platelets,
-                                  L=26,R=3,
-                                  epsilon1=0,epsilon2=0,
-                                  lambda1=1,lambda2=0,
+                                  L=26, R=3,
+                                  epsilon1=0, epsilon2=0,
+                                  lambda1=1, lambda2=0,
                                   penaltyFunction=penaltyFunctionGenerator(),
                                   include.area=FALSE)
 
-linkedPlatelets
+print(linkedPlatelets)
 @
 
 As it can be seen, \Robject{linkedPlatelets} is an object of the \Rclass{LinkedParticleSet} class, which is a subclass of the \Rclass{ParticleSet} class. 
@@ -290,7 +290,7 @@ An example is provided in the lines below, with the functions \Rfunction{export.
 
 <<expo-impo,eval=FALSE>>=
 # export to csv format
-export.particles(platelets,dir = "/path/to/export/folder/exportParticleSet/")
+export.particles(platelets, dir="/path/to/export/folder/exportParticleSet/")
 # re-import the previously exported, in this case
 importedPlatelets <- read.particles(particle.files="/path/to/export/folder/exportParticleSet/")
 
@@ -308,7 +308,7 @@ It is possible to extract the trajectories with the correspondent \Rfunction{tra
 <<generateTrajs>>=
 trajPlatelets <- trajectories(linkedPlatelets)
 
-trajPlatelets
+print(trajPlatelets)
 @
 
 A \Rclass{TrajectorySet} object is returned in this case. It consists of a two level list for each trajectory, reporting the \Robject{trajectory} as a \Robject{data.frame}, the number of points \Robject{npoints} (often coinciding with the number of \Robject{nframes}, when no gaps \Robject{ngaps} are present) and its \Robject{ID}. A \Robject{keep} flag is used for subsequent user evaluation purposes.
@@ -320,13 +320,13 @@ By plotting all trajectories in a 2D+time representation, it's possible to have 
 The following command gives an interactive 3D (2D+time) view of all trajectories (output is not included in this vignette): % (Fig.\ref{fig:cubeTrajs}):
 
 <<cubeTrajs,rgl=TRUE,fig.cap="A 2D+time representation of the trajectories, produced by plotting a TrajectoryList object",eval=FALSE>>=
-plot(trajPlatelets,MesenteriumSubset)
+plot(trajPlatelets, MesenteriumSubset)
 @
 
 The \Rfunction{plot2D.TrajectorySet} focuses on additional information and a different "point of view", but can just display a two dimensional projection of the identified trajectories (Fig.\ref{fig:overviewTrajs}).
 
 <<overviewTrajs,fig.height=4,fig.width=7.5,fig.cap='A 2D "flat" representation of the trajectories, more suitable to give an indication of the global movement'>>=
-plot2D.TrajectorySet(trajPlatelets,MesenteriumSubset)
+plot2D.TrajectorySet(trajPlatelets, MesenteriumSubset)
 @
 
 
@@ -337,7 +337,7 @@ paintedTrajectories <- add.contours(raw.frames=MesenteriumSubset,
                                     binary.frames=preprocessedPlatelets,  
                                     trajectoryset=trajPlatelets,
                                     mode="trajectories")
-paintedTrajectories
+print(paintedTrajectories)
 @
 
 As with any other \Rclass{Frames} object, it is recommended to take a peek at it via the \Rfunction{inspect.Frames} function (Fig.\ref{fig:inspectTrajs}):
@@ -354,8 +354,8 @@ traj11 <- add.contours(raw.frames=MesenteriumSubset,
                        trajectoryset=trajPlatelets,
                        mode="trajectories",
                        trajIDs=11)
-traj11
-inspect.Frames(traj11,nframes=9,display.method="raster")
+print(traj11)
+inspect.Frames(traj11, nframes=9, display.method="raster")
 @
 
 The data for trajectory 11 in the \Rclass{TrajectorySet} object can be printed to the terminal: 
@@ -367,8 +367,8 @@ trajPlatelets[[11]]
 After that, it can also be exported with the following command (the \Robject{dir} parameter must be changed accordingly):
 
 <<exportTraj11,eval=FALSE>>=
-export.Frames(traj11,dir = tempdir(),nameStub="vignetteTest_traj11",
-              createGif=TRUE,removeAfterCreatingGif=FALSE)
+export.Frames(traj11, dir=tempdir(), nameStub="vignetteTest_traj11",
+              createGif=TRUE, removeAfterCreatingGif=FALSE)
 @
 
 \Rfunction{export.Frames} offers multiple ways to export - animated gif (if \software{ImageMagick} is available and installed on the system) or multiple jpeg/png images.
@@ -385,20 +385,17 @@ for(i in 1:length(trajPlatelets))
                               trajectoryset=trajPlatelets,
                               mode="trajectories",
                               col="yellow",
-                              trajIDs=i)
-  
+                              trajIDs=i)  
   export.Frames(paintedTraj,
                 nameStub=paste0("vignetteTest_evaluation_traj_oneByOne_",i),
-                createGif=TRUE,removeAfterCreatingGif=TRUE)
-  
+                createGif=TRUE, removeAfterCreatingGif=TRUE)
   ### uncomment the code below to perform the interactive evaluation of the single trajectories
 
   #   cat("Should I keep this trajectory? --- 0: NO, 1:YES --- no other values allowed")
-  #   userInput <- readLines(n = 1L)
+  #   userInput <- readLines(n=1L)
   #   ## if neither 0 nor 1, do not update
   #   ## otherwise, this becomes the value for the field keep in the new TrajectoryList
   #   evaluatedTrajectories@.Data[[i]]$keep <- as.logical(as.numeric(userInput))
- 
 }
 @
 
@@ -417,7 +414,7 @@ allKinematicFeats.allPlatelets <- kinematics(trajPlatelets,
 As it is reported from the output, the function raises a warning for trajectories which have 3 or less points, as they might be spurious detections. In such cases, no kinematic features are computed.
 
 <<kinemInspect>>=
-allKinematicFeats.allPlatelets
+print(allKinematicFeats.allPlatelets)
 @
 
 A summary for the returned object (in this case a \Rclass{KinematicsFeaturesSet}) shows some of the computed parameters.
@@ -426,18 +423,18 @@ By default, information about the first trajectory is reported in brief, and the
 A list of all available parameters is printed with an error message if the user specifies an incorrect name, such as here:
 
 <<kinemFeatsAvailable>>=
-allKinematicFeats.allPlatelets <- kinematics(trajPlatelets,feature="?")
+allKinematicFeats.allPlatelets <- kinematics(trajPlatelets, feature="?")
 @
 
 When asking for a single parameter, the value returned is structured in a vector, such that it is straightforward to proceed with further analysis, e.g. by plotting the distribution of the curvilinear velocities (Fig.\ref{fig:allVelos}).
 
 <<allVelos,fig.cap="Histogram of the curvilinear velocities for all trajectories identified in the MesenteriumSubset dataset",warning=FALSE>>=
-allVelocities <- kinematics(trajPlatelets,feature="curvilinearVelocity")
+allVelocities <- kinematics(trajPlatelets, feature="curvilinearVelocity")
 
-hist(allVelocities, breaks=10, probability=TRUE,col = "cadetblue",
+hist(allVelocities, breaks=10, probability=TRUE, col="cadetblue",
      xlab="Curvilinear Velocities Distribution",
      main="Trajectory Analysis: Curvilinear Velocities")
-lines(density(allVelocities,na.rm=TRUE),col="steelblue",lwd = 2)
+lines(density(allVelocities, na.rm=TRUE), col="steelblue", lwd=2)
 @
 
 For this code chunk, we are suppressing the warning messages, as they would be exactly the same as in the former where all features were computed for each trajectory.
