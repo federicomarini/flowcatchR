@@ -17,6 +17,7 @@
 #' @import rgl
 #' @import colorRamps
 #' @import methods
+#' @import abind
 #' 
 #' @author
 #' Federico Marini \email{marinif@@uni-mainz.de},

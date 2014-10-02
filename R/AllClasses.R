@@ -89,13 +89,29 @@ setClass("KinematicsFeaturesSet",
 
 
 ## and their constructors
+
+
+#' Constructor for a \code{Frames} object
+#' 
+#' @param x A multi-dimensional \code{Image} object
+#' @param channel A character vector, can be 'red','green','blue' or 'all' (if in color mode)
+#' 
+#' @examples
+#' data("MesenteriumSubset")
+#' inputImg <- Image(MesenteriumSubset)
+#' Frames(inputImg,"red")
+#' 
+#' @return The created \code{Frames} object.
+#' 
+#' @export
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 Frames <- function(x, channel) {
   if(channel=="all")
     new("Frames", x, channel = channel)
   else
   {
     if(channel=="red"||channel=="green"||channel=="blue")
-      new("Frames", channel(x, channel), channel = channel)
+      new("Frames", .Data = channel(x, channel), channel = channel)
     else
       stop("You need to provide one of the following values for the channel: 'red', 'green', 'blue', or 'all'")
   }
@@ -103,7 +119,7 @@ Frames <- function(x, channel) {
 
 
 ParticleSet <- function(x = list(), channel){
-  new("ParticleSet",x,channel=channel)
+  new("ParticleSet", x, channel = channel)
 }
 
 

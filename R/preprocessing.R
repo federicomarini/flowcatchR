@@ -44,17 +44,15 @@ preprocess.Frames <- function(frames,
   flo = makeBrush(brush.size, brush.shape, step=FALSE)^2
   flo <- flo/sum(flo)
   # imageData(frames) is storing the raw Images
-  thresh_img <- thresh(filter2(imageData(frames),flo),w=at.wwidth,h=at.wheight,offset=at.offset)
+  thresh_img <- thresh(filter2(frames,flo),w=at.wwidth,h=at.wheight,offset=at.offset)
   
   # if needed with a step of smoothing & co (operations of opening,...)
   kern <- makeBrush(size=kern.size,shape=kern.shape)
   
   distmap_thre <- distmap(thresh_img)
   watershed_thre <- watershed(distmap_thre,tolerance=ws.tolerance,ext=ws.radius) 
-  
-  # just replace the image data
-  imageData(frames) = watershed_thre
-  return(frames)
+
+  return(watershed_thre)
 }
 
 
@@ -141,7 +139,7 @@ particles <- function(raw.frames,
 #' @param cutDown Amount of pixels to be cut at the side
 #' @param cutAll Amount of pixels to be cut at all sides. Overrides the single side values
 #' @param testing Logical, whether to just test the cropping or to actually perform it. Default set to \code{FALSE}
-#' @param ... Arguments to be passed to methods
+#' @param ... Arguments to be passed to methods (e.g. \code{display}, which can be set to \code{"browser"} or \code{"raster"})
 #' 
 #' @return A \code{Frames} object, with cropped frames in the \code{image} slot
 #' 
@@ -155,38 +153,17 @@ crop.Frames <- function(frames,
                         cutLeft=5,cutRight=5,cutUp=5,cutDown=5,
                         cutAll=0,
                         testing=FALSE,
-                        ...)
-{
-  tmpFL <- vector(length.Frames(frames),mode="list")
-  if(cutAll > 0)
-  {
-    cutLeft <- cutRight <- cutUp <- cutDown <- cutAll
-  }
+                        ...) {
+  if (cutAll > 0) cutLeft <- cutRight <- cutUp <- cutDown <- cutAll
   
-  if(!testing)
-  {
-    for(i in 1:length.Frames(frames))
-    {
-      img <- getFrame(frames,i,"render")
-      if (numberOfFrames(img)==3)
-        cutoutImg <- img[cutLeft:(dim(img)[1]-cutRight),cutUp:(dim(img)[2]-cutDown),]
-      else
-        cutoutImg <- img[cutLeft:(dim(img)[1]-cutRight),cutUp:(dim(img)[2]-cutDown)]
-      
-      tmpFL[[i]] <- cutoutImg
-    }
-    out <- combine(tmpFL)
-    return(out)
-  } else {
-    # just check on one image, the first one
-    img <- getFrame(frames,i,"render")
-    if (numberOfFrames(img)==3)
-      cutoutImg <- img[cutLeft:(dim(img)[1]-cutRight),cutUp:(dim(img)[2]-cutDown),]
-    else
-      cutoutImg <- img[cutLeft:(dim(img)[1]-cutRight),cutUp:(dim(img)[2]-cutDown)]
-    display(cutoutImg)
-    return(cutoutImg)
-  }
+  img <- if (isTRUE(testing)) getFrame(frames, 1, "render") else frames
+  
+  img <- asub(img, idx =
+                list(cutLeft:(dim(img)[1]-cutRight),cutUp:(dim(img)[2]-cutDown)), dims = c(1, 2))
+  
+  if (isTRUE(testing)) display(img, ...)
+  
+  return(img)
 }
 
 

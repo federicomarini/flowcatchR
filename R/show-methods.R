@@ -15,15 +15,8 @@
 setMethod("show",
           signature = "Frames",
           definition = function(object){
-            d <- dim(object)
-            cat("Frames\n")
-            cat("An object of the Frames class. \n\n")
-            #             cat("Multi-dimensional Image with", numberOfFrames(object,"render"),"frames\n")
-            #             cat("Images contain information on",ifelse(!is.na(d[3]),d[3],"1"),"channel(s)\n")
-            #             cat("Image dimensions:\t",d[1:2],"\n\n")
-            
-            cat("Displaying information for the first Image in the Frames object...\n\n")
             callNextMethod(object)
+            cat("\nChannel(s):", object@channel)
             invisible(NULL)
           })
 
@@ -51,10 +44,10 @@ setMethod("show",
             cat("Displaying a subset of the features of the",nrow(firstFrameParticles),"particles found in the first image...\n")
             linesToShow <- min(5,nrow(firstFrameParticles))
             print(firstFrameParticles[1:linesToShow,1:8])
-            cat("\nParticles identified on the",object$channel,"channel\n") 
+            cat("\nParticles identified on the",object@channel,"channel\n") 
             invisible(NULL)
           })
-
+  
 
 #' Display conveniently a \code{LinkedParticleSet} object
 #'  
@@ -117,7 +110,7 @@ setMethod("show",
             cat("Displaying a segment of the first trajectory...\n")
             print(object[[1]]$trajectory[1:min(10,nrow(object[[1]]$trajectory)),])
             
-            cat("\nTrajectories are related to articles identified on the",object@channel,"channel\n")        
+            cat("\nTrajectories are related to particles identified on the",object@channel,"channel\n")        
             invisible(NULL)
           })
 

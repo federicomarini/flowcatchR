@@ -27,7 +27,8 @@ Depends:
     EBImage
 Imports:   
     rgl,
-    colorRamps
+    colorRamps,
+    abind
 SystemRequirements:
     ImageMagick
 URL: www.imbei.de

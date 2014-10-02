@@ -34,8 +34,7 @@ length.Frames <- function(x)
 #' @export
 channel.Frames <- function(frames,mode)
 {
-  y <- Frames(EBImage::channel(frames,mode),channel="all")
-  y@channel<-mode
+  y <- Frames(frames,channel=mode)
   return(y)
 }
 
@@ -106,6 +105,8 @@ inspect.Frames <- function(frames,
 read.Frames <- function(image.files, # ../exportedMesenteriumSubset
                         nframes=NULL)
 {
+  if(!file.exists(image.files))
+    stop("File/folder not found")
   cat("Creating a new object of class Frames...\n")
   is.dir <- file.info(image.files[1])$isdir
   if(is.dir){
@@ -130,9 +131,8 @@ read.Frames <- function(image.files, # ../exportedMesenteriumSubset
   if(length(image.files) > nframes)
     image.files <- image.files[1:nframes]
   
-  multiImg <- readImage(image.files)
-  # to save the image locations as dimnames # currently readImage works by saving not the full path
-  dimnames(multiImg) <- list(NULL,NULL,NULL,image.files)
+  multiImg <- readImage(image.files,names = image.files)
+  
   y <- Frames(multiImg,channel = "all")  
   
   cat("Created a Frames object of",nframes,"frames.\n")
@@ -221,6 +221,8 @@ select.Frames <- function(frames,framesToKeep=1,...)
   
   
   y <- combine(lapply(framesToKeep,function(i) getFrame(frames,i,type = "render")))
+  d = if ( colorMode(frames) == Color ) 4L else 3L
+  dimnames(y)[[d]] <- dimnames(frames)[[d]][framesToKeep]
   #   y <- Frames(multiImg,channel=frames@channel)
   
   return(y)
@@ -249,6 +251,8 @@ select.Frames <- function(frames,framesToKeep=1,...)
 read.particles <- function(particle.files,
                            nframes=NULL)
 {
+  if(!file.exists(particle.files))
+    stop("File/folder not found")
   cat("Creating a new object of class ParticleSet...\n")
   is.dir <- file.info(particle.files[1])$isdir
   if(is.dir){

@@ -137,24 +137,13 @@ addTrajectories <- function(raw.frames,binary.frames,trajectoryset,trajIDs){
 #' @return A \code{Frames} object, whose images are the combination of the raw images with the segmented objects drawn on them
 #' 
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-addParticles <- function(raw.frames,binary.frames,col=NULL)
-{
-  tmpFL <- list()
-  for (i in 1:length.Frames(raw.frames))
-  {
-    rawimg <- Image(getFrame(raw.frames,i,"render"))
-    segmimg <- Image(getFrame(binary.frames,i,"render"))
-    
-    if(is.null(col)) col <- "yellow"
-    rawWithObj <- paintObjects(segmimg,rawimg,col=col)
-    
-    tmpFL[[i]] <- rawWithObj
-  }
-  out <- Frames(combine(tmpFL),channel="all")
-  return(out)
+addParticles <- function(raw.frames,binary.frames,col=NULL) {
+  if(is.null(col)) col <- "yellow"
   
+  out <- paintObjects(binary.frames, raw.frames, col=col)
+  
+  return(out)
 }
-
 
 
 
