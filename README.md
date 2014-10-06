@@ -37,8 +37,8 @@ In order to compile the vignette, it is required that a (full) TeX system (MikTe
 
 ```r
 library("flowcatchR")
-load(file.path(system.file("extra", package="flowcatchR"),"MesenteriumSubset.RData"))
-fullResults <- kinematics(trajectories(particles(channels(MesenteriumSubset)$red)))
+data("MesenteriumSubset")
+fullResults <- kinematics(trajectories(particles(channel.Frames(MesenteriumSubset,"red"))))
 ```
 
 
