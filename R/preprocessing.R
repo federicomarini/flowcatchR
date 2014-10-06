@@ -51,7 +51,7 @@ preprocess.Frames <- function(frames,
   
   distmap_thre <- distmap(thresh_img)
   watershed_thre <- watershed(distmap_thre,tolerance=ws.tolerance,ext=ws.radius) 
-
+  
   return(watershed_thre)
 }
 
@@ -139,7 +139,7 @@ particles <- function(raw.frames,
 #' @param cutDown Amount of pixels to be cut at the side
 #' @param cutAll Amount of pixels to be cut at all sides. Overrides the single side values
 #' @param testing Logical, whether to just test the cropping or to actually perform it. Default set to \code{FALSE}
-#' @param ... Arguments to be passed to methods (e.g. \code{display}, which can be set to \code{"browser"} or \code{"raster"})
+#' @param ... Arguments to be passed to \code{\link{display}} (e.g. setting the \code{method} argument)
 #' 
 #' @return A \code{Frames} object, with cropped frames in the \code{image} slot
 #' 

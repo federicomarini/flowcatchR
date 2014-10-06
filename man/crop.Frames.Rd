@@ -21,7 +21,7 @@ crop.Frames(frames, cutLeft = 5, cutRight = 5, cutUp = 5, cutDown = 5,
 
 \item{testing}{Logical, whether to just test the cropping or to actually perform it. Default set to \code{FALSE}}
 
-\item{...}{Arguments to be passed to methods (e.g. \code{display}, which can be set to \code{"browser"} or \code{"raster"})}
+\item{...}{Arguments to be passed to \code{\link{display}} (e.g. setting the \code{method} argument)}
 }
 \value{
 A \code{Frames} object, with cropped frames in the \code{image} slot

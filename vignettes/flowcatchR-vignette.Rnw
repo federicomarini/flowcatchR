@@ -50,7 +50,7 @@ knit_hooks$set(rgl=hook_rgl)
 
 \title{{\flowcatchR{}: A framework for tracking and analyzing flowing blood cells in time lapse microscopy images}}
 \author{Federico Marini$^1$, Johanna Mazur, Harald Binder \\ [1em]Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI), \\ University Medical Center - Mainz (Germany)\\[1em] \email{$^1$marinif@uni-mainz.de}}
-\date{Edited: September 26, 2014; Compiled: \today}
+\date{Edited: October 3, 2014; Compiled: \today}
 
 
 
@@ -116,7 +116,7 @@ data("MesenteriumSubset")
 
 <<meseLoaded>>=
 # printing summary information for the MesenteriumSubset object
-print(MesenteriumSubset)
+MesenteriumSubset
 @
 
 To obtain the set of trajectories identified from the analysis of the loaded frames, a very compact one-line command is all that is needed:
@@ -142,9 +142,8 @@ A set of images is acquired, after a proper microscopy setup has been performed.
 <<newFrames,eval=FALSE>>=
 # initialization
 fullData <- read.Frames(image.files="/path/to/folder/containing/images/", nframes=100) 
-
 # printing summary information for the Frames object
-print(fullData)
+fullData
 @
 
 \Robject{nframes} specifies the number of frames that will constitute the \Rclass{Frames} object, whereas \Robject{image.files} is a vector of character strings with the full location of the (raw) images, or the path to the folder containing them (works automatically if images are in TIFF/JPG/PNG format). In this case we just loaded the full dataset, but for the demonstrational purpose of this vignette, we will proceed with the subset available in the \Robject{MesenteriumSubset} object, which we previously loaded in Section \ref{sec:overview}.
@@ -163,8 +162,7 @@ For the following steps, we will focus on the information contained in the red c
 
 <<selectRed>>=
 plateletsMesenterium <- channel.Frames(MesenteriumSubset, mode="red")
-
-print(plateletsMesenterium)
+plateletsMesenterium
 @
 
 This creates another instance of the class \Rclass{Frames}, and we inspect it in its first 9 frames (Fig.\ref{fig:inspectPlatelets}).
@@ -185,7 +183,7 @@ preprocessedPlatelets <- preprocess.Frames(plateletsMesenterium,
                                     kernSize=3, kernShape="disc",
                                     watershedTolerance=1, watershedRadius=1,
                                     areaThresholdMin=5, areaThresholdMax=100)
-print(preprocessedPlatelets)
+preprocessedPlatelets
 @
 
 The result of this is displayed in Fig.\ref{fig:inspectSegm}. 
@@ -202,14 +200,14 @@ croppedFrames <- crop.Frames(plateletsMesenterium,
                      cutLeft=6, cutRight=6,
                      cutUp=3, cutDown=3,
                      testing=FALSE)
-print(croppedFrames)
+croppedFrames
 @
 
 If \Robject{testing} is set to true, the function just displays the first cropped frame, to get a feeling whether the choice of parameters was adequate. Similarly, for the function \Rfunction{rotate.Frames} the same behaviour is expected, whereas the rotation in degrees is specified by the parameter \Robject{angle}.
 
 <<rotateFrames>>=
 rotatedFrames <- rotate.Frames(plateletsMesenterium, angle=30)
-print(rotatedFrames)
+rotatedFrames
 @
 
 If desired, it is possible to select just a subset of the frames belonging to a \Rclass{Frames}. This can be done via the \Rfunction{select.Frames} function:
@@ -217,7 +215,7 @@ If desired, it is possible to select just a subset of the frames belonging to a 
 <<selectFrames>>=
 subsetFrames <- select.Frames(plateletsMesenterium,
                        framesToKeep=c(1:10,14:20))
-print(subsetFrames)
+subsetFrames
 @
 
 
@@ -225,7 +223,7 @@ The user can choose any combination of the operations in order to segment the im
 
 <<particleSet>>=
 platelets <- particles(plateletsMesenterium, preprocessedPlatelets)
-print(platelets)
+platelets
 @
 
 As it can be seen from the summary information, each \Rclass{ParticleSet} stores the essential information on all particles that were detected in the original images, alongside with a complete set of features, which are computed by integrating the information from both the raw and the segmented frames.
@@ -236,8 +234,7 @@ It is possible to filter out particles according to their properties, such as ar
 
 <<selectParticles>>=
 selectedPlatelets <- select.particles(platelets, min.area=3)
-
-print(selectedPlatelets)
+selectedPlatelets
 @
   
 This step can be done iteratively, with the help of the function \Rfunction{add.contours}. 
@@ -276,8 +273,7 @@ linkedPlatelets <- link.particles(platelets,
                                   lambda1=1, lambda2=0,
                                   penaltyFunction=penaltyFunctionGenerator(),
                                   include.area=FALSE)
-
-print(linkedPlatelets)
+linkedPlatelets
 @
 
 As it can be seen, \Robject{linkedPlatelets} is an object of the \Rclass{LinkedParticleSet} class, which is a subclass of the \Rclass{ParticleSet} class. 
@@ -307,8 +303,7 @@ It is possible to extract the trajectories with the correspondent \Rfunction{tra
 
 <<generateTrajs>>=
 trajPlatelets <- trajectories(linkedPlatelets)
-
-print(trajPlatelets)
+trajPlatelets
 @
 
 A \Rclass{TrajectorySet} object is returned in this case. It consists of a two level list for each trajectory, reporting the \Robject{trajectory} as a \Robject{data.frame}, the number of points \Robject{npoints} (often coinciding with the number of \Robject{nframes}, when no gaps \Robject{ngaps} are present) and its \Robject{ID}. A \Robject{keep} flag is used for subsequent user evaluation purposes.
@@ -337,7 +332,7 @@ paintedTrajectories <- add.contours(raw.frames=MesenteriumSubset,
                                     binary.frames=preprocessedPlatelets,  
                                     trajectoryset=trajPlatelets,
                                     mode="trajectories")
-print(paintedTrajectories)
+paintedTrajectories
 @
 
 As with any other \Rclass{Frames} object, it is recommended to take a peek at it via the \Rfunction{inspect.Frames} function (Fig.\ref{fig:inspectTrajs}):
@@ -354,7 +349,7 @@ traj11 <- add.contours(raw.frames=MesenteriumSubset,
                        trajectoryset=trajPlatelets,
                        mode="trajectories",
                        trajIDs=11)
-print(traj11)
+traj11
 inspect.Frames(traj11, nframes=9, display.method="raster")
 @
 
@@ -414,7 +409,7 @@ allKinematicFeats.allPlatelets <- kinematics(trajPlatelets,
 As it is reported from the output, the function raises a warning for trajectories which have 3 or less points, as they might be spurious detections. In such cases, no kinematic features are computed.
 
 <<kinemInspect>>=
-print(allKinematicFeats.allPlatelets)
+allKinematicFeats.allPlatelets
 @
 
 A summary for the returned object (in this case a \Rclass{KinematicsFeaturesSet}) shows some of the computed parameters.
