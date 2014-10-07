@@ -137,7 +137,7 @@ The following sections will provide additional details to the operations mention
 \section{Image acquisition}\label{sec:acquisition}
 A set of images is acquired, after a proper microscopy setup has been performed. This includes for example a careful choice of spatial and temporal resolution; often a compromise must be met to have a good frame rate and a good SNR to detect the particles in the single frames. For a good review on the steps to be taken, please refer to Meijering's work \cite{Meijering2008, Meijering2012a}. 
 
-\flowcatchR{} provides an S4 class that can store the information of a complete acquisition, namely \Rclass{Frames}. The \Rclass{Frames} class extends the \Rclass{Image} class, defined in the \Biocpkg{EBImage} package, and thus exploits the multi-dimensional array structures of the class. The locations of the images are stored as \Rfunction{dimnames} of the \Rclass{Frames} object. To construct a \Rclass{Frames} from images, the \Rfunction{read.Frames} function is used:
+\flowcatchR{} provides an S4 class that can store the information of a complete acquisition, namely \Rclass{Frames}. The \Rclass{Frames} class extends the \Rclass{Image} class, defined in the \Biocpkg{EBImage} package, and thus exploits the multi-dimensional array structures of the class. The locations of the images are stored as \Rfunction{dimnames} of the \Rclass{Frames} object. To construct a \Rclass{Frames} object from a set of images, the \Rfunction{read.Frames} function is used:
 
 <<newFrames,eval=FALSE>>=
 # initialization
