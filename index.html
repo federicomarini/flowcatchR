@@ -337,7 +337,7 @@ defaultPenalty</code></pre>
 <pre><code>## function(angle,distance) { 
 ##     lambda1 * ( distance/ (1-lambda2*(angle/(pi+epsilon1))))
 ##   }
-## &lt;environment: 0x10528b8a0&gt;</code></pre>
+## &lt;environment: 0x10751a940&gt;</code></pre>
 <p>As mentioned above, to perform the linking of the particles, we use <code>link.particles</code>. Fundamental parameters are <code>L</code> and <code>r</code>, named as in the original implementation. <code>L</code> is the maximum displacement in pixels that a particle is expected to have in two consecutive frames, and <code>r</code> is the value for the link range, i.e. the number of future frames to be considered for the linking (typically assumes values between 1 - when no occlusions are known to happen - and 3). An extended explanation of the parameters is in the documentation of the package.</p>
 <pre class="sourceCode r"><code class="sourceCode r">linkedPlatelets &lt;-<span class="st"> </span><span class="kw">link.particles</span>(platelets,
                                   <span class="dt">L=</span><span class="dv">26</span>,<span class="dt">R=</span><span class="dv">3</span>,
@@ -405,7 +405,7 @@ reimportedPlatelets &lt;-<span class="st"> </span><span class="kw">read.particle
 <p>A <code>TrajectorySet</code> object is returned in this case. It consists of a two level list for each trajectory, reporting the <code>trajectory</code> as a <code>data.frame</code>, the number of points <code>npoints</code> (often coinciding with the number of <code>nframes</code>, when no gaps <code>ngaps</code> are present) and its <code>ID</code>. A <code>keep</code> flag is used for subsequent user evaluation purposes.</p>
 <p>Before proceeding with the actual analysis of the trajectories, it is recommended to evaluate them by visual inspection. <em>flowcatchR</em> provides two complementary methods to do this, either plotting them (<code>plot</code> or <code>plot2D.TrajectorySet</code>) or drawing the contours of the points on the original image (<code>add.contours</code>).</p>
 <p>By plotting all trajectories in a 2D+time representation, it’s possible to have an overview of all trajectories.</p>
-<p>This command gives an interactive 3D (2D+time) view of all trajectories (output is not included in this vignette): % (Fig.CCCCCCCref{fig:cubeTrajs}):</p>
+<p>This command gives an interactive 3D (2D+time) view of all trajectories (output is not included in this vignette):</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(trajPlatelets,MesenteriumSubset)</code></pre>
 <p>The <code>plot2D.TrajectorySet</code> focuses on additional information and a different “point of view”, but can just display the a two dimensional projection of the identified trajectories.</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot2D.TrajectorySet</span>(trajPlatelets,MesenteriumSubset)</code></pre>
