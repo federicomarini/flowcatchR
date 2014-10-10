@@ -1,0 +1,35 @@
+CHANGES IN VERSION 0.99.4 (2014-10-03)
+--------------------------------------
+
+NEW FEATURES
+
+    o Final fixes. Accepted in the current status at Bioconductor.
+
+CHANGES IN VERSION 0.99.3
+-------------------------
+
+NEW FEATURES
+
+    o Changes in the code to be adapted to the latest devel version of EBImage (new functions were added for the Frames class).
+
+CHANGES IN VERSION 0.99.2
+-------------------------
+
+NEW FEATURES
+
+    o Updated/added documentation.
+
+CHANGES IN VERSION 0.99.1
+-------------------------
+
+NEW FEATURES
+
+    o Adapted after first round of review.
+
+CHANGES IN VERSION 0.99.0
+-------------------------
+
+NEW FEATURES
+
+    o Initial submit to Bioconductor.
+
