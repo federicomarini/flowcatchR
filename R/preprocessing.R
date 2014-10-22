@@ -38,7 +38,7 @@ preprocess.Frames <- function(frames,
                               displayprocessing=FALSE,
                               ...) # for the single channel images/for one channel of multi-channel images
 {
-  if(frames@channel=="all")
+  if( frames@channel=="all" && frames@colormode==2L ) # it is ok on a grayscale Frames object
     stop("Please select a channel to work on, run channel.Frames on the Frames object you provided")
   
   flo = makeBrush(brush.size, brush.shape, step=FALSE)^2
