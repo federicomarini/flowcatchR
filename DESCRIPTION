@@ -30,6 +30,6 @@ Imports:
     colorRamps,
     abind
 SystemRequirements: ImageMagick
-URL: http://http://bioconductor.org/packages/release/bioc/html/flowcatchR.html
+URL: http://www.bioconductor.org/packages/release/bioc/html/flowcatchR.html
 biocViews: Software, Visualization, CellBiology, Classification
 Author: Federico Marini [aut, cre]
