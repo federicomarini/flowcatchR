@@ -105,7 +105,7 @@ inspect.Frames <- function(frames,
 read.Frames <- function(image.files, # ../exportedMesenteriumSubset
                         nframes=NULL)
 {
-  if(!file.exists(image.files))
+  if(all(!file.exists(image.files)))
     stop("File/folder not found")
   cat("Creating a new object of class Frames...\n")
   is.dir <- file.info(image.files[1])$isdir
