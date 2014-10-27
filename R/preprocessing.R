@@ -79,6 +79,7 @@ particles <- function(raw.frames,
                       channel=NULL  
 )
 {
+  ## perform preliminary checks on the object(s)
   # if still storing all channels, select one
   if(raw.frames@channel == "all" && is.null(channel))
     stop("Please select one channel to work on. Choose one among 'red','green' and 'blue'")
