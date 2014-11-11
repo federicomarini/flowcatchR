@@ -203,6 +203,7 @@ plot.TrajectorySet <- function(x,frames,verbose=FALSE,...)
 #' @param trajectoryset A \code{TrajectorySet} object
 #' @param frames A \code{Frames} object, used here to identify the limits of the region of interest 
 #' @param trajIDs A vector containing the ids of the desired trajectories
+#' @param addGrid Logical, add an additional grid to the 2-dimensional plot (visual aid for backtracking trajectory point locations) 
 #' @param verbose Logical, whether to provide additional output on the command line
 #' @param ... Arguments to be passed to methods
 #' 
@@ -216,7 +217,7 @@ plot.TrajectorySet <- function(x,frames,verbose=FALSE,...)
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-plot2D.TrajectorySet <- function(trajectoryset,frames,trajIDs=NULL,verbose=FALSE,...)
+plot2D.TrajectorySet <- function(trajectoryset,frames,trajIDs=NULL,addGrid=FALSE,verbose=FALSE,...)
 {
   cubeLimits <- axesInfo(frames)
   xlim <- cubeLimits$xlim
@@ -252,7 +253,20 @@ plot2D.TrajectorySet <- function(trajectoryset,frames,trajIDs=NULL,verbose=FALSE
     text((yCoord[1] + 4)~xCoord[1], data = trajectoryset[[t]]$trajectory, labels=t,
          col=colcols[t])
   }
+  if(addGrid) grid(col="darkgrey")
   invisible(NULL)
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
