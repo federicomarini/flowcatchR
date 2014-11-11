@@ -102,7 +102,7 @@ add.contours <- function(raw.frames,
 
 
 addTrajectories <- function(raw.frames,binary.frames,trajectoryset,trajIDs){
-  tmpFL <- lapply(1:length(raw.frames),function(i) Image(getFrame(raw.frames,i,"render")))
+  tmpFL <- lapply(1:length.Frames(raw.frames),function(i) Image(getFrame(raw.frames,i,"render")))
   colcols <- rep(colorRamps::primary.colors(40,steps=10,FALSE),6)
   for(i in trajIDs)
   {
