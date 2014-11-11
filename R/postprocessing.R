@@ -102,7 +102,7 @@ add.contours <- function(raw.frames,
 
 
 addTrajectories <- function(raw.frames,binary.frames,trajectoryset,trajIDs){
-  tmpFL <- lapply(1:length.Frames(raw.frames),function(i) Image(getFrame(raw.frames,i,"render")))
+  tmpFL <- lapply(1:length(raw.frames),function(i) Image(getFrame(raw.frames,i,"render")))
   colcols <- rep(colorRamps::primary.colors(40,steps=10,FALSE),6)
   for(i in trajIDs)
   {
@@ -111,6 +111,9 @@ addTrajectories <- function(raw.frames,binary.frames,trajectoryset,trajIDs){
     for(j in currentTraj$frame)
     {
       rawimg <- tmpFL[[j]]
+      # if black and white, helps enhancing detection/tracking results
+      if(colorMode(rawimg)==0)
+        rawimg <- rgbImage(red=rawimg)
       segmimg <- Image(getFrame(binary.frames,j,"render"))
       singleObjectSegm <- segmimg
       singleObjectSegm[segmimg!=currentTraj$frameobjectID[counter]] <- 0
@@ -139,9 +142,13 @@ addTrajectories <- function(raw.frames,binary.frames,trajectoryset,trajIDs){
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 addParticles <- function(raw.frames,binary.frames,col=NULL) {
   if(is.null(col)) col <- "yellow"
-  
-  out <- paintObjects(binary.frames, raw.frames, col=col)
-  
+  # if raw images are in black and white, use false colors to enhance the marking of detected cells
+  if(colorMode(raw.frames)==0)
+  {
+    out <- paintObjects(binary.frames, rgbImage(red = raw.frames), col=col)
+  } else {
+    out <- paintObjects(binary.frames, raw.frames, col=col)
+  }
   return(out)
 }
 
