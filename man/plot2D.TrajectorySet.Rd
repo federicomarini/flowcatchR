@@ -3,8 +3,8 @@
 \alias{plot2D.TrajectorySet}
 \title{2D projection of a \code{TrajectorySet} object}
 \usage{
-plot2D.TrajectorySet(trajectoryset, frames, trajIDs = NULL, verbose = FALSE,
-  ...)
+plot2D.TrajectorySet(trajectoryset, frames, trajIDs = NULL, addGrid = FALSE,
+  verbose = FALSE, ...)
 }
 \arguments{
 \item{trajectoryset}{A \code{TrajectorySet} object}
@@ -12,6 +12,8 @@ plot2D.TrajectorySet(trajectoryset, frames, trajIDs = NULL, verbose = FALSE,
 \item{frames}{A \code{Frames} object, used here to identify the limits of the region of interest}
 
 \item{trajIDs}{A vector containing the ids of the desired trajectories}
+
+\item{addGrid}{Logical, add an additional grid to the 2-dimensional plot (visual aid for backtracking trajectory point locations)}
 
 \item{verbose}{Logical, whether to provide additional output on the command line}
 
