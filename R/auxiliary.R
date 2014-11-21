@@ -75,7 +75,10 @@ inspect.Frames <- function(frames,
   
   if (verbose) cat("Displaying",nframes,"frames of a Frames object composed in total of",totframes,"images")
   
-  display(frames,all=TRUE,method=display.method)
+  if(nframes == 1) # "all" would not be required any more
+    display(frames,method=display.method)
+  else 
+    display(frames,all=TRUE,method=display.method)
   invisible(NULL)
 }
 
@@ -221,7 +224,21 @@ select.Frames <- function(frames,framesToKeep=1,...)
   
   
   y <- combine(lapply(framesToKeep,function(i) getFrame(frames,i,type = "render")))
-  d = if ( colorMode(frames) == Color ) 4L else 3L
+  if(length(framesToKeep==1)) {
+    if ( colorMode(frames) == Color ) 
+    {
+      d <- 3L
+    } else {
+      d <- 2L
+    }
+  } else { # if we keep more than one frame
+    if ( colorMode(frames) == Color ) 
+    {
+      d <- 4L
+    } else {
+      d <- 3L
+    }
+  }
   dimnames(y)[[d]] <- dimnames(frames)[[d]][framesToKeep]
   #   y <- Frames(multiImg,channel=frames@channel)
   
