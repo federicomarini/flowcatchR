@@ -1,6 +1,7 @@
 flowcatchR
 ==========
 [![Build Status](https://travis-ci.org/federicomarini/flowcatchR.png?branch=master)](https://travis-ci.org/federicomarini/flowcatchR)
+
 #### A framework for tracking and analyzing flowing blood cells in time lapse microscopy images
 
 **flowcatchR** is a set of tools to analyze in vivo microscopy imaging data, focused on tracking flowing blood cells.
@@ -14,13 +15,21 @@ covering a wide range of applications founded on time-lapse microscopy.
 
 
 ### Installation
-To install the package **flowcatchR**, please start a current version of R and type (using `devtools`):
+To install the development version for the package **flowcatchR**, please start a current version of R and type (using `devtools`):
 
 ```r 
 # currently this can be done via github
 install.packages("devtools") # if needed
 devtools::install_github("flowcatchR", "federicomarini")
 ```
+
+If you want to install the current release version, just type:
+```r
+source("http://bioconductor.org/biocLite.R")
+biocLite("flowcatchR")
+```
+
+
 
 If required, install the dependencies:
 
@@ -30,8 +39,6 @@ biocLite(c("EBImage","BiocStyle"))
 
 install.packages(c("rgl","colorRamps","knitr"))
 ```
-
-In order to compile the vignette, it is required that a (full) TeX system (MikTeX, TeX Live, MaCTex) is also installed on your system.
 
 ### flowcatchR in a glimpse
 
@@ -56,4 +63,7 @@ browseVignettes("flowcatchR")
 ### Contact
 For additional details regarding the functions of **flowcatchR**, please consult the documentation or write an email to marinif@uni-mainz.de. 
 
+### Bug reports/Issues/New features
+
+Please use https://github.com/federicomarini/flowcatchR/issues for reporting bugs, issues or for suggesting new features to be implemented.
 

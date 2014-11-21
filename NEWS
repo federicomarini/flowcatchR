@@ -1,3 +1,32 @@
+CHANGES IN VERSION 1.0.1 (2014-11-21)
+--------------------------------------
+
+BUG FIXES
+
+	o Vignette: fixed typos, fixed parameter names in the preprocessing steps
+	o read.Frames: additional check on the existence of all files
+	o Grayscale images can now be directly preprocessed by selecting channel = "all"
+
+NEW FEATURES
+
+	o Added url for development version on github.
+		Active development is performed there, therefore feel free to send pull requests/
+		feature wishes (https://github.com/federicomarini/flowcatchR/issues)!
+	o Added integration of the repository with Travis-CI	
+	o add.contours: if image is in grayscale, use false colours to enhance detected particles
+	o plot2d.TrajectorySet is now able to draw a grid and help backtracking points from the 
+		trajectories
+
+
+
+CHANGES IN VERSION 1.0.0 (2014-10-13)
+--------------------------------------
+
+NEW FEATURES
+
+    o Initial release to Bioconductor!
+
+
 CHANGES IN VERSION 0.99.4 (2014-10-03)
 --------------------------------------
 
