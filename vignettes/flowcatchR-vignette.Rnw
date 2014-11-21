@@ -178,10 +178,10 @@ Steps such as denoising, smoothing and morphological operations (erosion/dilatio
 
 <<segmentPreprocess>>=
 preprocessedPlatelets <- preprocess.Frames(plateletsMesenterium,
-                                    brushSize=3, brushShape="disc",
-                                    adaptOffset=0.15, adaptWinWidth=10, adaptWinHeight=10,
-                                    kernSize=3, kernShape="disc",
-                                    watershedTolerance=1, watershedRadius=1,
+                                    brush.size=3, brush.shape="disc",
+                                    at.offset=0.15, at.wwidth=10, at.wheight=10,
+                                    kern.size=3, kern.shape="disc",
+                                    ws.tolerance=1, ws.radius=1,
                                     areaThresholdMin=5, areaThresholdMax=100)
 preprocessedPlatelets
 @
@@ -267,7 +267,7 @@ print(defaultPenalty)
 As mentioned above, to perform the linking of the particles, we use \Rfunction{link.particles}. Fundamental parameters are \Robject{L} and \Robject{R}, named as in the original implementation. \Robject{L} is the maximum displacement in pixels that a particle is expected to have in two consecutive frames, and \Robject{R} is the value for the link range, i.e. the number of future frames to be considered for the linking (typically assumes values between 1 - when no occlusions are known to happen - and 3). An extended explanation of the parameters is in the documentation of the package.
 
 <<linkParticles>>=
-linkedPlatelets <- link.particles(platelets,
+linkedPlatelets <- link.particles(platelets,  
                                   L=26, R=3,
                                   epsilon1=0, epsilon2=0,
                                   lambda1=1, lambda2=0,
