@@ -181,8 +181,7 @@ preprocessedPlatelets <- preprocess.Frames(plateletsMesenterium,
                                     brush.size=3, brush.shape="disc",
                                     at.offset=0.15, at.wwidth=10, at.wheight=10,
                                     kern.size=3, kern.shape="disc",
-                                    ws.tolerance=1, ws.radius=1,
-                                    areaThresholdMin=5, areaThresholdMax=100)
+                                    ws.tolerance=1, ws.radius=1)
 preprocessedPlatelets
 @
 
