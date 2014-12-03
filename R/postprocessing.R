@@ -84,7 +84,7 @@ add.contours <- function(raw.frames,
       }
       }
     
-    out <- addTrajectories(raw.frames,binary.frames,trajectoryset,trajIDs)
+    out <- addTrajectories(raw.frames,binary.frames,trajectoryset,trajIDs,col)
     
     } else if(mode=="particles") # there is actually no need for the trajectoryset/trajId, and the col can be just one value ;)
     {
@@ -101,9 +101,22 @@ add.contours <- function(raw.frames,
 
 
 
-addTrajectories <- function(raw.frames,binary.frames,trajectoryset,trajIDs){
-  tmpFL <- lapply(1:length.Frames(raw.frames),function(i) Image(getFrame(raw.frames,i,"render")))
-  colcols <- rep(colorRamps::primary.colors(40,steps=10,FALSE),6)
+addTrajectories <- function(raw.frames,binary.frames,trajectoryset,trajIDs,col){
+  nrFrames <- length.Frames(raw.frames)
+  if(colorMode(raw.frames)==0)
+    raw.frames <- Frames(rgbImage(red=raw.frames),channel = "all")
+  
+  tmpFL <- lapply(1:nrFrames,function(i) Image(getFrame(raw.frames,i,"render")))
+  
+  if(is.null(col)) {
+    colcols <- rep(colorRamps::primary.colors(40,steps=10,FALSE),6)
+    # force to yellow if just one
+    if(length(trajIDs)==1) 
+      colcols <- "yellow"
+  } else {
+    colcols <- rep(col,240)
+  }
+  
   for(i in trajIDs)
   {
     currentTraj <- trajectoryset[[i]]$trajectory
@@ -111,9 +124,9 @@ addTrajectories <- function(raw.frames,binary.frames,trajectoryset,trajIDs){
     for(j in currentTraj$frame)
     {
       rawimg <- tmpFL[[j]]
-      # if black and white, helps enhancing detection/tracking results
-      if(colorMode(rawimg)==0)
-        rawimg <- rgbImage(red=rawimg)
+#       # if black and white, helps enhancing detection/tracking results
+#       if(colorMode(rawimg)==0)
+#         rawimg <- rgbImage(red=rawimg)
       segmimg <- Image(getFrame(binary.frames,j,"render"))
       singleObjectSegm <- segmimg
       singleObjectSegm[segmimg!=currentTraj$frameobjectID[counter]] <- 0
