@@ -185,7 +185,7 @@ export.Frames <- function(frames,
   if(createGif)
   {
     # using imagemagick
-    system(sprintf("convert -delay 40 %s %s.gif", paste(imgNames, collapse = ""), file.path(dir, nameStub)))
+    system(sprintf("convert -delay 40 %s %s.gif", paste(imgNames, collapse = " "), file.path(dir, nameStub)))
   }
   if(removeAfterCreatingGif && createGif)
   {
