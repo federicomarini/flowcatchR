@@ -116,7 +116,12 @@ particles <- function(raw.frames,
     
     ## keep maybe an additional if to see if these are available? TODO
     # with the locations now saved as names
-    out[[dimnames(binary.frames)[[3]][i]]] <- imgFeatures
+    if(!is.null(dimnames(binary.frames))) {
+      out[[dimnames(binary.frames)[[3]][i]]] <- imgFeatures
+    } else {
+      out[[i]] <- imgFeatures
+    }
+    
   }
   cat("Done!\n")
   return(out)
