@@ -1,3 +1,16 @@
+CHANGES IN VERSION 1.0.2 (2015-01-09)
+--------------------------------------
+
+BUG FIXES
+
+	o select.Frames: fixed behaviour in select.Frames when selecting a single frame
+	o add.contours: corrected bug in add.contours for grayscale images, was preventing correct combining of images. now uses correctly false colours and aids identification
+	o particles: for computing particles,added check whether dimnames is set or not. previously it raised an error, but it was kind of overkilling
+	o fixed behaviour in export.Frames
+	o typos fixed
+
+	
+
 CHANGES IN VERSION 1.0.1 (2014-11-21)
 --------------------------------------
 

@@ -101,8 +101,49 @@ add.contours <- function(raw.frames,
 
 
 
+# addTrajectories <- function(raw.frames,binary.frames,trajectoryset,trajIDs,col){
+#   nrFrames <- length.Frames(raw.frames)
+#   if(colorMode(raw.frames)==0)
+#     raw.frames <- Frames(rgbImage(red=raw.frames),channel = "all")
+#   
+#   tmpFL <- lapply(1:nrFrames,function(i) Image(getFrame(raw.frames,i,"render")))
+#   
+#   if(is.null(col)) {
+#     colcols <- rep(colorRamps::primary.colors(40,steps=10,FALSE),6)
+#     # force to yellow if just one
+#     if(length(trajIDs)==1) 
+#       colcols <- "yellow"
+#   } else {
+#     colcols <- rep(col,240)
+#   }
+#   
+#   for(i in trajIDs)
+#   {
+#     currentTraj <- trajectoryset[[i]]$trajectory
+#     counter <- 1
+#     for(j in currentTraj$frame)
+#     {
+#       rawimg <- tmpFL[[j]]
+# #       # if black and white, helps enhancing detection/tracking results
+# #       if(colorMode(rawimg)==0)
+# #         rawimg <- rgbImage(red=rawimg)
+#       segmimg <- Image(getFrame(binary.frames,j,"render"))
+#       singleObjectSegm <- segmimg
+#       singleObjectSegm[segmimg!=currentTraj$frameobjectID[counter]] <- 0
+#       
+#       rawWithPaintedObj <- paintObjects(singleObjectSegm,rawimg,col=colcols[i])
+#       
+#       tmpFL[[j]] <- rawWithPaintedObj 
+#       counter <- counter +1
+#     }
+#   }  
+#   out <- Frames(combine(tmpFL),channel="all")
+#   return(out)
+# }
+
+
 addTrajectories <- function(raw.frames,binary.frames,trajectoryset,trajIDs,col){
-  nrFrames <- length.Frames(raw.frames)
+  nrFrames <- length(raw.frames)
   if(colorMode(raw.frames)==0)
     raw.frames <- Frames(rgbImage(red=raw.frames),channel = "all")
   
@@ -117,29 +158,39 @@ addTrajectories <- function(raw.frames,binary.frames,trajectoryset,trajIDs,col){
     colcols <- rep(col,240)
   }
   
-  for(i in trajIDs)
+  for (i in 1:nrFrames)
   {
-    currentTraj <- trajectoryset[[i]]$trajectory
+    rawimg <- tmpFL[[i]]
     counter <- 1
-    for(j in currentTraj$frame)
+    segmimg <- Image(getFrame(binary.frames,i,"render"))
+    
+    for(j in trajIDs)
     {
-      rawimg <- tmpFL[[j]]
-#       # if black and white, helps enhancing detection/tracking results
-#       if(colorMode(rawimg)==0)
-#         rawimg <- rgbImage(red=rawimg)
-      segmimg <- Image(getFrame(binary.frames,j,"render"))
-      singleObjectSegm <- segmimg
-      singleObjectSegm[segmimg!=currentTraj$frameobjectID[counter]] <- 0
-      
-      rawWithPaintedObj <- paintObjects(singleObjectSegm,rawimg,col=colcols[i])
-      
-      tmpFL[[j]] <- rawWithPaintedObj 
-      counter <- counter +1
+      # only if the trajectory j is involved in the frame i, do the real painting
+      if(i %in% trajectoryset[[j]]$trajectory$frame) {
+        singleObjectSegm <- segmimg # reset
+        # put to zero everything not the object under analysis
+        currTraj <- trajectoryset[[j]]$trajectory
+        singleObjectSegm[segmimg!=currTraj$frameobjectID[which(currTraj$frame==i)]] <- 0
+        # paint
+        rawWithPaintedObj <- paintObjects(singleObjectSegm,tmpFL[[i]],col=colcols[j])
+        # update the img for the next round of the loop
+        tmpFL[[i]] <- rawWithPaintedObj
+      } # else { # # if the trajectory j is not involved in the frame i, do nothing
+        #
+    #  }      
     }
-  }  
+  }
+
   out <- Frames(combine(tmpFL),channel="all")
   return(out)
 }
+
+
+
+
+
+
 
 
 #' Combines the information from a raw \code{Frames} object and the corresponding preprocessed one
