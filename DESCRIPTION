@@ -28,7 +28,8 @@ Depends:
 Imports:
     rgl,
     colorRamps,
-    abind
+    abind,
+    BiocParallel
 SystemRequirements: ImageMagick
 URL: https://github.com/federicomarini/flowcatchR
 BugReports: https://github.com/federicomarini/flowcatchR/issues

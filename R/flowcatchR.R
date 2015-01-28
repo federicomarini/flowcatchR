@@ -22,7 +22,7 @@
 #' @author
 #' Federico Marini \email{marinif@@uni-mainz.de},
 #' Johanna Mazur \email{mazur@@uni-mainz.de},
-#' Harald Binder \email{binderh@@uni-mainz.de}
+#' Harald Binder \email{binderh@@uni-mainz.de}, 2015
 #'
 #' Maintainer: Federico Marini \email{marinif@@uni-mainz.de}
 #' @name flowcatchR
