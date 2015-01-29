@@ -219,6 +219,148 @@ addParticles <- function(raw.frames,binary.frames,col=NULL) {
 
 
 
+#' Match trajectories to related particles.
+#' 
+#' Match trajectories to the related particles in the \code{TrajectorySet} and 
+#' \code{ParticleSet} objects. This function returns a new \code{ParticleSet}
+#' object that contains as additional column the trajectory ID that the particular
+#' particle was assigned to. Used also by other routines, such as \code{\link{snap}}
+#' 
+#' @param particleset A \code{ParticleSet} object
+#' @param trajectoryset A \code{TrajectorySet} object coupled to the \code{particleset}
+#' 
+#' @return A \code{ParticleSet} object with an additional column with the trajectory
+#' IDs 
+#' 
+#' @examples
+#' data(candidate.platelets)
+#' trajs <- trajectories(candidate.platelets)
+#' matchTrajToParticles(candidate.platelets, trajs)
+#' 
+#' @export
+#' 
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2015
+matchTrajToParticles <- function(particleset,trajectoryset)
+{
+  myTrajParts <- particleset
+  for(i in 1:length(myTrajParts)) {
+    tmpdf <- myTrajParts[[i]]
+    tmpdf$correspTrajId <- rep(NA,nrow(tmpdf))
+    myTrajParts[[i]] <- tmpdf
+  }
+  
+  for (j in 1:length(trajectoryset))
+  {
+    #     cat("\nnewtraj---",j)
+    framesInvolved <- trajectoryset[[j]]$trajectory$frame
+    for(k in 1:trajectoryset[[j]]$npoints)
+    {
+      #       cat("point",k)
+      partIDinTraj <- trajectoryset[[j]]$trajectory$frameobjectID[k]
+      myTrajParts[[ framesInvolved[k] ]]$correspTrajId[partIDinTraj] <- j
+    }
+  }
+  return(myTrajParts)
+}
+
+
+
+
+#' Snap the features of the closest particle identified
+#' 
+#' This function combines all classes related to a single experiment in order to deliver
+#' a clickable feedback on one of the frames.
+#' 
+#' @param raw.frames A \code{Frames} object with the raw frames data
+#' @param binary.frames A \code{Frames} object with the preprocessed frames data
+#' @param particleset A \code{ParticleSet} object with the particles data
+#' @param trajectoryset A \code{TrajectorySet} object with the trajectories data
+#' @param frameID The ID of the frame to inspect 
+#' @param infocol The color to use for plotting the contours and the information on the 
+#' clicked particle
+#' @param infocex The numeric character expansion value as in \code{cex} to be used
+#' for printing the text on the image
+#' @param showVelocity Logical, whether to display additional information on the 
+#' instantaneous velocity of the particle
+#' 
+#' @return An image of the selected frame, rendered in R native graphics, and additionally 
+#' a list with the coordinates as well as the trajectory ID of the particle closest to the
+#' clicked location
+#' 
+#' @examples
+#' \dontrun{data(MesenteriumSubset)
+#' binary.frames <- preprocess.Frames(channel.Frames(MesenteriumSubset,"red"))
+#' particleset <- particles(MesenteriumSubset,binary.frames,"red")
+#' trajectoryset <- trajectories(particleset)
+#' snap(MesenteriumSubset,binary.frames,particleset,trajectoryset,frameID=1)
+#' }
+#' @export
+#' 
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2015
+snap <- function(raw.frames,
+                 binary.frames,
+                 particleset,
+                 trajectoryset,
+                 frameID = 1,
+                 infocol = "yellow",
+                 infocex = 1,
+                 showVelocity = FALSE)
+{
+  imageToPaintOn <- getFrame(raw.frames,frameID,type = "render")
+  correspondingBinary <- getFrame(binary.frames,frameID,type = "render")
+  # TODO: maybe display already somehow additional info with the borders of the detected ones? - e.g. in some dark orange, so that 
+  # the yellow one still pops up?
+  display(imageToPaintOn,method="raster")
+  coordsClick <- locator(1)
+  coordsClick
+  particlesLocations <- particleset[[frameID]][,1:2] # on the frame corresponding to the selected one
+  # compute euclidean distance to each from the location of the mouse click
+  distances <- data.frame(particles=row.names(particleset[[frameID]]),
+                          distToThis=rep(0,nrow(particleset[[frameID]]))
+                         )
+  myX <- coordsClick$x
+  myY <- coordsClick$y
+  
+  distToClick <- unlist(lapply(1:nrow(particlesLocations),
+                               function(arg){
+                                 myDist <- sqrt( (myX - particlesLocations$cell.0.m.cx[arg])^2 + (myY - particlesLocations$cell.0.m.cy[arg])^2 )
+                               }))
+  distances$distToThis <- distToClick
+  
+  partToDraw <- which.min(distances$distToThis)
+  
+  # put to zero everything but
+  binaryObj <- correspondingBinary
+  binaryObj[correspondingBinary!=partToDraw] <- 0
+  imgWithParticlePainted <- paintObjects(binaryObj,imageToPaintOn,col=infocol)
+  display(imgWithParticlePainted,method="raster")
+  
+  matchedParticles <- matchTrajToParticles(particleset,trajectoryset)
+  
+  trajCorrespID <- matchedParticles[[frameID]]$correspTrajId[[partToDraw]]
+  particleInfo <- list(x = particleset[[frameID]]$cell.0.m.cx[[partToDraw]],
+                       y = particleset[[frameID]]$cell.0.m.cy[[partToDraw]],
+                       trajectoryID = trajCorrespID)
+  
+  if(showVelocity){
+    allKinematics <- kinematics(trajectoryset)
+    if(frameID != trajectoryset[[trajCorrespID]]$npoints) # must be less than the last point of the traj
+      instantVel <- allKinematics[[trajCorrespID]][["delta.v"]][[frameID]]
+  }
+  
+  textToDisplay <- paste0(round(particleInfo$x,3),";",round(particleInfo$y,3)," - traj ",particleInfo$trajectoryID)
+  if(showVelocity)
+    textToDisplay <- paste0(textToDisplay," - vel_i ",round(instantVel,3))
+  
+  text(labels = textToDisplay,
+       x = (particleInfo$x) + 7,
+       y = (particleInfo$y) + 7,
+       col = infocol,
+       cex = infocex,
+       adj = c(0,1))
+  
+  return(particleInfo)
+}
 
 
 

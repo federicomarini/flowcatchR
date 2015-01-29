@@ -27,6 +27,6 @@ Extracts particles from the images of a \code{Frames} object.
 data("MesenteriumSubset")
 }
 \author{
-Federico Marini, \email{marinif@uni-mainz.de}, 2014
+Federico Marini, \email{marinif@uni-mainz.de}, 2015
 }
 

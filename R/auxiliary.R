@@ -247,6 +247,61 @@ select.Frames <- function(frames,framesToKeep=1,...)
 
 
 
+#' Normalize the values of a \code{Frames} object
+#' 
+#' Applies a transformation to the \code{Frames} object in a way that the intensities
+#' throughout the acquisition are normalized overall in term of pixel values sums.
+#' It can be used to compensate for example a global change in the illumination values, 
+#' e.g. due to changed acquisition conditions in experiments that span long timescales.
+#' 
+#' @param frames A \code{Frames} object to normalize
+#' @param normFun The normalization function chosen. Can be one of \code{mean} or \code{median}
+#' 
+#' @return A \code{Frames} object with normalized pixel values.
+#' 
+#' @export
+#' 
+#' @examples
+#' data(MesenteriumSubset)
+#' normalize.Frames(MesenteriumSubset,normFun="median") 
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
+normalize.Frames <- function(frames, normFun = "median")
+{
+  # initial check on the normFun parameter
+  if(normFun %in% c("mean","median") == FALSE)
+    stop("Please provide a function used to normalize the pixel values. Possible values: 'mean','median'. ")
+  
+  # take the raw frames and decompose it as list
+  tmpFrames <- lapply(1:length(frames),
+                      function(arg){
+                        getFrame(frames,arg,"render") 
+                      })  
+  # compute the sum over all pixels
+  pixelSums <- unlist(lapply(1:length(frames),
+                      function(arg){
+                        sum(tmpFrames[[arg]])
+                      }))
+  # introduce a kind of multiplicative factor wrt to the mean or median
+  if(normFun=="median")
+    medPixelSums <- median(pixelSums)
+  if(normFun=="mean")
+    medPixelSums <- mean(pixelSums)
+  # modify single images
+  modFrames <- lapply(1:length(frames),
+                      function(arg){
+                        tmpFrames[[arg]] * medPixelSums / pixelSums[arg]
+                      })
+  # return the object with modified
+  modObj <- combine(modFrames)
+  dimnames(modObj) <- dimnames(frames)
+  return(modObj)
+}
+
+
+
+
+
+
 
 
 #' Constructor for a \code{ParticleSet} object
@@ -418,5 +473,28 @@ select.particles <- function(particleset,
   return(out)
 }
 
+
+#' Shiny application for exploring the features and parameters provided by \code{flowcatchR}
+#' 
+#' Launches a Shiny Web Application for interactive data exploration. Default data loaded are
+#' the frames from the \code{MesenteriumSubset} object, custom values can be inserted by typing
+#' the location of the data stored in a local folder. The Application is structured in a variety
+#' of tabs that mirror the steps in the usual workflow in time-lapse microscopy images. These can
+#' allow the user to interactively explore the parameters and their effect in the reactive 
+#' framework provided by Shiny. 
+#' 
+#' @return The Shiny Application is launched in the web browser
+#' 
+#' @export
+#' 
+#' @examples
+#' \dontrun{shinyFlow()}
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2015
+shinyFlow <- function()
+{
+  require("shiny")
+  shiny::runApp(system.file("shiny", package = "flowcatchR"))
+  invisible()
+}
 
 
