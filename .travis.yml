@@ -8,7 +8,7 @@ before_install:
   - ./travis-tool.sh bootstrap
 
 install:
-  - ./travis-tool.sh install_bioc EBImage BiocStyle
+  - ./travis-tool.sh install_bioc EBImage BiocStyle BiocParallel
   - ./travis-tool.sh install_deps
 
 script: ./travis-tool.sh run_tests
