@@ -35,7 +35,7 @@ If required, install the dependencies:
 
 ```r
 source("http://bioconductor.org/biocLite.R")
-biocLite(c("EBImage","BiocStyle"))
+biocLite(c("EBImage","BiocStyle","BiocParallel"))
 
 install.packages(c("rgl","colorRamps","knitr"))
 ```
