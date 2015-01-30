@@ -25,6 +25,8 @@ shinyUI(
                         )
                       )
              ),
+             
+             
              tabPanel("Channel Selection",
                       sidebarLayout(
                         sidebarPanel(
@@ -58,6 +60,8 @@ shinyUI(
                           plotOutput("contoured"))
                       )
              ),
+             
+             
              tabPanel("Linking the Trajectories",
                       sidebarLayout(
                         sidebarPanel(h4("Linking the Particles and Generating the Trajectories"),
@@ -79,8 +83,7 @@ shinyUI(
                           uiOutput("firstTrajPrint")
                         )
                       )
-             )
-             ,
+             ),
              
              
              tabPanel("Results Export",
@@ -107,11 +110,9 @@ shinyUI(
                           p("Enjoyed the tour? Got to know flowcatchR and its functionality? It is possible to move now to the command line and generate a fully scripted version of the analysis to guarantee full reproducibility.")
                         )
                       )
-             )
+             ),
              
              
-             
-             ,
              tabPanel("About",
                       sidebarLayout(
                         sidebarPanel(
