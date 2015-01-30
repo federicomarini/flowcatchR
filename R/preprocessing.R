@@ -65,67 +65,134 @@ preprocess.Frames <- function(frames,
 #' @param raw.frames A \code{Frames} object with the raw images (mandatory)
 #' @param binary.frames A \code{Frames} object with preprocessed images (optional, if not provided gets produced with standard default parameters)
 #' @param channel Character string. The channel to perform the operations on. Can be \code{red}, \code{green} or \code{blue}
+#' @param BPPARAM a \code{MulticoreParam} object, used to control the performances inside the \code{BiocParallel} call to process 
+#' frames in parallel by taking advantage of the computing infrastructure available
 #' 
 #' @return A \code{ParticleSet} object, containing all detected particles for each frame
 #' 
 #' @examples
 #' data("MesenteriumSubset")
-#
+#' 
+#' @importFrom BiocParallel bplapply bpparam
 #' 
 #' @export
-#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-particles <- function(raw.frames,
-                      binary.frames=NULL,
-                      channel=NULL  
-)
+#' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2015
+particles <- function(raw.frames, 
+                      binary.frames = NULL,
+                      channel = NULL,
+                      BPPARAM = bpparam()) 
 {
-  ## perform preliminary checks on the object(s)
-  # if still storing all channels, select one
-  if(raw.frames@channel == "all" && is.null(channel))
+  if (raw.frames@channel == "all" && is.null(channel)) 
     stop("Please select one channel to work on. Choose one among 'red','green' and 'blue'")
-  if(raw.frames@channel == "all" && !is.null(channel))
-    raw.frames <- channel.Frames(raw.frames,mode = channel)
-  if ( missing(channel) ) # stop("Please provide a channel name to process")
+  if (raw.frames@channel == "all" && !is.null(channel)) 
+    raw.frames <- channel.Frames(raw.frames, mode = channel)
+  if (missing(channel)) 
     channel <- raw.frames@channel
-  if(raw.frames@channel != "all" && channel != raw.frames@channel)
+  if (raw.frames@channel != "all" && channel != raw.frames@channel) 
     stop("You are selecting to work on a channel not stored in your current Frames object")
-  if(!is.null(binary.frames) && (raw.frames@channel != binary.frames@channel))
+  if (!is.null(binary.frames) && (raw.frames@channel != binary.frames@channel)) 
     stop("Your raw.frames and binary.frames objects store data related to different channels")
-  
-  
-  if(missing(binary.frames)){
+  if (missing(binary.frames)) {
     cat("You did not provide a preprocessed Frames object alongside with the raw set of frames.\n")
     cat("Don't worry, the raw Frames object object will be first preprocessed with a set of default parameter.\n")
     cat("You can always change them afterwards if they do not fit to your scenario.\n")
     binary.frames = preprocess.Frames(raw.frames)
   }
-  if ( length.Frames(raw.frames) != length.Frames(binary.frames) ) {
+  if (length(raw.frames) != length(binary.frames)) {
     stop("Raw and preprocessed Frames objects have different number of frames!")
-  } else {
-    cat("Computing features...\n")
+  }
+  else {
+    cat("Computing features in parallel...\n")
   }
   
-  # returns a particle list - not linked yet
+  
+  
+  
+  
   out <- ParticleSet(channel = binary.frames@channel)
   
-  for(i in 1:length.Frames(raw.frames))  {
-    segmImg <- getFrame(binary.frames, i)
-    rawImg <- getFrame(raw.frames, i)
-    imgFeatures <- as.data.frame(EBImage::computeFeatures(segmImg,rawImg,xname="cell"))
-    imgFeatures$shapeFactor <- (imgFeatures$cell.0.s.perimeter)^2 / (4*pi*imgFeatures$cell.0.s.area)
-    
-    ## keep maybe an additional if to see if these are available? TODO
-    # with the locations now saved as names
-    if(!is.null(dimnames(binary.frames))) {
-      out[[dimnames(binary.frames)[[3]][i]]] <- imgFeatures
-    } else {
-      out[[i]] <- imgFeatures
-    }
-    
+  out@.Data <- bplapply(1:length(raw.frames),
+                        FUN = function(arg){
+                          segmImg <- getFrame(binary.frames, arg)
+                          rawImg <- getFrame(raw.frames, arg)
+                          imgFeatures <- as.data.frame(EBImage::computeFeatures(segmImg, 
+                                                                                rawImg, xname = "cell"))
+                          imgFeatures$shapeFactor <- (imgFeatures$cell.0.s.perimeter)^2/(4 * pi * imgFeatures$cell.0.s.area)
+                          imgFeatures
+                        }
+                        
+  )
+  
+  
+  #   else {
+  #     cat("son in the else")
+  #     out[[arg]] <- imgFeatures
+  #   }
+  
+  if (!is.null(dimnames(binary.frames))) {
+    names(out@.Data) <- dimnames(binary.frames)[[3]]
   }
+  
+  
+  
+  
+  
+  
   cat("Done!\n")
   return(out)
 }
+# particles <- function(raw.frames,
+#                       binary.frames=NULL,
+#                       channel=NULL  
+# )
+# {
+#   ## perform preliminary checks on the object(s)
+#   # if still storing all channels, select one
+#   if(raw.frames@channel == "all" && is.null(channel))
+#     stop("Please select one channel to work on. Choose one among 'red','green' and 'blue'")
+#   if(raw.frames@channel == "all" && !is.null(channel))
+#     raw.frames <- channel.Frames(raw.frames,mode = channel)
+#   if ( missing(channel) ) # stop("Please provide a channel name to process")
+#     channel <- raw.frames@channel
+#   if(raw.frames@channel != "all" && channel != raw.frames@channel)
+#     stop("You are selecting to work on a channel not stored in your current Frames object")
+#   if(!is.null(binary.frames) && (raw.frames@channel != binary.frames@channel))
+#     stop("Your raw.frames and binary.frames objects store data related to different channels")
+#   
+#   
+#   if(missing(binary.frames)){
+#     cat("You did not provide a preprocessed Frames object alongside with the raw set of frames.\n")
+#     cat("Don't worry, the raw Frames object object will be first preprocessed with a set of default parameter.\n")
+#     cat("You can always change them afterwards if they do not fit to your scenario.\n")
+#     binary.frames = preprocess.Frames(raw.frames)
+#   }
+#   if ( length.Frames(raw.frames) != length.Frames(binary.frames) ) {
+#     stop("Raw and preprocessed Frames objects have different number of frames!")
+#   } else {
+#     cat("Computing features...\n")
+#   }
+#   
+#   # returns a particle list - not linked yet
+#   out <- ParticleSet(channel = binary.frames@channel)
+#   
+#   for(i in 1:length.Frames(raw.frames))  {
+#     segmImg <- getFrame(binary.frames, i)
+#     rawImg <- getFrame(raw.frames, i)
+#     imgFeatures <- as.data.frame(EBImage::computeFeatures(segmImg,rawImg,xname="cell"))
+#     imgFeatures$shapeFactor <- (imgFeatures$cell.0.s.perimeter)^2 / (4*pi*imgFeatures$cell.0.s.area)
+#     
+#     ## keep maybe an additional if to see if these are available? TODO
+#     # with the locations now saved as names
+#     if(!is.null(dimnames(binary.frames))) {
+#       out[[dimnames(binary.frames)[[3]][i]]] <- imgFeatures
+#     } else {
+#       out[[i]] <- imgFeatures
+#     }
+#     
+#   }
+#   cat("Done!\n")
+#   return(out)
+# }
 
 
 
