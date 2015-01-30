@@ -1,11 +1,12 @@
 library(shiny)
 
 shinyUI(
-  navbarPage("shinyFlow!",
+  navbarPage("shinyFlow",
              tabPanel("General Options - Import Data",
                       sidebarLayout(
                         sidebarPanel(
                           "",
+                          helpText("Welcome to shinyFlow, the Shiny App companion to the flowcatchR package!"),
                           h4("General Options - Import Data"),
                           helpText("Type the path to the folder containing the time-lapse images - Error messages will be delivered if no images are found. If left blank, it will use the MesenteriumSubset as an example dataset."),
                           textInput(inputId = "dataInput",
