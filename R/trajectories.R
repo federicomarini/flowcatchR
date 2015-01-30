@@ -264,9 +264,3 @@ plot2D.TrajectorySet <- function(trajectoryset,frames,trajIDs=NULL,addGrid=FALSE
 
 
 
-
-
-
-
-
-
