@@ -12,23 +12,28 @@ preprocess.Frames(frames, brush.size = 3, brush.shape = "disc",
 \arguments{
 \item{frames}{A \code{Frames} object}
 
-\item{brush.size}{Size in pixels of the brush to be used for initial smoothing}
+\item{brush.size}{Size in pixels of the brush to be used for initial smoothing
+(low-pass filtering)}
 
-\item{brush.shape}{Shape of the brush to be used for initial smoothing}
+\item{brush.shape}{Shape of the brush to be used for initial smoothing (low-pass
+filtering)}
 
-\item{at.offset}{Offset to be used in the adaptive thresholding step}
+\item{at.offset}{Offset to be used in the adaptive thresholding step - see also \code{\link{thresh}}. As an
+alternative thresholding method, see also \code{\link{otsu}} in the \code{EBImage} package.}
 
-\item{at.wwidth}{Width of the window for the adaptive thresholding step}
+\item{at.wwidth}{Width of the window for the adaptive thresholding step - see also \code{\link{thresh}}. As an
+alternative thresholding method, see also \code{\link{otsu}} in the \code{EBImage} package.}
 
-\item{at.wheight}{Height of the window for the adaptive thresholding step}
+\item{at.wheight}{Height of the window for the adaptive thresholding step - see also \code{\link{thresh}}. As an
+alternative thresholding method, see also \code{\link{otsu}} in the \code{EBImage} package.}
 
-\item{kern.size}{Size in pixels of the kernel used for morphological operations}
+\item{kern.size}{Size in pixels of the kernel used for morphological operations - e.g., opening, which is an erosion followed by a dilation, and closing which is a dilation followed by an erosion - see also \code{\link{opening}}, \code{\link{closing}}}
 
 \item{kern.shape}{Shape of the kernel used for morphological operations}
 
-\item{ws.tolerance}{Tolerance allowed in performing the watershed-based segmentation}
+\item{ws.tolerance}{Tolerance allowed in performing the watershed-based segmentation (see also \code{\link{watershed}})}
 
-\item{ws.radius}{Radius for the watershed-based segmentation}
+\item{ws.radius}{Radius for the watershed-based segmentation (see also \code{\link{watershed}})}
 
 \item{displayprocessing}{Logical, whether to display intermediate steps while performing preprocessing. Dismissed currently, it could increase runtime a lot}
 
