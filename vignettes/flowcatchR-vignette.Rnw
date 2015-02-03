@@ -50,7 +50,7 @@ knit_hooks$set(rgl=hook_rgl)
 
 \title{{\flowcatchR{}: A framework for tracking and analyzing flowing blood cells in time lapse microscopy images}}
 \author{Federico Marini$^1$, Johanna Mazur, Harald Binder \\ [1em]Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI), \\ University Medical Center - Mainz (Germany)\\[1em] \email{$^1$marinif@uni-mainz.de}}
-\date{Edited: February 2, 2015; Compiled: \today}
+\date{Edited: February 3, 2015; Compiled: \today}
 
 
 
