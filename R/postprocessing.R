@@ -321,6 +321,12 @@ snap <- function(raw.frames,
   myX <- coordsClick$x
   myY <- coordsClick$y
   
+  # to decide where to place the info label
+  imgSizeX <- dim(imageToPaintOn)[1]
+#   imgSizeY <- dim(imageToPaintOn)[2]
+  leftSide <- (myX < imgSizeX/2)
+#   upSide <- (myY < imgSizeY/2)
+  
   distToClick <- unlist(lapply(1:nrow(particlesLocations),
                                function(arg){
                                  myDist <- sqrt( (myX - particlesLocations$cell.0.m.cx[arg])^2 + (myY - particlesLocations$cell.0.m.cy[arg])^2 )
@@ -352,12 +358,22 @@ snap <- function(raw.frames,
   if(showVelocity)
     textToDisplay <- paste0(textToDisplay," - vel_i ",round(instantVel,3))
   
+  
+  if(leftSide)
+  {
+    whereToPutTheText <- 4
+  } else {
+    whereToPutTheText <- 2
+  }
+  
+  
   text(labels = textToDisplay,
-       x = (particleInfo$x) + 7,
-       y = (particleInfo$y) + 7,
+       x = (particleInfo$x + 2 * ifelse(leftSide,1,-1)),
+       y = (particleInfo$y + 2 ),
        col = infocol,
        cex = infocex,
-       adj = c(0,1))
+       pos = whereToPutTheText
+       )
   
   return(particleInfo)
 }
