@@ -2,8 +2,8 @@ Package: flowcatchR
 Type: Package
 Title: Tools to analyze in vivo microscopy imaging data focused on
     tracking flowing blood cells.
-Version: 1.1.3
-Date: 2015-01-14
+Version: 1.1.4
+Date: 2015-02-03
 Authors@R: person("Federico", "Marini", email = "marinif@uni-mainz.de",
     role = c("aut", "cre"))
 Maintainer: Federico Marini <marinif@uni-mainz.de>
@@ -34,5 +34,5 @@ Imports:
 SystemRequirements: ImageMagick
 URL: https://github.com/federicomarini/flowcatchR
 BugReports: https://github.com/federicomarini/flowcatchR/issues
-biocViews: Software, Visualization, CellBiology, Classification
+biocViews: Software, Visualization, CellBiology, Classification, Infrastructure, GUI
 

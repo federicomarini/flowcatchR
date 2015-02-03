@@ -263,9 +263,9 @@ select.Frames <- function(frames,framesToKeep=1,...)
 #' 
 #' @examples
 #' data(MesenteriumSubset)
-#' normalize.Frames(MesenteriumSubset,normFun="median") 
+#' normalizeFrames(MesenteriumSubset,normFun="median") 
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
-normalize.Frames <- function(frames, normFun = "median")
+normalizeFrames <- function(frames, normFun = "median")
 {
   # initial check on the normFun parameter
   if(normFun %in% c("mean","median") == FALSE)
