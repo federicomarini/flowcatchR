@@ -4,9 +4,7 @@
 \alias{rotate.Frames}
 \title{Rotates all images in a \code{Frames} object}
 \usage{
-rotate.Frames(frames, angle, testing = FALSE,
-  output.origin = c(dim(frames)[1]/3, dim(frames)[2]/3),
-  output.dim = c(dim(frames)[1] * 1.5, dim(frames)[2] * 1.5))
+rotate.Frames(frames, angle, testing = FALSE)
 }
 \arguments{
 \item{frames}{A \code{Frames} object}
@@ -14,10 +12,6 @@ rotate.Frames(frames, angle, testing = FALSE,
 \item{angle}{The rotation angle (clockwise) specified in degrees}
 
 \item{testing}{Logical, whether to just test the rotation or to actually perform it. Default set to \code{FALSE}}
-
-\item{output.origin}{A vector of 2 numbers indicating the dimension of the output image, as in the rotate function}
-
-\item{output.dim}{A vector of 2 numbers indicating the output coordinates of the origin in pixels, as in the \code{rotate} function}
 }
 \value{
 A \code{Frames} object containing the rotated frames
