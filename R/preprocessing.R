@@ -254,8 +254,6 @@ crop.Frames <- function(frames,
 #' @param frames A \code{Frames} object
 #' @param angle The rotation angle (clockwise) specified in degrees
 #' @param testing Logical, whether to just test the rotation or to actually perform it. Default set to \code{FALSE}
-#' @param output.origin A vector of 2 numbers indicating the dimension of the output image, as in the rotate function
-#' @param output.dim A vector of 2 numbers indicating the output coordinates of the origin in pixels, as in the \code{rotate} function
 #'  
 #' @return A \code{Frames} object containing the rotated frames
 #' 
@@ -267,19 +265,17 @@ crop.Frames <- function(frames,
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 rotate.Frames <- function(frames,
                           angle,
-                          testing=FALSE,
-                          output.origin=c(dim(frames)[1]/3,dim(frames)[2]/3),
-                          output.dim=c(dim(frames)[1]*1.5,dim(frames)[2]*1.5))
+                          testing=FALSE)
 {
   if(!testing)
   {
     y <- frames
-    y <- rotate(y, angle = angle, output.origin=output.origin, output.dim=output.dim)
+    y <- rotate(y, angle = angle) # , output.origin=output.origin, output.dim=output.dim) not required anymore after EBImage 4.9.13
     return(y)
   } else {
     # just check
     
-    display(rotate(frames, angle = angle, output.origin=output.origin, output.dim=output.dim))
+    display(rotate(frames, angle = angle)) # , output.origin=output.origin, output.dim=output.dim)) no more required after EBImage 4.9.13
     invisible()
   }  
 }

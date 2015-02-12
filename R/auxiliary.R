@@ -492,8 +492,11 @@ select.particles <- function(particleset,
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2015
 shinyFlow <- function()
 {
-  require("shiny")
-  shiny::runApp(system.file("shiny", package = "flowcatchR"))
+  if (requireNamespace("shiny", quietly = TRUE)) {
+    shiny::runApp(system.file("shiny", package = "flowcatchR"))
+  } else {
+    stop("The shinyFlow function requires the installation of shiny. Please install the package to use it.")
+  }
   invisible()
 }
 
