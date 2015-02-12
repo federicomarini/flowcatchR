@@ -35,7 +35,7 @@ If you use this tool to analyze your data, please cite the package as suggested 
 ```r
 citation("flowcatchR")
 ```
-Marini F (2015). *flowcatchR: Tools to analyze in vivo microscopy imaging data focused on tracking flowing blood cells. R package version 1.0.2*, https://github.com/federicomarini/flowcatchR.
+Marini F (2015). *flowcatchR: Tools to analyze in vivo microscopy imaging data focused on tracking flowing blood cells. R package version 1.0.3*, https://github.com/federicomarini/flowcatchR.
 
 
 
