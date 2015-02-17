@@ -110,25 +110,21 @@ particles <- function(raw.frames,
     cat("Computing features in parallel...\n")
   }
   
-  
-  
-  
-  
   out <- ParticleSet(channel = binary.frames@channel)
   
   out@.Data <- bplapply(1:length(raw.frames),
-                        FUN = function(arg){
+                        FUN = function(arg,raw.frames,binary.frames){
+                          library("EBImage")
                           segmImg <- getFrame(binary.frames, arg)
                           rawImg <- getFrame(raw.frames, arg)
                           imgFeatures <- as.data.frame(EBImage::computeFeatures(segmImg, 
                                                                                 rawImg, xname = "cell"))
                           imgFeatures$shapeFactor <- (imgFeatures$cell.0.s.perimeter)^2/(4 * pi * imgFeatures$cell.0.s.area)
                           imgFeatures
-                        }
-                        
-  )
-  
-  
+                        },
+                        raw.frames = raw.frames,
+                        binary.frames = binary.frames
+                        )
   #   else {
   #     cat("son in the else")
   #     out[[arg]] <- imgFeatures
