@@ -105,8 +105,7 @@ particles <- function(raw.frames,
   }
   if (length(raw.frames) != length(binary.frames)) {
     stop("Raw and preprocessed Frames objects have different number of frames!")
-  }
-  else {
+  } else {
     cat("Computing features in parallel...\n")
   }
   
@@ -117,8 +116,8 @@ particles <- function(raw.frames,
                           library("EBImage")
                           segmImg <- getFrame(binary.frames, arg)
                           rawImg <- getFrame(raw.frames, arg)
-                          imgFeatures <- as.data.frame(EBImage::computeFeatures(segmImg, 
-                                                                                rawImg, xname = "cell"))
+                          imgFeatures <- as.data.frame(EBImage::computeFeatures(Image(segmImg), 
+                                                                                Image(rawImg), xname = "cell"))
                           imgFeatures$shapeFactor <- (imgFeatures$cell.0.s.perimeter)^2/(4 * pi * imgFeatures$cell.0.s.area)
                           imgFeatures
                         },
@@ -176,7 +175,7 @@ particles <- function(raw.frames,
 #   # returns a particle list - not linked yet
 #   out <- ParticleSet(channel = binary.frames@channel)
 #   
-#   for(i in 1:length.Frames(raw.frames))  {
+#   for(i in 1:length(raw.frames))  {
 #     segmImg <- getFrame(binary.frames, i)
 #     rawImg <- getFrame(raw.frames, i)
 #     imgFeatures <- as.data.frame(EBImage::computeFeatures(segmImg,rawImg,xname="cell"))
