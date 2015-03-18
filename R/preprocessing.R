@@ -43,11 +43,11 @@ preprocess.Frames <- function(frames,
                               displayprocessing=FALSE,
                               ...) # for the single channel images/for one channel of multi-channel images
 {
-  if( frames@channel=="all" && frames@colormode==2L ) # it is ok on a grayscale Frames object
+  if ( frames@channel=="all" && frames@colormode==2L ) # it is ok on a grayscale Frames object
     stop("Please select a channel to work on, run channel.Frames on the Frames object you provided")
   
-  flo = makeBrush(brush.size, brush.shape, step=FALSE)^2
-  flo <- flo/sum(flo)
+  flo <- makeBrush(brush.size, brush.shape, step=FALSE)^2
+  flo <- flo / sum(flo)
   # imageData(frames) is storing the raw Images
   thresh_img <- thresh(filter2(frames,flo),w=at.wwidth,h=at.wheight,offset=at.offset)
   
@@ -82,26 +82,26 @@ preprocess.Frames <- function(frames,
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2015
-particles <- function(raw.frames, 
+particles <- function(raw.frames,
                       binary.frames = NULL,
                       channel = NULL,
                       BPPARAM = bpparam()) 
 {
-  if (raw.frames@channel == "all" && is.null(channel)) 
+  if (raw.frames@channel == "all" && is.null(channel))
     stop("Please select one channel to work on. Choose one among 'red','green' and 'blue'")
-  if (raw.frames@channel == "all" && !is.null(channel)) 
+  if (raw.frames@channel == "all" && !is.null(channel))
     raw.frames <- channel.Frames(raw.frames, mode = channel)
   if (missing(channel)) 
     channel <- raw.frames@channel
-  if (raw.frames@channel != "all" && channel != raw.frames@channel) 
+  if (raw.frames@channel != "all" && channel != raw.frames@channel)
     stop("You are selecting to work on a channel not stored in your current Frames object")
-  if (!is.null(binary.frames) && (raw.frames@channel != binary.frames@channel)) 
+  if (!is.null(binary.frames) && (raw.frames@channel != binary.frames@channel))
     stop("Your raw.frames and binary.frames objects store data related to different channels")
   if (missing(binary.frames)) {
     cat("You did not provide a preprocessed Frames object alongside with the raw set of frames.\n")
     cat("Don't worry, the raw Frames object object will be first preprocessed with a set of default parameter.\n")
     cat("You can always change them afterwards if they do not fit to your scenario.\n")
-    binary.frames = preprocess.Frames(raw.frames)
+    binary.frames <- preprocess.Frames(raw.frames)
   }
   if (length(raw.frames) != length(binary.frames)) {
     stop("Raw and preprocessed Frames objects have different number of frames!")
@@ -116,9 +116,9 @@ particles <- function(raw.frames,
                           library("EBImage")
                           segmImg <- getFrame(binary.frames, arg)
                           rawImg <- getFrame(raw.frames, arg)
-                          imgFeatures <- as.data.frame(EBImage::computeFeatures(Image(segmImg), 
-                                                                                Image(rawImg), xname = "cell"))
-                          imgFeatures$shapeFactor <- (imgFeatures$cell.0.s.perimeter)^2/(4 * pi * imgFeatures$cell.0.s.area)
+                          imgFeatures <- as.data.frame(EBImage::computeFeatures(segmImg,
+                                                                                rawImg, xname = "cell"))
+                          imgFeatures$shapeFactor <- (imgFeatures$cell.0.s.perimeter)^2 / (4 * pi * imgFeatures$cell.0.s.area)
                           imgFeatures
                         },
                         raw.frames = raw.frames,
@@ -262,8 +262,7 @@ rotate.Frames <- function(frames,
                           angle,
                           testing=FALSE)
 {
-  if(!testing)
-  {
+  if (!testing) {
     y <- frames
     y <- rotate(y, angle = angle) # , output.origin=output.origin, output.dim=output.dim) not required anymore after EBImage 4.9.13
     return(y)
@@ -272,11 +271,5 @@ rotate.Frames <- function(frames,
     
     display(rotate(frames, angle = angle)) # , output.origin=output.origin, output.dim=output.dim)) no more required after EBImage 4.9.13
     invisible()
-  }  
+  }
 }
-
-
-
-
-
-

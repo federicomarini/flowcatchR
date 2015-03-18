@@ -45,49 +45,44 @@ link.particles <- function(particleset,
   if (prog) pb <- txtProgressBar(min = 0, max = 100, style = 3)
   # preliminary step to set the particles next arrays (or matrix in our case) according to the linkrange
   # done now in case linkrange can get modified during the runs or across different runs
-  if(verboseOutput) cat("Starting up...\n\n")
+  if (verboseOutput) cat("Starting up...\n\n")
   frames_number <- length(out)
-  linkrange <- R
   for (fr in 1:frames_number)
   {
     out@tracking[[fr]]$nxt <- matrix(0,nrow=nrow(out@.Data[[fr]]),ncol=R)
   }
-  
   curr_linkrange <- R # as it can be updated afterwards
   displacement <- L
   # we need at least two frames
-  if(frames_number < 2) 
-  {
-    stop("At least",R+1,"frames are needed! - Interrupting the tracking...\n")
+  if(frames_number < 2) {
+    stop("At least", R + 1,"frames are needed! - Interrupting the tracking...\n")
   }
   
   # if the linkrange is too big, set it to the right value
-  if(frames_number < (curr_linkrange+1))
-  {
+  if (frames_number < (curr_linkrange + 1)) {
     curr_linkrange <- frames_number - 1
   }
   
-  for(m in 1:(frames_number - 1)) 
-  {
-    if(verboseOutput) cat("---------- Linking frame",m,"of",frames_number,"...........\n")
+  for (m in 1:(frames_number - 1)) {
+    if (verboseOutput) cat("---------- Linking frame",m,"of",frames_number,"...........\n")
     nop <- nrow(out@.Data[[m]])
     out@tracking[[m]]$special[] <- FALSE
     out@tracking[[m]]$nxt[,] <- -1
     
     # AND HERE BEGINS THE "TRUE" CYCLE THROUGHOUT NEXT FRAMES
     iterate <- 0
-    for(n in 1:curr_linkrange)
+    for (n in 1:curr_linkrange)
     {
       iterate <- 0
-      max_cost <- n*displacement*displacement    
-      nop_next <- nrow(out@.Data[[m+n]])     
+      max_cost <- n * displacement * displacement    
+      nop_next <- nrow(out@.Data[[m + n]])
       ## cost matrix
       # setup the cost matrix
-      C <- n*displacement*displacement*matrix(1,nop+1,nop_next+1)
+      C <- n * displacement * displacement * matrix(1,nop + 1,nop_next + 1)
       ## PLUS VARIATION
       # quadratic distance between p_i and q_j
-      xrep <- repmat(t(out@.Data[[m+n]][,1]),nop,1) # function repmat replicates the matlab behaviour
-      yrep <- repmat(t(out@.Data[[m+n]][,2]),nop,1)
+      xrep <- repmat(t(out@.Data[[m + n]][,1]),nop,1) # function repmat replicates the matlab behaviour
+      yrep <- repmat(t(out@.Data[[m + n]][,2]),nop,1)
       xdiff <- xrep - repmat(out@.Data[[m]][,1],1,nop_next)
       ydiff <- yrep - repmat(out@.Data[[m]][,2],1,nop_next)
       deltaSquared <- xdiff^2 + ydiff^2
@@ -99,68 +94,63 @@ link.particles <- function(particleset,
       ## similarly, include the part where the area/intensity is considered
       areaVariation <- 0
       # using the ... 6th column, corresponding to the area
-      areaDiff <- repmat(t(out@.Data[[m+n]][,"cell.0.s.area"]),nop,1) - repmat(out@.Data[[m]][,"cell.0.s.area"],1,nop_next)
+      areaDiff <- repmat(t(out@.Data[[m + n]][,"cell.0.s.area"]),nop,1) - repmat(out@.Data[[m]][,"cell.0.s.area"],1,nop_next)
       areaVariation <- areaDiff^2
       
       intensityVariation <- 0
       # using the ... corresponding column, corresponding to the mean intensity
-      intDiff <- repmat(t(out@.Data[[m+n]][,"cell.a.b.mean"]),nop,1) - repmat(out@.Data[[m]][,"cell.a.b.mean"],1,nop_next)
+      intDiff <- repmat(t(out@.Data[[m + n]][,"cell.a.b.mean"]),nop,1) - repmat(out@.Data[[m]][,"cell.a.b.mean"],1,nop_next)
       intensityVariation <- intDiff^2
-      
       
       #       distFunction <- deltaSquared + ifelse(include.area,areaVariation,0) + ifelse(include.intensity,intensityVariation,0)
       distFunction <- deltaSquared
-      if(include.intensity) distFunction <- distFunction + intensityVariation
-      if(include.area) distFunction <- distFunction + areaVariation
-      
-      
+      if (include.intensity) distFunction <- distFunction + intensityVariation
+      if (include.area) distFunction <- distFunction + areaVariation
+
       newCost <- penaltyFunction(alpha,distFunction)
       
       #       newCost <- deltaSquared
       # cost function for link p_i, q_j
       # for everything apart from the dummies, already set to rL^2...
       C[1:nop,1:nop_next] <- newCost # + squared moments and so on
-      C[nop+1,nop_next+1] <- 0 # dummy to dummy      
-      C[C>max_cost] <- Inf
+      C[nop + 1,nop_next + 1] <- 0 # dummy to dummy
+      C[C > max_cost] <- Inf
       
       ## association matrix
-      # empty association matrix  
-      A <- matrix(0,nrow=nop+1,ncol=nop_next+1)
+      # empty association matrix
+      A <- matrix(0,nrow=nop + 1,ncol=nop_next + 1)
       # initialize link matrix A --- oldstyle, but working ;) and probably even more optimized than the for for for loops
-      for(i in 1:nop)
-      {
+      for (i in 1:nop) {
         # sort costs of real particles
-        srtcst <- sort(C[i,])
+        # srtcst <- sort(C[i,])
         srtidx <- order(C[i,])
         # append index of dummy
         iidx <- 1
-        dumidx <- which(srtidx==nop_next+1)
+        dumidx <- which(srtidx == (nop_next + 1))
         # search for available particle of smallest cost or dummy
-        while(sum(A[,srtidx[iidx]])!=0 && (iidx < dumidx))
-        {
-          iidx <- iidx +1      
+        while(sum(A[,srtidx[iidx]]) != 0 && (iidx < dumidx)) {
+          iidx <- iidx +1
         }
         A[i,srtidx[iidx]] <- 1
-      }   
+      }
       # set dummy particle for columns with no entry
       s <- colSums(A) 
-      A[nop+1,which(s<1)] <- 1
+      A[nop + 1,which(s < 1)] <- 1
       # dummy corresponds to dummy
-      A[nop+1,nop_next+1] <- 1
+      A[nop + 1,nop_next + 1] <- 1
       # consistency checks
       s1 <- colSums(A[,1:nop_next])
-      s2 <- rowSums(A[1:nop,]) 
+      s2 <- rowSums(A[1:nop,])
       # optimize the relation matrix
       finished <- 0
       mincost <- c()
-      while(!finished)
-      {
+      while(!finished) {
         iterate <- iterate + 1
-        if(verboseOutput) cat("Frame:",m,"\t---\tLink_range:",n,"\t---\tIteration",iterate,".....")
+        if (verboseOutput) cat("Frame:",m,"\t---\tLink_range:",n,"\t---\tIteration",iterate,".....")
         # non-set links of finite costs
-        todo <- intersect(which(A[1:nop,1:nop_next]==0),which(C[1:nop,1:nop_next]<Inf) )
-        Icand = ((todo-1) %% nop) + 1
-        Jcand = floor((todo-1) / nop) + 1
+        todo <- intersect(which(A[1:nop,1:nop_next] == 0),which(C[1:nop,1:nop_next] < Inf) )
+        Icand <- ((todo - 1) %% nop) + 1
+        Jcand <- floor((todo - 1) / nop) + 1
         # determine the reduced cost Cred for each candidate insertion
         # initialize
         
@@ -168,10 +158,9 @@ link.particles <- function(particleset,
         Xcand <- rep(0,length(todo))
         Ycand <- rep(0,length(todo))
         # compute iteratively
-        for(ic in 1:length(Icand))
-        {
-          Xcand[ic] <- which(A[Icand[ic],]==1)
-          Ycand[ic] <- which(A[,Jcand[ic]]==1)
+        for (ic in 1:length(Icand)) {
+          Xcand[ic] <- which(A[Icand[ic],] == 1)
+          Ycand[ic] <- which(A[,Jcand[ic]] == 1)
           Cred[ic] <- C[Icand[ic],Jcand[ic]] + C[Ycand[ic],Xcand[ic]] - C[Icand[ic],Xcand[ic]] - C[Ycand[ic],Jcand[ic]]
         }
         
@@ -181,9 +170,8 @@ link.particles <- function(particleset,
         mincost <- c(mincost,minc)
         
         # if minimum < 0, link addition is favorable
-        if(!is.na(minc) && (minc < 0))
-        {
-          if(verboseOutput) cat("--> Performing change.\n")
+        if (!is.na(minc) && (minc < 0)) {
+          if (verboseOutput) cat("--> Performing change.\n")
           # add link and update dependencies to preserve the topology
           A[Icand[mini],Jcand[mini]] <- 1
           A[Ycand[mini],Jcand[mini]] <- 0
@@ -202,21 +190,20 @@ link.particles <- function(particleset,
       }
       
       # convert link matrix to representation in the list format
-      links <- which(A[1:nop,]==1,arr.ind=TRUE)
+      links <- which(A[1:nop,] == 1,arr.ind=TRUE)
       Ilinks <- links[,1]
       Jlinks <- links[,2]
       # if link is to dummy particle, set index to -1
-      Jlinks[which(Jlinks==(nop_next+1))] <- -1
+      Jlinks[which(Jlinks == (nop_next + 1))] <- -1
       
       # set links in the list object
       out@tracking[[m]]$nxt[Ilinks,n] <- Jlinks
     }
     # shrink curr_linkrange if needed at the end of the frames
-    if(m==(frames_number-curr_linkrange) && curr_linkrange > 1)
-    {
+    if(m == (frames_number - curr_linkrange) && curr_linkrange > 1) {
       curr_linkrange <- curr_linkrange - 1
     }
-    if (prog)setTxtProgressBar(pb, (m / (frames_number - curr_linkrange + 1)*100))
+    if (prog) setTxtProgressBar(pb,(m / (frames_number - curr_linkrange + 1) * 100))
   }
   # terminate all links at the list objects at the very last frame
   out@tracking[[frames_number]]$special[] <- FALSE
@@ -225,7 +212,7 @@ link.particles <- function(particleset,
     setTxtProgressBar(pb, 100)
     close(pb)
   }
-  return(out)  
+  return(out)
 }
 
 
@@ -255,7 +242,7 @@ penaltyFunctionGenerator <- function(epsilon1=0.1,
   # this function returns a function that is adopted afterwards in the tracking
   # it can be defined by default as we coded it, or the user can actually "invent" one of his taste 
   function(angle,distance) { 
-    lambda1 * ( distance/ (1-lambda2*(angle/(pi+epsilon1))))
+    lambda1 * ( distance / (1 - lambda2 * (angle / (pi + epsilon1))))
   }
 }
 
@@ -283,25 +270,22 @@ penaltyFunctionGenerator <- function(epsilon1=0.1,
 #' 
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 initialize.LinkedParticleSet <- function(particleset,
-                                         linkrange=1)       
+                                         linkrange=1)   
 {
   out <- new("LinkedParticleSet",
              .Data = particleset@.Data,
              channel = particleset@channel)
   # for the tracking slot...
   tmp <- vector(length(particleset),mode="list")
-  for (i in 1:length(particleset))
-  {
+  for (i in 1:length(particleset)) {
     particleNr <- nrow(particleset[[i]])
     tmp[[i]]$link <- rep(0,particleNr)
     tmp[[i]]$frame <- rep(i,particleNr)
     tmp[[i]]$label <- rep(NA,particleNr)
     tmp[[i]]$special <- rep(TRUE,particleNr)
     tmp[[i]]$nxt <- matrix(0,nrow=particleNr,ncol=linkrange)
-    
   }
   out@tracking <- tmp
-  
   return(out)
 }
 
@@ -322,7 +306,7 @@ initialize.LinkedParticleSet <- function(particleset,
 #' @references http://cran.r-project.org/doc/contrib/R-and-octave.txt
 #' 
 #' @author Robin Hankin, 2001
-repmat <- function(a,n,m) 
+repmat <- function(a,n,m)
 {
   kronecker(matrix(1,n,m),a)
 }

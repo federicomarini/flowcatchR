@@ -106,11 +106,10 @@ setClass("KinematicsFeaturesSet",
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 Frames <- function(x, channel) {
-  if(channel=="all")
+  if(channel == "all")
     new("Frames", x, channel = channel)
-  else
-  {
-    if(channel=="red"||channel=="green"||channel=="blue")
+  else {
+    if(channel == "red" || channel == "green" || channel == "blue")
       new("Frames", .Data = channel(x, channel), channel = channel)
     else
       stop("You need to provide one of the following values for the channel: 'red', 'green', 'blue', or 'all'")
@@ -121,8 +120,3 @@ Frames <- function(x, channel) {
 ParticleSet <- function(x = list(), channel){
   new("ParticleSet", x, channel = channel)
 }
-
-
-
-
-
