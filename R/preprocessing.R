@@ -116,8 +116,8 @@ particles <- function(raw.frames,
                           library("EBImage")
                           segmImg <- getFrame(binary.frames, arg)
                           rawImg <- getFrame(raw.frames, arg)
-                          imgFeatures <- as.data.frame(EBImage::computeFeatures(Image(segmImg),
-                                                                                Image(rawImg), xname = "cell"))
+                          imgFeatures <- as.data.frame(EBImage::computeFeatures(segmImg,
+                                                                                rawImg, xname = "cell"))
                           imgFeatures$shapeFactor <- (imgFeatures$cell.0.s.perimeter)^2 / (4 * pi * imgFeatures$cell.0.s.area)
                           imgFeatures
                         },
