@@ -1,0 +1,40 @@
+Package: flowcatchR
+Type: Package
+Title: Tools to analyze in vivo microscopy imaging data focused on
+    tracking flowing blood cells
+Version: 1.2.0
+Date: 2015-04-02
+Authors@R: person("Federico", "Marini", email = "marinif@uni-mainz.de",
+    role = c("aut", "cre"))
+Maintainer: Federico Marini <marinif@uni-mainz.de>
+Description: flowcatchR is a set of tools to analyze in vivo microscopy imaging
+    data, focused on tracking flowing blood cells. It guides the steps from
+    segmentation to calculation of features, filtering out particles not of
+    interest, providing also a set of utilities to help checking the quality of
+    the performed operations (e.g. how good the segmentation was). It allows investigating the 
+    issue of tracking flowing cells such as in blood vessels, to categorize the particles in 
+    flowing, rolling and adherent. This classification is applied in the study of phenomena such as
+    hemostasis and study of thrombosis development. Moreover, flowcatchR presents an integrated 
+    workflow solution, based on the integration with a Shiny App and Jupyter notebooks, which is 
+    delivered alongside the package, and can enable fully reproducible bioimage analysis in the 
+    R environment. 
+License: BSD_3_clause + file LICENSE
+VignetteBuilder: knitr
+Suggests:
+    BiocStyle,
+    knitr,
+    shiny
+Depends:
+    R (>= 2.10),
+    methods,
+    EBImage
+Imports:
+    rgl,
+    colorRamps,
+    abind,
+    BiocParallel
+SystemRequirements: ImageMagick
+URL: https://github.com/federicomarini/flowcatchR
+BugReports: https://github.com/federicomarini/flowcatchR/issues
+biocViews: Software, Visualization, CellBiology, Classification, Infrastructure, GUI
+
