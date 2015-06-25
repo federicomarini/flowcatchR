@@ -45,11 +45,7 @@ kinematics <- function(trajectoryset,
           totalDistance, distStartToEnd, curvilinearVelocity,
           straightLineVelocity, linearityForwardProgression, trajMSD,
           velocityAutoCorr, instAngle, directChange or dirAutoCorr")
-<<<<<<< HEAD
-      return(NULL)
-=======
       return(invisible(NULL))
->>>>>>> master
     }
   }
   # compute all, for one or all trajectories
