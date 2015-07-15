@@ -239,10 +239,18 @@ penaltyFunctionGenerator <- function(epsilon1=0.1,
                                      lambda1=1,
                                      lambda2=1)
 {
+
+
+  # TODO:
+  # request that lambda2 is at most 1 to maintain meaningful penalty shapes
+  
+  # something like stop if lambda2 > 1?
+  
   # this function returns a function that is adopted afterwards in the tracking
   # it can be defined by default as we coded it, or the user can actually "invent" one of his taste 
   function(angle,distance) { 
-    lambda1 * ( distance / (1 - lambda2 * (angle / (pi + epsilon1))))
+    lambda1 * ( distance / (1 - lambda2 * ( abs(angle) / (pi + epsilon1) )))
+
   }
 }
 

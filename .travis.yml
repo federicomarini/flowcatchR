@@ -1,24 +1,16 @@
 # Sample .travis.yml for R projects from https://github.com/craigcitro/r-travis
 
-language: c
+language: r
 
-before_install:
-  - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
-  - chmod 755 ./travis-tool.sh
-  - ./travis-tool.sh bootstrap
+apt_packages:
+- fftw3-dev
 
-install:
-  - ./travis-tool.sh install_bioc EBImage BiocStyle BiocParallel
-  - ./travis-tool.sh install_deps
+bioc_required: true
 
-script: ./travis-tool.sh run_tests
-
-after_script:
-  - ./travis-tool.sh dump_logs_by_extension "timings"
-  - ./travis-tool.sh dump_sysinfo
-
-on_failure:
-  - ./travis-tool.sh dump_logs
+bioc_packages:
+- EBImage
+- BiocStyle
+- BiocParallel
 
 notifications:
   email:

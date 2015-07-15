@@ -50,7 +50,7 @@ knit_hooks$set(rgl=hook_rgl)
 
 \title{{\flowcatchR{}: A framework for tracking and analyzing flowing blood cells in time lapse microscopy images}}
 \author{Federico Marini$^1$, Johanna Mazur, Harald Binder \\ [1em]Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI), \\ University Medical Center - Mainz (Germany)\\[1em] \email{$^1$marinif@uni-mainz.de}}
-\date{Edited: February 3, 2015; Compiled: \today}
+\date{Edited: June 25, 2015; Compiled: \today}
 
 
 
@@ -73,6 +73,9 @@ knit_hooks$set(rgl=hook_rgl)
 
 This document offers an introduction and overview of the \R{}/\Bioconductor{} \cite{Rlang2014,Gentleman2004} package \flowcatchR{}, which provides a flexible and comprehensive set of tools to detect and track flowing blood cells in time-lapse microscopy. 
 
+
+\subsection{Why \Biocpkg{flowcatchR}?}
+
 \flowcatchR{} builds upon functionalities provided by the \Biocpkg{EBImage} package \cite{Pau2010}, and extends them in order to analyze time-lapse microscopy images. Here we list some of the unique characteristics of the datasets \flowcatchR{} is designed for:
 
 \begin{itemize}
@@ -91,18 +94,54 @@ Essential features \flowcatchR{} delivers to the user are:
 \item A wide set of functions inspecting the kinematic properties of the identified trajectories \cite{Beltman2009,Meijering2012a}, providing publication-ready summary statistics and visualization tools to help classifying identified objects
 \end{itemize}
 
+
 This guide includes a brief overview of the entire processing flow, from importing the raw images to the analysis of kinematic parameters derived from the identified trajectories. An example dataset will be used to illustrate the available features, in order to track blood platelets in consecutive frames derived from an intravital microscopy acquisition (also available in the package). All steps will be dissected to explore available parameters and options.
 
 To install the package \flowcatchR{}, please start a current version of R and type 
 
+
+\subsection{Purpose of this document}
+
+This vignette includes a brief overview of the entire processing flow, from importing the raw images to the analysis of kinematic parameters derived from the identified trajectories. An example dataset will be used to illustrate the available features, in order to track blood platelets in consecutive frames derived from an intravital microscopy acquisition (also available in the package). All steps will be dissected to explore available parameters and options.
+
+\section{Getting started}
+
+\subsection{Installation}
+
+\flowcatchR{} is an R package distributed as part of the Bioconductor project. To install \flowcatchR{}, please start R and type: 
+
 <<install,eval=FALSE>>=
 source("http://bioconductor.org/biocLite.R")
 biocLite("flowcatchR")
-
-# currently this can be done via github
-install.packages("devtools") # if needed
-devtools::install_github("flowcatchR", "federicomarini")
 @
+
+In case you might prefer to install the latest development version, this can be done with these two lines below:
+
+<<install-devel,eval=FALSE>>=
+install.packages("devtools") # if needed
+devtools::install_github("federicomarini/flowcatchR")
+@
+
+Installation issues should be reported to the Bioconductor support site (\url{http://support.bioconductor.org/}).
+
+\subsection{Getting help}
+
+The \flowcatchR{} package was tested on a variety of datasets provided from cooperation partners, yet it may require some extra tuning or bug fixes. For these issues, please contact the maintainer - if required with a copy of the error messages, the output of \Rfunction{sessionInfo} function:
+
+<<helpmaintainer>>=
+maintainer("flowcatchR")
+@
+
+Despite our best efforts to test and develop the package further, additional functions or interesting suggestions might come from the specific scenarios that the package users might be facing. Improvements of existing functions or development of new ones are always most welcome! We also encourage to fork the GitHub repository of the package (\url{https://github.com/federicomarini/flowcatchR}), develop and test the new feature(s), and finally generate a pull request to integrate it to the original repository.
+
+\subsection{Citing \flowcatchR{}}
+
+The work underlying the development of \flowcatchR{} has not been formally published yet. A manuscript has been submitted for peer-review. For the time being, users of \flowcatchR{} are encouraged to cite it using the output of the \Rfunction{citation} function in the \Rpackage{utils}, as it follows:
+
+<<citationPkg>>=
+citation("flowcatchR")
+@
+
 
 
 
@@ -460,6 +499,8 @@ display(readImage(system.file("extdata/snapExp.jpg",package="flowcatchR")),
 @
 
 
+\subsection{The \Robject{shinyFlow} Shiny Application}
+
 Additionally, since Version 1.0.3, \flowcatchR{} delivers \Robject{shinyFlow}, a Shiny Web Application (\cite{Shiny2013}), which is built on the backbone of the analysis presented in this vignette, and is portable across all main operating systems. The user is thus invited to explore datasets and parameters with immediate reactive feedback, that can enable better understanding of the effects of single steps and changes in the workflow.
 
 To launch the Shiny App, use the command below to open an external window either in the browser or in the IDE (such as RStudio):
@@ -467,6 +508,8 @@ To launch the Shiny App, use the command below to open an external window either
 <<launchShiny,eval=FALSE>>=
 shinyFlow()
 @
+
+\subsection{\flowcatchR{} in Jupyter notebooks}
 
 A further integration are a number of Jupyter/IPython notebooks (\cite{Perez2007}), as a way to provide easy reproducibility as well as communication of results, by combining plain text, commands and output in single documents. The R kernel used on the back-end was developed by Thomas Kluyver (\url{https://github.com/takluyver/IRkernel}), and instructions for the installation are available at the Github repository website. The notebooks are available in the installation folder of the package \flowcatchR{}, which can be found with the command below. 
 
