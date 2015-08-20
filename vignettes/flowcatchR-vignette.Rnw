@@ -42,15 +42,15 @@ opts_chunk$set(fig.path='./figures/flowcatchR-',
                results='hold',
                tidy=FALSE)
 options(replace.assign=TRUE,width=80,'reindent.spaces'=2) # for tidying up the code
-options(rgl.useNULL=TRUE)
-knit_hooks$set(rgl=hook_rgl)
+# options(rgl.useNULL=TRUE)
+# knit_hooks$set(rgl=hook_rgl)
 @
 
 
 
 \title{{\flowcatchR{}: A framework for tracking and analyzing flowing blood cells in time lapse microscopy images}}
 \author{Federico Marini$^1$, Johanna Mazur, Harald Binder \\ [1em]Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI), \\ University Medical Center - Mainz (Germany)\\[1em] \email{$^1$marinif@uni-mainz.de}}
-\date{Edited: June 25, 2015; Compiled: \today}
+\date{Edited: August 20, 2015; Compiled: \today}
 
 
 
@@ -361,7 +361,7 @@ By plotting all trajectories in a 2D+time representation, it's possible to have 
 
 The following command gives an interactive 3D (2D+time) view of all trajectories (output is not included in this vignette): % (Fig.\ref{fig:cubeTrajs}):
 
-<<cubeTrajs,rgl=TRUE,fig.cap="A 2D+time representation of the trajectories, produced by plotting a TrajectoryList object",eval=FALSE>>=
+<<cubeTrajs,fig.cap="A 2D+time representation of the trajectories, produced by plotting a TrajectoryList object",eval=FALSE>>=
 plot(trajPlatelets, MesenteriumSubset)
 @
 
