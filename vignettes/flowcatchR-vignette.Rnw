@@ -526,6 +526,17 @@ $ ipython notebook
 Alternatively, these documents can be viewed with the \Rfunction{nbviewer} tool, available at \url{http://nbviewer.ipython.org/}.
 
 
+\section{\Biocpkg{flowcatchR} in Docker containers}
+
+\Biocpkg{flowcatchR} is now (as of September 2015) available also in Docker images that are the components of the \texttt{dockerflow} proposal (\url{https://github.com/federicomarini/dockerflow}). This includes:
+
+\begin{itemize}
+  \item \texttt{flowstudio} - \url{https://github.com/federicomarini/flowstudio}, a command-line/IDE interface to RStudio where \Biocpkg{flowcatchR} and its dependencies are preinstalled
+  \item \texttt{flowshiny} - \url{https://github.com/federicomarini/flowshiny} a Shiny Server running the \texttt{shinyFlow} web application
+  \item  \texttt{flowjupy} - \url{https://github.com/federicomarini/flowjupy}, a Jupyter Notebook interface
+\end{itemize}
+
+These three images can be run simultaneously, provided the system where the containers are running supports the \texttt{docker-compose} tool. For more information on how to install the single components, please refer to their repositories.
 
 
 \section{Supplementary information}\label{sec:supplinfo}

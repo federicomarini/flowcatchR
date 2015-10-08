@@ -1,3 +1,21 @@
+CHANGES IN VERSION 1.4.0
+--------------------------------------
+
+NEW FEATURES
+
+	o added details in the vignette on the dockerflow proposal, where flowcatchR is made available in preconfigured Docker containers
+
+BUG FIXES
+
+	o penaltyFunctionGenerator: simmetric penalty function is now correctly computed
+	
+OTHER NOTES
+
+  o added LazyData: true in the DESCRIPTION
+  o updated travis.yml to use native R integration
+  o vignette: improved structure, to enhance readability and usability; removed rgl hook which was not used anyway
+  o documentation: slight updates and enhancements
+
 CHANGES IN VERSION 1.2.0
 --------------------------------------
 
