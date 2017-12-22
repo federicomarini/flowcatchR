@@ -17,7 +17,10 @@
 #' @import rgl
 #' @import colorRamps
 #' @import methods
-#' @import abind
+#' @importFrom abind asub
+#' @importFrom graphics grid lines locator plot text
+#' @importFrom stats acf median na.omit
+#' @importFrom utils read.table setTxtProgressBar txtProgressBar write.table
 #' 
 #' @author
 #' Federico Marini \email{marinif@@uni-mainz.de},

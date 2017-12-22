@@ -38,4 +38,4 @@ LazyData: true
 URL: https://github.com/federicomarini/flowcatchR
 BugReports: https://github.com/federicomarini/flowcatchR/issues
 biocViews: Software, Visualization, CellBiology, Classification, Infrastructure, GUI
-
+RoxygenNote: 6.0.1
