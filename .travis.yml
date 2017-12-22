@@ -16,4 +16,10 @@ addons:
   apt:
     packages:
       - fftw3-dev
-      
+
+# https://stackoverflow.com/questions/45742068/travis-failing-for-r-bioc-packages-using-new-latex-format
+before_install:
+  - tlmgr install bera
+  - tlmgr install nowidow
+  - tlmgr install parnotes
+  - tlmgr install marginfix      
