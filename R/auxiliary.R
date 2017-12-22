@@ -163,7 +163,8 @@ read.Frames <- function(image.files, # ../exportedMesenteriumSubset
 #' 
 #' @examples
 #' data("MesenteriumSubset")
-#' \dontrun{export.Frames(MesenteriumSubset,nameStub="subset_export_",createGif=TRUE,removeAfterCreatingGif=FALSE)}
+#' \dontrun{export.Frames(MesenteriumSubset,nameStub="subset_export_",
+#'                        createGif=TRUE,removeAfterCreatingGif=FALSE)}
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014

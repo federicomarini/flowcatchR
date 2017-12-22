@@ -1,9 +1,11 @@
 
 #' Add object contours to a \code{Frames} object
 #'  
-#' Creates a \code{Frames} object containing raw information, combined with the segmented images and the relative trajectory under analysis
+#' Creates a \code{Frames} object containing raw information, combined with the segmented 
+#' images and the relative trajectory under analysis
 #' 
-#' If a \code{TrajectorySet} is provided and mode is set to \code{trajectories}, returns a \code{Frames} with all trajectories included in the IDs 
+#' If a \code{TrajectorySet} is provided and mode is set to \code{trajectories}, returns 
+#' a \code{Frames} with all trajectories included in the IDs 
 #' vector painted accordingly.
 #' If the mode is set to \code{particles}, it will just plot the particles (all) on all frames.
 #' If no \code{TrajectorySet} is provided, it will be computed with default parameters.
@@ -13,7 +15,8 @@
 #' @param binary.frames A \code{Frames} object with preprocessed frames
 #' @param trajectoryset A \code{TrajectorySet} object
 #' @param trajIDs Numeric vector, the ID(s) of the trajectory.
-#' @param mode A character string, can assume the values \code{particles} or \code{trajectories}. Defaults to \code{particles}
+#' @param mode A character string, can assume the values \code{particles} or \code{trajectories}.
+#' Defaults to \code{particles}
 #' @param col A vector of color strings
 #' @param channel A character string, to select which channel to process
 #' 
@@ -22,8 +25,10 @@
 #' @examples
 #' data("MesenteriumSubset")
 #' \dontrun{
-#' paintedTrajectories <- add.contours(raw.frames = MesenteriumSubset, mode = "trajectories",channel="red")
-#' paintedParticles <- add.contours(raw.frames = MesenteriumSubset, mode = "particles",channel="red")
+#' paintedTrajectories <- add.contours(raw.frames = MesenteriumSubset, 
+#'                                     mode = "trajectories",channel="red")
+#' paintedParticles <- add.contours(raw.frames = MesenteriumSubset, 
+#'                                  mode = "particles",channel="red")
 #' inspect.Frames(paintedTrajectories)
 #' inspect.Frames(paintedParticles)
 #' }

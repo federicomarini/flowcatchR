@@ -28,7 +28,8 @@ by the single frames.
 }
 \examples{
 data("MesenteriumSubset")
-\dontrun{export.Frames(MesenteriumSubset,nameStub="subset_export_",createGif=TRUE,removeAfterCreatingGif=FALSE)}
+\dontrun{export.Frames(MesenteriumSubset,nameStub="subset_export_",
+                       createGif=TRUE,removeAfterCreatingGif=FALSE)}
 
 }
 \author{
