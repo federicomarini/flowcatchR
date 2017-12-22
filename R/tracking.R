@@ -39,7 +39,7 @@ link.particles <- function(particleset,
                            verboseOutput=FALSE,
                            prog=FALSE,
                            include.intensity=TRUE,
-                           include.area=TRUE)
+                           include.area=FALSE)
 {
   out <- initialize.LinkedParticleSet(particleset)
   if (prog) pb <- txtProgressBar(min = 0, max = 100, style = 3)
@@ -139,8 +139,8 @@ link.particles <- function(particleset,
       # dummy corresponds to dummy
       A[nop + 1,nop_next + 1] <- 1
       # consistency checks
-      s1 <- colSums(A[,1:nop_next])
-      s2 <- rowSums(A[1:nop,])
+      s1 <- ifelse(!is.null(dim(A[,1:nop_next])),colSums(A[,1:nop_next]),sum(A[,1:nop_next]))
+      s2 <- ifelse(!is.null(dim(A[,1:nop_next])),rowSums(A[1:nop,]),sum(A[,1:nop_next]))
       # optimize the relation matrix
       finished <- 0
       mincost <- c()
@@ -185,16 +185,22 @@ link.particles <- function(particleset,
         }
         
         # consistency checks--..
-        s1 <- colSums(A[,1:nop_next])
-        s2 <- rowSums(A[1:nop,])
+        s1 <- ifelse(!is.null(dim(A[,1:nop_next])),colSums(A[,1:nop_next]),sum(A[,1:nop_next]))
+        s2 <- ifelse(!is.null(dim(A[,1:nop_next])),rowSums(A[1:nop,]),sum(A[,1:nop_next]))
       }
       
       # convert link matrix to representation in the list format
       links <- which(A[1:nop,] == 1,arr.ind=TRUE)
-      Ilinks <- links[,1]
-      Jlinks <- links[,2]
-      # if link is to dummy particle, set index to -1
-      Jlinks[which(Jlinks == (nop_next + 1))] <- -1
+      if(length(links)==1){
+        Ilinks <- 1
+        Jlinks <- 1
+      } else {
+        Ilinks <- links[,1]
+        Jlinks <- links[,2]
+        
+        # if link is to dummy particle, set index to -1
+        Jlinks[which(Jlinks == (nop_next + 1))] <- -1
+      }
       
       # set links in the list object
       out@tracking[[m]]$nxt[Ilinks,n] <- Jlinks
