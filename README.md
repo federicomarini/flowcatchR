@@ -1,6 +1,8 @@
 flowcatchR
 ==========
-[![Build Status](https://travis-ci.org/federicomarini/flowcatchR.png?branch=master)](https://travis-ci.org/federicomarini/flowcatchR)
+
+[![Travis build status](https://travis-ci.org/federicomarini/flowcatchR.svg?branch=master)](https://travis-ci.org/federicomarini/flowcatchR)
+
 
 #### A framework for tracking and analyzing flowing blood cells in time lapse microscopy images
 
