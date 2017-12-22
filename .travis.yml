@@ -1,18 +1,14 @@
-# Sample .travis.yml for R projects from https://github.com/craigcitro/r-travis
-
 language: r
+r: bioc-devel
 
-apt_packages:
-- fftw3-dev
+sudo: false
+cache: packages
 
-bioc_required: true
+warnings_are_errors: false
+
+r_build_args: "--no-manual --no-resave-data"
+r_check_args: "--no-build-vignettes --no-manual --timings"
 
 bioc_packages:
-- EBImage
-- BiocStyle
-- BiocParallel
-
-notifications:
-  email:
-    on_success: change
-    on_failure: change
+  - BiocInstaller
+  
