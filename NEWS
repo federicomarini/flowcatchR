@@ -1,3 +1,18 @@
+CHANGES IN VERSION 1.14.0
+--------------------------------------
+
+NEW FEATURES
+
+	o the engine for plotting the trajectories is now based on plotly, abandoning the 
+	older rgl-based solution
+
+OTHER NOTES
+
+  o vignette: now also based on Rmarkdown, leaving the older Rnw-pdf be
+  o shortened example lines for better documentation
+  o better definition of import statements for better behaviour with other packages
+  o updated travis.yml for current setup
+
 CHANGES IN VERSION 1.4.0
 --------------------------------------
 
