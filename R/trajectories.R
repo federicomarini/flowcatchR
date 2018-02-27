@@ -177,17 +177,48 @@ plot.TrajectorySet <- function(x,frames,verbose=FALSE,...)
   trajectoryDataFrame <- do.call(rbind.data.frame,lapply(x,function(arg){arg$trajectory}))
   if(verbose) cat("Plotting",length(x),"trajectories...\n")
   colcols <- rep(colorRamps::primary.colors(40,steps=10,FALSE),6)
-  for (i in 1:max(trajectoryDataFrame$trajLabel))
-  {
-    singleTraj <- trajectoryDataFrame[which(trajectoryDataFrame$trajLabel==i),]
-    rgl::plot3d(singleTraj$xCoord, singleTraj$yCoord, singleTraj$frame, col=colcols[singleTraj$trajLabel],type="l",lwd = 3,add=TRUE)
-    
-  }
   cubeLimits <- axesInfo(frames)
+  
+  p <- plot_ly(trajectoryDataFrame, 
+          x = ~xCoord, y = ~yCoord, z = ~frame, 
+          split = ~trajLabel, type = 'scatter3d', mode = 'lines',
+          line = list(width = 2))
+  # plus, set limits according to the ones in the figure
+  p <- layout(p,
+              xaxis = list(range = c(0, cubeLimits$xlim)),
+              yaxis = list(range = c(0, cubeLimits$ylim))#,
+              # zaxis = list(range = c(0, cubeLimits$tlim))
+              )
+
+  
+  return(p)
+  
+  # singleTraj <- trajectoryDataFrame[which(trajectoryDataFrame$trajLabel==1),]
+  # p <- plot_ly(singleTraj, x = ~xCoord, y = ~yCoord, z = ~frame, type = 'scatter3d', mode = 'lines',
+  #              line = list(color = singleTraj$color[1], width = 1))
+  # 
+  # 
+  # for (i in 2:max(trajectoryDataFrame$trajLabel))
+  # {
+  #   singleTraj <- trajectoryDataFrame[which(trajectoryDataFrame$trajLabel==i),]
+  #   # rgl::plot3d(singleTraj$xCoord, singleTraj$yCoord, singleTraj$frame, col=colcols[singleTraj$trajLabel],type="l",lwd = 3,add=TRUE)
+  #   singleTraj$color <- colcols[singleTraj$trajLabel]
   #   
-  decorate3d(xlim=cubeLimits$xlim,ylim=cubeLimits$ylim,zlim=cubeLimits$tlim,xlab="",ylab="",zlab="Frame Number",aspect=TRUE)
-  bg3d("black") 
-  invisible(NULL)
+  #   p <- add_trace(p, singleTraj, x = ~xCoord, y = ~yCoord, z = ~frame, type = 'scatter3d', mode = 'lines',
+  #                line = list(color = singleTraj$color[1], width = 1))
+  #   
+  #   
+  #   
+  # }
+  # cubeLimits <- axesInfo(frames)
+  # #   
+  # decorate3d(xlim=cubeLimits$xlim,ylim=cubeLimits$ylim,zlim=cubeLimits$tlim,xlab="",ylab="",zlab="Frame Number",aspect=TRUE)
+  # bg3d("black") 
+  # invisible(NULL)
+  # 
+  # 
+  
+  
 }
 
 
