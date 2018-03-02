@@ -152,7 +152,8 @@ axesInfo <- function(frames)
 #' 
 #' 
 #' 
-#' Based on the \code{rgl} library, the function extracts the region of interests from the dimensions of an image of the \code{Frames} object,
+#' Based on the \code{plotly} library, the function extracts the region of interests 
+#' from the dimensions of an image of the \code{Frames} object,
 #' and afterwards plots the x-y-time representation of the identified trajectories
 #' 
 #' @param x A \code{TrajectorySet} object
@@ -198,8 +199,10 @@ plot.TrajectorySet <- function(x,frames,verbose=FALSE,...)
 #' 
 #' Provides a bird's eye view of a \code{TrajectorySet} object on a bidimensional space
 #' 
-#' Independent from the \code{rgl} library, the function extracts the region of interests from the dimensions of an image of the \code{Frames} object,
-#' and afterwards plots the x-y-time representation of the identified trajectories on a 2d plane. It is possible to subset the \code{TrajectorySet}
+#' This function extracts the region of interests from the dimensions
+#' of an image of the \code{Frames} object,
+#' and afterwards plots the x-y-time representation of the identified 
+#' trajectories on a 2d plane. It is possible to subset the \code{TrajectorySet}
 #' object with the IDs of the desired trajectories
 #' 
 #' @param trajectoryset A \code{TrajectorySet} object
