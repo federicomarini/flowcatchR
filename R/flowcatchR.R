@@ -14,7 +14,6 @@
 #' hemostasis and study of thrombosis development.
 #' 
 #' @import EBImage
-#' @import rgl
 #' @import colorRamps
 #' @import methods
 #' @importFrom abind asub
@@ -22,6 +21,7 @@
 #' @importFrom stats acf median na.omit
 #' @importFrom utils read.table setTxtProgressBar txtProgressBar write.table
 #' @importFrom plotly plot_ly layout
+#' @import shiny
 #' 
 #' @author
 #' Federico Marini \email{marinif@@uni-mainz.de},
