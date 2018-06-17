@@ -19,7 +19,11 @@ addons:
 
 # https://stackoverflow.com/questions/45742068/travis-failing-for-r-bioc-packages-using-new-latex-format
 before_install:
+  - sudo apt-get -qq update
+  - sudo apt-get install -y libpng-dev
   - tlmgr install bera
   - tlmgr install nowidow
   - tlmgr install parnotes
-  - tlmgr install marginfix      
+  - tlmgr install marginfix
+
+
