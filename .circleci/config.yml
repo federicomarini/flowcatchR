@@ -1,7 +1,3 @@
-dependencies:
-  pre:
-    - sudo apt-get update; sudo apt-get install fftw3-dev libtiff5-dev libjpeg-dev
-
 defaults: &steps
   steps:
     - checkout
@@ -17,8 +13,12 @@ defaults: &steps
             -e 'cat(sprintf("export RCHECK_DIR=%s.Rcheck\n", dsc[,"Package"]))' \
             >> ${BASH_ENV}
 
+    - run:
+        name: Unix deps
+        command: |
+          sudo apt-get update; sudo apt-get install fftw3-dev libtiff5-dev libjpeg-dev
+
     ## install dependencies ------------------
-    
     - restore_cache:
           keys:
             - deps1-{{ .Branch }}-{{ checksum "DESCRIPTION" }}
