@@ -16,7 +16,7 @@ defaults: &steps
     - run:
         name: Unix deps
         command: |
-          sudo apt-get update; sudo apt-get install fftw3-dev libtiff5-dev libjpeg-dev
+          sudo apt-get update; sudo apt-get install -y libfftw3-dev libtiff5-dev libjpeg-dev
 
     ## install dependencies ------------------
     - restore_cache:
