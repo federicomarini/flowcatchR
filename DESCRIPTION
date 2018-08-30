@@ -2,7 +2,7 @@ Package: flowcatchR
 Type: Package
 Title: Tools to analyze in vivo microscopy imaging data focused on
     tracking flowing blood cells
-Version: 1.15.0
+Version: 1.15.1
 Date: 2018-03-02
 Authors@R: person("Federico", "Marini", email = "marinif@uni-mainz.de",
     role = c("aut", "cre"))
