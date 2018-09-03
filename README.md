@@ -27,8 +27,9 @@ devtools::install_github("flowcatchR", "federicomarini")
 
 If you want to install the current release version, just type:
 ```r
-source("http://bioconductor.org/biocLite.R")
-biocLite("flowcatchR")
+if (!requireNamespace("BiocManager", quietly=TRUE))
+    install.packages("BiocManager")
+BiocManager::install("flowcatchR")
 ```
 
 

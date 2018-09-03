@@ -93,8 +93,9 @@ This vignette includes a brief overview of the entire processing flow, from impo
 `r Biocpkg("flowcatchR")` is an R package distributed as part of the Bioconductor project. To install `r Biocpkg("flowcatchR")`, please start R and type: 
 
 ```{r install, eval=FALSE}
-source("http://bioconductor.org/biocLite.R")
-biocLite("flowcatchR")
+if (!requireNamespace("BiocManager", quietly=TRUE))
+    install.packages("BiocManager")
+BiocManager::install("flowcatchR")
 ```
 
 In case you might prefer to install the latest development version, this can be done with these two lines below:
