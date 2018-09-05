@@ -4,8 +4,8 @@
 \alias{plot2D.TrajectorySet}
 \title{2D projection of a \code{TrajectorySet} object}
 \usage{
-plot2D.TrajectorySet(trajectoryset, frames, trajIDs = NULL, addGrid = FALSE,
-  verbose = FALSE, ...)
+plot2D.TrajectorySet(trajectoryset, frames, trajIDs = NULL,
+  addGrid = FALSE, verbose = FALSE, ...)
 }
 \arguments{
 \item{trajectoryset}{A \code{TrajectorySet} object}

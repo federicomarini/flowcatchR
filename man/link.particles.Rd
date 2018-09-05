@@ -5,9 +5,9 @@
 \title{Links a \code{ParticleSet} object}
 \usage{
 link.particles(particleset, L, R = 2, epsilon1 = 0.1, epsilon2 = 2,
-  lambda1 = 1, lambda2 = 1, penaltyFunction = penaltyFunctionGenerator(),
-  verboseOutput = FALSE, prog = FALSE, include.intensity = TRUE,
-  include.area = FALSE)
+  lambda1 = 1, lambda2 = 1,
+  penaltyFunction = penaltyFunctionGenerator(), verboseOutput = FALSE,
+  prog = FALSE, include.intensity = TRUE, include.area = FALSE)
 }
 \arguments{
 \item{particleset}{A \code{ParticleSet} object}
