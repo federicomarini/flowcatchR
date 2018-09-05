@@ -22,7 +22,7 @@ To install the development version for the package **flowcatchR**, please start 
 ```r 
 # currently this can be done via github
 install.packages("devtools") # if needed
-devtools::install_github("flowcatchR", "federicomarini")
+devtools::install_github("federicomarini/flowcatchR")
 ```
 
 If you want to install the current release version, just type:
