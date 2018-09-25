@@ -1,0 +1,7 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^.gitignore$
+^.travis.yml$
+_pkgdown.yml
+docs/*
+.circleci
