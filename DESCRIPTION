@@ -4,8 +4,9 @@ Title: Tools to analyze in vivo microscopy imaging data focused on
     tracking flowing blood cells
 Version: 1.15.2
 Date: 2018-09-05
-Authors@R: person("Federico", "Marini", email = "marinif@uni-mainz.de",
-    role = c("aut", "cre"))
+Authors@R: c(person("Federico", "Marini", role = c("aut", "cre"), 
+        email ="marinif@uni-mainz.de", 
+        comment = c(ORCID = '0000-0003-3252-7758')))
 Maintainer: Federico Marini <marinif@uni-mainz.de>
 Description: flowcatchR is a set of tools to analyze in vivo microscopy imaging
     data, focused on tracking flowing blood cells. It guides the steps from
@@ -39,7 +40,8 @@ Imports:
     shiny
 SystemRequirements: ImageMagick
 LazyData: true
-URL: https://github.com/federicomarini/flowcatchR
+URL: https://github.com/federicomarini/flowcatchR,
+    https://federicomarini.github.io/flowcatchR/
 BugReports: https://github.com/federicomarini/flowcatchR/issues
 biocViews: Software, Visualization, CellBiology, Classification, Infrastructure, GUI
 RoxygenNote: 6.1.0
