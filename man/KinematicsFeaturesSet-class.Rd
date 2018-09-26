@@ -3,7 +3,7 @@
 \docType{class}
 \name{KinematicsFeaturesSet-class}
 \alias{KinematicsFeaturesSet-class}
-\title{KinematicsFeaturesSet}
+\title{KinematicsFeaturesSet class}
 \description{
 S4 class for storing information on all kinematics features identified for all trajectories. Single
 \code{KinematicsFeatures} objects are the element of the main list
