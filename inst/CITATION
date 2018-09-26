@@ -1,0 +1,19 @@
+citHeader("To cite the package 'flowcatchR' in publications use:")
+
+citEntry(
+  entry        = "Manual",
+  title        = "{flowcatchR}: Tools to analyze in vivo microscopy imaging data focused on
+tracking flowing blood cells",
+  author       = personList(as.person("Federico Marini"),
+                   as.person("Harald Binder")),
+  year         = "2018",
+  url          = "http://bioconductor.org/packages/flowcatchR/, https://github.com/federicomarini/flowcatchR, https://federicomarini.github.io/flowcatchR/",
+  doi          = "10.18129/B9.bioc.flowcatchR",
+
+  textVersion  =
+  paste("Federico Marini, Harald Binder (2018).",
+        "flowcatchR: Tools to analyze in vivo microscopy imaging data focused on
+tracking flowing blood cells.",
+        "URL http://bioconductor.org/packages/flowcatchR/",
+        "doi: 10.18129/B9.bioc.flowcatchR")
+)
