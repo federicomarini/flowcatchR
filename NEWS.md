@@ -1,11 +1,8 @@
 # flowcatchR 1.16.0
 
-## New features
-
-## Bug fixes
-
 ## Other notes
 
+* The project website based on `pkgdown` has been created and published on GitHub
 * Added a `NEWS.md` file to track changes to the package.
 
 # flowcatchR 1.14.0
