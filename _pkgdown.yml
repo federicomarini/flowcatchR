@@ -35,3 +35,68 @@ navbar:
     github:
       icon: fa-github fa-lg
       href: https://github.com/federicomarini/flowcatchR
+
+reference:
+- title: The flowcatchR package
+  desc: Main functions and data in the `flowcatchR` package
+  contents:
+  - '`flowcatchR`'
+  - '`MesenteriumSubset`'
+  - '`candidate.platelets`'
+  - '`shinyFlow`'
+  - '`snap`'
+- title: Working with Frames
+  desc: Working with the `Frames` class
+  contents:
+  - '`Frames-class`'
+  - '`Frames`'
+  - '`read.Frames`'
+  - '`add.contours`'
+  - '`axesInfo`'
+  - '`channel.Frames`'
+  - '`crop.Frames`'
+  - '`export.Frames`'
+  - '`inspect.Frames`'
+  - '`length.Frames`'
+  - '`normalizeFrames`'
+  - '`preprocess.Frames`'
+  - '`rotate.Frames`'
+  - '`select.Frames`'
+  - '`show,Frames-method`'
+- title: Working with ParticlesSet and LinkedParticleSet
+  desc: Working with the `ParticlesSet` and `LinkedParticlesSet` class
+  contents:
+  - '`ParticleSet-class`'
+  - '`LinkedParticleSet-class`'
+  - '`particles`'
+  - '`read.particles`'
+  - '`select.particles`'
+  - '`export.particles`'
+  - '`initialize.LinkedParticleSet`'
+  - '`link.particles`'
+  - '`addParticles`'
+  - '`penaltyFunctionGenerator`'
+  - '`repmat`'
+  - '`show,LinkedParticleSet-method`'
+  - '`show,ParticleSet-method`'
+- title: Working with TrajectorySet
+  desc: Working with the `TrajectorySet` class
+  contents:
+  - '`TrajectorySet-class`'
+  - '`trajectories`'
+  - '`computeMSD`'
+  - '`extractKinematics.traj`'
+  - '`matchTrajToParticles`'
+  - '`toCartesianCoords`'
+  - '`toPolarCoords`'
+  - '`plot.TrajectorySet`'
+  - '`plot2D.TrajectorySet`'
+  - '`show,TrajectorySet-method`'
+- title: Working with KinematicsFeatures and KinematicsFeaturesSet
+  desc: Working with the `KinematicsFeatures` and `KinematicsFeaturesSet` class
+  contents:
+  - '`KinematicsFeatures-class`'
+  - '`KinematicsFeaturesSet-class`'
+  - '`kinematics`'
+  - '`show,KinematicsFeatures-method`'
+  - '`show,KinematicsFeaturesSet-method`'
