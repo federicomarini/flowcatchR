@@ -7,7 +7,7 @@ tracking flowing blood cells",
   author       = personList(as.person("Federico Marini"),
                    as.person("Harald Binder")),
   year         = "2018",
-  url          = "http://bioconductor.org/packages/flowcatchR/, https://github.com/federicomarini/flowcatchR, https://federicomarini.github.io/flowcatchR/",
+  url          = "http://bioconductor.org/packages/flowcatchR/",
   doi          = "10.18129/B9.bioc.flowcatchR",
 
   textVersion  =
