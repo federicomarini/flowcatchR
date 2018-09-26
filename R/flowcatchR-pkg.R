@@ -29,7 +29,7 @@
 #' Harald Binder \email{binderh@@uni-mainz.de}, 2015
 #'
 #' Maintainer: Federico Marini \email{marinif@@uni-mainz.de}
-#' @name flowcatchR
+#' @name flowcatchR-pkg
 #' @docType package
 NULL
 

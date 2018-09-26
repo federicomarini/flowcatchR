@@ -40,7 +40,7 @@ reference:
 - title: The flowcatchR package
   desc: Main functions and data in the `flowcatchR` package
   contents:
-  - '`flowcatchR`'
+  - '`flowcatchR-pkg`'
   - '`MesenteriumSubset`'
   - '`candidate.platelets`'
   - '`shinyFlow`'

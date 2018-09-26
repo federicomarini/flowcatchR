@@ -75,7 +75,7 @@ setClass("KinematicsFeatures",
          contains = "list"
         )
 
-#' KinematicsFeaturesSet
+#' KinematicsFeaturesSet class
 #' 
 #' S4 class for storing information on all kinematics features identified for all trajectories. Single
 #' \code{KinematicsFeatures} objects are the element of the main list
