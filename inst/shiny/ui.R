@@ -73,7 +73,7 @@ shinyUI(
                                      numericInput("trackE2","Epsilon 2 - used for penalty function definition",value=0,min=0,max=10,step=0.1),
                                      numericInput("trackL1","Lambda 1 - used for penalty function definition",value=1,min=0,max=5,step=0.001),
                                      numericInput("trackL2","Lambda 2 - used for penalty function definition",value=1,min=0,max=5,step=0.001),
-                                     selectInput("trackIncludearea","Include area variation in the cost function",choices=c("Yes","No"),selected = "Yes"),
+                                     selectInput("trackIncludearea","Include area variation in the cost function",choices=c("Yes","No"),selected = "No"),
                                      selectInput("trackIncludeintensity","Include intensity variation in the cost function",choices=c("Yes","No"),selected = "Yes")
                         ),
                         mainPanel(
