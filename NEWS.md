@@ -1,3 +1,9 @@
+# flowcatchR 1.20.0
+
+## Bug fixes
+
+* In the `shinyFlow` app, `include.area` now defaults to `FALSE`
+
 # flowcatchR 1.16.0
 
 ## Other notes
