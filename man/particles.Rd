@@ -4,8 +4,12 @@
 \alias{particles}
 \title{Extracts particles from the images of a \code{Frames} object.}
 \usage{
-particles(raw.frames, binary.frames = NULL, channel = NULL,
-  BPPARAM = bpparam())
+particles(
+  raw.frames,
+  binary.frames = NULL,
+  channel = NULL,
+  BPPARAM = bpparam()
+)
 }
 \arguments{
 \item{raw.frames}{A \code{Frames} object with the raw images (mandatory)}

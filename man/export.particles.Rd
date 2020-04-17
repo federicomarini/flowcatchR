@@ -4,8 +4,11 @@
 \alias{export.particles}
 \title{Exports a \code{ParticleSet} object}
 \usage{
-export.particles(particleset, dir = tempdir(),
-  nameStub = "testExport_particles")
+export.particles(
+  particleset,
+  dir = tempdir(),
+  nameStub = "testExport_particles"
+)
 }
 \arguments{
 \item{particleset}{A \code{ParticleSet} object}

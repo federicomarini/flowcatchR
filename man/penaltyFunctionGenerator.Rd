@@ -4,8 +4,12 @@
 \alias{penaltyFunctionGenerator}
 \title{Generate a penalty function}
 \usage{
-penaltyFunctionGenerator(epsilon1 = 0.1, epsilon2 = 2, lambda1 = 1,
-  lambda2 = 1)
+penaltyFunctionGenerator(
+  epsilon1 = 0.1,
+  epsilon2 = 2,
+  lambda1 = 1,
+  lambda2 = 1
+)
 }
 \arguments{
 \item{epsilon1}{A numeric value, to be used in the formula. Jitter for allowing angular displacements}

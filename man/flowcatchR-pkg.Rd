@@ -3,7 +3,6 @@
 \docType{package}
 \name{flowcatchR-pkg}
 \alias{flowcatchR-pkg}
-\alias{flowcatchR-pkg-package}
 \title{flowcatchR: analyzing time-lapse microscopy imaging, from detection to tracking}
 \description{
 A toolset to analyze in vivo microscopy imaging data focused on tracking

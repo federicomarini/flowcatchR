@@ -4,10 +4,20 @@
 \alias{preprocess.Frames}
 \title{Preprocessing function for \code{Frames} objects}
 \usage{
-preprocess.Frames(frames, brush.size = 3, brush.shape = "disc",
-  at.offset = 0.15, at.wwidth = 10, at.wheight = 10, kern.size = 3,
-  kern.shape = "disc", ws.tolerance = 1, ws.radius = 1,
-  displayprocessing = FALSE, ...)
+preprocess.Frames(
+  frames,
+  brush.size = 3,
+  brush.shape = "disc",
+  at.offset = 0.15,
+  at.wwidth = 10,
+  at.wheight = 10,
+  kern.size = 3,
+  kern.shape = "disc",
+  ws.tolerance = 1,
+  ws.radius = 1,
+  displayprocessing = FALSE,
+  ...
+)
 }
 \arguments{
 \item{frames}{A \code{Frames} object}

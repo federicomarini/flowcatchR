@@ -4,8 +4,13 @@
 \alias{kinematics}
 \title{Calculate a set of kinematics parameter from a \code{TrajectorySet} object, or a single parameter, or from a single trajectory (all possible combinations)}
 \usage{
-kinematics(trajectoryset, trajectoryIDs = NULL,
-  acquisitionFrequency = 30, scala = 50, feature = NULL)
+kinematics(
+  trajectoryset,
+  trajectoryIDs = NULL,
+  acquisitionFrequency = 30,
+  scala = 50,
+  feature = NULL
+)
 }
 \arguments{
 \item{trajectoryset}{A \code{TrajectorySet} object}

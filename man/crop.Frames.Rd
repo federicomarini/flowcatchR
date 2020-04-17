@@ -4,8 +4,16 @@
 \alias{crop.Frames}
 \title{Cut borders of a \code{Frames} object}
 \usage{
-crop.Frames(frames, cutLeft = 5, cutRight = 5, cutUp = 5,
-  cutDown = 5, cutAll = 0, testing = FALSE, ...)
+crop.Frames(
+  frames,
+  cutLeft = 5,
+  cutRight = 5,
+  cutUp = 5,
+  cutDown = 5,
+  cutAll = 0,
+  testing = FALSE,
+  ...
+)
 }
 \arguments{
 \item{frames}{An input \code{Frames} object}

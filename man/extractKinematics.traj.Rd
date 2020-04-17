@@ -4,8 +4,12 @@
 \alias{extractKinematics.traj}
 \title{Calculate a set of kinematics parameters from a single trajectory}
 \usage{
-extractKinematics.traj(trajectoryset, trajectoryID,
-  acquisitionFrequency = 30, scala = 50)
+extractKinematics.traj(
+  trajectoryset,
+  trajectoryID,
+  acquisitionFrequency = 30,
+  scala = 50
+)
 }
 \arguments{
 \item{trajectoryset}{A \code{TrajectorySet} object}

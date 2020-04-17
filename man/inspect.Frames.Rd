@@ -4,8 +4,12 @@
 \alias{inspect.Frames}
 \title{Explore the frames of a \code{Frames}}
 \usage{
-inspect.Frames(frames, nframes = NULL, display.method = "browser",
-  verbose = FALSE)
+inspect.Frames(
+  frames,
+  nframes = NULL,
+  display.method = "browser",
+  verbose = FALSE
+)
 }
 \arguments{
 \item{frames}{A \code{Frames} object}

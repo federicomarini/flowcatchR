@@ -7,8 +7,15 @@
 Creates a \code{Frames} object containing raw information, combined with the segmented 
 images and the relative trajectory under analysis}
 \usage{
-add.contours(raw.frames, binary.frames = NULL, trajectoryset = NULL,
-  trajIDs = NULL, mode = "particles", col = NULL, channel = NULL)
+add.contours(
+  raw.frames,
+  binary.frames = NULL,
+  trajectoryset = NULL,
+  trajIDs = NULL,
+  mode = "particles",
+  col = NULL,
+  channel = NULL
+)
 }
 \arguments{
 \item{raw.frames}{A \code{Frames} object with raw images}

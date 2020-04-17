@@ -4,8 +4,16 @@
 \alias{snap}
 \title{Snap the features of the closest particle identified}
 \usage{
-snap(raw.frames, binary.frames, particleset, trajectoryset, frameID = 1,
-  infocol = "yellow", infocex = 1, showVelocity = FALSE)
+snap(
+  raw.frames,
+  binary.frames,
+  particleset,
+  trajectoryset,
+  frameID = 1,
+  infocol = "yellow",
+  infocex = 1,
+  showVelocity = FALSE
+)
 }
 \arguments{
 \item{raw.frames}{A \code{Frames} object with the raw frames data}

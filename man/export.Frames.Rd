@@ -4,8 +4,13 @@
 \alias{export.Frames}
 \title{Exports a \code{Frames} object}
 \usage{
-export.Frames(frames, dir = tempdir(), nameStub = "testExport",
-  createGif = FALSE, removeAfterCreatingGif = TRUE)
+export.Frames(
+  frames,
+  dir = tempdir(),
+  nameStub = "testExport",
+  createGif = FALSE,
+  removeAfterCreatingGif = TRUE
+)
 }
 \arguments{
 \item{frames}{A \code{Frames} object}
