@@ -3,7 +3,6 @@
 #' Display conveniently a \code{Frames} object
 #' 
 #' @param object A \code{Frames} object
-#' @param ... Arguments to be passed to methods
 #'  
 #' @method print Frames
 #' @return This returns an invisible \code{NULL}.
@@ -24,7 +23,6 @@ setMethod("show",
 #' Display conveniently a \code{ParticleSet} object
 #'  
 #' @param object A \code{ParticleSet} object
-#' @param ... Arguments to be passed to methods
 #' 
 #' @method print ParticleSet
 #' 
@@ -52,7 +50,6 @@ setMethod("show",
 #' Display conveniently a \code{LinkedParticleSet} object
 #'  
 #' @param object A \code{LinkedParticleSet} object
-#' @param ... Arguments to be passed to methods
 #' 
 #' @method print LinkedParticleSet
 #' 
@@ -86,7 +83,6 @@ setMethod("show",
 #' Display conveniently a \code{TrajectorySet} object
 #'  
 #' @param object A \code{TrajectorySet} object
-#' @param ... Arguments to be passed to methods
 #' 
 #' @method print TrajectorySet
 #' 
@@ -119,7 +115,6 @@ setMethod("show",
 #' Displaying conveniently a \code{KinematicsFeatures} object
 #'  
 #' @param object A \code{KinematicsFeatures} object
-#' @param ... Arguments to be passed to methods
 #' 
 #' @method print KinematicsFeatures
 #' 
@@ -153,7 +148,6 @@ setMethod("show",
 #' Display conveniently a \code{KinematicsFeatureSet} object
 #'  
 #' @param object A \code{KinematicsFeatureSet} object
-#' @param ... Arguments to be passed to methods
 #' 
 #' 
 #' @examples 

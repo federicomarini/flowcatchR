@@ -8,8 +8,6 @@
 }
 \arguments{
 \item{object}{A \code{TrajectorySet} object}
-
-\item{...}{Arguments to be passed to methods}
 }
 \value{
 This returns an invisible \code{NULL}.
