@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Links a <code>ParticleSet</code> object — link.particles • flowcatchR</title>
+<title>Links a ParticleSet object — link.particles • flowcatchR</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Links a <code>ParticleSet</code> object — link.particles" />
+<meta property="og:title" content="Links a ParticleSet object — link.particles" />
 <meta property="og:description" content="Performs linking of the particles by tracking them through the frames" />
 
 
@@ -133,20 +133,20 @@
     <p>Performs linking of the particles by tracking them through the frames</p>
     </div>
 
-    <pre class="usage"><span class='fu'>link.particles</span>(
-  <span class='no'>particleset</span>,
-  <span class='no'>L</span>,
-  <span class='kw'>R</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>epsilon1</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
-  <span class='kw'>epsilon2</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>lambda1</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>lambda2</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>penaltyFunction</span> <span class='kw'>=</span> <span class='fu'><a href='penaltyFunctionGenerator.html'>penaltyFunctionGenerator</a></span>(),
-  <span class='kw'>verboseOutput</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>prog</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>include.intensity</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>include.area</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>link.particles</span><span class='op'>(</span>
+  <span class='va'>particleset</span>,
+  <span class='va'>L</span>,
+  R <span class='op'>=</span> <span class='fl'>2</span>,
+  epsilon1 <span class='op'>=</span> <span class='fl'>0.1</span>,
+  epsilon2 <span class='op'>=</span> <span class='fl'>2</span>,
+  lambda1 <span class='op'>=</span> <span class='fl'>1</span>,
+  lambda2 <span class='op'>=</span> <span class='fl'>1</span>,
+  penaltyFunction <span class='op'>=</span> <span class='fu'><a href='penaltyFunctionGenerator.html'>penaltyFunctionGenerator</a></span><span class='op'>(</span><span class='op'>)</span>,
+  verboseOutput <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  prog <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  include.intensity <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  include.area <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -214,8 +214,10 @@ URL: http://www.ncbi.nlm.nih.gov/pubmed/16043363</p>
     <p>Federico Marini, <a href='mailto:marinif@uni-mainz.de'>marinif@uni-mainz.de</a>, 2014</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"candidate.platelets"</span>)
-<span class='no'>tracked.platelets</span> <span class='kw'>&lt;-</span> <span class='fu'>link.particles</span>(<span class='no'>candidate.platelets</span>, <span class='kw'>L</span><span class='kw'>=</span> <span class='fl'>40</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"candidate.platelets"</span><span class='op'>)</span>
+<span class='va'>tracked.platelets</span> <span class='op'>&lt;-</span> <span class='fu'>link.particles</span><span class='op'>(</span><span class='va'>candidate.platelets</span>, L<span class='op'>=</span> <span class='fl'>40</span><span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -231,7 +233,7 @@ URL: http://www.ncbi.nlm.nih.gov/pubmed/16043363</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

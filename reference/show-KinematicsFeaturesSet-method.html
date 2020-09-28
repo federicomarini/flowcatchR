@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Display conveniently a <code>KinematicsFeatureSet</code> object — show,KinematicsFeaturesSet-method • flowcatchR</title>
+<title>Display conveniently a KinematicsFeatureSet object — show,KinematicsFeaturesSet-method • flowcatchR</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Display conveniently a <code>KinematicsFeatureSet</code> object — show,KinematicsFeaturesSet-method" />
+<meta property="og:title" content="Display conveniently a KinematicsFeatureSet object — show,KinematicsFeaturesSet-method" />
 <meta property="og:description" content="Display conveniently a KinematicsFeatureSet object" />
 
 
@@ -134,7 +134,7 @@
     </div>
 
     <pre class="usage"><span class='co'># S4 method for KinematicsFeaturesSet</span>
-<span class='fu'>show</span>(<span class='no'>object</span>)</pre>
+<span class='fu'>show</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -153,9 +153,12 @@
     <p>Federico Marini, <a href='mailto:marinif@uni-mainz.de'>marinif@uni-mainz.de</a>, 2014</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"candidate.platelets"</span>)
-<span class='no'>platelets.trajectories</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectories.html'>trajectories</a></span>(<span class='no'>candidate.platelets</span>)</div><div class='output co'>#&gt; Input ParticleSet is not a LinkedParticleSet.
-#&gt; Performing linking first with some set of default parameters - you might want to change them according to your scenario...</div><div class='input'><span class='no'>alltrajs.features</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='kinematics.html'>kinematics</a></span>(<span class='no'>platelets.trajectories</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: The trajectory with ID 17 had 3 or less points, no features were computed.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The trajectory with ID 19 had 3 or less points, no features were computed.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The trajectory with ID 21 had 3 or less points, no features were computed.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The trajectory with ID 25 had 3 or less points, no features were computed.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>alltrajs.features</span>)</div><div class='output co'>#&gt; An object of the KinematicsFeaturesSet class. 
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"candidate.platelets"</span><span class='op'>)</span>
+<span class='va'>platelets.trajectories</span> <span class='op'>&lt;-</span> <span class='fu'><a href='trajectories.html'>trajectories</a></span><span class='op'>(</span><span class='va'>candidate.platelets</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Input ParticleSet is not a LinkedParticleSet.
+#&gt; Performing linking first with some set of default parameters - you might want to change them according to your scenario...</div><div class='input'><span class='va'>alltrajs.features</span> <span class='op'>&lt;-</span> <span class='fu'><a href='kinematics.html'>kinematics</a></span><span class='op'>(</span><span class='va'>platelets.trajectories</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: The trajectory with ID 17 had 3 or less points, no features were computed.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The trajectory with ID 19 had 3 or less points, no features were computed.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The trajectory with ID 21 had 3 or less points, no features were computed.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The trajectory with ID 25 had 3 or less points, no features were computed.</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>alltrajs.features</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; An object of the KinematicsFeaturesSet class. 
 #&gt; 
 #&gt; KinematicsFeaturesSet composed of 25  KinematicsFeatures objects
 #&gt; 
@@ -193,7 +196,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

@@ -135,16 +135,16 @@ a clickable feedback on one of the frames." />
 a clickable feedback on one of the frames.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>snap</span>(
-  <span class='no'>raw.frames</span>,
-  <span class='no'>binary.frames</span>,
-  <span class='no'>particleset</span>,
-  <span class='no'>trajectoryset</span>,
-  <span class='kw'>frameID</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>infocol</span> <span class='kw'>=</span> <span class='st'>"yellow"</span>,
-  <span class='kw'>infocex</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>showVelocity</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>snap</span><span class='op'>(</span>
+  <span class='va'>raw.frames</span>,
+  <span class='va'>binary.frames</span>,
+  <span class='va'>particleset</span>,
+  <span class='va'>trajectoryset</span>,
+  frameID <span class='op'>=</span> <span class='fl'>1</span>,
+  infocol <span class='op'>=</span> <span class='st'>"yellow"</span>,
+  infocex <span class='op'>=</span> <span class='fl'>1</span>,
+  showVelocity <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -196,11 +196,14 @@ clicked location</p>
     <p>Federico Marini, <a href='mailto:marinif@uni-mainz.de'>marinif@uni-mainz.de</a>, 2015</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>MesenteriumSubset</span>)
-<span class='no'>binary.frames</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='preprocess.Frames.html'>preprocess.Frames</a></span>(<span class='fu'><a href='channel.Frames.html'>channel.Frames</a></span>(<span class='no'>MesenteriumSubset</span>,<span class='st'>"red"</span>))
-<span class='no'>particleset</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='particles.html'>particles</a></span>(<span class='no'>MesenteriumSubset</span>,<span class='no'>binary.frames</span>,<span class='st'>"red"</span>)</div><div class='output co'>#&gt; Computing features in parallel...
-#&gt; Done!</div><div class='input'><span class='no'>trajectoryset</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectories.html'>trajectories</a></span>(<span class='no'>particleset</span>)</div><div class='output co'>#&gt; Input ParticleSet is not a LinkedParticleSet.
-#&gt; Performing linking first with some set of default parameters - you might want to change them according to your scenario...</div><div class='input'><span class='fu'>snap</span>(<span class='no'>MesenteriumSubset</span>,<span class='no'>binary.frames</span>,<span class='no'>particleset</span>,<span class='no'>trajectoryset</span>,<span class='kw'>frameID</span><span class='kw'>=</span><span class='fl'>1</span>)</div><div class='output co'>#&gt; <span class='error'>Error in `$&lt;-.data.frame`(`*tmp*`, "distToThis", value = numeric(0)): replacement has 0 rows, data has 13</span></div><div class='img'><img src='snap-1.png' alt='' width='700' height='433' /></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>MesenteriumSubset</span><span class='op'>)</span>
+<span class='va'>binary.frames</span> <span class='op'>&lt;-</span> <span class='fu'><a href='preprocess.Frames.html'>preprocess.Frames</a></span><span class='op'>(</span><span class='fu'><a href='channel.Frames.html'>channel.Frames</a></span><span class='op'>(</span><span class='va'>MesenteriumSubset</span>,<span class='st'>"red"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>particleset</span> <span class='op'>&lt;-</span> <span class='fu'><a href='particles.html'>particles</a></span><span class='op'>(</span><span class='va'>MesenteriumSubset</span>,<span class='va'>binary.frames</span>,<span class='st'>"red"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Computing features in parallel...
+#&gt; Done!</div><div class='input'><span class='va'>trajectoryset</span> <span class='op'>&lt;-</span> <span class='fu'><a href='trajectories.html'>trajectories</a></span><span class='op'>(</span><span class='va'>particleset</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Input ParticleSet is not a LinkedParticleSet.
+#&gt; Performing linking first with some set of default parameters - you might want to change them according to your scenario...</div><div class='input'><span class='fu'>snap</span><span class='op'>(</span><span class='va'>MesenteriumSubset</span>,<span class='va'>binary.frames</span>,<span class='va'>particleset</span>,<span class='va'>trajectoryset</span>,frameID<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in `$&lt;-.data.frame`(`*tmp*`, "distToThis", value = numeric(0)): replacement has 0 rows, data has 13</span></div><div class='img'><img src='snap-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -217,7 +220,7 @@ clicked location</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

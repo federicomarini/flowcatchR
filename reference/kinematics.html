@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate a set of kinematics parameter from a <code>TrajectorySet</code> object, or a single parameter, or from a single trajectory (all possible combinations) — kinematics • flowcatchR</title>
+<title>Calculate a set of kinematics parameter from a TrajectorySet object, or a single parameter, or from a single trajectory (all possible combinations) — kinematics • flowcatchR</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Calculate a set of kinematics parameter from a <code>TrajectorySet</code> object, or a single parameter, or from a single trajectory (all possible combinations) — kinematics" />
+<meta property="og:title" content="Calculate a set of kinematics parameter from a TrajectorySet object, or a single parameter, or from a single trajectory (all possible combinations) — kinematics" />
 <meta property="og:description" content="The computed set of parameters include delta.x, delta.t and delta.v
 (displacements and instantaneous velocity), totalTime, totalDistance,
 distStartToEnd, curvilinearVelocity, straightLineVelocity and
@@ -145,13 +145,13 @@ performed for that trajectory alone. If a parameter is specified, only that
 parameter is reported, either for one or all trajectories</p>
     </div>
 
-    <pre class="usage"><span class='fu'>kinematics</span>(
-  <span class='no'>trajectoryset</span>,
-  <span class='kw'>trajectoryIDs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>acquisitionFrequency</span> <span class='kw'>=</span> <span class='fl'>30</span>,
-  <span class='kw'>scala</span> <span class='kw'>=</span> <span class='fl'>50</span>,
-  <span class='kw'>feature</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>kinematics</span><span class='op'>(</span>
+  <span class='va'>trajectoryset</span>,
+  trajectoryIDs <span class='op'>=</span> <span class='cn'>NULL</span>,
+  acquisitionFrequency <span class='op'>=</span> <span class='fl'>30</span>,
+  scala <span class='op'>=</span> <span class='fl'>50</span>,
+  feature <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -189,13 +189,16 @@ corresponds</p></td>
     <p>Federico Marini, <a href='mailto:marinif@uni-mainz.de'>marinif@uni-mainz.de</a>, 2014</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"candidate.platelets"</span>)
-<span class='no'>platelets.trajectories</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectories.html'>trajectories</a></span>(<span class='no'>candidate.platelets</span>)</div><div class='output co'>#&gt; Input ParticleSet is not a LinkedParticleSet.
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"candidate.platelets"</span><span class='op'>)</span>
+<span class='va'>platelets.trajectories</span> <span class='op'>&lt;-</span> <span class='fu'><a href='trajectories.html'>trajectories</a></span><span class='op'>(</span><span class='va'>candidate.platelets</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Input ParticleSet is not a LinkedParticleSet.
 #&gt; Performing linking first with some set of default parameters - you might want to change them according to your scenario...</div><div class='input'><span class='co'># for all trajectories, all features</span>
-<span class='no'>alltrajs.features</span> <span class='kw'>&lt;-</span> <span class='fu'>kinematics</span>(<span class='no'>platelets.trajectories</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: The trajectory with ID 17 had 3 or less points, no features were computed.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The trajectory with ID 19 had 3 or less points, no features were computed.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The trajectory with ID 21 had 3 or less points, no features were computed.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The trajectory with ID 25 had 3 or less points, no features were computed.</span></div><div class='input'><span class='co'># for one trajectory, all features</span>
-<span class='no'>traj11features</span> <span class='kw'>&lt;-</span> <span class='fu'>kinematics</span>(<span class='no'>platelets.trajectories</span>,<span class='kw'>trajectoryIDs</span> <span class='kw'>=</span> <span class='fl'>11</span>)
+<span class='va'>alltrajs.features</span> <span class='op'>&lt;-</span> <span class='fu'>kinematics</span><span class='op'>(</span><span class='va'>platelets.trajectories</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: The trajectory with ID 17 had 3 or less points, no features were computed.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The trajectory with ID 19 had 3 or less points, no features were computed.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The trajectory with ID 21 had 3 or less points, no features were computed.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The trajectory with ID 25 had 3 or less points, no features were computed.</span></div><div class='input'><span class='co'># for one trajectory, all features</span>
+<span class='va'>traj11features</span> <span class='op'>&lt;-</span> <span class='fu'>kinematics</span><span class='op'>(</span><span class='va'>platelets.trajectories</span>,trajectoryIDs <span class='op'>=</span> <span class='fl'>11</span><span class='op'>)</span>
 <span class='co'># for all trajectories, one feature</span>
-<span class='no'>alltrajs.curvVel</span> <span class='kw'>&lt;-</span> <span class='fu'>kinematics</span>(<span class='no'>platelets.trajectories</span>,<span class='kw'>feature</span> <span class='kw'>=</span> <span class='st'>"curvilinearVelocity"</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: The trajectory with ID 17 had 3 or less points, no features were computed.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The trajectory with ID 19 had 3 or less points, no features were computed.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The trajectory with ID 21 had 3 or less points, no features were computed.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The trajectory with ID 25 had 3 or less points, no features were computed.</span></div><div class='input'>  
+<span class='va'>alltrajs.curvVel</span> <span class='op'>&lt;-</span> <span class='fu'>kinematics</span><span class='op'>(</span><span class='va'>platelets.trajectories</span>,feature <span class='op'>=</span> <span class='st'>"curvilinearVelocity"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: The trajectory with ID 17 had 3 or less points, no features were computed.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The trajectory with ID 19 had 3 or less points, no features were computed.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The trajectory with ID 21 had 3 or less points, no features were computed.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: The trajectory with ID 25 had 3 or less points, no features were computed.</span></div><div class='input'>  
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -212,7 +215,7 @@ corresponds</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

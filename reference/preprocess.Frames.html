@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Preprocessing function for <code>Frames</code> objects — preprocess.Frames • flowcatchR</title>
+<title>Preprocessing function for Frames objects — preprocess.Frames • flowcatchR</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Preprocessing function for <code>Frames</code> objects — preprocess.Frames" />
+<meta property="og:title" content="Preprocessing function for Frames objects — preprocess.Frames" />
 <meta property="og:description" content="Frames objects are processed according to the chosen set of parameters. Many of them refer directly to 
 existing EBImage functions, please see the corresponding help for additional information" />
 
@@ -135,20 +135,20 @@ existing EBImage functions, please see the corresponding help for additional inf
 existing <code>EBImage</code> functions, please see the corresponding help for additional information</p>
     </div>
 
-    <pre class="usage"><span class='fu'>preprocess.Frames</span>(
-  <span class='no'>frames</span>,
-  <span class='kw'>brush.size</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>brush.shape</span> <span class='kw'>=</span> <span class='st'>"disc"</span>,
-  <span class='kw'>at.offset</span> <span class='kw'>=</span> <span class='fl'>0.15</span>,
-  <span class='kw'>at.wwidth</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>at.wheight</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>kern.size</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>kern.shape</span> <span class='kw'>=</span> <span class='st'>"disc"</span>,
-  <span class='kw'>ws.tolerance</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>ws.radius</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>displayprocessing</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>preprocess.Frames</span><span class='op'>(</span>
+  <span class='va'>frames</span>,
+  brush.size <span class='op'>=</span> <span class='fl'>3</span>,
+  brush.shape <span class='op'>=</span> <span class='st'>"disc"</span>,
+  at.offset <span class='op'>=</span> <span class='fl'>0.15</span>,
+  at.wwidth <span class='op'>=</span> <span class='fl'>10</span>,
+  at.wheight <span class='op'>=</span> <span class='fl'>10</span>,
+  kern.size <span class='op'>=</span> <span class='fl'>3</span>,
+  kern.shape <span class='op'>=</span> <span class='st'>"disc"</span>,
+  ws.tolerance <span class='op'>=</span> <span class='fl'>1</span>,
+  ws.radius <span class='op'>=</span> <span class='fl'>1</span>,
+  displayprocessing <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -216,8 +216,9 @@ alternative thresholding method, see also <code>otsu</code> in the <code>EBImage
     <p>Federico Marini, <a href='mailto:marinif@uni-mainz.de'>marinif@uni-mainz.de</a>, 2014</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"MesenteriumSubset"</span>)
-<span class='fu'>preprocess.Frames</span>(<span class='fu'><a href='channel.Frames.html'>channel.Frames</a></span>(<span class='no'>MesenteriumSubset</span>,<span class='st'>"red"</span>))</div><div class='output co'>#&gt; Frames 
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"MesenteriumSubset"</span><span class='op'>)</span>
+<span class='fu'>preprocess.Frames</span><span class='op'>(</span><span class='fu'><a href='channel.Frames.html'>channel.Frames</a></span><span class='op'>(</span><span class='va'>MesenteriumSubset</span>,<span class='st'>"red"</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Frames 
 #&gt;   colorMode    : Grayscale 
 #&gt;   storage.mode : integer 
 #&gt;   dim          : 271 131 20 
@@ -249,7 +250,7 @@ alternative thresholding method, see also <code>otsu</code> in the <code>EBImage
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

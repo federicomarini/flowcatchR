@@ -139,7 +139,7 @@ object that contains as additional column the trajectory ID that the particular
 particle was assigned to. Used also by other routines, such as <code><a href='snap.html'>snap</a></code></p>
     </div>
 
-    <pre class="usage"><span class='fu'>matchTrajToParticles</span>(<span class='no'>particleset</span>, <span class='no'>trajectoryset</span>)</pre>
+    <pre class="usage"><span class='fu'>matchTrajToParticles</span><span class='op'>(</span><span class='va'>particleset</span>, <span class='va'>trajectoryset</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,9 +163,11 @@ IDs</p>
     <p>Federico Marini, <a href='mailto:marinif@uni-mainz.de'>marinif@uni-mainz.de</a>, 2015</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>candidate.platelets</span>)
-<span class='no'>trajs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='trajectories.html'>trajectories</a></span>(<span class='no'>candidate.platelets</span>)</div><div class='output co'>#&gt; Input ParticleSet is not a LinkedParticleSet.
-#&gt; Performing linking first with some set of default parameters - you might want to change them according to your scenario...</div><div class='input'><span class='fu'>matchTrajToParticles</span>(<span class='no'>candidate.platelets</span>, <span class='no'>trajs</span>)</div><div class='output co'>#&gt; An object of the ParticleSet class. 
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>candidate.platelets</span><span class='op'>)</span>
+<span class='va'>trajs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='trajectories.html'>trajectories</a></span><span class='op'>(</span><span class='va'>candidate.platelets</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Input ParticleSet is not a LinkedParticleSet.
+#&gt; Performing linking first with some set of default parameters - you might want to change them according to your scenario...</div><div class='input'><span class='fu'>matchTrajToParticles</span><span class='op'>(</span><span class='va'>candidate.platelets</span>, <span class='va'>trajs</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; An object of the ParticleSet class. 
 #&gt; 
 #&gt; Set of particles for 20 images
 #&gt; 
@@ -200,7 +202,7 @@ IDs</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>

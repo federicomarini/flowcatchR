@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Exports a <code>ParticleSet</code> object — export.particles • flowcatchR</title>
+<title>Exports a ParticleSet object — export.particles • flowcatchR</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Exports a <code>ParticleSet</code> object — export.particles" />
+<meta property="og:title" content="Exports a ParticleSet object — export.particles" />
 <meta property="og:description" content="Writes the particles contained in the particles data frame slot of the ParticleSet object elements.
 A track of the provenience of the particles is stored as a comment line above the header" />
 
@@ -135,11 +135,11 @@ A track of the provenience of the particles is stored as a comment line above th
 A track of the provenience of the particles is stored as a comment line above the header</p>
     </div>
 
-    <pre class="usage"><span class='fu'>export.particles</span>(
-  <span class='no'>particleset</span>,
-  <span class='kw'>dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span>(),
-  <span class='kw'>nameStub</span> <span class='kw'>=</span> <span class='st'>"testExport_particles"</span>
-)</pre>
+    <pre class="usage"><span class='fu'>export.particles</span><span class='op'>(</span>
+  <span class='va'>particleset</span>,
+  dir <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span>,
+  nameStub <span class='op'>=</span> <span class='st'>"testExport_particles"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -166,8 +166,10 @@ A track of the provenience of the particles is stored as a comment line above th
     <p>Federico Marini, <a href='mailto:marinif@uni-mainz.de'>marinif@uni-mainz.de</a>, 2014</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='st'>"candidate.platelets"</span>)
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) <span class='fu'>export.particles</span>(<span class='no'>candidate.platelets</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"candidate.platelets"</span><span class='op'>)</span>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='fu'>export.particles</span><span class='op'>(</span><span class='va'>candidate.platelets</span><span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -183,7 +185,7 @@ A track of the provenience of the particles is stored as a comment line above th
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
 </div>
 
       </footer>
