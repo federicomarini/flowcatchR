@@ -1,6 +1,6 @@
 ---
 title: > 
-  `r Biocpkg("flowcatchR")`: A framework for tracking and analyzing flowing 
+  `r BiocStyle::Biocpkg("flowcatchR")`: A framework for tracking and analyzing flowing 
   blood cells in time lapse microscopy images
 author:
 - name: Federico Marini
@@ -15,8 +15,8 @@ author:
 date: "`r BiocStyle::doc_date()`"
 package: "`r BiocStyle::pkg_ver('flowcatchR')`"
 abstract: >
-  `r Biocpkg("flowcatchR")` is a set of tools to analyze in vivo microscopy 
-  imaging data, focused on tracking flowing blood cells. `r Biocpkg("flowcatchR")` 
+  `r BiocStyle::Biocpkg("flowcatchR")` is a set of tools to analyze in vivo microscopy 
+  imaging data, focused on tracking flowing blood cells. `r BiocStyle::Biocpkg("flowcatchR")` 
   guides throughout all the steps of bioimage processing, from segmentation to 
   calculation of features, filtering out particles not of interest, providing 
   also a set of utilities to help checking the quality of the performed 
@@ -28,7 +28,7 @@ abstract: >
   this package to be potentially applied to a variety of assays, covering a wide
   range of applications founded on time-lapse microscopy.
 output: 
-  BiocStyle::html_document:
+  html_document:
     toc_float: true
 bibliography: flowcatchR.bib
 vignette: >
@@ -57,6 +57,10 @@ knitr::opts_chunk$set(
 #                warning=FALSE)
 ```
 
+```{r}
+library(BiocStyle)
+```
+
 
 # Introduction {#intro}
 
@@ -65,6 +69,8 @@ This document offers an introduction and overview of the R/Bioconductor [@Rlang2
 ## Why `r Biocpkg("flowcatchR")`?
 
 \subsection{Why `r Biocpkg("flowcatchR")`?}
+
+
 
 `r Biocpkg("flowcatchR")` builds upon functionalities provided by the `r Biocpkg("EBImage")` package [@Pau2010], and extends them in order to analyze time-lapse microscopy images. Here we list some of the unique characteristics of the datasets `r Biocpkg("flowcatchR")` is designed for:
 
