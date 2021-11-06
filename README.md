@@ -57,6 +57,10 @@ browseVignettes("flowcatchR")
 ### Contact
 For additional details regarding the functions of **flowcatchR**, please consult the documentation or write an email to marinif@uni-mainz.de. 
 
+### Code of Conduct
+
+Please note that the flowcatchR project is released with a [Contributor Code of Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
+
 ### Bug reports/Issues/New features
 
 Please use https://github.com/federicomarini/flowcatchR/issues for reporting bugs, issues or for suggesting new features to be implemented.
