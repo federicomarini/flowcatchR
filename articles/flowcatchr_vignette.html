@@ -20,6 +20,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -32,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">flowcatchR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.23.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.29.0</span>
       </span>
     </div>
 
@@ -66,7 +68,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/federicomarini/flowcatchR">
+  <a href="https://github.com/federicomarini/flowcatchR" class="external-link">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -81,24 +83,24 @@
 
       
 
-      </header><script src="flowcatchr_vignette_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="flowcatchr_vignette_files/htmlwidgets-1.5.1/htmlwidgets.js"></script><script src="flowcatchr_vignette_files/plotly-binding-4.9.2.1/plotly.js"></script><script src="flowcatchr_vignette_files/typedarray-0.1/typedarray.min.js"></script><script src="flowcatchr_vignette_files/jquery-1.11.3/jquery.min.js"></script><link href="flowcatchr_vignette_files/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet">
-<script src="flowcatchr_vignette_files/crosstalk-1.1.0.1/js/crosstalk.min.js"></script><link href="flowcatchr_vignette_files/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="flowcatchr_vignette_files/plotly-main-1.52.2/plotly-latest.min.js"></script><div class="row">
+      </header><script src="flowcatchr_vignette_files/accessible-code-block-0.0.1/empty-anchor.js"></script><script src="flowcatchr_vignette_files/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="flowcatchr_vignette_files/plotly-binding-4.10.0/plotly.js"></script><script src="flowcatchr_vignette_files/typedarray-0.1/typedarray.min.js"></script><script src="flowcatchr_vignette_files/jquery-3.5.1/jquery.min.js"></script><link href="flowcatchr_vignette_files/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="flowcatchr_vignette_files/crosstalk-1.2.0/js/crosstalk.min.js"></script><link href="flowcatchr_vignette_files/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="flowcatchr_vignette_files/plotly-main-2.5.1/plotly-latest.min.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip></h1>
-<p><em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em>: A framework for tracking and analyzing flowing blood cells in time lapse microscopy images</p>
-                        <h4 class="author">Federico Marini</h4>
+<p><em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em>: A framework for tracking and analyzing flowing blood cells in time lapse microscopy images</p>
+                        <h4 data-toc-skip class="author">Federico Marini</h4>
             <address class="author_afil">
       Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI), Mainz<br><a class="author_email" href="mailto:#"></a><a href="mailto:marinif@uni-mainz.de" class="email">marinif@uni-mainz.de</a>
       </address>
-                              <h4 class="author">Johanna Mazur</h4>
+                              <h4 data-toc-skip class="author">Johanna Mazur</h4>
             <address class="author_afil">
-      Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI), Mainz<br><h4 class="author">Harald Binder</h4>
+      Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI), Mainz<br><h4 data-toc-skip class="author">Harald Binder</h4>
             <address class="author_afil">
-      Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI), Mainz<br><h4 class="date">28 September 2020</h4>
+      Institute of Medical Biostatistics, Epidemiology and Informatics (IMBEI), Mainz<br><h4 data-toc-skip class="date">6 November 2021</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/federicomarini/flowcatchR/blob/master/vignettes/flowcatchr_vignette.Rmd"><code>vignettes/flowcatchr_vignette.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/federicomarini/flowcatchR/blob/HEAD/vignettes/flowcatchr_vignette.Rmd" class="external-link"><code>vignettes/flowcatchr_vignette.Rmd</code></a></small>
       <div class="hidden name"><code>flowcatchr_vignette.Rmd</code></div>
 
     </address>
@@ -108,21 +110,21 @@
     
         <div class="abstract">
       <p class="abstract">Abstract</p>
-      <p><em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em> is a set of tools to analyze in vivo microscopy imaging data, focused on tracking flowing blood cells. <em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em> guides throughout all the steps of bioimage processing, from segmentation to calculation of features, filtering out particles not of interest, providing also a set of utilities to help checking the quality of the performed operations. The main novel contribution investigates the issue of tracking flowing cells such as the ones in blood vessels, to categorize the particles in flowing, rolling, and adherent by providing a comprehensive analysis of the identified trajectories. The extracted information is then applied in the study of phenomena such as hemostasis and thrombosis development. We expect this package to be potentially applied to a variety of assays, covering a wide range of applications founded on time-lapse microscopy.</p>
+      <p><em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em> is a set of tools to analyze in vivo microscopy imaging data, focused on tracking flowing blood cells. <em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em> guides throughout all the steps of bioimage processing, from segmentation to calculation of features, filtering out particles not of interest, providing also a set of utilities to help checking the quality of the performed operations. The main novel contribution investigates the issue of tracking flowing cells such as the ones in blood vessels, to categorize the particles in flowing, rolling, and adherent by providing a comprehensive analysis of the identified trajectories. The extracted information is then applied in the study of phenomena such as hemostasis and thrombosis development. We expect this package to be potentially applied to a variety of assays, covering a wide range of applications founded on time-lapse microscopy.</p>
     </div>
     
-<p><strong>Compiled date</strong>: 2020-09-28</p>
+<p><strong>Compiled date</strong>: 2021-11-06</p>
 <p><strong>Last edited</strong>: 2018-01-14</p>
 <p><strong>License</strong>: BSD_3_clause + file LICENSE</p>
-<div id="intro" class="section level1">
-<h1 class="hasAnchor">
-<a href="#intro" class="anchor"></a>Introduction</h1>
-<p>This document offers an introduction and overview of the R/Bioconductor <span class="citation">(R Core Team 2014, @Gentleman2004)</span> package <em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em>, which provides a flexible and comprehensive set of tools to detect and track flowing blood cells in time-lapse microscopy.</p>
-<div id="why-flowcatchr" class="section level2">
-<h2 class="hasAnchor">
-<a href="#why-flowcatchr" class="anchor"></a>Why <em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em>?</h2>
+<div class="section level1">
+<h1 id="intro">Introduction<a class="anchor" aria-label="anchor" href="#intro"></a>
+</h1>
+<p>This document offers an introduction and overview of the R/Bioconductor <span class="citation">(R Core Team 2014, @Gentleman2004)</span> package <em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em>, which provides a flexible and comprehensive set of tools to detect and track flowing blood cells in time-lapse microscopy.</p>
+<div class="section level2">
+<h2 id="why-flowcatchr">Why <em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em>?<a class="anchor" aria-label="anchor" href="#why-flowcatchr"></a>
+</h2>
 
-<p><em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em> builds upon functionalities provided by the <em><a href="https://bioconductor.org/packages/3.12/EBImage">EBImage</a></em> package <span class="citation">(Pau et al. 2010)</span>, and extends them in order to analyze time-lapse microscopy images. Here we list some of the unique characteristics of the datasets <em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em> is designed for:</p>
+<p><em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em> builds upon functionalities provided by the <em><a href="https://bioconductor.org/packages/3.15/EBImage" class="external-link">EBImage</a></em> package <span class="citation">(Pau et al. 2010)</span>, and extends them in order to analyze time-lapse microscopy images. Here we list some of the unique characteristics of the datasets <em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em> is designed for:</p>
 <ul>
 <li>The images come from intravital microscopy experiments. This means that the Signal-to-Noise Ratio (SNR) is not optimal, and, very importantly, there are potential major movements of the living specimen that can be confounded with the true movements of the particles of interest <span class="citation">(Meijering and Smal 2008)</span>
 </li>
@@ -130,7 +132,7 @@
 <li>The acquisition frame rate is a compromise between allowing the fluorescent cells to be detected and detecting the movements properly</li>
 <li>Cells can flow, temporarily adhere to the endothelial layer and/or be permanently adherent. Therefore, all movement modalities should be detected correctly throughout the entire acquisition. Cells can also cluster together and form (temporary) conglomerates</li>
 </ul>
-<p>Essential features <em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em> delivers to the user are:</p>
+<p>Essential features <em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em> delivers to the user are:</p>
 <ul>
 <li>A simple and flexible, yet complete framework to analyze flowing blood cells (and more generally time-lapse) image sets, with a system of S4 classes such as <code>Frames</code>, <code>ParticleSet</code>, and <code>TrajectorySet</code> constituting the backbone of the procedures</li>
 <li>Techniques for aiding the detection of objects in the segmentation step</li>
@@ -139,313 +141,312 @@
 </ul>
 <p>This guide includes a brief overview of the entire processing flow, from importing the raw images to the analysis of kinematic parameters derived from the identified trajectories. An example dataset will be used to illustrate the available features, in order to track blood platelets in consecutive frames derived from an intravital microscopy acquisition (also available in the package). All steps will be dissected to explore available parameters and options.</p>
 </div>
-<div id="purpose-of-this-document" class="section level2">
-<h2 class="hasAnchor">
-<a href="#purpose-of-this-document" class="anchor"></a>Purpose of this document</h2>
+<div class="section level2">
+<h2 id="purpose-of-this-document">Purpose of this document<a class="anchor" aria-label="anchor" href="#purpose-of-this-document"></a>
+</h2>
 <p>This vignette includes a brief overview of the entire processing flow, from importing the raw images to the analysis of kinematic parameters derived from the identified trajectories. An example dataset will be used to illustrate the available features, in order to track blood platelets in consecutive frames derived from an intravital microscopy acquisition (also available in the package). All steps will be dissected to explore available parameters and options.</p>
 </div>
 </div>
-<div id="getting-started" class="section level1">
-<h1 class="hasAnchor">
-<a href="#getting-started" class="anchor"></a>Getting started</h1>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p><em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em> is an R package distributed as part of the Bioconductor project. To install <em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em>, please start R and type:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
-<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"flowcatchR"</span><span class="op">)</span></pre></div>
-<p>In case you might prefer to install the latest development version, this can be done with these two lines below:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span> <span class="co"># if needed</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"federicomarini/flowcatchR"</span><span class="op">)</span></pre></div>
-<p>Installation issues should be reported to the Bioconductor support site (<a href="http://support.bioconductor.org/" class="uri">http://support.bioconductor.org/</a>).</p>
-</div>
-<div id="getting-help" class="section level2">
-<h2 class="hasAnchor">
-<a href="#getting-help" class="anchor"></a>Getting help</h2>
-<p>The <em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em> package was tested on a variety of datasets provided from cooperation partners, yet it may require some extra tuning or bug fixes. For these issues, please contact the maintainer - if required with a copy of the error messages, the output of <code>sessionInfo</code> function:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/maintainer.html">maintainer</a></span><span class="op">(</span><span class="st">"flowcatchR"</span><span class="op">)</span></pre></div>
-<pre><code>## [1] "Federico Marini &lt;marinif@uni-mainz.de&gt;"</code></pre>
-<p>Despite our best efforts to test and develop the package further, additional functions or interesting suggestions might come from the specific scenarios that the package users might be facing. Improvements of existing functions or development of new ones are always most welcome! We also encourage to fork the GitHub repository of the package (<a href="https://github.com/federicomarini/flowcatchR" class="uri">https://github.com/federicomarini/flowcatchR</a>), develop and test the new feature(s), and finally generate a pull request to integrate it to the original repository.</p>
-</div>
-<div id="citing-flowcatchr" class="section level2">
-<h2 class="hasAnchor">
-<a href="#citing-flowcatchr" class="anchor"></a>Citing <em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em>
+<div class="section level1">
+<h1 id="getting-started">Getting started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
+</h1>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>The work underlying the development of <em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em> has not been formally published yet. A manuscript has been submitted for peer-review. For the time being, users of <em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em> are encouraged to cite it using the output of the <code>citation</code> function, as it follows:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span><span class="op">(</span><span class="st">"flowcatchR"</span><span class="op">)</span></pre></div>
-<pre><code>## 
-## To cite the package 'flowcatchR' in publications use:
-## 
-##   Federico Marini, Harald Binder (2018). flowcatchR: Tools to analyze
-##   in vivo microscopy imaging data focused on tracking flowing blood
-##   cells. URL http://bioconductor.org/packages/flowcatchR/ doi:
-##   10.18129/B9.bioc.flowcatchR
-## 
-## A BibTeX entry for LaTeX users is
-## 
-##   @Manual{,
-##     title = {{flowcatchR}: Tools to analyze in vivo microscopy imaging data focused on
-## tracking flowing blood cells},
-##     author = {Federico Marini and Harald Binder},
-##     year = {2018},
-##     url = {http://bioconductor.org/packages/flowcatchR/},
-##     doi = {10.18129/B9.bioc.flowcatchR},
-##   }</code></pre>
+<p><em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em> is an R package distributed as part of the Bioconductor project. To install <em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em>, please start R and type:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
+<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"flowcatchR"</span><span class="op">)</span></code></pre></div>
+<p>In case you might prefer to install the latest development version, this can be done with these two lines below:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span> <span class="co"># if needed</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"federicomarini/flowcatchR"</span><span class="op">)</span></code></pre></div>
+<p>Installation issues should be reported to the Bioconductor support site (<a href="http://support.bioconductor.org/" class="external-link uri">http://support.bioconductor.org/</a>).</p>
+</div>
+<div class="section level2">
+<h2 id="getting-help">Getting help<a class="anchor" aria-label="anchor" href="#getting-help"></a>
+</h2>
+<p>The <em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em> package was tested on a variety of datasets provided from cooperation partners, yet it may require some extra tuning or bug fixes. For these issues, please contact the maintainer - if required with a copy of the error messages, the output of <code>sessionInfo</code> function:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/maintainer.html" class="external-link">maintainer</a></span><span class="op">(</span><span class="st">"flowcatchR"</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## [1] "Federico Marini &lt;marinif@uni-mainz.de&gt;"</span></code></pre>
+<p>Despite our best efforts to test and develop the package further, additional functions or interesting suggestions might come from the specific scenarios that the package users might be facing. Improvements of existing functions or development of new ones are always most welcome! We also encourage to fork the GitHub repository of the package (<a href="https://github.com/federicomarini/flowcatchR" class="external-link uri">https://github.com/federicomarini/flowcatchR</a>), develop and test the new feature(s), and finally generate a pull request to integrate it to the original repository.</p>
+</div>
+<div class="section level2">
+<h2 id="citing-flowcatchr">Citing <em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em><a class="anchor" aria-label="anchor" href="#citing-flowcatchr"></a>
+</h2>
+<p>The work underlying the development of <em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em> has not been formally published yet. A manuscript has been submitted for peer-review. For the time being, users of <em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em> are encouraged to cite it using the output of the <code>citation</code> function, as it follows:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"flowcatchR"</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## </span>
+<span class="co">## To cite the package 'flowcatchR' in publications use:</span>
+<span class="co">## </span>
+<span class="co">##   Federico Marini, Harald Binder (2018). flowcatchR: Tools to analyze</span>
+<span class="co">##   in vivo microscopy imaging data focused on tracking flowing blood</span>
+<span class="co">##   cells. URL http://bioconductor.org/packages/flowcatchR/ doi:</span>
+<span class="co">##   10.18129/B9.bioc.flowcatchR</span>
+<span class="co">## </span>
+<span class="co">## A BibTeX entry for LaTeX users is</span>
+<span class="co">## </span>
+<span class="co">##   @Manual{,</span>
+<span class="co">##     title = {{flowcatchR}: Tools to analyze in vivo microscopy imaging data focused on</span>
+<span class="co">## tracking flowing blood cells},</span>
+<span class="co">##     author = {Federico Marini and Harald Binder},</span>
+<span class="co">##     year = {2018},</span>
+<span class="co">##     url = {http://bioconductor.org/packages/flowcatchR/},</span>
+<span class="co">##     doi = {10.18129/B9.bioc.flowcatchR},</span>
+<span class="co">##   }</span></code></pre>
 </div>
 </div>
-<div id="overview" class="section level1">
-<h1 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Processing overview</h1>
-<p><em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em> works primarily with sets of fluorescent time-lapse images, where the particles of interest are marked with a fluorescent label (e.g., red for blood platelets, green for leukocytes). Although different entry spots are provided (such as the coordinates of identified points in each frame via tab delimited files), we will illustrate the characteristics of the package starting from the common protocol starting point. In this case, we have a set of 20 frames derived from an intravital microscopy acquisition, which for the sake of practicality were already registered to reduce the unwanted specimen movements (Fiji <span class="citation">(Schindelin, Arganda-Carreras, and Frise 2012)</span> was used for this purpose).</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/federicomarini/flowcatchR">"flowcatchR"</a></span><span class="op">)</span></pre></div>
-<pre><code>## Loading required package: EBImage</code></pre>
-<div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"MesenteriumSubset"</span><span class="op">)</span></pre></div>
-<div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="co"># printing summary information for the MesenteriumSubset object</span>
-<span class="va">MesenteriumSubset</span></pre></div>
-<pre><code>## Frames 
-##   colorMode    : Color 
-##   storage.mode : double 
-##   dim          : 271 131 3 20 
-##   frames.total : 60 
-##   frames.render: 20 
-## 
-## imageData(object)[1:5,1:6,1,1]
-##           [,1]      [,2]      [,3]      [,4]      [,5]      [,6]
-## [1,] 0.1647059 0.2117647 0.1882353 0.1803922 0.1607843 0.1333333
-## [2,] 0.2352941 0.1882353 0.1803922 0.1568627 0.1411765 0.1372549
-## [3,] 0.2352941 0.2000000 0.1764706 0.1490196 0.1333333 0.1333333
-## [4,] 0.2352941 0.2117647 0.1764706 0.1529412 0.1411765 0.1411765
-## [5,] 0.2313725 0.2078431 0.1725490 0.1411765 0.1294118 0.1411765
-## 
-## Channel(s): all</code></pre>
+<div class="section level1">
+<h1 id="overview">Processing overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h1>
+<p><em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em> works primarily with sets of fluorescent time-lapse images, where the particles of interest are marked with a fluorescent label (e.g., red for blood platelets, green for leukocytes). Although different entry spots are provided (such as the coordinates of identified points in each frame via tab delimited files), we will illustrate the characteristics of the package starting from the common protocol starting point. In this case, we have a set of 20 frames derived from an intravital microscopy acquisition, which for the sake of practicality were already registered to reduce the unwanted specimen movements (Fiji <span class="citation">(Schindelin, Arganda-Carreras, and Frise 2012)</span> was used for this purpose).</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/federicomarini/flowcatchR" class="external-link">"flowcatchR"</a></span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## Loading required package: EBImage</span></code></pre>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"MesenteriumSubset"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># printing summary information for the MesenteriumSubset object</span>
+<span class="va">MesenteriumSubset</span></code></pre></div>
+<pre><code><span class="co">## Frames </span>
+<span class="co">##   colorMode    : Color </span>
+<span class="co">##   storage.mode : double </span>
+<span class="co">##   dim          : 271 131 3 20 </span>
+<span class="co">##   frames.total : 60 </span>
+<span class="co">##   frames.render: 20 </span>
+<span class="co">## </span>
+<span class="co">## imageData(object)[1:5,1:6,1,1]</span>
+<span class="co">##           [,1]      [,2]      [,3]      [,4]      [,5]      [,6]</span>
+<span class="co">## [1,] 0.1647059 0.2117647 0.1882353 0.1803922 0.1607843 0.1333333</span>
+<span class="co">## [2,] 0.2352941 0.1882353 0.1803922 0.1568627 0.1411765 0.1372549</span>
+<span class="co">## [3,] 0.2352941 0.2000000 0.1764706 0.1490196 0.1333333 0.1333333</span>
+<span class="co">## [4,] 0.2352941 0.2117647 0.1764706 0.1529412 0.1411765 0.1411765</span>
+<span class="co">## [5,] 0.2313725 0.2078431 0.1725490 0.1411765 0.1294118 0.1411765</span>
+<span class="co">## </span>
+<span class="co">## Channel(s): all</span></code></pre>
 <p>To obtain the set of trajectories identified from the analysis of the loaded frames, a very compact one-line command is all that is needed:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit">
-<span class="co"># one command to seize them all :)</span>
-<span class="va">fullResults</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/kinematics.html">kinematics</a></span><span class="op">(</span><span class="fu"><a href="../reference/trajectories.html">trajectories</a></span><span class="op">(</span><span class="fu"><a href="../reference/particles.html">particles</a></span><span class="op">(</span><span class="fu"><a href="../reference/channel.Frames.html">channel.Frames</a></span><span class="op">(</span><span class="va">MesenteriumSubset</span>,<span class="st">"red"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># one command to seize them all :)</span>
+<span class="va">fullResults</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/kinematics.html">kinematics</a></span><span class="op">(</span><span class="fu"><a href="../reference/trajectories.html">trajectories</a></span><span class="op">(</span><span class="fu"><a href="../reference/particles.html">particles</a></span><span class="op">(</span><span class="fu"><a href="../reference/channel.Frames.html">channel.Frames</a></span><span class="op">(</span><span class="va">MesenteriumSubset</span>,<span class="st">"red"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <!-- microbenchmark(kinematics(trajectories(particles(channel.Frames(MesenteriumSubset,"red"))))) -->
-<p>On a MAC OS X machine equipped with 2.8 Ghz Intel Core i7 processor and 16 GB RAM, the execution of this command takes 2.32 seconds to run (tests performed with the R package <em><a href="https://CRAN.R-project.org/package=microbenchmark">microbenchmark</a></em>. On a more recent MacBook Pro (2017), the same benchmark took 1.78 seconds.</p>
-<p>The following sections will provide additional details to the operations mentioned above, with more also on the auxiliary functions that are available in <em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em>.</p>
+<p>On a MAC OS X machine equipped with 2.8 Ghz Intel Core i7 processor and 16 GB RAM, the execution of this command takes 2.32 seconds to run (tests performed with the R package <em><a href="https://CRAN.R-project.org/package=microbenchmark" class="external-link">microbenchmark</a></em>. On a more recent MacBook Pro (2017), the same benchmark took 1.78 seconds.</p>
+<p>The following sections will provide additional details to the operations mentioned above, with more also on the auxiliary functions that are available in <em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em>.</p>
 </div>
-<div id="acquisition" class="section level1">
-<h1 class="hasAnchor">
-<a href="#acquisition" class="anchor"></a>Image acquisition</h1>
+<div class="section level1">
+<h1 id="acquisition">Image acquisition<a class="anchor" aria-label="anchor" href="#acquisition"></a>
+</h1>
 <p>A set of images is acquired, after a proper microscopy setup has been performed. This includes for example a careful choice of spatial and temporal resolution; often a compromise must be met to have a good frame rate and a good SNR to detect the particles in the single frames. For a good review on the steps to be taken, please refer to Meijering’s work <span class="citation">(Meijering and Smal 2008, @Meijering2012a)</span>.</p>
-<p><em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em> provides an S4 class that can store the information of a complete acquisition, namely <code>Frames</code>. The <code>Frames</code> class extends the <code>Image</code> class, defined in the <em><a href="https://bioconductor.org/packages/3.12/EBImage">EBImage</a></em> package, and thus exploits the multi-dimensional array structures of the class. The locations of the images are stored as <code>dimnames</code> of the <code>Frames</code> object. To construct a <code>Frames</code> object from a set of images, the <code>read.Frames</code> function is used:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit">
-<span class="co"># initialization</span>
+<p><em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em> provides an S4 class that can store the information of a complete acquisition, namely <code>Frames</code>. The <code>Frames</code> class extends the <code>Image</code> class, defined in the <em><a href="https://bioconductor.org/packages/3.15/EBImage" class="external-link">EBImage</a></em> package, and thus exploits the multi-dimensional array structures of the class. The locations of the images are stored as <code>dimnames</code> of the <code>Frames</code> object. To construct a <code>Frames</code> object from a set of images, the <code>read.Frames</code> function is used:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># initialization</span>
 <span class="va">fullData</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read.Frames.html">read.Frames</a></span><span class="op">(</span>image.files<span class="op">=</span><span class="st">"/path/to/folder/containing/images/"</span>, nframes<span class="op">=</span><span class="fl">100</span><span class="op">)</span> 
 <span class="co"># printing summary information for the Frames object</span>
-<span class="va">fullData</span></pre></div>
+<span class="va">fullData</span></code></pre></div>
 <p><code>nframes</code> specifies the number of frames that will constitute the <code>Frames</code> object, whereas <code>image.files</code> is a vector of character strings with the full location of the (raw) images, or the path to the folder containing them (works automatically if images are in TIFF/JPG/PNG format). In this case we just loaded the full dataset, but for the demonstrational purpose of this vignette, we will proceed with the subset available in the <code>MesenteriumSubset</code> object, which we previously loaded in Section @ref(overview).</p>
 <p>It is possible to inspect the images composing a <code>Frames</code> object with the function <code>inspect.Frames</code> (Fig. @ref(fig:inspectRaw)).</p>
-<div class="sourceCode" id="cb14"><pre class="downlit">
-<span class="fu"><a href="../reference/inspect.Frames.html">inspect.Frames</a></span><span class="op">(</span><span class="va">MesenteriumSubset</span>, nframes<span class="op">=</span><span class="fl">9</span>, display.method<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/inspect.Frames.html">inspect.Frames</a></span><span class="op">(</span><span class="va">MesenteriumSubset</span>, nframes<span class="op">=</span><span class="fl">9</span>, display.method<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <img src="flowcatchr_vignette_files/figure-html/inspectRaw-1.png" alt="The first 9 frames of the MesenteriumSubset dataset. The red channel stores information about platelets, while the green channel is dedicated to leukocytes" width="720"><p class="caption">
 The first 9 frames of the MesenteriumSubset dataset. The red channel stores information about platelets, while the green channel is dedicated to leukocytes
 </p>
 </div>
-<p>By default, <code>display.method</code> is set to <code>browser</code>, as in the <em><a href="https://bioconductor.org/packages/3.12/EBImage">EBImage</a></em> function display. This opens up a window in the predefined browser (e.g. Mozilla Firefox), with navigable frames (arrows on the top left corner). For the vignette, we will set it to <code>raster</code>, for viewing them as raster graphics using R’s native functions.</p>
+<p>By default, <code>display.method</code> is set to <code>browser</code>, as in the <em><a href="https://bioconductor.org/packages/3.15/EBImage" class="external-link">EBImage</a></em> function display. This opens up a window in the predefined browser (e.g. Mozilla Firefox), with navigable frames (arrows on the top left corner). For the vignette, we will set it to <code>raster</code>, for viewing them as raster graphics using R’s native functions.</p>
 <p>Importantly, these image sets were already registered and rotated in such a way that the overall direction of the movement of interest flows from left to right, as a visual aid and also to fit with some assumptions that will be done in the subsequent step of particle tracking. To register the images, we recommend the general purpose tools offered by suites such as ImageJ/Fiji <span class="citation">(Schneider, Rasband, and Eliceiri 2012, @Schindelin2012)</span>.</p>
 <p>For the following steps, we will focus on the information contained in the red channel, corresponding in this case to blood platelets. We do so by calling the <code>channel.Frames</code> function:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit">
-<span class="va">plateletsMesenterium</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/channel.Frames.html">channel.Frames</a></span><span class="op">(</span><span class="va">MesenteriumSubset</span>, mode<span class="op">=</span><span class="st">"red"</span><span class="op">)</span>
-<span class="va">plateletsMesenterium</span></pre></div>
-<pre><code>## Frames 
-##   colorMode    : Grayscale 
-##   storage.mode : double 
-##   dim          : 271 131 20 
-##   frames.total : 20 
-##   frames.render: 20 
-## 
-## imageData(object)[1:5,1:6,1]
-##           [,1]      [,2]      [,3]      [,4]      [,5]      [,6]
-## [1,] 0.1647059 0.2117647 0.1882353 0.1803922 0.1607843 0.1333333
-## [2,] 0.2352941 0.1882353 0.1803922 0.1568627 0.1411765 0.1372549
-## [3,] 0.2352941 0.2000000 0.1764706 0.1490196 0.1333333 0.1333333
-## [4,] 0.2352941 0.2117647 0.1764706 0.1529412 0.1411765 0.1411765
-## [5,] 0.2313725 0.2078431 0.1725490 0.1411765 0.1294118 0.1411765
-## 
-## Channel(s): red</code></pre>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">plateletsMesenterium</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/channel.Frames.html">channel.Frames</a></span><span class="op">(</span><span class="va">MesenteriumSubset</span>, mode<span class="op">=</span><span class="st">"red"</span><span class="op">)</span>
+<span class="va">plateletsMesenterium</span></code></pre></div>
+<pre><code><span class="co">## Frames </span>
+<span class="co">##   colorMode    : Grayscale </span>
+<span class="co">##   storage.mode : double </span>
+<span class="co">##   dim          : 271 131 20 </span>
+<span class="co">##   frames.total : 20 </span>
+<span class="co">##   frames.render: 20 </span>
+<span class="co">## </span>
+<span class="co">## imageData(object)[1:5,1:6,1]</span>
+<span class="co">##           [,1]      [,2]      [,3]      [,4]      [,5]      [,6]</span>
+<span class="co">## [1,] 0.1647059 0.2117647 0.1882353 0.1803922 0.1607843 0.1333333</span>
+<span class="co">## [2,] 0.2352941 0.1882353 0.1803922 0.1568627 0.1411765 0.1372549</span>
+<span class="co">## [3,] 0.2352941 0.2000000 0.1764706 0.1490196 0.1333333 0.1333333</span>
+<span class="co">## [4,] 0.2352941 0.2117647 0.1764706 0.1529412 0.1411765 0.1411765</span>
+<span class="co">## [5,] 0.2313725 0.2078431 0.1725490 0.1411765 0.1294118 0.1411765</span>
+<span class="co">## </span>
+<span class="co">## Channel(s): red</span></code></pre>
 <p>This creates another instance of the class <code>Frames</code>, and we inspect it in its first 9 frames (Fig.@ref(fig:inspectPlatelets)).</p>
-<div class="sourceCode" id="cb17"><pre class="downlit">
-<span class="fu"><a href="../reference/inspect.Frames.html">inspect.Frames</a></span><span class="op">(</span><span class="va">plateletsMesenterium</span>, nframes<span class="op">=</span><span class="fl">9</span>, display.method<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/inspect.Frames.html">inspect.Frames</a></span><span class="op">(</span><span class="va">plateletsMesenterium</span>, nframes<span class="op">=</span><span class="fl">9</span>, display.method<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <img src="flowcatchr_vignette_files/figure-html/inspectPlatelets-1.png" alt="The first 9 frames for the red channel of the MesenteriumSubset dataset. This is just displaying the GrayScale signal for the red channel stored in `plateletsMesenterium` (for the thrombocytes)" width="720"><p class="caption">
 The first 9 frames for the red channel of the MesenteriumSubset dataset. This is just displaying the GrayScale signal for the red channel stored in <code>plateletsMesenterium</code> (for the thrombocytes)
 </p>
 </div>
 </div>
-<div id="prepro" class="section level1">
-<h1 class="hasAnchor">
-<a href="#prepro" class="anchor"></a>Image preprocessing and analysis</h1>
-<p>Steps such as denoising, smoothing and morphological operations (erosion/dilation, opening/closing) can be performed thanks to the general functions provided by <em><a href="https://bioconductor.org/packages/3.12/EBImage">EBImage</a></em>. <em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em> offers a wrapper around a series of operations to be applied to all images in a <code>Frames</code> object. The function <code>preprocess.Frames</code> is called via the following command:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit">
-<span class="va">preprocessedPlatelets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/preprocess.Frames.html">preprocess.Frames</a></span><span class="op">(</span><span class="va">plateletsMesenterium</span>,
+<div class="section level1">
+<h1 id="prepro">Image preprocessing and analysis<a class="anchor" aria-label="anchor" href="#prepro"></a>
+</h1>
+<p>Steps such as denoising, smoothing and morphological operations (erosion/dilation, opening/closing) can be performed thanks to the general functions provided by <em><a href="https://bioconductor.org/packages/3.15/EBImage" class="external-link">EBImage</a></em>. <em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em> offers a wrapper around a series of operations to be applied to all images in a <code>Frames</code> object. The function <code>preprocess.Frames</code> is called via the following command:</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">preprocessedPlatelets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/preprocess.Frames.html">preprocess.Frames</a></span><span class="op">(</span><span class="va">plateletsMesenterium</span>,
                                     brush.size<span class="op">=</span><span class="fl">3</span>, brush.shape<span class="op">=</span><span class="st">"disc"</span>,
                                     at.offset<span class="op">=</span><span class="fl">0.15</span>, at.wwidth<span class="op">=</span><span class="fl">10</span>, at.wheight<span class="op">=</span><span class="fl">10</span>,
                                     kern.size<span class="op">=</span><span class="fl">3</span>, kern.shape<span class="op">=</span><span class="st">"disc"</span>,
                                     ws.tolerance<span class="op">=</span><span class="fl">1</span>, ws.radius<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
-<span class="va">preprocessedPlatelets</span></pre></div>
-<pre><code>## Frames 
-##   colorMode    : Grayscale 
-##   storage.mode : integer 
-##   dim          : 271 131 20 
-##   frames.total : 20 
-##   frames.render: 20 
-## 
-## imageData(object)[1:5,1:6,1]
-##      [,1] [,2] [,3] [,4] [,5] [,6]
-## [1,]    0    0    0    0    0    0
-## [2,]    0    0    0    0    0    0
-## [3,]    0    0    0    0    0    0
-## [4,]    0    0    0    0    0    0
-## [5,]    0    0    0    0    0    0
-## 
-## Channel(s): red</code></pre>
+<span class="va">preprocessedPlatelets</span></code></pre></div>
+<pre><code><span class="co">## Frames </span>
+<span class="co">##   colorMode    : Grayscale </span>
+<span class="co">##   storage.mode : integer </span>
+<span class="co">##   dim          : 271 131 20 </span>
+<span class="co">##   frames.total : 20 </span>
+<span class="co">##   frames.render: 20 </span>
+<span class="co">## </span>
+<span class="co">## imageData(object)[1:5,1:6,1]</span>
+<span class="co">##      [,1] [,2] [,3] [,4] [,5] [,6]</span>
+<span class="co">## [1,]    0    0    0    0    0    0</span>
+<span class="co">## [2,]    0    0    0    0    0    0</span>
+<span class="co">## [3,]    0    0    0    0    0    0</span>
+<span class="co">## [4,]    0    0    0    0    0    0</span>
+<span class="co">## [5,]    0    0    0    0    0    0</span>
+<span class="co">## </span>
+<span class="co">## Channel(s): red</span></code></pre>
 <p>The result of this is displayed in Fig.@ref(fig:inspectSegm). For a detailed explanation of the parameters to better tweak the performances of this segmentation step, please refer to the help of <code>preprocess.Frames</code>. To obtain an immediate feedback about the effects of the operations performed in the full preprocessing phase, we can call again <code>inspect.Frames</code> on the <code>Frames</code> of segmented images (Fig.@ref(fig:inspectSegm).</p>
-<div class="sourceCode" id="cb20"><pre class="downlit">
-<span class="fu"><a href="../reference/inspect.Frames.html">inspect.Frames</a></span><span class="op">(</span><span class="va">preprocessedPlatelets</span>, nframes<span class="op">=</span><span class="fl">9</span>, display.method<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/inspect.Frames.html">inspect.Frames</a></span><span class="op">(</span><span class="va">preprocessedPlatelets</span>, nframes<span class="op">=</span><span class="fl">9</span>, display.method<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <img src="flowcatchr_vignette_files/figure-html/inspectSegm-1.png" alt="The first 9 frames after preprocessing of the MesenteriumSubset dataset. The binarized image shows the detected objects after thresholding." width="720"><p class="caption">
 The first 9 frames after preprocessing of the MesenteriumSubset dataset. The binarized image shows the detected objects after thresholding.
 </p>
 </div>
 <p>The frames could be cropped, if e.g. it is needed to remove background noise that might be present close to the edges. This is done with the function <code>crop.Frames</code>.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit">
-<span class="va">croppedFrames</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crop.Frames.html">crop.Frames</a></span><span class="op">(</span><span class="va">plateletsMesenterium</span>,
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">croppedFrames</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crop.Frames.html">crop.Frames</a></span><span class="op">(</span><span class="va">plateletsMesenterium</span>,
                      cutLeft<span class="op">=</span><span class="fl">6</span>, cutRight<span class="op">=</span><span class="fl">6</span>,
                      cutUp<span class="op">=</span><span class="fl">3</span>, cutDown<span class="op">=</span><span class="fl">3</span>,
                      testing<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
-<span class="va">croppedFrames</span></pre></div>
-<pre><code>## Frames 
-##   colorMode    : Grayscale 
-##   storage.mode : double 
-##   dim          : 260 126 20 
-##   frames.total : 20 
-##   frames.render: 20 
-## 
-## imageData(object)[1:5,1:6,1]
-##           [,1]      [,2]      [,3]      [,4]      [,5]      [,6]
-## [1,] 0.1803922 0.1568627 0.1372549 0.1372549 0.1333333 0.1176471
-## [2,] 0.2039216 0.1843137 0.1490196 0.1254902 0.1215686 0.1215686
-## [3,] 0.1843137 0.1764706 0.1568627 0.1294118 0.1176471 0.1019608
-## [4,] 0.1921569 0.1568627 0.1529412 0.1333333 0.1254902 0.1333333
-## [5,] 0.2000000 0.1647059 0.1490196 0.1450980 0.1333333 0.1411765
-## 
-## Channel(s): red</code></pre>
+<span class="va">croppedFrames</span></code></pre></div>
+<pre><code><span class="co">## Frames </span>
+<span class="co">##   colorMode    : Grayscale </span>
+<span class="co">##   storage.mode : double </span>
+<span class="co">##   dim          : 260 126 20 </span>
+<span class="co">##   frames.total : 20 </span>
+<span class="co">##   frames.render: 20 </span>
+<span class="co">## </span>
+<span class="co">## imageData(object)[1:5,1:6,1]</span>
+<span class="co">##           [,1]      [,2]      [,3]      [,4]      [,5]      [,6]</span>
+<span class="co">## [1,] 0.1803922 0.1568627 0.1372549 0.1372549 0.1333333 0.1176471</span>
+<span class="co">## [2,] 0.2039216 0.1843137 0.1490196 0.1254902 0.1215686 0.1215686</span>
+<span class="co">## [3,] 0.1843137 0.1764706 0.1568627 0.1294118 0.1176471 0.1019608</span>
+<span class="co">## [4,] 0.1921569 0.1568627 0.1529412 0.1333333 0.1254902 0.1333333</span>
+<span class="co">## [5,] 0.2000000 0.1647059 0.1490196 0.1450980 0.1333333 0.1411765</span>
+<span class="co">## </span>
+<span class="co">## Channel(s): red</span></code></pre>
 <p>If <code>testing</code> is set to true, the function just displays the first cropped frame, to get a feeling whether the choice of parameters was adequate. Similarly, for the function <code>rotate.Frames</code> the same behaviour is expected, whereas the rotation in degrees is specified by the parameter <code>angle</code>.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit">
-<span class="va">rotatedFrames</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rotate.Frames.html">rotate.Frames</a></span><span class="op">(</span><span class="va">plateletsMesenterium</span>, angle<span class="op">=</span><span class="fl">30</span><span class="op">)</span>
-<span class="va">rotatedFrames</span></pre></div>
-<pre><code>## Frames 
-##   colorMode    : Grayscale 
-##   storage.mode : double 
-##   dim          : 300 249 20 
-##   frames.total : 20 
-##   frames.render: 20 
-## 
-## imageData(object)[1:5,1:6,1]
-##      [,1] [,2] [,3] [,4] [,5] [,6]
-## [1,]    0    0    0    0    0    0
-## [2,]    0    0    0    0    0    0
-## [3,]    0    0    0    0    0    0
-## [4,]    0    0    0    0    0    0
-## [5,]    0    0    0    0    0    0
-## 
-## Channel(s): red</code></pre>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">rotatedFrames</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/rotate.Frames.html">rotate.Frames</a></span><span class="op">(</span><span class="va">plateletsMesenterium</span>, angle<span class="op">=</span><span class="fl">30</span><span class="op">)</span>
+<span class="va">rotatedFrames</span></code></pre></div>
+<pre><code><span class="co">## Frames </span>
+<span class="co">##   colorMode    : Grayscale </span>
+<span class="co">##   storage.mode : double </span>
+<span class="co">##   dim          : 300 249 20 </span>
+<span class="co">##   frames.total : 20 </span>
+<span class="co">##   frames.render: 20 </span>
+<span class="co">## </span>
+<span class="co">## imageData(object)[1:5,1:6,1]</span>
+<span class="co">##      [,1] [,2] [,3] [,4] [,5] [,6]</span>
+<span class="co">## [1,]    0    0    0    0    0    0</span>
+<span class="co">## [2,]    0    0    0    0    0    0</span>
+<span class="co">## [3,]    0    0    0    0    0    0</span>
+<span class="co">## [4,]    0    0    0    0    0    0</span>
+<span class="co">## [5,]    0    0    0    0    0    0</span>
+<span class="co">## </span>
+<span class="co">## Channel(s): red</span></code></pre>
 <p>If desired, it is possible to select just a subset of the frames belonging to a <code>Frames</code>. This can be done via the <code>select.Frames</code> function:</p>
-<div class="sourceCode" id="cb25"><pre class="downlit">
-<span class="va">subsetFrames</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select.Frames.html">select.Frames</a></span><span class="op">(</span><span class="va">plateletsMesenterium</span>,
-                       framesToKeep<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="fl">14</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span>
-<span class="va">subsetFrames</span></pre></div>
-<pre><code>## Frames 
-##   colorMode    : Grayscale 
-##   storage.mode : double 
-##   dim          : 271 131 17 
-##   frames.total : 17 
-##   frames.render: 17 
-## 
-## imageData(object)[1:5,1:6,1]
-##           [,1]      [,2]      [,3]      [,4]      [,5]      [,6]
-## [1,] 0.1647059 0.2117647 0.1882353 0.1803922 0.1607843 0.1333333
-## [2,] 0.2352941 0.1882353 0.1803922 0.1568627 0.1411765 0.1372549
-## [3,] 0.2352941 0.2000000 0.1764706 0.1490196 0.1333333 0.1333333
-## [4,] 0.2352941 0.2117647 0.1764706 0.1529412 0.1411765 0.1411765
-## [5,] 0.2313725 0.2078431 0.1725490 0.1411765 0.1294118 0.1411765
-## 
-## Channel(s): red</code></pre>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">subsetFrames</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select.Frames.html">select.Frames</a></span><span class="op">(</span><span class="va">plateletsMesenterium</span>,
+                       framesToKeep<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>,<span class="fl">14</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span>
+<span class="va">subsetFrames</span></code></pre></div>
+<pre><code><span class="co">## Frames </span>
+<span class="co">##   colorMode    : Grayscale </span>
+<span class="co">##   storage.mode : double </span>
+<span class="co">##   dim          : 271 131 17 </span>
+<span class="co">##   frames.total : 17 </span>
+<span class="co">##   frames.render: 17 </span>
+<span class="co">## </span>
+<span class="co">## imageData(object)[1:5,1:6,1]</span>
+<span class="co">##           [,1]      [,2]      [,3]      [,4]      [,5]      [,6]</span>
+<span class="co">## [1,] 0.1647059 0.2117647 0.1882353 0.1803922 0.1607843 0.1333333</span>
+<span class="co">## [2,] 0.2352941 0.1882353 0.1803922 0.1568627 0.1411765 0.1372549</span>
+<span class="co">## [3,] 0.2352941 0.2000000 0.1764706 0.1490196 0.1333333 0.1333333</span>
+<span class="co">## [4,] 0.2352941 0.2117647 0.1764706 0.1529412 0.1411765 0.1411765</span>
+<span class="co">## [5,] 0.2313725 0.2078431 0.1725490 0.1411765 0.1294118 0.1411765</span>
+<span class="co">## </span>
+<span class="co">## Channel(s): red</span></code></pre>
 <p>If required, the user can decide to perform a normalization step (via <code>normalizeFrames</code>), to correct for systematic variations in the acquisition conditions, in case the overall intensity levels change, e.g., when the acquisition spans long time scales. In this case, the median of the intensity sums is chosen as a scaling factor.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit">
-<span class="va">normFrames</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/normalizeFrames.html">normalizeFrames</a></span><span class="op">(</span><span class="va">plateletsMesenterium</span>,normFun <span class="op">=</span> <span class="st">"median"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">normFrames</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/normalizeFrames.html">normalizeFrames</a></span><span class="op">(</span><span class="va">plateletsMesenterium</span>,normFun <span class="op">=</span> <span class="st">"median"</span><span class="op">)</span></code></pre></div>
 <p>The user can choose any combination of the operations in order to segment the images provided as input, but <code>preprocess.Frames</code> is a very convenient high level function for proceeding in the workflow. It is also possible, as it was shown in the introductory one-liner, to call just <code>particles</code> on the raw <code>Frames</code> object. In this latter case, <code>particles</code> computes the preprocessed <code>Frames</code> object according to default parameters. Still, in either situation, the output for this step is an object of the <code>ParticleSet</code> class.</p>
-<div class="sourceCode" id="cb28"><pre class="downlit">
-<span class="va">platelets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/particles.html">particles</a></span><span class="op">(</span><span class="va">plateletsMesenterium</span>, <span class="va">preprocessedPlatelets</span><span class="op">)</span></pre></div>
-<pre><code>## Computing features in parallel...
-## Done!</code></pre>
-<div class="sourceCode" id="cb30"><pre class="downlit">
-<span class="va">platelets</span></pre></div>
-<pre><code>## An object of the ParticleSet class. 
-## 
-## Set of particles for 20 images
-## 
-## Displaying a subset of the features of the 13 particles found in the first image...
-##   cell.0.m.cx cell.0.m.cy cell.0.m.majoraxis cell.0.m.eccentricity
-## 1   186.70833   47.937500           8.916405             0.6353715
-## 2   256.19048   35.857143           7.746554             0.4606665
-## 3   251.09524   63.523810           8.552466             0.6843186
-## 4   215.54688   51.828125          13.694783             0.8788344
-## 5    15.82759    8.517241           7.548790             0.7570114
-##   cell.0.m.theta cell.0.s.area cell.0.s.perimeter cell.0.s.radius.mean
-## 1      0.3380463            48                 20             3.487042
-## 2      0.9165252            42                 19             3.194559
-## 3      0.9370618            42                 19             3.247531
-## 4      0.7172299            64                 28             4.308530
-## 5      1.5439842            29                 16             2.622403
-## 
-## Particles identified on the red channel</code></pre>
-<p>The function <code>particles</code> leverages on the multi-core architecture of the systems where the analysis is run, and this is implemented via <em><a href="https://bioconductor.org/packages/3.12/BiocParallel">BiocParallel</a></em> (updated since Version 1.0.3).</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">platelets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/particles.html">particles</a></span><span class="op">(</span><span class="va">plateletsMesenterium</span>, <span class="va">preprocessedPlatelets</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## Computing features in parallel...</span>
+<span class="co">## Done!</span></code></pre>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">platelets</span></code></pre></div>
+<pre><code><span class="co">## An object of the ParticleSet class. </span>
+<span class="co">## </span>
+<span class="co">## Set of particles for 20 images</span>
+<span class="co">## </span>
+<span class="co">## Displaying a subset of the features of the 13 particles found in the first image...</span>
+<span class="co">##   cell.0.m.cx cell.0.m.cy cell.0.m.majoraxis cell.0.m.eccentricity</span>
+<span class="co">## 1   186.70833   47.937500           8.916405             0.6353715</span>
+<span class="co">## 2   256.19048   35.857143           7.746554             0.4606665</span>
+<span class="co">## 3   251.09524   63.523810           8.552466             0.6843186</span>
+<span class="co">## 4   215.54688   51.828125          13.694783             0.8788344</span>
+<span class="co">## 5    15.82759    8.517241           7.548790             0.7570114</span>
+<span class="co">##   cell.0.m.theta cell.0.s.area cell.0.s.perimeter cell.0.s.radius.mean</span>
+<span class="co">## 1      0.3380463            48                 20             3.487042</span>
+<span class="co">## 2      0.9165252            42                 19             3.194559</span>
+<span class="co">## 3      0.9370618            42                 19             3.247531</span>
+<span class="co">## 4      0.7172299            64                 28             4.308530</span>
+<span class="co">## 5      1.5439842            29                 16             2.622403</span>
+<span class="co">## </span>
+<span class="co">## Particles identified on the red channel</span></code></pre>
+<p>The function <code>particles</code> leverages on the multi-core architecture of the systems where the analysis is run, and this is implemented via <em><a href="https://bioconductor.org/packages/3.15/BiocParallel" class="external-link">BiocParallel</a></em> (updated since Version 1.0.3).</p>
 <p>As it can be seen from the summary information, each <code>ParticleSet</code> stores the essential information on all particles that were detected in the original images, alongside with a complete set of features, which are computed by integrating the information from both the raw and the segmented frames.</p>
 <p>A <code>ParticleSet</code> can be seen as a named list, where each element is a <code>data.frame</code> for a single frame, and the image source is stored as <code>names</code> to help backtracking the operations performed, and the slot <code>channel</code> is retained as selected in the initial steps.</p>
 <p>It is possible to filter out particles according to their properties, such as area, shape and eccentricity. This is possible with the function <code>select.particles</code>. The current implementation regards only the surface extension, but any additional feature can be chosen and adopted to restrict the number of candidate particles according to particular properties which are expected and/or to remove potential noise that went through the preprocessing phase.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit">
-<span class="va">selectedPlatelets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select.particles.html">select.particles</a></span><span class="op">(</span><span class="va">platelets</span>, min.area<span class="op">=</span><span class="fl">3</span><span class="op">)</span></pre></div>
-<pre><code>## Filtering the particles...</code></pre>
-<div class="sourceCode" id="cb34"><pre class="downlit">
-<span class="va">selectedPlatelets</span></pre></div>
-<pre><code>## An object of the ParticleSet class. 
-## 
-## Set of particles for 20 images
-## 
-## Displaying a subset of the features of the 13 particles found in the first image...
-##   cell.0.m.cx cell.0.m.cy cell.0.m.majoraxis cell.0.m.eccentricity
-## 1   186.70833   47.937500           8.916405             0.6353715
-## 2   256.19048   35.857143           7.746554             0.4606665
-## 3   251.09524   63.523810           8.552466             0.6843186
-## 4   215.54688   51.828125          13.694783             0.8788344
-## 5    15.82759    8.517241           7.548790             0.7570114
-##   cell.0.m.theta cell.0.s.area cell.0.s.perimeter cell.0.s.radius.mean
-## 1      0.3380463            48                 20             3.487042
-## 2      0.9165252            42                 19             3.194559
-## 3      0.9370618            42                 19             3.247531
-## 4      0.7172299            64                 28             4.308530
-## 5      1.5439842            29                 16             2.622403
-## 
-## Particles identified on the red channel</code></pre>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">selectedPlatelets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select.particles.html">select.particles</a></span><span class="op">(</span><span class="va">platelets</span>, min.area<span class="op">=</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## Filtering the particles...</span></code></pre>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">selectedPlatelets</span></code></pre></div>
+<pre><code><span class="co">## An object of the ParticleSet class. </span>
+<span class="co">## </span>
+<span class="co">## Set of particles for 20 images</span>
+<span class="co">## </span>
+<span class="co">## Displaying a subset of the features of the 13 particles found in the first image...</span>
+<span class="co">##   cell.0.m.cx cell.0.m.cy cell.0.m.majoraxis cell.0.m.eccentricity</span>
+<span class="co">## 1   186.70833   47.937500           8.916405             0.6353715</span>
+<span class="co">## 2   256.19048   35.857143           7.746554             0.4606665</span>
+<span class="co">## 3   251.09524   63.523810           8.552466             0.6843186</span>
+<span class="co">## 4   215.54688   51.828125          13.694783             0.8788344</span>
+<span class="co">## 5    15.82759    8.517241           7.548790             0.7570114</span>
+<span class="co">##   cell.0.m.theta cell.0.s.area cell.0.s.perimeter cell.0.s.radius.mean</span>
+<span class="co">## 1      0.3380463            48                 20             3.487042</span>
+<span class="co">## 2      0.9165252            42                 19             3.194559</span>
+<span class="co">## 3      0.9370618            42                 19             3.247531</span>
+<span class="co">## 4      0.7172299            64                 28             4.308530</span>
+<span class="co">## 5      1.5439842            29                 16             2.622403</span>
+<span class="co">## </span>
+<span class="co">## Particles identified on the red channel</span></code></pre>
 <p>This step can be done iteratively, with the help of the function <code>add.contours</code>. If called with the parameter <code>mode</code> set to <code>particles</code>, then it will automatically generate a <code>Frames</code> object, with the contours of all particles drawn around the objects that passed the segmentation (and filtering) step (Fig.@ref(fig:checkSelection)).</p>
-<div class="sourceCode" id="cb36"><pre class="downlit">
-<span class="va">paintedPlatelets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add.contours.html">add.contours</a></span><span class="op">(</span>raw.frames<span class="op">=</span><span class="va">MesenteriumSubset</span>,
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">paintedPlatelets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add.contours.html">add.contours</a></span><span class="op">(</span>raw.frames<span class="op">=</span><span class="va">MesenteriumSubset</span>,
                                  binary.frames<span class="op">=</span><span class="va">preprocessedPlatelets</span>,
                                  mode<span class="op">=</span><span class="st">"particles"</span><span class="op">)</span>
-<span class="fu"><a href="../reference/inspect.Frames.html">inspect.Frames</a></span><span class="op">(</span><span class="va">paintedPlatelets</span>, nframes<span class="op">=</span><span class="fl">9</span>, display.method<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../reference/inspect.Frames.html">inspect.Frames</a></span><span class="op">(</span><span class="va">paintedPlatelets</span>, nframes<span class="op">=</span><span class="fl">9</span>, display.method<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <img src="flowcatchr_vignette_files/figure-html/checkSelection-1.png" alt="Particles detected in the first 9 frames. Particles detected in the first 9 frames are shown in yellow, with their contours defined by the segmentation procedure." width="720"><p class="caption">
 Particles detected in the first 9 frames. Particles detected in the first 9 frames are shown in yellow, with their contours defined by the segmentation procedure.
@@ -453,226 +454,221 @@ Particles detected in the first 9 frames. Particles detected in the first 9 fram
 </div>
 <p>To connect the particles from one frame to the other, we perform first the detection of particles on all images. Only in a successive phase, we establish the links between the so identified objects. This topic will be covered in detail in the following section.</p>
 </div>
-<div id="tracking" class="section level1">
-<h1 class="hasAnchor">
-<a href="#tracking" class="anchor"></a>Particle tracking</h1>
+<div class="section level1">
+<h1 id="tracking">Particle tracking<a class="anchor" aria-label="anchor" href="#tracking"></a>
+</h1>
 <p>To establish the connections between particles, the function to be called is <code>link.particles</code>. The algorithm used to perform the tracking itself is an improved version of the original implementation of Sbalzarini and Koumotsakos <span class="citation">(Sbalzarini and Koumoutsakos 2005)</span>. To summarize the method, it is a fast and efficient self-initializing feature point tracking algorithm (using the centroids of the objects as reference) <span class="citation">(Chenouard et al. 2014)</span>. The initial version is based on a particle matching algorithm, approached via a graph theory technique. It allows for appearances/disappearances of particles from the field of view, also temporarily as it happens in case of occlusions and objects leaving the plane of focus.</p>
 <p>Our implementation adds to the existing one by redefining the cost function used in the optimization phase of the link assignment. It namely adds two terms, such as intensity variation and area variation, and mostly important implements a function to penalize the movements that are either perpendicular or backwards with respect to the oriented flow of cells. Small unwanted movements, which may be present even after the registration phase, are handled with two jitter terms in a defined penalty function. Multiplicative factors can further influence the penalties given to each term.</p>
 <p>In its default value, the penalty function is created via the <code>penaltyFunctionGenerator</code>. The user can exploit the parameter values in it to create a custom version of it, to match the particular needs stemming from the nature of the available data and phenomenon under inspection.</p>
-<div class="sourceCode" id="cb37"><pre class="downlit">
-<span class="va">defaultPenalty</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/penaltyFunctionGenerator.html">penaltyFunctionGenerator</a></span><span class="op">(</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">defaultPenalty</span><span class="op">)</span></pre></div>
-<pre><code>## function (angle, distance) 
-## {
-##     lambda1 * (distance/(1 - lambda2 * (abs(angle)/(pi + epsilon1))))
-## }
-## &lt;bytecode: 0x7f98bc3da920&gt;
-## &lt;environment: 0x7f98bc3db288&gt;</code></pre>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">defaultPenalty</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/penaltyFunctionGenerator.html">penaltyFunctionGenerator</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">defaultPenalty</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## function (angle, distance) </span>
+<span class="co">## {</span>
+<span class="co">##     lambda1 * (distance/(1 - lambda2 * (abs(angle)/(pi + epsilon1))))</span>
+<span class="co">## }</span>
+<span class="co">## &lt;bytecode: 0x7fbcec2be448&gt;</span>
+<span class="co">## &lt;environment: 0x7fbcec2bafb8&gt;</span></code></pre>
 <p>As mentioned above, to perform the linking of the particles, we use <code>link.particles</code>. Fundamental parameters are <code>L</code> and <code>R</code>, named as in the original implementation. <code>L</code> is the maximum displacement in pixels that a particle is expected to have in two consecutive frames, and <code>R</code> is the value for the link range, i.e. the number of future frames to be considered for the linking (typically assumes values between 1 - when no occlusions are known to happen - and 3). An extended explanation of the parameters is in the documentation of the package.</p>
-<div class="sourceCode" id="cb39"><pre class="downlit">
-<span class="va">linkedPlatelets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/link.particles.html">link.particles</a></span><span class="op">(</span><span class="va">platelets</span>,  
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">linkedPlatelets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/link.particles.html">link.particles</a></span><span class="op">(</span><span class="va">platelets</span>,  
                                   L<span class="op">=</span><span class="fl">26</span>, R<span class="op">=</span><span class="fl">3</span>,
                                   epsilon1<span class="op">=</span><span class="fl">0</span>, epsilon2<span class="op">=</span><span class="fl">0</span>,
                                   lambda1<span class="op">=</span><span class="fl">1</span>, lambda2<span class="op">=</span><span class="fl">0</span>,
                                   penaltyFunction<span class="op">=</span><span class="fu"><a href="../reference/penaltyFunctionGenerator.html">penaltyFunctionGenerator</a></span><span class="op">(</span><span class="op">)</span>,
                                   include.area<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
-<span class="va">linkedPlatelets</span></pre></div>
-<pre><code>## An object of the LinkedParticleSet class. 
-## 
-## Set of particles for 20 images
-## 
-## Particles are tracked throughout the subsequent 3 frame(s)
-## 
-## Displaying a subset of the features of the 13 particles found in the first image...
-##   cell.0.m.cx cell.0.m.cy cell.0.m.majoraxis cell.0.m.eccentricity
-## 1   186.70833   47.937500           8.916405             0.6353715
-## 2   256.19048   35.857143           7.746554             0.4606665
-## 3   251.09524   63.523810           8.552466             0.6843186
-## 4   215.54688   51.828125          13.694783             0.8788344
-## 5    15.82759    8.517241           7.548790             0.7570114
-##   cell.0.m.theta cell.0.s.area cell.0.s.perimeter cell.0.s.radius.mean
-## 1      0.3380463            48                 20             3.487042
-## 2      0.9165252            42                 19             3.194559
-## 3      0.9370618            42                 19             3.247531
-## 4      0.7172299            64                 28             4.308530
-## 5      1.5439842            29                 16             2.622403
-## 
-## Particles identified on the red channel</code></pre>
+<span class="va">linkedPlatelets</span></code></pre></div>
+<pre><code><span class="co">## An object of the LinkedParticleSet class. </span>
+<span class="co">## </span>
+<span class="co">## Set of particles for 20 images</span>
+<span class="co">## </span>
+<span class="co">## Particles are tracked throughout the subsequent 3 frame(s)</span>
+<span class="co">## </span>
+<span class="co">## Displaying a subset of the features of the 13 particles found in the first image...</span>
+<span class="co">##   cell.0.m.cx cell.0.m.cy cell.0.m.majoraxis cell.0.m.eccentricity</span>
+<span class="co">## 1   186.70833   47.937500           8.916405             0.6353715</span>
+<span class="co">## 2   256.19048   35.857143           7.746554             0.4606665</span>
+<span class="co">## 3   251.09524   63.523810           8.552466             0.6843186</span>
+<span class="co">## 4   215.54688   51.828125          13.694783             0.8788344</span>
+<span class="co">## 5    15.82759    8.517241           7.548790             0.7570114</span>
+<span class="co">##   cell.0.m.theta cell.0.s.area cell.0.s.perimeter cell.0.s.radius.mean</span>
+<span class="co">## 1      0.3380463            48                 20             3.487042</span>
+<span class="co">## 2      0.9165252            42                 19             3.194559</span>
+<span class="co">## 3      0.9370618            42                 19             3.247531</span>
+<span class="co">## 4      0.7172299            64                 28             4.308530</span>
+<span class="co">## 5      1.5439842            29                 16             2.622403</span>
+<span class="co">## </span>
+<span class="co">## Particles identified on the red channel</span></code></pre>
 <p>As it can be seen, <code>linkedPlatelets</code> is an object of the <code>LinkedParticleSet</code> class, which is a subclass of the <code>ParticleSet</code> class.</p>
 <p>After inspecting the trajectories (see Section @ref(trajanal)) it might be possible to filter a <code>LinkedParticleSet</code> class object and subsequently reperform the linking on its updated version (e.g. some detected particles were found to be noise, and thus removed with <code>select.particles</code>).</p>
-<p><em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em> provides functions to export and import the identified particles, in order to offer an additional entry point for tracking and analyzing the trajectories (if particles were detected with other routines) and also to store separately the information per each frame about the objects that were primarily identified.</p>
+<p><em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em> provides functions to export and import the identified particles, in order to offer an additional entry point for tracking and analyzing the trajectories (if particles were detected with other routines) and also to store separately the information per each frame about the objects that were primarily identified.</p>
 <p>An example is provided in the lines below, with the functions <code>export.particles</code> and <code>read.particles</code> :</p>
-<div class="sourceCode" id="cb41"><pre class="downlit">
-<span class="co"># export to csv format</span>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># export to csv format</span>
 <span class="fu"><a href="../reference/export.particles.html">export.particles</a></span><span class="op">(</span><span class="va">platelets</span>, dir<span class="op">=</span><span class="st">"/path/to/export/folder/exportParticleSet/"</span><span class="op">)</span>
 <span class="co"># re-import the previously exported, in this case</span>
-<span class="va">importedPlatelets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read.particles.html">read.particles</a></span><span class="op">(</span>particle.files<span class="op">=</span><span class="st">"/path/to/export/folder/exportParticleSet/"</span><span class="op">)</span></pre></div>
+<span class="va">importedPlatelets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read.particles.html">read.particles</a></span><span class="op">(</span>particle.files<span class="op">=</span><span class="st">"/path/to/export/folder/exportParticleSet/"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="trajanal" class="section level1">
-<h1 class="hasAnchor">
-<a href="#trajanal" class="anchor"></a>Trajectory analysis</h1>
+<div class="section level1">
+<h1 id="trajanal">Trajectory analysis<a class="anchor" aria-label="anchor" href="#trajanal"></a>
+</h1>
 <p>It is possible to extract the trajectories with the correspondent <code>trajectories</code> function:</p>
-<div class="sourceCode" id="cb42"><pre class="downlit">
-<span class="va">trajPlatelets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectories.html">trajectories</a></span><span class="op">(</span><span class="va">linkedPlatelets</span><span class="op">)</span></pre></div>
-<pre><code>## Generating trajectories...</code></pre>
-<div class="sourceCode" id="cb44"><pre class="downlit">
-<span class="va">trajPlatelets</span></pre></div>
-<pre><code>## An object of the TrajectorySet class. 
-## 
-## TrajectorySet composed of 20 trajectories
-## 
-## Trajectories cover a range of 20 frames
-## Displaying a segment of the first trajectory...
-##        xCoord   yCoord trajLabel frame frameobjectID
-## 1_1  186.7083 47.93750         1     1             1
-## 1_2  186.9649 48.26316         1     2             4
-## 1_3  186.8136 48.18644         1     3             2
-## 1_4  186.2807 47.70175         1     4             1
-## 1_5  186.6897 47.87931         1     5             2
-## 1_6  186.8269 48.11538         1     6             2
-## 1_7  186.9643 48.30357         1     7             1
-## 1_8  186.6207 48.36207         1     8             3
-## 1_9  186.3273 48.05455         1     9             3
-## 1_10 186.9821 48.19643         1    10             3
-## 
-## Trajectories are related to particles identified on the red channel</code></pre>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">trajPlatelets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/trajectories.html">trajectories</a></span><span class="op">(</span><span class="va">linkedPlatelets</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## Generating trajectories...</span></code></pre>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">trajPlatelets</span></code></pre></div>
+<pre><code><span class="co">## An object of the TrajectorySet class. </span>
+<span class="co">## </span>
+<span class="co">## TrajectorySet composed of 20 trajectories</span>
+<span class="co">## </span>
+<span class="co">## Trajectories cover a range of 20 frames</span>
+<span class="co">## Displaying a segment of the first trajectory...</span>
+<span class="co">##        xCoord   yCoord trajLabel frame frameobjectID</span>
+<span class="co">## 1_1  186.7083 47.93750         1     1             1</span>
+<span class="co">## 1_2  186.9649 48.26316         1     2             4</span>
+<span class="co">## 1_3  186.8136 48.18644         1     3             2</span>
+<span class="co">## 1_4  186.2807 47.70175         1     4             1</span>
+<span class="co">## 1_5  186.6897 47.87931         1     5             2</span>
+<span class="co">## 1_6  186.8269 48.11538         1     6             2</span>
+<span class="co">## 1_7  186.9643 48.30357         1     7             1</span>
+<span class="co">## 1_8  186.6207 48.36207         1     8             3</span>
+<span class="co">## 1_9  186.3273 48.05455         1     9             3</span>
+<span class="co">## 1_10 186.9821 48.19643         1    10             3</span>
+<span class="co">## </span>
+<span class="co">## Trajectories are related to particles identified on the red channel</span></code></pre>
 <p>A <code>TrajectorySet</code> object is returned in this case. It consists of a two level list for each trajectory, reporting the <code>trajectory</code> as a <code>data.frame</code>, the number of points <code>npoints</code> (often coinciding with the number of <code>nframes</code>, when no gaps <code>ngaps</code> are present) and its <code>ID</code>. A <code>keep</code> flag is used for subsequent user evaluation purposes.</p>
-<p>Before proceeding with the actual analysis of the trajectories, it is recommended to evaluate them by visual inspection. <em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em> provides two complementary methods to do this, either plotting them (<code>plot</code> or <code>plot2D.TrajectorySet</code>) or drawing the contours of the points on the original image (<code>add.contours</code>).</p>
+<p>Before proceeding with the actual analysis of the trajectories, it is recommended to evaluate them by visual inspection. <em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em> provides two complementary methods to do this, either plotting them (<code>plot</code> or <code>plot2D.TrajectorySet</code>) or drawing the contours of the points on the original image (<code>add.contours</code>).</p>
 <p>By plotting all trajectories in a 2D+time representation, it’s possible to have an overview of all trajectories.</p>
 <p>The following command gives an interactive 3D (2D+time) view of all trajectories (Fig.@ref(fig:cubeTrajs)):</p>
-<div class="sourceCode" id="cb46"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">trajPlatelets</span>, <span class="va">MesenteriumSubset</span><span class="op">)</span></pre></div>
-<pre><code>## Warning: `arrange_()` is deprecated as of dplyr 0.7.0.
-## Please use `arrange()` instead.
-## See vignette('programming') for more help
-## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">trajPlatelets</span>, <span class="va">MesenteriumSubset</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <div id="htmlwidget-30e4409849e39179307f" style="width:700px;height:432.632880098888px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-30e4409849e39179307f">{"x":{"visdat":{"f22518df536":["function () ","plotlyVisDat"]},"cur_data":"f22518df536","attrs":{"f22518df536":{"x":{},"y":{},"z":{},"mode":"lines","line":{"width":2},"split":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"range":[0,0,271]},"yaxis":{"range":[0,0,131]},"scene":{"xaxis":{"title":"xCoord"},"yaxis":{"title":"yCoord"},"zaxis":{"title":"frame"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"x":[186.708333333333,186.964912280702,186.813559322034,186.280701754386,186.689655172414,186.826923076923,186.964285714286,186.620689655172,186.327272727273,186.982142857143,186.803921568627,187.055555555556,187.035714285714,186.87037037037,186.944444444444,187.12962962963,187.018867924528,187.175438596491,186.961538461538,186.944444444444],"y":[47.9375,48.2631578947368,48.1864406779661,47.7017543859649,47.8793103448276,48.1153846153846,48.3035714285714,48.3620689655172,48.0545454545455,48.1964285714286,48.1764705882353,48.2222222222222,48.4464285714286,48.3888888888889,48.3703703703704,48.6111111111111,48.6792452830189,48.5964912280702,48.6153846153846,48.3703703703704],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(31,119,180,1)","width":2},"type":"scatter3d","name":"1","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"frame":null},{"x":[256.190476190476,256.428571428571,256.34693877551,255.5,256.288461538462,256.25,256.25,255.918367346939,255.56862745098,256.065217391304,256.145833333333,256.5,256.645833333333,256.063829787234,256.177777777778,256.630434782609,256.645833333333,256.5,256.177777777778,256.130434782609],"y":[35.8571428571429,35.6734693877551,35.734693877551,35.5,35.8076923076923,36.1041666666667,36.1041666666667,35.8571428571429,35.7843137254902,35.9565217391304,36.2916666666667,36.44,36.4583333333333,36.2127659574468,36.3333333333333,36.2173913043478,36.4583333333333,36.44,36.3333333333333,36.2608695652174],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(255,127,14,1)","width":2},"type":"scatter3d","name":"2","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"frame":null},{"x":[251.095238095238,251.382978723404,251.632653061224,250.574468085106,251.36170212766,251.695652173913,251.068181818182,250.928571428571,250.113636363636,250.928571428571,250.10447761194,251.146341463415,250.142857142857,250.906976744186,251,251.166666666667,251.581395348837,251.666666666667,251.023255813953,251.02380952381],"y":[63.5238095238095,63.2978723404255,63.3673469387755,63.4893617021277,63.4468085106383,63.695652173913,63.5454545454545,63.9285714285714,63.8409090909091,63.9285714285714,61.6119402985075,64.0487804878049,61.5428571428571,64.2790697674419,64,64.1428571428571,64,64.2888888888889,64.1860465116279,64.0952380952381],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(44,160,44,1)","width":2},"type":"scatter3d","name":"3","marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"frame":null},{"x":[215.546875,215.719512195122,215.720930232558,215.120481927711,215.694117647059,215.69512195122,215.5625,215.166666666667,214.83908045977,215.807228915663,215.765432098765,215.795180722892,215.948051948052,215.723684210526,215.615384615385,215.858974358974,215.875,215.901234567901,215.611764705882,215.488095238095],"y":[51.828125,52.2073170731707,52.2906976744186,52.0120481927711,52.2470588235294,52.5365853658537,52.6125,52.4222222222222,52.2413793103448,52.6144578313253,52.8888888888889,53.0120481927711,52.7922077922078,52.8947368421053,52.7435897435897,52.974358974359,53.1,53.1604938271605,53.0352941176471,52.7738095238095],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(214,39,40,1)","width":2},"type":"scatter3d","name":"4","marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"frame":null},{"x":[15.8275862068966,15.741935483871,15.6666666666667,15.4,15.7058823529412,15.9393939393939,16.3448275862069,15.90625,15.3870967741935,16.34375,16.5588235294118,16.5588235294118,16.8,16.2413793103448,16.6333333333333,16.8,16.6896551724138,16.7741935483871,16.3928571428571,16.6206896551724],"y":[8.51724137931035,8.54838709677419,8.5,8.5,8.5,8.48484848484848,8.41379310344828,8.71875,8.35483870967742,8.5,8.64705882352941,8.64705882352941,8.4,8.82758620689655,8.56666666666667,8.56666666666667,8.86206896551724,8.90322580645161,8.53571428571429,8.3448275862069],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(148,103,189,1)","width":2},"type":"scatter3d","name":"5","marker":{"color":"rgba(148,103,189,1)","line":{"color":"rgba(148,103,189,1)"}},"error_y":{"color":"rgba(148,103,189,1)"},"error_x":{"color":"rgba(148,103,189,1)"},"frame":null},{"x":[98.56,98.3793103448276,98.1724137931034,97.9354838709677,98.1333333333333,98.2857142857143,98.3793103448276,98,97.6538461538462,98.3793103448276,98.5172413793103,98.5,98.5185185185185,98.1428571428571,98.5483870967742,98.5,98.5,98.5,98.5,98.34375],"y":[34.8,34.9655172413793,34.8965517241379,34.6774193548387,34.8,34.8928571428571,34.9655172413793,35,34.8846153846154,34.9655172413793,35.1034482758621,35.5,35.4074074074074,35.25,35.2903225806452,35.5,35.5,35.5,35.5,35.15625],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(140,86,75,1)","width":2},"type":"scatter3d","name":"6","marker":{"color":"rgba(140,86,75,1)","line":{"color":"rgba(140,86,75,1)"}},"error_y":{"color":"rgba(140,86,75,1)"},"error_x":{"color":"rgba(140,86,75,1)"},"frame":null},{"x":[39.3809523809524,39.6206896551724,39.125,38.7826086956522,39.5,39.4,39.5,39.0909090909091,38.9090909090909,39.5,39.3913043478261,39.6666666666667,39.0806451612903,39.0909090909091,39.6,39.5,39.6,39.6,39.4,39.4074074074074],"y":[44.2380952380952,44.4827586206897,44.1666666666667,44.0869565217391,44.1666666666667,44.56,44.2727272727273,44.9090909090909,44.0909090909091,44.5,44.7826086956522,44.875,47.8709677419355,44.9090909090909,44.96,45,44.96,44.96,44.96,44.7407407407407],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(227,119,194,1)","width":2},"type":"scatter3d","name":"7","marker":{"color":"rgba(227,119,194,1)","line":{"color":"rgba(227,119,194,1)"}},"error_y":{"color":"rgba(227,119,194,1)"},"error_x":{"color":"rgba(227,119,194,1)"},"frame":null},{"x":[16.8974358974359,35,41.9428571428571,47.4848484848485,61.6875,82.5681818181818,99.6410256410256,110.375,119.631578947368,127.405405405405,137.571428571429,144.25641025641,152.833333333333,157.475,159.717948717949,163.564102564103,165.025641025641,169.945945945946,175,178.717948717949],"y":[70.8205128205128,69.8205128205128,68.9714285714286,69.7878787878788,71.125,71.2727272727273,68.1025641025641,69.725,72.7368421052632,74.945945945946,73.8809523809524,73.5641025641026,72.7142857142857,74.15,75.6923076923077,77.5641025641026,80.1538461538462,79.5675675675676,79.5,81.0769230769231],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(127,127,127,1)","width":2},"type":"scatter3d","name":"8","marker":{"color":"rgba(127,127,127,1)","line":{"color":"rgba(127,127,127,1)"}},"error_y":{"color":"rgba(127,127,127,1)"},"error_x":{"color":"rgba(127,127,127,1)"},"frame":null},{"x":[82.3333333333333,82.2222222222222,82.1578947368421,82.0526315789474,82.6666666666667,82.5,82.6153846153846,82.5,82,83.1428571428571,82.6666666666667,83.5,83.6666666666667,83.1428571428571,83,84,84,82.6666666666667],"y":[126.733333333333,127.055555555556,127.157894736842,126.789473684211,126.733333333333,126.714285714286,126.615384615385,127,126.666666666667,126.714285714286,126.333333333333,127,126.333333333333,126.714285714286,126.5,127,127,126.333333333333],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,17,18,19],"mode":"lines","line":{"color":"rgba(188,189,34,1)","width":2},"type":"scatter3d","name":"9","marker":{"color":"rgba(188,189,34,1)","line":{"color":"rgba(188,189,34,1)"}},"error_y":{"color":"rgba(188,189,34,1)"},"error_x":{"color":"rgba(188,189,34,1)"},"frame":null},{"x":[113,113,112.533333333333,112.533333333333,112.866666666667,113,113,112.777777777778,112.6,113,113.277777777778,113.352941176471,113.363636363636,113,113.466666666667,113.333333333333,113.4,113.333333333333,113.125,113.235294117647],"y":[20,20,19.8666666666667,19.8666666666667,20.4666666666667,20.5,20.5,20.5,20.4,20.5,20.8888888888889,21,21.0909090909091,20.8,21.1333333333333,21.2666666666667,21.4,21.3333333333333,21.3125,21],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(23,190,207,1)","width":2},"type":"scatter3d","name":"10","marker":{"color":"rgba(23,190,207,1)","line":{"color":"rgba(23,190,207,1)"}},"error_y":{"color":"rgba(23,190,207,1)"},"error_x":{"color":"rgba(23,190,207,1)"},"frame":null},{"x":[186.538461538462,186.5,186.473684210526,186.045454545455,186.5,186.571428571429,186.714285714286,186.428571428571,186.095238095238,186.65,186.571428571429,186.736842105263,186.894736842105,186.5,186.818181818182,186.904761904762,186.863636363636,187,186.681818181818,186.578947368421],"y":[13.8461538461538,14.8125,14.6315789473684,14.4545454545455,14.7777777777778,15.1904761904762,15.4285714285714,15.3809523809524,15.0952380952381,15.3,15.6190476190476,15.5263157894737,16.0526315789474,15.5,15.7272727272727,15.952380952381,16.0909090909091,16.1363636363636,16.1363636363636,15.8947368421053],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(31,119,180,1)","width":2},"type":"scatter3d","name":"11","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"frame":null},{"x":[46.4,69,86.7333333333333,95.5862068965517,107.714285714286,123,138.6875,154.805555555556,166,173.969696969697,183.064516129032,197.676470588235,211.636363636364,213.5,216.185185185185,222.962962962963,228.413793103448,228.6,229.054054054054,230.135135135135],"y":[57.2,56.3939393939394,58.4666666666667,60.2758620689655,56.8214285714286,54.8620689655172,58.28125,57.75,58.2647058823529,61.5757575757576,62.4193548387097,61.9117647058824,62.6818181818182,64.6153846153846,65.4814814814815,66.5925925925926,67.1379310344828,67.4857142857143,68.5675675675676,69.7027027027027],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(255,127,14,1)","width":2},"type":"scatter3d","name":"12","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"frame":null},{"x":[20.5,20.6666666666667,20.125,19.9090909090909,20.5454545454545,20.6153846153846,21.125,13.7659574468085,24.6849315068493,41.4074074074074,64.0217391304348,78.804347826087,89.8695652173913,98.6428571428571,103.326086956522,115.617021276596,131.731707317073,145.75,166.682926829268,181.5],"y":[112.5,112.111111111111,112,112.818181818182,112.363636363636,112.384615384615,111.875,110.489361702128,113.534246575342,114.388888888889,113.413043478261,113.673913043478,111.086956521739,109.904761904762,110.586956521739,113,113.268292682927,109.839285714286,110.048780487805,108],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(44,160,44,1)","width":2},"type":"scatter3d","name":"13","marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"frame":null},{"x":[248,247.5,248.111111111111,248,247.857142857143,247.5,247.777777777778,247.9,248.04347826087,247.526315789474,248.173913043478,247.809523809524,247.909090909091,247.7,247.454545454545,247.368421052632],"y":[55,56,55.6666666666667,56.5,56.9285714285714,56.5,57.1666666666667,56.9,56.9565217391304,56.3684210526316,56.9130434782609,56.8571428571429,56.9090909090909,56.9,56.5909090909091,56.7368421052632],"z":[3,4,5,6,7,8,9,10,12,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(214,39,40,1)","width":2},"type":"scatter3d","name":"14","marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"frame":null},{"x":[1.5,16.7,36.5476190476191,49,55.5862068965517,63.0645161290323,78.6551724137931,94.2,107.035714285714,119.333333333333,129.928571428571,146.513513513514,163.305555555556,178.971428571429,204.046511627907,219.142857142857],"y":[31.5,33.76,33.0238095238095,29.5,27.2758620689655,26.9354838709677,27.9310344827586,27.6,29,30,30.3095238095238,31.3513513513514,32.0555555555556,30.8857142857143,32.3720930232558,33],"z":[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(148,103,189,1)","width":2},"type":"scatter3d","name":"15","marker":{"color":"rgba(148,103,189,1)","line":{"color":"rgba(148,103,189,1)"}},"error_y":{"color":"rgba(148,103,189,1)"},"error_x":{"color":"rgba(148,103,189,1)"},"frame":null},{"x":[19,19.6666666666667,20.3333333333333,21.5,19.6363636363636,20.8,20.3333333333333,20.2,19.5454545454545],"y":[112.285714285714,112.333333333333,112.5,113,113.090909090909,112.6,113,112.4,112.272727272727],"z":[10,11,12,13,14,16,17,19,20],"mode":"lines","line":{"color":"rgba(140,86,75,1)","width":2},"type":"scatter3d","name":"16","marker":{"color":"rgba(140,86,75,1)","line":{"color":"rgba(140,86,75,1)"}},"error_y":{"color":"rgba(140,86,75,1)"},"error_x":{"color":"rgba(140,86,75,1)"},"frame":null},{"x":[6.41463414634146,23.8205128205128],"y":[46.5365853658537,48.9230769230769],"z":[11,12],"mode":"lines","line":{"color":"rgba(227,119,194,1)","width":2},"type":"scatter3d","name":"17","marker":{"color":"rgba(227,119,194,1)","line":{"color":"rgba(227,119,194,1)"}},"error_y":{"color":"rgba(227,119,194,1)"},"error_x":{"color":"rgba(227,119,194,1)"},"frame":null},{"x":[27,27,27],"y":[9.5,10,10],"z":[12,14,16],"mode":"lines","line":{"color":"rgba(127,127,127,1)","width":2},"type":"scatter3d","name":"18","marker":{"color":"rgba(127,127,127,1)","line":{"color":"rgba(127,127,127,1)"}},"error_y":{"color":"rgba(127,127,127,1)"},"error_x":{"color":"rgba(127,127,127,1)"},"frame":null},{"x":[51.5714285714286,59.7560975609756,74.2285714285714,87.0476190476191,110.909090909091,135.829268292683,151.666666666667],"y":[47.8571428571429,47.8780487804878,49.0285714285714,53.0952380952381,53.3636363636364,54.3170731707317,54.2820512820513],"z":[14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(188,189,34,1)","width":2},"type":"scatter3d","name":"19","marker":{"color":"rgba(188,189,34,1)","line":{"color":"rgba(188,189,34,1)"}},"error_y":{"color":"rgba(188,189,34,1)"},"error_x":{"color":"rgba(188,189,34,1)"},"frame":null},{"x":[142,142],"y":[11,11],"z":[16,17],"mode":"lines","line":{"color":"rgba(23,190,207,1)","width":2},"type":"scatter3d","name":"20","marker":{"color":"rgba(23,190,207,1)","line":{"color":"rgba(23,190,207,1)"}},"error_y":{"color":"rgba(23,190,207,1)"},"error_x":{"color":"rgba(23,190,207,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script><p class="caption">
+<script type="application/json" data-for="htmlwidget-30e4409849e39179307f">{"x":{"visdat":{"15de66eb36317":["function () ","plotlyVisDat"]},"cur_data":"15de66eb36317","attrs":{"15de66eb36317":{"x":{},"y":{},"z":{},"mode":"lines","line":{"width":2},"split":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"range":[0,0,271]},"yaxis":{"range":[0,0,131]},"scene":{"xaxis":{"title":"xCoord"},"yaxis":{"title":"yCoord"},"zaxis":{"title":"frame"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[186.708333333333,186.964912280702,186.813559322034,186.280701754386,186.689655172414,186.826923076923,186.964285714286,186.620689655172,186.327272727273,186.982142857143,186.803921568627,187.055555555556,187.035714285714,186.87037037037,186.944444444444,187.12962962963,187.018867924528,187.175438596491,186.961538461538,186.944444444444],"y":[47.9375,48.2631578947368,48.1864406779661,47.7017543859649,47.8793103448276,48.1153846153846,48.3035714285714,48.3620689655172,48.0545454545455,48.1964285714286,48.1764705882353,48.2222222222222,48.4464285714286,48.3888888888889,48.3703703703704,48.6111111111111,48.6792452830189,48.5964912280702,48.6153846153846,48.3703703703704],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(31,119,180,1)","width":2},"type":"scatter3d","name":"1","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"frame":null},{"x":[256.190476190476,256.428571428571,256.34693877551,255.5,256.288461538462,256.25,256.25,255.918367346939,255.56862745098,256.065217391304,256.145833333333,256.5,256.645833333333,256.063829787234,256.177777777778,256.630434782609,256.645833333333,256.5,256.177777777778,256.130434782609],"y":[35.8571428571429,35.6734693877551,35.734693877551,35.5,35.8076923076923,36.1041666666667,36.1041666666667,35.8571428571429,35.7843137254902,35.9565217391304,36.2916666666667,36.44,36.4583333333333,36.2127659574468,36.3333333333333,36.2173913043478,36.4583333333333,36.44,36.3333333333333,36.2608695652174],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(255,127,14,1)","width":2},"type":"scatter3d","name":"2","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"frame":null},{"x":[251.095238095238,251.382978723404,251.632653061224,250.574468085106,251.36170212766,251.695652173913,251.068181818182,250.928571428571,250.113636363636,250.928571428571,250.10447761194,251.146341463415,250.142857142857,250.906976744186,251,251.166666666667,251.581395348837,251.666666666667,251.023255813953,251.02380952381],"y":[63.5238095238095,63.2978723404255,63.3673469387755,63.4893617021277,63.4468085106383,63.695652173913,63.5454545454545,63.9285714285714,63.8409090909091,63.9285714285714,61.6119402985075,64.0487804878049,61.5428571428571,64.2790697674419,64,64.1428571428571,64,64.2888888888889,64.1860465116279,64.0952380952381],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(44,160,44,1)","width":2},"type":"scatter3d","name":"3","marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"frame":null},{"x":[215.546875,215.719512195122,215.720930232558,215.120481927711,215.694117647059,215.69512195122,215.5625,215.166666666667,214.83908045977,215.807228915663,215.765432098765,215.795180722892,215.948051948052,215.723684210526,215.615384615385,215.858974358974,215.875,215.901234567901,215.611764705882,215.488095238095],"y":[51.828125,52.2073170731707,52.2906976744186,52.0120481927711,52.2470588235294,52.5365853658537,52.6125,52.4222222222222,52.2413793103448,52.6144578313253,52.8888888888889,53.0120481927711,52.7922077922078,52.8947368421053,52.7435897435897,52.974358974359,53.1,53.1604938271605,53.0352941176471,52.7738095238095],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(214,39,40,1)","width":2},"type":"scatter3d","name":"4","marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"frame":null},{"x":[15.8275862068966,15.741935483871,15.6666666666667,15.4,15.7058823529412,15.9393939393939,16.3448275862069,15.90625,15.3870967741935,16.34375,16.5588235294118,16.5588235294118,16.8,16.2413793103448,16.6333333333333,16.8,16.6896551724138,16.7741935483871,16.3928571428571,16.6206896551724],"y":[8.51724137931035,8.54838709677419,8.5,8.5,8.5,8.48484848484848,8.41379310344828,8.71875,8.35483870967742,8.5,8.64705882352941,8.64705882352941,8.4,8.82758620689655,8.56666666666667,8.56666666666667,8.86206896551724,8.90322580645161,8.53571428571429,8.3448275862069],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(148,103,189,1)","width":2},"type":"scatter3d","name":"5","marker":{"color":"rgba(148,103,189,1)","line":{"color":"rgba(148,103,189,1)"}},"error_y":{"color":"rgba(148,103,189,1)"},"error_x":{"color":"rgba(148,103,189,1)"},"frame":null},{"x":[98.56,98.3793103448276,98.1724137931034,97.9354838709677,98.1333333333333,98.2857142857143,98.3793103448276,98,97.6538461538462,98.3793103448276,98.5172413793103,98.5,98.5185185185185,98.1428571428571,98.5483870967742,98.5,98.5,98.5,98.5,98.34375],"y":[34.8,34.9655172413793,34.8965517241379,34.6774193548387,34.8,34.8928571428571,34.9655172413793,35,34.8846153846154,34.9655172413793,35.1034482758621,35.5,35.4074074074074,35.25,35.2903225806452,35.5,35.5,35.5,35.5,35.15625],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(140,86,75,1)","width":2},"type":"scatter3d","name":"6","marker":{"color":"rgba(140,86,75,1)","line":{"color":"rgba(140,86,75,1)"}},"error_y":{"color":"rgba(140,86,75,1)"},"error_x":{"color":"rgba(140,86,75,1)"},"frame":null},{"x":[39.3809523809524,39.6206896551724,39.125,38.7826086956522,39.5,39.4,39.5,39.0909090909091,38.9090909090909,39.5,39.3913043478261,39.6666666666667,39.0806451612903,39.0909090909091,39.6,39.5,39.6,39.6,39.4,39.4074074074074],"y":[44.2380952380952,44.4827586206897,44.1666666666667,44.0869565217391,44.1666666666667,44.56,44.2727272727273,44.9090909090909,44.0909090909091,44.5,44.7826086956522,44.875,47.8709677419355,44.9090909090909,44.96,45,44.96,44.96,44.96,44.7407407407407],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(227,119,194,1)","width":2},"type":"scatter3d","name":"7","marker":{"color":"rgba(227,119,194,1)","line":{"color":"rgba(227,119,194,1)"}},"error_y":{"color":"rgba(227,119,194,1)"},"error_x":{"color":"rgba(227,119,194,1)"},"frame":null},{"x":[16.8974358974359,35,41.9428571428571,47.4848484848485,61.6875,82.5681818181818,99.6410256410256,110.375,119.631578947368,127.405405405405,137.571428571429,144.25641025641,152.833333333333,157.475,159.717948717949,163.564102564103,165.025641025641,169.945945945946,175,178.717948717949],"y":[70.8205128205128,69.8205128205128,68.9714285714286,69.7878787878788,71.125,71.2727272727273,68.1025641025641,69.725,72.7368421052632,74.945945945946,73.8809523809524,73.5641025641026,72.7142857142857,74.15,75.6923076923077,77.5641025641026,80.1538461538462,79.5675675675676,79.5,81.0769230769231],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(127,127,127,1)","width":2},"type":"scatter3d","name":"8","marker":{"color":"rgba(127,127,127,1)","line":{"color":"rgba(127,127,127,1)"}},"error_y":{"color":"rgba(127,127,127,1)"},"error_x":{"color":"rgba(127,127,127,1)"},"frame":null},{"x":[82.3333333333333,82.2222222222222,82.1578947368421,82.0526315789474,82.6666666666667,82.5,82.6153846153846,82.5,82,83.1428571428571,82.6666666666667,83.5,83.6666666666667,83.1428571428571,83,84,84,82.6666666666667],"y":[126.733333333333,127.055555555556,127.157894736842,126.789473684211,126.733333333333,126.714285714286,126.615384615385,127,126.666666666667,126.714285714286,126.333333333333,127,126.333333333333,126.714285714286,126.5,127,127,126.333333333333],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,17,18,19],"mode":"lines","line":{"color":"rgba(188,189,34,1)","width":2},"type":"scatter3d","name":"9","marker":{"color":"rgba(188,189,34,1)","line":{"color":"rgba(188,189,34,1)"}},"error_y":{"color":"rgba(188,189,34,1)"},"error_x":{"color":"rgba(188,189,34,1)"},"frame":null},{"x":[113,113,112.533333333333,112.533333333333,112.866666666667,113,113,112.777777777778,112.6,113,113.277777777778,113.352941176471,113.363636363636,113,113.466666666667,113.333333333333,113.4,113.333333333333,113.125,113.235294117647],"y":[20,20,19.8666666666667,19.8666666666667,20.4666666666667,20.5,20.5,20.5,20.4,20.5,20.8888888888889,21,21.0909090909091,20.8,21.1333333333333,21.2666666666667,21.4,21.3333333333333,21.3125,21],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(23,190,207,1)","width":2},"type":"scatter3d","name":"10","marker":{"color":"rgba(23,190,207,1)","line":{"color":"rgba(23,190,207,1)"}},"error_y":{"color":"rgba(23,190,207,1)"},"error_x":{"color":"rgba(23,190,207,1)"},"frame":null},{"x":[186.538461538462,186.5,186.473684210526,186.045454545455,186.5,186.571428571429,186.714285714286,186.428571428571,186.095238095238,186.65,186.571428571429,186.736842105263,186.894736842105,186.5,186.818181818182,186.904761904762,186.863636363636,187,186.681818181818,186.578947368421],"y":[13.8461538461538,14.8125,14.6315789473684,14.4545454545455,14.7777777777778,15.1904761904762,15.4285714285714,15.3809523809524,15.0952380952381,15.3,15.6190476190476,15.5263157894737,16.0526315789474,15.5,15.7272727272727,15.952380952381,16.0909090909091,16.1363636363636,16.1363636363636,15.8947368421053],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(31,119,180,1)","width":2},"type":"scatter3d","name":"11","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"frame":null},{"x":[46.4,69,86.7333333333333,95.5862068965517,107.714285714286,123,138.6875,154.805555555556,166,173.969696969697,183.064516129032,197.676470588235,211.636363636364,213.5,216.185185185185,222.962962962963,228.413793103448,228.6,229.054054054054,230.135135135135],"y":[57.2,56.3939393939394,58.4666666666667,60.2758620689655,56.8214285714286,54.8620689655172,58.28125,57.75,58.2647058823529,61.5757575757576,62.4193548387097,61.9117647058824,62.6818181818182,64.6153846153846,65.4814814814815,66.5925925925926,67.1379310344828,67.4857142857143,68.5675675675676,69.7027027027027],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(255,127,14,1)","width":2},"type":"scatter3d","name":"12","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"frame":null},{"x":[20.5,20.6666666666667,20.125,19.9090909090909,20.5454545454545,20.6153846153846,21.125,13.7659574468085,24.6849315068493,41.4074074074074,64.0217391304348,78.804347826087,89.8695652173913,98.6428571428571,103.326086956522,115.617021276596,131.731707317073,145.75,166.682926829268,181.5],"y":[112.5,112.111111111111,112,112.818181818182,112.363636363636,112.384615384615,111.875,110.489361702128,113.534246575342,114.388888888889,113.413043478261,113.673913043478,111.086956521739,109.904761904762,110.586956521739,113,113.268292682927,109.839285714286,110.048780487805,108],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(44,160,44,1)","width":2},"type":"scatter3d","name":"13","marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"frame":null},{"x":[248,247.5,248.111111111111,248,247.857142857143,247.5,247.777777777778,247.9,248.04347826087,247.526315789474,248.173913043478,247.809523809524,247.909090909091,247.7,247.454545454545,247.368421052632],"y":[55,56,55.6666666666667,56.5,56.9285714285714,56.5,57.1666666666667,56.9,56.9565217391304,56.3684210526316,56.9130434782609,56.8571428571429,56.9090909090909,56.9,56.5909090909091,56.7368421052632],"z":[3,4,5,6,7,8,9,10,12,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(214,39,40,1)","width":2},"type":"scatter3d","name":"14","marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"frame":null},{"x":[1.5,16.7,36.5476190476191,49,55.5862068965517,63.0645161290323,78.6551724137931,94.2,107.035714285714,119.333333333333,129.928571428571,146.513513513514,163.305555555556,178.971428571429,204.046511627907,219.142857142857],"y":[31.5,33.76,33.0238095238095,29.5,27.2758620689655,26.9354838709677,27.9310344827586,27.6,29,30,30.3095238095238,31.3513513513514,32.0555555555556,30.8857142857143,32.3720930232558,33],"z":[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(148,103,189,1)","width":2},"type":"scatter3d","name":"15","marker":{"color":"rgba(148,103,189,1)","line":{"color":"rgba(148,103,189,1)"}},"error_y":{"color":"rgba(148,103,189,1)"},"error_x":{"color":"rgba(148,103,189,1)"},"frame":null},{"x":[19,19.6666666666667,20.3333333333333,21.5,19.6363636363636,20.8,20.3333333333333,20.2,19.5454545454545],"y":[112.285714285714,112.333333333333,112.5,113,113.090909090909,112.6,113,112.4,112.272727272727],"z":[10,11,12,13,14,16,17,19,20],"mode":"lines","line":{"color":"rgba(140,86,75,1)","width":2},"type":"scatter3d","name":"16","marker":{"color":"rgba(140,86,75,1)","line":{"color":"rgba(140,86,75,1)"}},"error_y":{"color":"rgba(140,86,75,1)"},"error_x":{"color":"rgba(140,86,75,1)"},"frame":null},{"x":[6.41463414634146,23.8205128205128],"y":[46.5365853658537,48.9230769230769],"z":[11,12],"mode":"lines","line":{"color":"rgba(227,119,194,1)","width":2},"type":"scatter3d","name":"17","marker":{"color":"rgba(227,119,194,1)","line":{"color":"rgba(227,119,194,1)"}},"error_y":{"color":"rgba(227,119,194,1)"},"error_x":{"color":"rgba(227,119,194,1)"},"frame":null},{"x":[27,27,27],"y":[9.5,10,10],"z":[12,14,16],"mode":"lines","line":{"color":"rgba(127,127,127,1)","width":2},"type":"scatter3d","name":"18","marker":{"color":"rgba(127,127,127,1)","line":{"color":"rgba(127,127,127,1)"}},"error_y":{"color":"rgba(127,127,127,1)"},"error_x":{"color":"rgba(127,127,127,1)"},"frame":null},{"x":[51.5714285714286,59.7560975609756,74.2285714285714,87.0476190476191,110.909090909091,135.829268292683,151.666666666667],"y":[47.8571428571429,47.8780487804878,49.0285714285714,53.0952380952381,53.3636363636364,54.3170731707317,54.2820512820513],"z":[14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(188,189,34,1)","width":2},"type":"scatter3d","name":"19","marker":{"color":"rgba(188,189,34,1)","line":{"color":"rgba(188,189,34,1)"}},"error_y":{"color":"rgba(188,189,34,1)"},"error_x":{"color":"rgba(188,189,34,1)"},"frame":null},{"x":[142,142],"y":[11,11],"z":[16,17],"mode":"lines","line":{"color":"rgba(23,190,207,1)","width":2},"type":"scatter3d","name":"20","marker":{"color":"rgba(23,190,207,1)","line":{"color":"rgba(23,190,207,1)"}},"error_y":{"color":"rgba(23,190,207,1)"},"error_x":{"color":"rgba(23,190,207,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script><p class="caption">
 A 2D+time representation of the trajectories. This is produced by plotting a <code>TrajectoryList</code> object
 </p>
 </div>
 <p>The <code>plot2D.TrajectorySet</code> focuses on additional information and a different “point of view”, but can just display a two dimensional projection of the identified trajectories (Fig.@ref(fig:overviewTrajs)).</p>
-<div class="sourceCode" id="cb48"><pre class="downlit">
-<span class="fu"><a href="../reference/plot2D.TrajectorySet.html">plot2D.TrajectorySet</a></span><span class="op">(</span><span class="va">trajPlatelets</span>, <span class="va">MesenteriumSubset</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/plot2D.TrajectorySet.html">plot2D.TrajectorySet</a></span><span class="op">(</span><span class="va">trajPlatelets</span>, <span class="va">MesenteriumSubset</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <img src="flowcatchr_vignette_files/figure-html/overviewTrajs-1.png" alt='A 2D "flat" representation of the trajectories. This is more suitable to give an indication of the global movement' width="720"><p class="caption">
 A 2D “flat” representation of the trajectories. This is more suitable to give an indication of the global movement
 </p>
 </div>
 <p>To have more insights on single trajectories, or on a subset of them, <code>add.contours</code> offers an additional mode called <code>trajectories</code>. Particles are drawn on the raw images with colours corresponding to the trajectory IDs. <code>add.contours</code> plots by default all trajectories, but the user can supply a vector of the IDs of interest to override this behaviour.</p>
-<div class="sourceCode" id="cb49"><pre class="downlit">
-<span class="va">paintedTrajectories</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add.contours.html">add.contours</a></span><span class="op">(</span>raw.frames<span class="op">=</span><span class="va">MesenteriumSubset</span>,
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">paintedTrajectories</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add.contours.html">add.contours</a></span><span class="op">(</span>raw.frames<span class="op">=</span><span class="va">MesenteriumSubset</span>,
                                     binary.frames<span class="op">=</span><span class="va">preprocessedPlatelets</span>,  
                                     trajectoryset<span class="op">=</span><span class="va">trajPlatelets</span>,
                                     mode<span class="op">=</span><span class="st">"trajectories"</span><span class="op">)</span>
-<span class="va">paintedTrajectories</span></pre></div>
-<pre><code>## Frames 
-##   colorMode    : Color 
-##   storage.mode : double 
-##   dim          : 271 131 3 20 
-##   frames.total : 60 
-##   frames.render: 20 
-## 
-## imageData(object)[1:5,1:6,1,1]
-##           [,1]      [,2]      [,3]      [,4]      [,5]      [,6]
-## [1,] 0.1647059 0.2117647 0.1882353 0.1803922 0.1607843 0.1333333
-## [2,] 0.2352941 0.1882353 0.1803922 0.1568627 0.1411765 0.1372549
-## [3,] 0.2352941 0.2000000 0.1764706 0.1490196 0.1333333 0.1333333
-## [4,] 0.2352941 0.2117647 0.1764706 0.1529412 0.1411765 0.1411765
-## [5,] 0.2313725 0.2078431 0.1725490 0.1411765 0.1294118 0.1411765
-## 
-## Channel(s): all</code></pre>
+<span class="va">paintedTrajectories</span></code></pre></div>
+<pre><code><span class="co">## Frames </span>
+<span class="co">##   colorMode    : Color </span>
+<span class="co">##   storage.mode : double </span>
+<span class="co">##   dim          : 271 131 3 20 </span>
+<span class="co">##   frames.total : 60 </span>
+<span class="co">##   frames.render: 20 </span>
+<span class="co">## </span>
+<span class="co">## imageData(object)[1:5,1:6,1,1]</span>
+<span class="co">##           [,1]      [,2]      [,3]      [,4]      [,5]      [,6]</span>
+<span class="co">## [1,] 0.1647059 0.2117647 0.1882353 0.1803922 0.1607843 0.1333333</span>
+<span class="co">## [2,] 0.2352941 0.1882353 0.1803922 0.1568627 0.1411765 0.1372549</span>
+<span class="co">## [3,] 0.2352941 0.2000000 0.1764706 0.1490196 0.1333333 0.1333333</span>
+<span class="co">## [4,] 0.2352941 0.2117647 0.1764706 0.1529412 0.1411765 0.1411765</span>
+<span class="co">## [5,] 0.2313725 0.2078431 0.1725490 0.1411765 0.1294118 0.1411765</span>
+<span class="co">## </span>
+<span class="co">## Channel(s): all</span></code></pre>
 <p>As with any other <code>Frames</code> object, it is recommended to take a peek at it via the <code>inspect.Frames</code> function (Fig.@ref(fig:inspectTrajs)):</p>
-<div class="sourceCode" id="cb51"><pre class="downlit">
-<span class="fu"><a href="../reference/inspect.Frames.html">inspect.Frames</a></span><span class="op">(</span><span class="va">paintedTrajectories</span>,nframes<span class="op">=</span><span class="fl">9</span>,display.method<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/inspect.Frames.html">inspect.Frames</a></span><span class="op">(</span><span class="va">paintedTrajectories</span>,nframes<span class="op">=</span><span class="fl">9</span>,display.method<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <img src="flowcatchr_vignette_files/figure-html/inspectTrajs-1.png" alt="Particles detected in the first 9 frames. These are shown this time in colours corresponding to the identified trajectories, again with their contours defined by the segmentation procedure." width="720"><p class="caption">
 Particles detected in the first 9 frames. These are shown this time in colours corresponding to the identified trajectories, again with their contours defined by the segmentation procedure.
 </p>
 </div>
 <p>To allow for a thorough evaluation of the single trajectories, <code>export.Frames</code> is a valid helper, as it creates single images corresponding to each frame in the <code>Frames</code> object. We first extract for example trajectory 11 (Fig.@ref(fig:traj11)) with the following command:</p>
-<div class="sourceCode" id="cb52"><pre class="downlit">
-<span class="va">traj11</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add.contours.html">add.contours</a></span><span class="op">(</span>raw.frames<span class="op">=</span><span class="va">MesenteriumSubset</span>,
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">traj11</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add.contours.html">add.contours</a></span><span class="op">(</span>raw.frames<span class="op">=</span><span class="va">MesenteriumSubset</span>,
                        binary.frames<span class="op">=</span><span class="va">preprocessedPlatelets</span>,
                        trajectoryset<span class="op">=</span><span class="va">trajPlatelets</span>,
                        mode<span class="op">=</span><span class="st">"trajectories"</span>,
                        trajIDs<span class="op">=</span><span class="fl">11</span><span class="op">)</span>
-<span class="va">traj11</span></pre></div>
-<pre><code>## Frames 
-##   colorMode    : Color 
-##   storage.mode : double 
-##   dim          : 271 131 3 20 
-##   frames.total : 60 
-##   frames.render: 20 
-## 
-## imageData(object)[1:5,1:6,1,1]
-##           [,1]      [,2]      [,3]      [,4]      [,5]      [,6]
-## [1,] 0.1647059 0.2117647 0.1882353 0.1803922 0.1607843 0.1333333
-## [2,] 0.2352941 0.1882353 0.1803922 0.1568627 0.1411765 0.1372549
-## [3,] 0.2352941 0.2000000 0.1764706 0.1490196 0.1333333 0.1333333
-## [4,] 0.2352941 0.2117647 0.1764706 0.1529412 0.1411765 0.1411765
-## [5,] 0.2313725 0.2078431 0.1725490 0.1411765 0.1294118 0.1411765
-## 
-## Channel(s): all</code></pre>
-<div class="sourceCode" id="cb54"><pre class="downlit">
-<span class="fu"><a href="../reference/inspect.Frames.html">inspect.Frames</a></span><span class="op">(</span><span class="va">traj11</span>, nframes<span class="op">=</span><span class="fl">9</span>, display.method<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span></pre></div>
+<span class="va">traj11</span></code></pre></div>
+<pre><code><span class="co">## Frames </span>
+<span class="co">##   colorMode    : Color </span>
+<span class="co">##   storage.mode : double </span>
+<span class="co">##   dim          : 271 131 3 20 </span>
+<span class="co">##   frames.total : 60 </span>
+<span class="co">##   frames.render: 20 </span>
+<span class="co">## </span>
+<span class="co">## imageData(object)[1:5,1:6,1,1]</span>
+<span class="co">##           [,1]      [,2]      [,3]      [,4]      [,5]      [,6]</span>
+<span class="co">## [1,] 0.1647059 0.2117647 0.1882353 0.1803922 0.1607843 0.1333333</span>
+<span class="co">## [2,] 0.2352941 0.1882353 0.1803922 0.1568627 0.1411765 0.1372549</span>
+<span class="co">## [3,] 0.2352941 0.2000000 0.1764706 0.1490196 0.1333333 0.1333333</span>
+<span class="co">## [4,] 0.2352941 0.2117647 0.1764706 0.1529412 0.1411765 0.1411765</span>
+<span class="co">## [5,] 0.2313725 0.2078431 0.1725490 0.1411765 0.1294118 0.1411765</span>
+<span class="co">## </span>
+<span class="co">## Channel(s): all</span></code></pre>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/inspect.Frames.html">inspect.Frames</a></span><span class="op">(</span><span class="va">traj11</span>, nframes<span class="op">=</span><span class="fl">9</span>, display.method<span class="op">=</span><span class="st">"raster"</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <img src="flowcatchr_vignette_files/figure-html/traj11-1.png" alt="First 9 frames for trajectory with ID 11. This is supplied to the `trajIds` argument of `add.contours`" width="720"><p class="caption">
 First 9 frames for trajectory with ID 11. This is supplied to the <code>trajIds</code> argument of <code>add.contours</code>
 </p>
 </div>
 <p>The data for trajectory 11 in the <code>TrajectorySet</code> object can be printed to the terminal:</p>
-<div class="sourceCode" id="cb55"><pre class="downlit">
-<span class="va">trajPlatelets</span><span class="op">[[</span><span class="fl">11</span><span class="op">]</span><span class="op">]</span></pre></div>
-<pre><code>## $trajectory
-##         xCoord   yCoord trajLabel frame frameobjectID
-## 11_1  186.5385 13.84615        11     1            11
-## 11_2  186.5000 14.81250        11     2            12
-## 11_3  186.4737 14.63158        11     3            11
-## 11_4  186.0455 14.45455        11     4             9
-## 11_5  186.5000 14.77778        11     5            11
-## 11_6  186.5714 15.19048        11     6            12
-## 11_7  186.7143 15.42857        11     7            11
-## 11_8  186.4286 15.38095        11     8            12
-## 11_9  186.0952 15.09524        11     9            11
-## 11_10 186.6500 15.30000        11    10            13
-## 11_11 186.5714 15.61905        11    11            14
-## 11_12 186.7368 15.52632        11    12            12
-## 11_13 186.8947 16.05263        11    13            12
-## 11_14 186.5000 15.50000        11    14            15
-## 11_15 186.8182 15.72727        11    15            13
-## 11_16 186.9048 15.95238        11    16            11
-## 11_17 186.8636 16.09091        11    17            12
-## 11_18 187.0000 16.13636        11    18            11
-## 11_19 186.6818 16.13636        11    19            15
-## 11_20 186.5789 15.89474        11    20            16
-## 
-## $npoints
-## [1] 20
-## 
-## $nframes
-## [1] 20
-## 
-## $ngaps
-## [1] 0
-## 
-## $keep
-## [1] NA
-## 
-## $ID
-## [1] 11</code></pre>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">trajPlatelets</span><span class="op">[[</span><span class="fl">11</span><span class="op">]</span><span class="op">]</span></code></pre></div>
+<pre><code><span class="co">## $trajectory</span>
+<span class="co">##         xCoord   yCoord trajLabel frame frameobjectID</span>
+<span class="co">## 11_1  186.5385 13.84615        11     1            11</span>
+<span class="co">## 11_2  186.5000 14.81250        11     2            12</span>
+<span class="co">## 11_3  186.4737 14.63158        11     3            11</span>
+<span class="co">## 11_4  186.0455 14.45455        11     4             9</span>
+<span class="co">## 11_5  186.5000 14.77778        11     5            11</span>
+<span class="co">## 11_6  186.5714 15.19048        11     6            12</span>
+<span class="co">## 11_7  186.7143 15.42857        11     7            11</span>
+<span class="co">## 11_8  186.4286 15.38095        11     8            12</span>
+<span class="co">## 11_9  186.0952 15.09524        11     9            11</span>
+<span class="co">## 11_10 186.6500 15.30000        11    10            13</span>
+<span class="co">## 11_11 186.5714 15.61905        11    11            14</span>
+<span class="co">## 11_12 186.7368 15.52632        11    12            12</span>
+<span class="co">## 11_13 186.8947 16.05263        11    13            12</span>
+<span class="co">## 11_14 186.5000 15.50000        11    14            15</span>
+<span class="co">## 11_15 186.8182 15.72727        11    15            13</span>
+<span class="co">## 11_16 186.9048 15.95238        11    16            11</span>
+<span class="co">## 11_17 186.8636 16.09091        11    17            12</span>
+<span class="co">## 11_18 187.0000 16.13636        11    18            11</span>
+<span class="co">## 11_19 186.6818 16.13636        11    19            15</span>
+<span class="co">## 11_20 186.5789 15.89474        11    20            16</span>
+<span class="co">## </span>
+<span class="co">## $npoints</span>
+<span class="co">## [1] 20</span>
+<span class="co">## </span>
+<span class="co">## $nframes</span>
+<span class="co">## [1] 20</span>
+<span class="co">## </span>
+<span class="co">## $ngaps</span>
+<span class="co">## [1] 0</span>
+<span class="co">## </span>
+<span class="co">## $keep</span>
+<span class="co">## [1] NA</span>
+<span class="co">## </span>
+<span class="co">## $ID</span>
+<span class="co">## [1] 11</span></code></pre>
 <p>After that, it can also be exported with the following command (the <code>dir</code> parameter must be changed accordingly):</p>
-<div class="sourceCode" id="cb57"><pre class="downlit">
-<span class="fu"><a href="../reference/export.Frames.html">export.Frames</a></span><span class="op">(</span><span class="va">traj11</span>, dir<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, nameStub<span class="op">=</span><span class="st">"vignetteTest_traj11"</span>,
-              createGif<span class="op">=</span><span class="cn">TRUE</span>, removeAfterCreatingGif<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/export.Frames.html">export.Frames</a></span><span class="op">(</span><span class="va">traj11</span>, dir<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, nameStub<span class="op">=</span><span class="st">"vignetteTest_traj11"</span>,
+              createGif<span class="op">=</span><span class="cn">TRUE</span>, removeAfterCreatingGif<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 <p><code>export.Frames</code> offers multiple ways to export - animated gif (if <code>ImageMagick</code> is available and installed on the system) or multiple jpeg/png images.</p>
 <p>Of course the user might want to singularly evaluate each trajectory that was identified, and this can be done by looping over the trajectory IDs.</p>
-<div class="sourceCode" id="cb58"><pre class="downlit">
-<span class="va">evaluatedTrajectories</span> <span class="op">&lt;-</span> <span class="va">trajPlatelets</span>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">evaluatedTrajectories</span> <span class="op">&lt;-</span> <span class="va">trajPlatelets</span>
 
-<span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">trajPlatelets</span><span class="op">)</span><span class="op">)</span>
+<span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">trajPlatelets</span><span class="op">)</span><span class="op">)</span>
 <span class="op">{</span>
   <span class="va">paintedTraj</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/add.contours.html">add.contours</a></span><span class="op">(</span>raw.frames<span class="op">=</span><span class="va">MesenteriumSubset</span>,
                               binary.frames<span class="op">=</span><span class="va">preprocessedPlatelets</span>,
@@ -681,7 +677,7 @@ First 9 frames for trajectory with ID 11. This is supplied to the <code>trajIds<
                               col<span class="op">=</span><span class="st">"yellow"</span>,
                               trajIDs<span class="op">=</span><span class="va">i</span><span class="op">)</span>  
   <span class="fu"><a href="../reference/export.Frames.html">export.Frames</a></span><span class="op">(</span><span class="va">paintedTraj</span>,
-                nameStub<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">"vignetteTest_evaluation_traj_oneByOne_"</span>,<span class="va">i</span><span class="op">)</span>,
+                nameStub<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"vignetteTest_evaluation_traj_oneByOne_"</span>,<span class="va">i</span><span class="op">)</span>,
                 createGif<span class="op">=</span><span class="cn">TRUE</span>, removeAfterCreatingGif<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>
   <span class="co">### uncomment the code below to perform the interactive evaluation of the single trajectories</span>
 
@@ -690,66 +686,66 @@ First 9 frames for trajectory with ID 11. This is supplied to the <code>trajIds<
   <span class="co">#   ## if neither 0 nor 1, do not update</span>
   <span class="co">#   ## otherwise, this becomes the value for the field keep in the new TrajectoryList</span>
   <span class="co">#   evaluatedTrajectories@.Data[[i]]$keep &lt;- as.logical(as.numeric(userInput))</span>
-<span class="op">}</span></pre></div>
+<span class="op">}</span></code></pre></div>
 <p>Always using trajectory 11 as example, we would set <code>evaluatedTrajectories[[11]]$keep</code> to <code>TRUE</code>, since the trajectory was correctly identified, as we just checked.</p>
 <p>Once all trajectories have been selected, we can proceed to calculate (a set of) kinematic parameters, for a single or all trajectories in a <code>TrajectorySet</code> object. The function <code>kinematics</code> returns the desired output, respectively a <code>KinematicsFeatures</code> object, a <code>KinematicsFeaturesSet</code>, a single value or a vector (or list, if not coercible to vector) of these single values (one parameter for each trajectory).</p>
-<div class="sourceCode" id="cb59"><pre class="downlit">
-<span class="va">allKinematicFeats.allPlatelets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/kinematics.html">kinematics</a></span><span class="op">(</span><span class="va">trajPlatelets</span>,
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">allKinematicFeats.allPlatelets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/kinematics.html">kinematics</a></span><span class="op">(</span><span class="va">trajPlatelets</span>,
                                              trajectoryIDs<span class="op">=</span><span class="cn">NULL</span>, <span class="co"># will select all trajectory IDs </span>
                                              acquisitionFrequency<span class="op">=</span><span class="fl">30</span>, <span class="co"># value in milliseconds</span>
                                              scala<span class="op">=</span><span class="fl">50</span>, <span class="co"># 1 pixel is equivalent to ... micrometer</span>
-                                             feature<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span> <span class="co"># all kinematic features available</span></pre></div>
-<pre><code>## Warning in extractKinematics.traj(trajectoryset, i, acquisitionFrequency =
-## acquisitionFrequency, : The trajectory with ID 17 had 3 or less points, no
-## features were computed.</code></pre>
-<pre><code>## Warning in extractKinematics.traj(trajectoryset, i, acquisitionFrequency =
-## acquisitionFrequency, : The trajectory with ID 18 had 3 or less points, no
-## features were computed.</code></pre>
-<pre><code>## Warning in extractKinematics.traj(trajectoryset, i, acquisitionFrequency =
-## acquisitionFrequency, : The trajectory with ID 20 had 3 or less points, no
-## features were computed.</code></pre>
+                                             feature<span class="op">=</span><span class="cn">NULL</span><span class="op">)</span> <span class="co"># all kinematic features available</span></code></pre></div>
+<pre><code><span class="co">## Warning in extractKinematics.traj(trajectoryset, i, acquisitionFrequency =</span>
+<span class="co">## acquisitionFrequency, : The trajectory with ID 17 had 3 or less points, no</span>
+<span class="co">## features were computed.</span></code></pre>
+<pre><code><span class="co">## Warning in extractKinematics.traj(trajectoryset, i, acquisitionFrequency =</span>
+<span class="co">## acquisitionFrequency, : The trajectory with ID 18 had 3 or less points, no</span>
+<span class="co">## features were computed.</span></code></pre>
+<pre><code><span class="co">## Warning in extractKinematics.traj(trajectoryset, i, acquisitionFrequency =</span>
+<span class="co">## acquisitionFrequency, : The trajectory with ID 20 had 3 or less points, no</span>
+<span class="co">## features were computed.</span></code></pre>
 <p>As it is reported from the output, the function raises a warning for trajectories which have 3 or less points, as they might be spurious detections. In such cases, no kinematic features are computed.</p>
-<div class="sourceCode" id="cb63"><pre class="downlit">
-<span class="va">allKinematicFeats.allPlatelets</span></pre></div>
-<pre><code>## An object of the KinematicsFeaturesSet class. 
-## 
-## KinematicsFeaturesSet composed of 20  KinematicsFeatures objects
-## 
-## Available features (shown for the first trajectory):
-##  [1] "delta.x"                     "delta.t"                    
-##  [3] "delta.v"                     "totalTime"                  
-##  [5] "totalDistance"               "distStartToEnd"             
-##  [7] "curvilinearVelocity"         "straightLineVelocity"       
-##  [9] "linearityForwardProgression" "trajMSD"                    
-## [11] "velocityAutoCorr"            "instAngle"                  
-## [13] "directChange"                "dirAutoCorr"                
-## [15] "paramsNotComputed"          
-## 
-## Curvilinear Velocity: 0.009970094 
-## Total Distance: 5.682953 
-## Total Time: 570 
-## 
-## Average values (calculated on 3 trajectories where parameters were computed)
-## Average Curvilinear Velocity: 0.1278174 
-## Average Total Distance: 56.08449 
-## Average Total Time: 518.8235</code></pre>
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">allKinematicFeats.allPlatelets</span></code></pre></div>
+<pre><code><span class="co">## An object of the KinematicsFeaturesSet class. </span>
+<span class="co">## </span>
+<span class="co">## KinematicsFeaturesSet composed of 20  KinematicsFeatures objects</span>
+<span class="co">## </span>
+<span class="co">## Available features (shown for the first trajectory):</span>
+<span class="co">##  [1] "delta.x"                     "delta.t"                    </span>
+<span class="co">##  [3] "delta.v"                     "totalTime"                  </span>
+<span class="co">##  [5] "totalDistance"               "distStartToEnd"             </span>
+<span class="co">##  [7] "curvilinearVelocity"         "straightLineVelocity"       </span>
+<span class="co">##  [9] "linearityForwardProgression" "trajMSD"                    </span>
+<span class="co">## [11] "velocityAutoCorr"            "instAngle"                  </span>
+<span class="co">## [13] "directChange"                "dirAutoCorr"                </span>
+<span class="co">## [15] "paramsNotComputed"          </span>
+<span class="co">## </span>
+<span class="co">## Curvilinear Velocity: 0.009970094 </span>
+<span class="co">## Total Distance: 5.682953 </span>
+<span class="co">## Total Time: 570 </span>
+<span class="co">## </span>
+<span class="co">## Average values (calculated on 3 trajectories where parameters were computed)</span>
+<span class="co">## Average Curvilinear Velocity: 0.1278174 </span>
+<span class="co">## Average Total Distance: 56.08449 </span>
+<span class="co">## Average Total Time: 518.8235</span></code></pre>
 <p>A summary for the returned object (in this case a <code>KinematicsFeaturesSet</code>) shows some of the computed parameters. By default, information about the first trajectory is reported in brief, and the same parameters are evaluated on average across the selected trajectories. The true values can be accessed in this case for each trajectory by the subset operator for lists (<code>[[]]</code>), followed by the name of the kinematic feature (e.g., <code>$totalDistance</code>).</p>
 <p>A list of all available parameters is printed with an error message if the user specifies an incorrect name, such as here:</p>
-<div class="sourceCode" id="cb65"><pre class="downlit">
-<span class="va">allKinematicFeats.allPlatelets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/kinematics.html">kinematics</a></span><span class="op">(</span><span class="va">trajPlatelets</span>, feature<span class="op">=</span><span class="st">"?"</span><span class="op">)</span></pre></div>
-<pre><code>## Available features to compute are listed here below.
-##           Please select one among delta.x, delta.t, delta.v, totalTime,
-##           totalDistance, distStartToEnd, curvilinearVelocity,
-##           straightLineVelocity, linearityForwardProgression, trajMSD,
-##           velocityAutoCorr, instAngle, directChange or dirAutoCorr</code></pre>
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">allKinematicFeats.allPlatelets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/kinematics.html">kinematics</a></span><span class="op">(</span><span class="va">trajPlatelets</span>, feature<span class="op">=</span><span class="st">"?"</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## Available features to compute are listed here below.</span>
+<span class="co">##           Please select one among delta.x, delta.t, delta.v, totalTime,</span>
+<span class="co">##           totalDistance, distStartToEnd, curvilinearVelocity,</span>
+<span class="co">##           straightLineVelocity, linearityForwardProgression, trajMSD,</span>
+<span class="co">##           velocityAutoCorr, instAngle, directChange or dirAutoCorr</span></code></pre>
 <p>When asking for a single parameter, the value returned is structured in a vector, such that it is straightforward to proceed with further analysis, e.g. by plotting the distribution of the curvilinear velocities (Fig.@ref(fig:allVelos)).</p>
-<div class="sourceCode" id="cb67"><pre class="downlit">
-<span class="va">allVelocities</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/kinematics.html">kinematics</a></span><span class="op">(</span><span class="va">trajPlatelets</span>, feature<span class="op">=</span><span class="st">"curvilinearVelocity"</span><span class="op">)</span>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">allVelocities</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/kinematics.html">kinematics</a></span><span class="op">(</span><span class="va">trajPlatelets</span>, feature<span class="op">=</span><span class="st">"curvilinearVelocity"</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html">hist</a></span><span class="op">(</span><span class="va">allVelocities</span>, breaks<span class="op">=</span><span class="fl">10</span>, probability<span class="op">=</span><span class="cn">TRUE</span>, col<span class="op">=</span><span class="st">"cadetblue"</span>,
+<span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">allVelocities</span>, breaks<span class="op">=</span><span class="fl">10</span>, probability<span class="op">=</span><span class="cn">TRUE</span>, col<span class="op">=</span><span class="st">"cadetblue"</span>,
      xlab<span class="op">=</span><span class="st">"Curvilinear Velocities Distribution"</span>,
      main<span class="op">=</span><span class="st">"Trajectory Analysis: Curvilinear Velocities"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span><span class="op">(</span><span class="va">allVelocities</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>, col<span class="op">=</span><span class="st">"steelblue"</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html" class="external-link">density</a></span><span class="op">(</span><span class="va">allVelocities</span>, na.rm<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span>, col<span class="op">=</span><span class="st">"steelblue"</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
 <div class="figure">
 <img src="flowcatchr_vignette_files/figure-html/allVelos-1.png" alt="Histogram of the curvilinear velocities for all trajectories identified in the MesenteriumSubset dataset" width="700"><p class="caption">
 Histogram of the curvilinear velocities for all trajectories identified in the MesenteriumSubset dataset
@@ -757,155 +753,159 @@ Histogram of the curvilinear velocities for all trajectories identified in the M
 </div>
 <p>For this code chunk, we are suppressing the warning messages, as they would be exactly the same as in the former where all features were computed for each trajectory.</p>
 </div>
-<div id="interactive-tools-for-a-user-friendly-workflow-solution" class="section level1">
-<h1 class="hasAnchor">
-<a href="#interactive-tools-for-a-user-friendly-workflow-solution" class="anchor"></a>Interactive tools for a user-friendly workflow solution</h1>
+<div class="section level1">
+<h1 id="interactive-tools-for-a-user-friendly-workflow-solution">Interactive tools for a user-friendly workflow solution<a class="anchor" aria-label="anchor" href="#interactive-tools-for-a-user-friendly-workflow-solution"></a>
+</h1>
 <p>To enhance the <code>Frames</code> objects and deliver an immediate feedback to the user, the function <code>snap</code> leverages on both the raw and binary <code>Frames</code>, as well as on the corresponding <code>ParticleSet</code> and <code>TrajectorySet</code> objects. It integrates the information available in all the mentioned objects, and it plots a modified instance of the <code>Frames</code> object, identifying the particles closest to the mouse click, and showing additional trajectory-related information, such as the trajectory ID and the instantaneous velocity of the cell. The function can be called as in the command below:</p>
-<div class="sourceCode" id="cb68"><pre class="downlit">
-<span class="fu"><a href="../reference/snap.html">snap</a></span><span class="op">(</span><span class="va">MesenteriumSubset</span>,<span class="va">preprocessedPlatelets</span>,
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/snap.html">snap</a></span><span class="op">(</span><span class="va">MesenteriumSubset</span>,<span class="va">preprocessedPlatelets</span>,
      <span class="va">platelets</span>,<span class="va">trajPlatelets</span>,
-     frameID <span class="op">=</span> <span class="fl">1</span>,showVelocity <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></pre></div>
+     frameID <span class="op">=</span> <span class="fl">1</span>,showVelocity <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></code></pre></div>
 <p>An example output for the <code>snap</code> is shown below in Fig.@ref(fig:snapExample), where the information (trajectory ID, as well as the velocity in the selected frame) is shown in yellow to offer a good contrast with the fluorescent image.</p>
 <div class="figure">
 <img src="flowcatchr_vignette_files/figure-html/snapExample-1.png" alt="Output generated by the snap function. The user wanted to identify the particle and additionally display the trajectory information (ID, instantaneous velocity) on it." width="672"><p class="caption">
 Output generated by the snap function. The user wanted to identify the particle and additionally display the trajectory information (ID, instantaneous velocity) on it.
 </p>
 </div>
-<div id="the-shinyflow-shiny-application" class="section level2">
-<h2 class="hasAnchor">
-<a href="#the-shinyflow-shiny-application" class="anchor"></a>The <code>shinyFlow</code> Shiny Application</h2>
-<p>Additionally, since Version 1.0.3, <em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em> delivers <code>shinyFlow</code>, a Shiny Web Application (<span class="citation">(RStudio, Inc 2013)</span>), which is built on the backbone of the analysis presented in this vignette, and is portable across all main operating systems. The user is thus invited to explore datasets and parameters with immediate reactive feedback, that can enable better understanding of the effects of single steps and changes in the workflow.</p>
+<div class="section level2">
+<h2 id="the-shinyflow-shiny-application">The <code>shinyFlow</code> Shiny Application<a class="anchor" aria-label="anchor" href="#the-shinyflow-shiny-application"></a>
+</h2>
+<p>Additionally, since Version 1.0.3, <em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em> delivers <code>shinyFlow</code>, a Shiny Web Application (<span class="citation">(RStudio, Inc 2013)</span>), which is built on the backbone of the analysis presented in this vignette, and is portable across all main operating systems. The user is thus invited to explore datasets and parameters with immediate reactive feedback, that can enable better understanding of the effects of single steps and changes in the workflow.</p>
 <p>To launch the Shiny App, use the command below to open an external window either in the browser or in the IDE (such as RStudio):</p>
-<div class="sourceCode" id="cb69"><pre class="downlit">
-<span class="fu"><a href="../reference/shinyFlow.html">shinyFlow</a></span><span class="op">(</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/shinyFlow.html">shinyFlow</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="flowcatchr-in-jupyter-notebooks" class="section level2">
-<h2 class="hasAnchor">
-<a href="#flowcatchr-in-jupyter-notebooks" class="anchor"></a><em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em> in Jupyter notebooks</h2>
-<p>A further integration are a number of Jupyter/IPython notebooks (<span class="citation">(Pérez and Granger 2007)</span>), as a way to provide easy reproducibility as well as communication of results, by combining plain text, commands and output in single documents. The R kernel used on the back-end was developed by Thomas Kluyver (<a href="https://github.com/takluyver/IRkernel" class="uri">https://github.com/takluyver/IRkernel</a>), and instructions for the installation are available at the Github repository website. The notebooks are available in the installation folder of the package <em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em>, which can be found with the command below.</p>
-<div class="sourceCode" id="cb70"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,package <span class="op">=</span> <span class="st">"flowcatchR"</span><span class="op">)</span>,pattern <span class="op">=</span> <span class="st">"*.ipynb"</span><span class="op">)</span></pre></div>
-<pre><code>## [1] "template_DetectionOfTransmigrationEvents.ipynb"
-## [2] "template_flowcatchR_vignetteSummary.ipynb"</code></pre>
-<p>The notebooks are provided as template for further steps in the analysis. The user is invited to set up the IPython notebook framework as explained on the official website for the project (<a href="http://ipython.org/notebook.html" class="uri">http://ipython.org/notebook.html</a>). As of February, 3rd 2015, the current way to obtain the Jupyter environment is via the <code>3.0.dev</code> version, available via Github (<a href="https://github.com/ipython/ipython" class="uri">https://github.com/ipython/ipython</a>). The notebooks can be opened and edited by navigating to their location while the IPython notebook server is running; use the following command in the shell to launch it:</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a><span class="op">$</span><span class="st"> </span>ipython notebook</span></code></pre></div>
-<p>Alternatively, these documents can be viewed with the <code>nbviewer</code> tool, available at <a href="http://nbviewer.ipython.org/" class="uri">http://nbviewer.ipython.org/</a>.</p>
+<div class="section level2">
+<h2 id="flowcatchr-in-jupyter-notebooks">
+<em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em> in Jupyter notebooks<a class="anchor" aria-label="anchor" href="#flowcatchr-in-jupyter-notebooks"></a>
+</h2>
+<p>A further integration are a number of Jupyter/IPython notebooks (<span class="citation">(Pérez and Granger 2007)</span>), as a way to provide easy reproducibility as well as communication of results, by combining plain text, commands and output in single documents. The R kernel used on the back-end was developed by Thomas Kluyver (<a href="https://github.com/takluyver/IRkernel" class="external-link uri">https://github.com/takluyver/IRkernel</a>), and instructions for the installation are available at the Github repository website. The notebooks are available in the installation folder of the package <em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em>, which can be found with the command below.</p>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,package <span class="op">=</span> <span class="st">"flowcatchR"</span><span class="op">)</span>,pattern <span class="op">=</span> <span class="st">"*.ipynb"</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## [1] "template_DetectionOfTransmigrationEvents.ipynb"</span>
+<span class="co">## [2] "template_flowcatchR_vignetteSummary.ipynb"</span></code></pre>
+<p>The notebooks are provided as template for further steps in the analysis. The user is invited to set up the IPython notebook framework as explained on the official website for the project (<a href="http://ipython.org/notebook.html" class="external-link uri">http://ipython.org/notebook.html</a>). As of February, 3rd 2015, the current way to obtain the Jupyter environment is via the <code>3.0.dev</code> version, available via Github (<a href="https://github.com/ipython/ipython" class="external-link uri">https://github.com/ipython/ipython</a>). The notebooks can be opened and edited by navigating to their location while the IPython notebook server is running; use the following command in the shell to launch it:</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a><span class="op">$</span><span class="st"> </span>ipython notebook</span></code></pre></div>
+<p>Alternatively, these documents can be viewed with the <code>nbviewer</code> tool, available at <a href="http://nbviewer.ipython.org/" class="external-link uri">http://nbviewer.ipython.org/</a>.</p>
 </div>
 </div>
-<div id="flowcatchr-in-docker-containers" class="section level1">
-<h1 class="hasAnchor">
-<a href="#flowcatchr-in-docker-containers" class="anchor"></a><em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em> in Docker containers</h1>
-<p><em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em> is now (as of September 2015) available also in Docker images that are the components of the <code>dockerflow</code> proposal (<a href="https://github.com/federicomarini/dockerflow" class="uri">https://github.com/federicomarini/dockerflow</a>). This includes:</p>
+<div class="section level1">
+<h1 id="flowcatchr-in-docker-containers">
+<em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em> in Docker containers<a class="anchor" aria-label="anchor" href="#flowcatchr-in-docker-containers"></a>
+</h1>
+<p><em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em> is now (as of September 2015) available also in Docker images that are the components of the <code>dockerflow</code> proposal (<a href="https://github.com/federicomarini/dockerflow" class="external-link uri">https://github.com/federicomarini/dockerflow</a>). This includes:</p>
 <ul>
 <li>
-<code>flowstudio</code> - <a href="https://github.com/federicomarini/flowstudio" class="uri">https://github.com/federicomarini/flowstudio</a>, a command-line/IDE interface to RStudio where <em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em> and its dependencies are preinstalled</li>
+<code>flowstudio</code> - <a href="https://github.com/federicomarini/flowstudio" class="external-link uri">https://github.com/federicomarini/flowstudio</a>, a command-line/IDE interface to RStudio where <em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em> and its dependencies are preinstalled</li>
 <li>
-<code>flowshiny</code> - <a href="https://github.com/federicomarini/flowshiny" class="uri">https://github.com/federicomarini/flowshiny</a> a Shiny Server running the <code>shinyFlow</code> web application</li>
+<code>flowshiny</code> - <a href="https://github.com/federicomarini/flowshiny" class="external-link uri">https://github.com/federicomarini/flowshiny</a> a Shiny Server running the <code>shinyFlow</code> web application</li>
 <li>
-<code>flowjupy</code> - <a href="https://github.com/federicomarini/flowjupy" class="uri">https://github.com/federicomarini/flowjupy</a>, a Jupyter Notebook interface</li>
+<code>flowjupy</code> - <a href="https://github.com/federicomarini/flowjupy" class="external-link uri">https://github.com/federicomarini/flowjupy</a>, a Jupyter Notebook interface</li>
 </ul>
 <p>These three images can be run simultaneously, provided the system where the containers are running supports the <code>docker-compose</code> tool. For more information on how to install the single components, please refer to their repositories.</p>
 </div>
-<div id="supplinfo" class="section level1">
-<h1 class="hasAnchor">
-<a href="#supplinfo" class="anchor"></a>Supplementary information</h1>
-<p>For more information on the method adapted for tracking cells, see Sbalzarini and Koumotsakos (2005) <span class="citation">(Sbalzarini and Koumoutsakos 2005)</span>. For additional details regarding the functions of <em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em>, please consult the documentation or write an email to <a href="mailto:marinif@uni-mainz.de" class="email">marinif@uni-mainz.de</a>.</p>
-<p>Due to space limitations, the complete dataset for the acquired frames used in this vignette is not included as part of the <em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em> package. If you would like to get access to it, you can write an email to <a href="mailto:marinif@uni-mainz.de" class="email">marinif@uni-mainz.de</a>.</p>
+<div class="section level1">
+<h1 id="supplinfo">Supplementary information<a class="anchor" aria-label="anchor" href="#supplinfo"></a>
+</h1>
+<p>For more information on the method adapted for tracking cells, see Sbalzarini and Koumotsakos (2005) <span class="citation">(Sbalzarini and Koumoutsakos 2005)</span>. For additional details regarding the functions of <em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em>, please consult the documentation or write an email to <a href="mailto:marinif@uni-mainz.de" class="email">marinif@uni-mainz.de</a>.</p>
+<p>Due to space limitations, the complete dataset for the acquired frames used in this vignette is not included as part of the <em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em> package. If you would like to get access to it, you can write an email to <a href="mailto:marinif@uni-mainz.de" class="email">marinif@uni-mainz.de</a>.</p>
 </div>
-<div id="acknowledgements" class="section level1">
-<h1 class="hasAnchor">
-<a href="#acknowledgements" class="anchor"></a>Acknowledgements</h1>
+<div class="section level1">
+<h1 id="acknowledgements">Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"></a>
+</h1>
 <p>This package was developed at the Institute of Medical Biostatistics, Epidemiology and Informatics at the University Medical Center, Mainz (Germany), with the financial support provided by the TRP-A15 Translational Research Project grant.</p>
-<p><em><a href="https://bioconductor.org/packages/3.12/flowcatchR">flowcatchR</a></em> incorporates suggestions and feedback from the wet-lab biology units operating at the Center for Thrombosis and Hemostasis (CTH), in particular Sven Jäckel and Kerstin Jurk. Sven Jäckel also provided us with the sample acquisition which is available in this vignette.</p>
+<p><em><a href="https://bioconductor.org/packages/3.15/flowcatchR" class="external-link">flowcatchR</a></em> incorporates suggestions and feedback from the wet-lab biology units operating at the Center for Thrombosis and Hemostasis (CTH), in particular Sven Jäckel and Kerstin Jurk. Sven Jäckel also provided us with the sample acquisition which is available in this vignette.</p>
 <p>We would like to thank the members of the Biostatistics division for valuable discussions, and additionally Isabella Zwiener for contributing to the first ideas on the project.</p>
 </div>
-<div id="session-info" class="section level1 unnumbered">
-<h1 class="hasAnchor">
-<a href="#session-info" class="anchor"></a>Session info</h1>
+<div class="section level1 unnumbered">
+<h1 id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
+</h1>
 <p>This vignette was generated using the following package versions:</p>
-<pre><code>## R version 4.0.2 (2020-06-22)
-## Platform: x86_64-apple-darwin17.0 (64-bit)
-## Running under: macOS Catalina 10.15.6
-## 
-## Matrix products: default
-## BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
-## LAPACK: /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRlapack.dylib
-## 
-## locale:
-## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
-## 
-## attached base packages:
-## [1] stats     graphics  grDevices utils     datasets  methods   base     
-## 
-## other attached packages:
-## [1] flowcatchR_1.23.0 EBImage_4.31.0    BiocStyle_2.17.1 
-## 
-## loaded via a namespace (and not attached):
-##  [1] Rcpp_1.0.5          locfit_1.5-9.4      lattice_0.20-41    
-##  [4] tidyr_1.1.2         fftwtools_0.9-8     png_0.1-7          
-##  [7] assertthat_0.2.1    rprojroot_1.3-2     digest_0.6.25      
-## [10] mime_0.9            R6_2.4.1            tiff_0.1-5         
-## [13] backports_1.1.10    evaluate_0.14       highr_0.8          
-## [16] httr_1.4.2          ggplot2_3.3.2       pillar_1.4.6       
-## [19] rlang_0.4.7         lazyeval_0.2.2      data.table_1.13.0  
-## [22] rmarkdown_2.3       pkgdown_1.6.1.9000  desc_1.2.0         
-## [25] BiocParallel_1.23.2 stringr_1.4.0       htmlwidgets_1.5.1  
-## [28] RCurl_1.98-1.2      munsell_0.5.0       shiny_1.5.0        
-## [31] compiler_4.0.2      httpuv_1.5.4        xfun_0.17          
-## [34] pkgconfig_2.0.3     systemfonts_0.3.1   BiocGenerics_0.35.4
-## [37] htmltools_0.5.0     tidyselect_1.1.0    tibble_3.0.3       
-## [40] bookdown_0.20       viridisLite_0.3.0   crayon_1.3.4       
-## [43] dplyr_1.0.2         later_1.1.0.1       bitops_1.0-6       
-## [46] grid_4.0.2          jsonlite_1.7.1      xtable_1.8-4       
-## [49] gtable_0.3.0        lifecycle_0.2.0     magrittr_1.5       
-## [52] scales_1.1.1        stringi_1.5.3       fs_1.5.0           
-## [55] promises_1.1.1      colorRamps_2.3      ellipsis_0.3.1     
-## [58] ragg_0.3.1          vctrs_0.3.4         generics_0.0.2     
-## [61] tools_4.0.2         glue_1.4.2          purrr_0.3.4        
-## [64] crosstalk_1.1.0.1   jpeg_0.1-8.1        abind_1.4-5        
-## [67] parallel_4.0.2      fastmap_1.0.1       yaml_2.2.1         
-## [70] colorspace_1.4-1    BiocManager_1.30.10 cpp11_0.2.1        
-## [73] memoise_1.1.0       plotly_4.9.2.1      knitr_1.30</code></pre>
+<pre><code><span class="co">## R Under development (unstable) (2021-11-05 r81143)</span>
+<span class="co">## Platform: x86_64-apple-darwin17.0 (64-bit)</span>
+<span class="co">## Running under: macOS Catalina 10.15.7</span>
+<span class="co">## </span>
+<span class="co">## Matrix products: default</span>
+<span class="co">## BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib</span>
+<span class="co">## LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib</span>
+<span class="co">## </span>
+<span class="co">## locale:</span>
+<span class="co">## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8</span>
+<span class="co">## </span>
+<span class="co">## attached base packages:</span>
+<span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
+<span class="co">## </span>
+<span class="co">## other attached packages:</span>
+<span class="co">## [1] flowcatchR_1.29.0 EBImage_4.37.0    BiocStyle_2.23.0 </span>
+<span class="co">## </span>
+<span class="co">## loaded via a namespace (and not attached):</span>
+<span class="co">##  [1] httr_1.4.2               sass_0.4.0               tidyr_1.1.4             </span>
+<span class="co">##  [4] jsonlite_1.7.2           viridisLite_0.4.0        bslib_0.3.1             </span>
+<span class="co">##  [7] shiny_1.7.1              BiocManager_1.30.16      highr_0.9               </span>
+<span class="co">## [10] tiff_0.1-10              yaml_2.2.1               pillar_1.6.4            </span>
+<span class="co">## [13] lattice_0.20-45          glue_1.4.2               digest_0.6.28           </span>
+<span class="co">## [16] promises_1.2.0.1         colorspace_2.0-2         htmltools_0.5.2         </span>
+<span class="co">## [19] httpuv_1.6.3             pkgconfig_2.0.3          bookdown_0.24           </span>
+<span class="co">## [22] purrr_0.3.4              xtable_1.8-4             fftwtools_0.9-11        </span>
+<span class="co">## [25] scales_1.1.1             jpeg_0.1-9               later_1.3.0             </span>
+<span class="co">## [28] BiocParallel_1.29.0      tibble_3.1.5             generics_0.1.1          </span>
+<span class="co">## [31] ggplot2_3.3.5            ellipsis_0.3.2           cachem_1.0.6            </span>
+<span class="co">## [34] BiocGenerics_0.41.1      lazyeval_0.2.2           magrittr_2.0.1          </span>
+<span class="co">## [37] crayon_1.4.2             mime_0.12                memoise_2.0.0           </span>
+<span class="co">## [40] evaluate_0.14            fs_1.5.0                 fansi_0.5.0             </span>
+<span class="co">## [43] textshaping_0.3.6        tools_4.2.0              data.table_1.14.2       </span>
+<span class="co">## [46] lifecycle_1.0.1          stringr_1.4.0            plotly_4.10.0           </span>
+<span class="co">## [49] munsell_0.5.0            locfit_1.5-9.4           colorRamps_2.3          </span>
+<span class="co">## [52] compiler_4.2.0           pkgdown_1.9000.9000.9000 jquerylib_0.1.4         </span>
+<span class="co">## [55] systemfonts_1.0.3        rlang_0.4.12             grid_4.2.0              </span>
+<span class="co">## [58] RCurl_1.98-1.5           htmlwidgets_1.5.4        crosstalk_1.2.0         </span>
+<span class="co">## [61] bitops_1.0-7             rmarkdown_2.11           gtable_0.3.0            </span>
+<span class="co">## [64] abind_1.4-5              R6_2.5.1                 knitr_1.36              </span>
+<span class="co">## [67] dplyr_1.0.7              fastmap_1.1.0            utf8_1.2.2              </span>
+<span class="co">## [70] rprojroot_2.0.2          ragg_1.2.0               desc_1.4.0              </span>
+<span class="co">## [73] stringi_1.7.5            parallel_4.2.0           Rcpp_1.0.7              </span>
+<span class="co">## [76] vctrs_0.3.8              png_0.1-7                tidyselect_1.1.1        </span>
+<span class="co">## [79] xfun_0.28</span></code></pre>
 </div>
-<div id="references" class="section level1 unnumbered">
-<h1 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h1>
+<div class="section level1 unnumbered">
+<h1 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h1>
 <div id="refs" class="references">
 <div id="ref-Beltman2009">
-<p>Beltman, JB, AFM Marée, and RJ de Boer. 2009. “Analysing immune cell migration.” <em>Nature Reviews Immunology</em> 9 (11): 789–98. <a href="https://doi.org/10.1038/nri2638">https://doi.org/10.1038/nri2638</a>.</p>
+<p>Beltman, JB, AFM Marée, and RJ de Boer. 2009. “Analysing immune cell migration.” <em>Nature Reviews Immunology</em> 9 (11): 789–98. <a href="https://doi.org/10.1038/nri2638" class="external-link">https://doi.org/10.1038/nri2638</a>.</p>
 </div>
 <div id="ref-Chenouard2014">
-<p>Chenouard, Nicolas, Ihor Smal, Fabrice de Chaumont, Martin Maška, Ivo F Sbalzarini, Yuanhao Gong, Janick Cardinale, et al. 2014. “Objective comparison of particle tracking methods.” <em>Nature Methods</em> 11 (3): 281–9. <a href="https://doi.org/10.1038/nmeth.2808">https://doi.org/10.1038/nmeth.2808</a>.</p>
+<p>Chenouard, Nicolas, Ihor Smal, Fabrice de Chaumont, Martin Maška, Ivo F Sbalzarini, Yuanhao Gong, Janick Cardinale, et al. 2014. “Objective comparison of particle tracking methods.” <em>Nature Methods</em> 11 (3): 281–9. <a href="https://doi.org/10.1038/nmeth.2808" class="external-link">https://doi.org/10.1038/nmeth.2808</a>.</p>
 </div>
 <div id="ref-Gentleman2004">
-<p>Gentleman, Robert C, Vincent J. Carey, Douglas M. Bates, and others. 2004. “Bioconductor: Open software development for computational biology and bioinformatics.” <em>Genome Biology</em> 5: R80. <a href="http://genomebiology.com/2004/5/10/R80">http://genomebiology.com/2004/5/10/R80</a>.</p>
+<p>Gentleman, Robert C, Vincent J. Carey, Douglas M. Bates, and others. 2004. “Bioconductor: Open software development for computational biology and bioinformatics.” <em>Genome Biology</em> 5: R80. <a href="http://genomebiology.com/2004/5/10/R80" class="external-link">http://genomebiology.com/2004/5/10/R80</a>.</p>
 </div>
 <div id="ref-Meijering2012a">
-<p>Meijering, Erik, Oleh Dzyubachyk, and Ihor Smal. 2012. “Methods for cell and particle tracking.” <em>Methods in Enzymology</em> 504 (February): 183–200. <a href="https://doi.org/10.1016/B978-0-12-391857-4.00009-4">https://doi.org/10.1016/B978-0-12-391857-4.00009-4</a>.</p>
+<p>Meijering, Erik, Oleh Dzyubachyk, and Ihor Smal. 2012. “Methods for cell and particle tracking.” <em>Methods in Enzymology</em> 504 (February): 183–200. <a href="https://doi.org/10.1016/B978-0-12-391857-4.00009-4" class="external-link">https://doi.org/10.1016/B978-0-12-391857-4.00009-4</a>.</p>
 </div>
 <div id="ref-Meijering2008">
-<p>Meijering, Erik, and Ihor Smal. 2008. “Time-lapse imaging.” In <em>Microscope Image Processing</em>, 401–40. Academic Press. <a href="http://www.imagescience.org/meijering/publications/download/tlmi2008.pdf">http://www.imagescience.org/meijering/publications/download/tlmi2008.pdf</a>.</p>
+<p>Meijering, Erik, and Ihor Smal. 2008. “Time-lapse imaging.” In <em>Microscope Image Processing</em>, 401–40. Academic Press. <a href="http://www.imagescience.org/meijering/publications/download/tlmi2008.pdf" class="external-link">http://www.imagescience.org/meijering/publications/download/tlmi2008.pdf</a>.</p>
 </div>
 <div id="ref-Pau2010">
-<p>Pau, Grégoire, Florian Fuchs, Oleg Sklyar, Michael Boutros, and Wolfgang Huber. 2010. “EBImage–an R package for image processing with applications to cellular phenotypes.” <em>Bioinformatics</em> 26 (7): 979–81. <a href="https://doi.org/10.1093/bioinformatics/btq046">https://doi.org/10.1093/bioinformatics/btq046</a>.</p>
+<p>Pau, Grégoire, Florian Fuchs, Oleg Sklyar, Michael Boutros, and Wolfgang Huber. 2010. “EBImage–an R package for image processing with applications to cellular phenotypes.” <em>Bioinformatics</em> 26 (7): 979–81. <a href="https://doi.org/10.1093/bioinformatics/btq046" class="external-link">https://doi.org/10.1093/bioinformatics/btq046</a>.</p>
 </div>
 <div id="ref-Perez2007">
-<p>Pérez, Fernando, and Brian E. Granger. 2007. “IPython: A System for Interactive Scientific Computing.” <em>Computing in Science and Engineering</em> 9 (3): 21–29. <a href="https://doi.org/10.1109/MCSE.2007.53">https://doi.org/10.1109/MCSE.2007.53</a>.</p>
+<p>Pérez, Fernando, and Brian E. Granger. 2007. “IPython: A System for Interactive Scientific Computing.” <em>Computing in Science and Engineering</em> 9 (3): 21–29. <a href="https://doi.org/10.1109/MCSE.2007.53" class="external-link">https://doi.org/10.1109/MCSE.2007.53</a>.</p>
 </div>
 <div id="ref-Rlang2014">
-<p>R Core Team. 2014. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="http://www.R-project.org/">http://www.R-project.org/</a>.</p>
+<p>R Core Team. 2014. <em>R: A Language and Environment for Statistical Computing</em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="http://www.R-project.org/" class="external-link">http://www.R-project.org/</a>.</p>
 </div>
 <div id="ref-Shiny2013">
 <p>RStudio, Inc. 2013. <em>Easy Web Applications in R.</em></p>
 </div>
 <div id="ref-Sbalzarini2005">
-<p>Sbalzarini, I F, and P Koumoutsakos. 2005. “Feature point tracking and trajectory analysis for video imaging in cell biology.” <em>Journal of Structural Biology</em> 151 (2): 182–95. <a href="https://doi.org/10.1016/j.jsb.2005.06.002">https://doi.org/10.1016/j.jsb.2005.06.002</a>.</p>
+<p>Sbalzarini, I F, and P Koumoutsakos. 2005. “Feature point tracking and trajectory analysis for video imaging in cell biology.” <em>Journal of Structural Biology</em> 151 (2): 182–95. <a href="https://doi.org/10.1016/j.jsb.2005.06.002" class="external-link">https://doi.org/10.1016/j.jsb.2005.06.002</a>.</p>
 </div>
 <div id="ref-Schindelin2012">
-<p>Schindelin, Johannes, I Arganda-Carreras, and Erwin Frise. 2012. “Fiji: an open-source platform for biological-image analysis.” <em>Nature Methods</em> 9 (7): 676–82. <a href="https://doi.org/10.1038/nmeth.2019">https://doi.org/10.1038/nmeth.2019</a>.</p>
+<p>Schindelin, Johannes, I Arganda-Carreras, and Erwin Frise. 2012. “Fiji: an open-source platform for biological-image analysis.” <em>Nature Methods</em> 9 (7): 676–82. <a href="https://doi.org/10.1038/nmeth.2019" class="external-link">https://doi.org/10.1038/nmeth.2019</a>.</p>
 </div>
 <div id="ref-Schneider2012">
-<p>Schneider, Caroline a, Wayne S Rasband, and Kevin W Eliceiri. 2012. “NIH Image to ImageJ: 25 years of image analysis.” <em>Nature Methods</em> 9 (7): 671–75. <a href="https://doi.org/10.1038/nmeth.2089">https://doi.org/10.1038/nmeth.2089</a>.</p>
+<p>Schneider, Caroline a, Wayne S Rasband, and Kevin W Eliceiri. 2012. “NIH Image to ImageJ: 25 years of image analysis.” <em>Nature Methods</em> 9 (7): 671–75. <a href="https://doi.org/10.1038/nmeth.2089" class="external-link">https://doi.org/10.1038/nmeth.2089</a>.</p>
 </div>
 </div>
 </div>
@@ -922,11 +922,13 @@ Output generated by the snap function. The user wanted to identify the particle 
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://federicomarini.github.io">Federico Marini</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://federicomarini.github.io" class="external-link">Federico Marini</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
 </div>
 
       </footer>
@@ -934,6 +936,8 @@ Output generated by the snap function. The user wanted to identify the particle 
 
   
 
+
+  
 
   </body>
 </html>

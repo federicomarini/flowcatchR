@@ -31,6 +31,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -43,7 +45,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">flowcatchR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.23.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.29.0</span>
       </span>
     </div>
 
@@ -77,7 +79,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/federicomarini/flowcatchR">
+  <a href="https://github.com/federicomarini/flowcatchR" class="external-link">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -94,110 +96,124 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="flowcatchr" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#flowcatchr" class="anchor"></a>flowcatchR</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="flowcatchr">flowcatchR<a class="anchor" aria-label="anchor" href="#flowcatchr"></a>
+</h1></div>
 
-<div id="a-framework-for-tracking-and-analyzing-flowing-blood-cells-in-time-lapse-microscopy-images" class="section level4">
-<h4 class="hasAnchor">
-<a href="#a-framework-for-tracking-and-analyzing-flowing-blood-cells-in-time-lapse-microscopy-images" class="anchor"></a>A framework for tracking and analyzing flowing blood cells in time lapse microscopy images</h4>
+<div class="section level4">
+<h4 id="a-framework-for-tracking-and-analyzing-flowing-blood-cells-in-time-lapse-microscopy-images">A framework for tracking and analyzing flowing blood cells in time lapse microscopy images<a class="anchor" aria-label="anchor" href="#a-framework-for-tracking-and-analyzing-flowing-blood-cells-in-time-lapse-microscopy-images"></a>
+</h4>
 <p><strong>flowcatchR</strong> is a set of tools to analyze in vivo microscopy imaging data, focused on tracking flowing blood cells. It guides throughout all the steps of bioimage processing, from segmentation to calculation of features, filtering out particles not of interest, providing also a set of utilities to help checking the quality of the performed operations. The main novel contribution investigates the issue of tracking flowing cells such as the ones in blood vessels, to categorize the particles in flowing, rolling and adherent by providing a comprehensive analysis of the identified trajectories. The extracted information is then applied in the study of phenomena such as hemostasis and study of thrombosis development. We expect this package to be potentially applied to a variety of essays, covering a wide range of applications founded on time-lapse microscopy.</p>
 </div>
-<div id="installation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h3>
+<div class="section level3">
+<h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h3>
 <p>To install the development version for the package <strong>flowcatchR</strong>, please start a current version of R and type (using <code>devtools</code>):</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="co"># currently this can be done via github</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span> <span class="co"># if needed</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"federicomarini/flowcatchR"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># currently this can be done via github</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span> <span class="co"># if needed</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"federicomarini/flowcatchR"</span><span class="op">)</span></code></pre></div>
 <p>If you want to install the current release version, just type:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
-    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
-<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html">install</a></span><span class="op">(</span><span class="st">"flowcatchR"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
+<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"flowcatchR"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="flowcatchr-in-a-glimpse" class="section level3">
-<h3 class="hasAnchor">
-<a href="#flowcatchr-in-a-glimpse" class="anchor"></a>flowcatchR in a glimpse</h3>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/federicomarini/flowcatchR">"flowcatchR"</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"MesenteriumSubset"</span><span class="op">)</span>
-<span class="va">fullResults</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/kinematics.html">kinematics</a></span><span class="op">(</span><span class="fu"><a href="reference/trajectories.html">trajectories</a></span><span class="op">(</span><span class="fu"><a href="reference/particles.html">particles</a></span><span class="op">(</span><span class="fu"><a href="reference/channel.Frames.html">channel.Frames</a></span><span class="op">(</span><span class="va">MesenteriumSubset</span>,<span class="st">"red"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></pre></div>
+<div class="section level3">
+<h3 id="flowcatchr-in-a-glimpse">flowcatchR in a glimpse<a class="anchor" aria-label="anchor" href="#flowcatchr-in-a-glimpse"></a>
+</h3>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/federicomarini/flowcatchR" class="external-link">"flowcatchR"</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"MesenteriumSubset"</span><span class="op">)</span>
+<span class="va">fullResults</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/kinematics.html">kinematics</a></span><span class="op">(</span><span class="fu"><a href="reference/trajectories.html">trajectories</a></span><span class="op">(</span><span class="fu"><a href="reference/particles.html">particles</a></span><span class="op">(</span><span class="fu"><a href="reference/channel.Frames.html">channel.Frames</a></span><span class="op">(</span><span class="va">MesenteriumSubset</span>,<span class="st">"red"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="vignette" class="section level3">
-<h3 class="hasAnchor">
-<a href="#vignette" class="anchor"></a>Vignette</h3>
+<div class="section level3">
+<h3 id="vignette">Vignette<a class="anchor" aria-label="anchor" href="#vignette"></a>
+</h3>
 <p>To inspect the vignette and the code used in it, type:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/vignette.html">vignette</a></span><span class="op">(</span><span class="st">"flowcatchR-vignette"</span><span class="op">)</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html" class="external-link">vignette</a></span><span class="op">(</span><span class="st">"flowcatchR-vignette"</span><span class="op">)</span>
 <span class="co">## and/or</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/browseVignettes.html">browseVignettes</a></span><span class="op">(</span><span class="st">"flowcatchR"</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/browseVignettes.html" class="external-link">browseVignettes</a></span><span class="op">(</span><span class="st">"flowcatchR"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="contact" class="section level3">
-<h3 class="hasAnchor">
-<a href="#contact" class="anchor"></a>Contact</h3>
+<div class="section level3">
+<h3 id="contact">Contact<a class="anchor" aria-label="anchor" href="#contact"></a>
+</h3>
 <p>For additional details regarding the functions of <strong>flowcatchR</strong>, please consult the documentation or write an email to <a href="mailto:marinif@uni-mainz.de" class="email">marinif@uni-mainz.de</a>.</p>
 </div>
-<div id="bug-reportsissuesnew-features" class="section level3">
-<h3 class="hasAnchor">
-<a href="#bug-reportsissuesnew-features" class="anchor"></a>Bug reports/Issues/New features</h3>
-<p>Please use <a href="https://github.com/federicomarini/flowcatchR/issues" class="uri">https://github.com/federicomarini/flowcatchR/issues</a> for reporting bugs, issues or for suggesting new features to be implemented.</p>
+<div class="section level3">
+<h3 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
+</h3>
+<p>Please note that the flowcatchR project is released with a <a href="https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html" class="external-link">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+</div>
+<div class="section level3">
+<h3 id="bug-reportsissuesnew-features">Bug reports/Issues/New features<a class="anchor" aria-label="anchor" href="#bug-reportsissuesnew-features"></a>
+</h3>
+<p>Please use <a href="https://github.com/federicomarini/flowcatchR/issues" class="external-link uri">https://github.com/federicomarini/flowcatchR/issues</a> for reporting bugs, issues or for suggesting new features to be implemented.</p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from BIOC at <br><a href="https://www.bioconductor.org/packages/flowcatchR">https://​www.bioconductor.org/​packages/​flowcatchR</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/federicomarini/flowcatchR/">https://​github.com/​federicomarini/​flowcatchR/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/federicomarini/flowcatchR/issues">https://​github.com/​federicomarini/​flowcatchR/​issues</a>
-</li>
+<li><a href="https://www.bioconductor.org/packages/flowcatchR" class="external-link">View on Bioconductor</a></li>
+<li><a href="https://github.com/federicomarini/flowcatchR/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/federicomarini/flowcatchR/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://opensource.org/licenses/BSD-3-Clause">BSD_3_clause</a> + file <a href="LICENSE-text.html">LICENSE</a>
+<a href="https://opensource.org/licenses/BSD-3-Clause" class="external-link">BSD_3_clause</a> + file <a href="LICENSE-text.html">LICENSE</a>
 </li>
 </ul>
 </div>
+
+<div class="community">
+<h2 data-toc-skip>Community</h2>
+<ul class="list-unstyled">
+<li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
+</ul>
+</div>
+
 <div class="citation">
-<h2>Citation</h2>
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
 <li><a href="authors.html">Citing flowcatchR</a></li>
 </ul>
 </div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://federicomarini.github.io">Federico Marini</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-3252-7758" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<a href="https://federicomarini.github.io" class="external-link">Federico Marini</a> <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-3252-7758" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/federicomarini/flowcatchR/actions"><img src="https://github.com/federicomarini/flowcatchR/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://travis-ci.org/federicomarini/flowcatchR"><img src="https://travis-ci.org/federicomarini/flowcatchR.svg?branch=master" alt="Travis build status"></a></li>
+<li><a href="https://github.com/federicomarini/flowcatchR/actions" class="external-link"><img src="https://github.com/federicomarini/flowcatchR/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by <a href="https://federicomarini.github.io">Federico Marini</a>.</p>
+  <p></p>
+<p>Developed by <a href="https://federicomarini.github.io" class="external-link">Federico Marini</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.9000.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
 </div>
 
       </footer>
@@ -205,6 +221,8 @@
 
   
 
+
+  
 
   </body>
 </html>
