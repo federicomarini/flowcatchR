@@ -18,7 +18,7 @@ a clickable feedback on one of the frames."><!-- mathjax --><script src="https:/
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">flowcatchR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.29.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.31.0</span>
       </span>
     </div>
 
@@ -33,7 +33,7 @@ a clickable feedback on one of the frames."><!-- mathjax --><script src="https:/
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -71,7 +71,8 @@ a clickable feedback on one of the frames."><!-- mathjax --><script src="https:/
 a clickable feedback on one of the frames.</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">snap</span><span class="op">(</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">snap</span><span class="op">(</span>
   <span class="va">raw.frames</span>,
   <span class="va">binary.frames</span>,
   <span class="va">particleset</span>,
@@ -81,8 +82,8 @@ a clickable feedback on one of the frames.</p>
   infocex <span class="op">=</span> <span class="fl">1</span>,
   showVelocity <span class="op">=</span> <span class="cn">FALSE</span>
 <span class="op">)</span></code></pre></div>
+    </div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>raw.frames</dt>
@@ -115,11 +116,10 @@ clicked location</p>
     <h2>Author</h2>
     <p>Federico Marini, <a href="mailto:marinif@uni-mainz.de">marinif@uni-mainz.de</a>, 2015</p>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">MesenteriumSubset</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">MesenteriumSubset</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">binary.frames</span> <span class="op">&lt;-</span> <span class="fu"><a href="preprocess.Frames.html">preprocess.Frames</a></span><span class="op">(</span><span class="fu"><a href="channel.Frames.html">channel.Frames</a></span><span class="op">(</span><span class="va">MesenteriumSubset</span>,<span class="st">"red"</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">particleset</span> <span class="op">&lt;-</span> <span class="fu"><a href="particles.html">particles</a></span><span class="op">(</span><span class="va">MesenteriumSubset</span>,<span class="va">binary.frames</span>,<span class="st">"red"</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Computing features in parallel...</span>
@@ -145,7 +145,7 @@ clicked location</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
 </div>
 
       </footer></div>

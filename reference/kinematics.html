@@ -23,7 +23,7 @@ parameter is reported, either for one or all trajectories"><!-- mathjax --><scri
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">flowcatchR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.29.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.31.0</span>
       </span>
     </div>
 
@@ -38,7 +38,7 @@ parameter is reported, either for one or all trajectories"><!-- mathjax --><scri
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -81,15 +81,16 @@ performed for that trajectory alone. If a parameter is specified, only that
 parameter is reported, either for one or all trajectories</p>
     </div>
 
-    <div class="ref-usage sourceCode"><pre class="sourceCode r"><code><span class="fu">kinematics</span><span class="op">(</span>
+    <div id="ref-usage">
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">kinematics</span><span class="op">(</span>
   <span class="va">trajectoryset</span>,
   trajectoryIDs <span class="op">=</span> <span class="cn">NULL</span>,
   acquisitionFrequency <span class="op">=</span> <span class="fl">30</span>,
   scala <span class="op">=</span> <span class="fl">50</span>,
   feature <span class="op">=</span> <span class="cn">NULL</span>
 <span class="op">)</span></code></pre></div>
+    </div>
 
-    <div id="ref-sections">
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>trajectoryset</dt>
@@ -114,11 +115,10 @@ corresponds</p></dd>
     <h2>Author</h2>
     <p>Federico Marini, <a href="mailto:marinif@uni-mainz.de">marinif@uni-mainz.de</a>, 2014</p>
     </div>
-    </div>
 
-    <div id="examples">
+    <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="ref-examples sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"candidate.platelets"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"candidate.platelets"</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">platelets.trajectories</span> <span class="op">&lt;-</span> <span class="fu"><a href="trajectories.html">trajectories</a></span><span class="op">(</span><span class="va">candidate.platelets</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Input ParticleSet is not a LinkedParticleSet.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Performing linking first with some set of default parameters - you might want to change them according to your scenario...</span>
@@ -151,7 +151,7 @@ corresponds</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.9000.9000.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
 </div>
 
       </footer></div>
