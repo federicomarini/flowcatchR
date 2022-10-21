@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">flowcatchR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.31.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.31.1</span>
       </span>
     </div>
 
@@ -70,21 +70,28 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">trajectories</span><span class="op">(</span><span class="va">particleset</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">trajectories</span><span class="op">(</span><span class="va">particleset</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>particleset</dt>
 <dd><p>A (<code>Linked</code>)<code>ParticleSet</code> object</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>Logical, currently not used - could be introduced for providing additional info on the trajectories</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Arguments to be passed to methods</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <code>TrajectorySet</code> object</p>
+    
+
+<p>A <code>TrajectorySet</code> object</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -93,11 +100,11 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"candidate.platelets"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">platelets.trajectories</span> <span class="op">&lt;-</span> <span class="fu">trajectories</span><span class="op">(</span><span class="va">candidate.platelets</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"candidate.platelets"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">platelets.trajectories</span> <span class="op">&lt;-</span> <span class="fu">trajectories</span><span class="op">(</span><span class="va">candidate.platelets</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Input ParticleSet is not a LinkedParticleSet.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Performing linking first with some set of default parameters - you might want to change them according to your scenario...</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -112,7 +119,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

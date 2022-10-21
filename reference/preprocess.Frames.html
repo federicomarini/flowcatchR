@@ -18,7 +18,7 @@ existing EBImage functions, please see the corresponding help for additional inf
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">flowcatchR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.31.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.31.1</span>
       </span>
     </div>
 
@@ -72,57 +72,82 @@ existing <code>EBImage</code> functions, please see the corresponding help for a
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">preprocess.Frames</span><span class="op">(</span>
-  <span class="va">frames</span>,
-  brush.size <span class="op">=</span> <span class="fl">3</span>,
-  brush.shape <span class="op">=</span> <span class="st">"disc"</span>,
-  at.offset <span class="op">=</span> <span class="fl">0.15</span>,
-  at.wwidth <span class="op">=</span> <span class="fl">10</span>,
-  at.wheight <span class="op">=</span> <span class="fl">10</span>,
-  kern.size <span class="op">=</span> <span class="fl">3</span>,
-  kern.shape <span class="op">=</span> <span class="st">"disc"</span>,
-  ws.tolerance <span class="op">=</span> <span class="fl">1</span>,
-  ws.radius <span class="op">=</span> <span class="fl">1</span>,
-  displayprocessing <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">preprocess.Frames</span><span class="op">(</span></span>
+<span>  <span class="va">frames</span>,</span>
+<span>  brush.size <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  brush.shape <span class="op">=</span> <span class="st">"disc"</span>,</span>
+<span>  at.offset <span class="op">=</span> <span class="fl">0.15</span>,</span>
+<span>  at.wwidth <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  at.wheight <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  kern.size <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  kern.shape <span class="op">=</span> <span class="st">"disc"</span>,</span>
+<span>  ws.tolerance <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  ws.radius <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  displayprocessing <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>frames</dt>
 <dd><p>A <code>Frames</code> object</p></dd>
+
+
 <dt>brush.size</dt>
 <dd><p>Size in pixels of the brush to be used for initial smoothing 
 (low-pass filtering)</p></dd>
+
+
 <dt>brush.shape</dt>
 <dd><p>Shape of the brush to be used for initial smoothing (low-pass 
 filtering)</p></dd>
+
+
 <dt>at.offset</dt>
 <dd><p>Offset to be used in the adaptive thresholding step - see also <code><a href="https://rdrr.io/pkg/EBImage/man/thresh.html" class="external-link">thresh</a></code>. As an
 alternative thresholding method, see also <code><a href="https://rdrr.io/pkg/EBImage/man/otsu.html" class="external-link">otsu</a></code> in the <code>EBImage</code> package.</p></dd>
+
+
 <dt>at.wwidth</dt>
 <dd><p>Width of the window for the adaptive thresholding step - see also <code><a href="https://rdrr.io/pkg/EBImage/man/thresh.html" class="external-link">thresh</a></code>. As an
 alternative thresholding method, see also <code><a href="https://rdrr.io/pkg/EBImage/man/otsu.html" class="external-link">otsu</a></code> in the <code>EBImage</code> package.</p></dd>
+
+
 <dt>at.wheight</dt>
 <dd><p>Height of the window for the adaptive thresholding step - see also <code><a href="https://rdrr.io/pkg/EBImage/man/thresh.html" class="external-link">thresh</a></code>. As an
 alternative thresholding method, see also <code><a href="https://rdrr.io/pkg/EBImage/man/otsu.html" class="external-link">otsu</a></code> in the <code>EBImage</code> package.</p></dd>
+
+
 <dt>kern.size</dt>
 <dd><p>Size in pixels of the kernel used for morphological operations - e.g., opening, which is an erosion followed by a dilation, and closing which is a dilation followed by an erosion - see also <code><a href="https://rdrr.io/pkg/EBImage/man/morphology.html" class="external-link">opening</a></code>, <code><a href="https://rdrr.io/pkg/EBImage/man/morphology.html" class="external-link">closing</a></code></p></dd>
+
+
 <dt>kern.shape</dt>
 <dd><p>Shape of the kernel used for morphological operations</p></dd>
+
+
 <dt>ws.tolerance</dt>
 <dd><p>Tolerance allowed in performing the watershed-based segmentation (see also <code><a href="https://rdrr.io/pkg/EBImage/man/watershed.html" class="external-link">watershed</a></code>)</p></dd>
+
+
 <dt>ws.radius</dt>
 <dd><p>Radius for the watershed-based segmentation (see also <code><a href="https://rdrr.io/pkg/EBImage/man/watershed.html" class="external-link">watershed</a></code>)</p></dd>
+
+
 <dt>displayprocessing</dt>
 <dd><p>Logical, whether to display intermediate steps while performing preprocessing. Dismissed currently, it could increase runtime a lot</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Arguments to be passed to methods</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <code>Frames</code> object, whose frame images are the preprocessed versions of the input images</p>
+    
+
+<p>A <code>Frames</code> object, whose frame images are the preprocessed versions of the input images</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -131,8 +156,8 @@ alternative thresholding method, see also <code><a href="https://rdrr.io/pkg/EBI
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"MesenteriumSubset"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">preprocess.Frames</span><span class="op">(</span><span class="fu"><a href="channel.Frames.html">channel.Frames</a></span><span class="op">(</span><span class="va">MesenteriumSubset</span>,<span class="st">"red"</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"MesenteriumSubset"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">preprocess.Frames</span><span class="op">(</span><span class="fu"><a href="channel.Frames.html">channel.Frames</a></span><span class="op">(</span><span class="va">MesenteriumSubset</span>,<span class="st">"red"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Frames </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   colorMode    : Grayscale </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   storage.mode : integer </span>
@@ -147,7 +172,7 @@ alternative thresholding method, see also <code><a href="https://rdrr.io/pkg/EBI
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3,]    0    0    0    0    0    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [4,]    0    0    0    0    0    0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [5,]    0    0    0    0    0    0</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -162,7 +187,7 @@ alternative thresholding method, see also <code><a href="https://rdrr.io/pkg/EBI
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

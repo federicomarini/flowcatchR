@@ -21,7 +21,7 @@ autocorrelation, and more"><!-- mathjax --><script src="https://cdnjs.cloudflare
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">flowcatchR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.31.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.31.1</span>
       </span>
     </div>
 
@@ -78,30 +78,39 @@ autocorrelation, and more</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">extractKinematics.traj</span><span class="op">(</span>
-  <span class="va">trajectoryset</span>,
-  <span class="va">trajectoryID</span>,
-  acquisitionFrequency <span class="op">=</span> <span class="fl">30</span>,
-  scala <span class="op">=</span> <span class="fl">50</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">extractKinematics.traj</span><span class="op">(</span></span>
+<span>  <span class="va">trajectoryset</span>,</span>
+<span>  <span class="va">trajectoryID</span>,</span>
+<span>  acquisitionFrequency <span class="op">=</span> <span class="fl">30</span>,</span>
+<span>  scala <span class="op">=</span> <span class="fl">50</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>trajectoryset</dt>
 <dd><p>A <code>TrajectorySet</code> object</p></dd>
+
+
 <dt>trajectoryID</dt>
 <dd><p>The ID of a single trajectory</p></dd>
+
+
 <dt>acquisitionFrequency</dt>
 <dd><p>The frame rate of acquisition for the images, in
 milliseconds</p></dd>
+
+
 <dt>scala</dt>
 <dd><p>The value of micro(?)meters to which each single pixel
 corresponds</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <code>KinematicsFeatures</code> object</p>
+    
+
+<p>A <code>KinematicsFeatures</code> object</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -120,7 +129,7 @@ corresponds</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

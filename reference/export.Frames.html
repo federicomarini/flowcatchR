@@ -19,7 +19,7 @@ by the single frames."><!-- mathjax --><script src="https://cdnjs.cloudflare.com
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">flowcatchR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.31.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.31.1</span>
       </span>
     </div>
 
@@ -74,31 +74,42 @@ by the single frames.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">export.Frames</span><span class="op">(</span>
-  <span class="va">frames</span>,
-  dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,
-  nameStub <span class="op">=</span> <span class="st">"testExport"</span>,
-  createGif <span class="op">=</span> <span class="cn">FALSE</span>,
-  removeAfterCreatingGif <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">export.Frames</span><span class="op">(</span></span>
+<span>  <span class="va">frames</span>,</span>
+<span>  dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  nameStub <span class="op">=</span> <span class="st">"testExport"</span>,</span>
+<span>  createGif <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  removeAfterCreatingGif <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>frames</dt>
 <dd><p>A <code>Frames</code> object</p></dd>
+
+
 <dt>dir</dt>
 <dd><p>The path of the folder where the image should be written</p></dd>
+
+
 <dt>nameStub</dt>
 <dd><p>The stub for the file name, that will be used as a prefix for the exported images</p></dd>
+
+
 <dt>createGif</dt>
 <dd><p>Logical, whether to create or not an animated .gif file</p></dd>
+
+
 <dt>removeAfterCreatingGif</dt>
 <dd><p>Logical, whether to remove the single exported .png images after creating the single .gif</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Image files are written in the desired location</p>
+    
+
+<p>Image files are written in the desired location</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -107,10 +118,10 @@ by the single frames.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"MesenteriumSubset"</span><span class="op">)</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="fu">export.Frames</span><span class="op">(</span><span class="va">MesenteriumSubset</span>,nameStub<span class="op">=</span><span class="st">"subset_export_"</span>,</span>
-<span class="r-in">                       createGif<span class="op">=</span><span class="cn">TRUE</span>,removeAfterCreatingGif<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"MesenteriumSubset"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="fu">export.Frames</span><span class="op">(</span><span class="va">MesenteriumSubset</span>,nameStub<span class="op">=</span><span class="st">"subset_export_"</span>,</span></span>
+<span class="r-in"><span>                       createGif<span class="op">=</span><span class="cn">TRUE</span>,removeAfterCreatingGif<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -125,7 +136,7 @@ by the single frames.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

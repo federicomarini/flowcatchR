@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">flowcatchR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.31.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.31.1</span>
       </span>
     </div>
 
@@ -70,28 +70,37 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">inspect.Frames</span><span class="op">(</span>
-  <span class="va">frames</span>,
-  nframes <span class="op">=</span> <span class="cn">NULL</span>,
-  display.method <span class="op">=</span> <span class="st">"browser"</span>,
-  verbose <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">inspect.Frames</span><span class="op">(</span></span>
+<span>  <span class="va">frames</span>,</span>
+<span>  nframes <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  display.method <span class="op">=</span> <span class="st">"browser"</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>frames</dt>
 <dd><p>A <code>Frames</code> object</p></dd>
+
+
 <dt>nframes</dt>
 <dd><p>The number of frames to display (default value: <code>NULL</code>, all are displayed )</p></dd>
+
+
 <dt>display.method</dt>
 <dd><p>Method for displaying, can be either <code>raster</code> or <code>browser</code>. Defaults to <code>browser</code>, by opening a window in the browser</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>Logical, whether to provide additional output on the command line alongside with the images themselves</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p><code>inspect.Frames</code> returns an invisible <code>NULL</code>.</p>
+    
+
+<p><code>inspect.Frames</code> returns an invisible <code>NULL</code>.</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -100,9 +109,9 @@
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"MesenteriumSubset"</span><span class="op">)</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="fu">inspect.Frames</span><span class="op">(</span><span class="va">MesenteriumSubset</span><span class="op">)</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"MesenteriumSubset"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="fu">inspect.Frames</span><span class="op">(</span><span class="va">MesenteriumSubset</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -117,7 +126,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

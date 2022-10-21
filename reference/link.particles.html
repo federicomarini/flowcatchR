@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">flowcatchR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.31.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.31.1</span>
       </span>
     </div>
 
@@ -70,52 +70,77 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">link.particles</span><span class="op">(</span>
-  <span class="va">particleset</span>,
-  <span class="va">L</span>,
-  R <span class="op">=</span> <span class="fl">2</span>,
-  epsilon1 <span class="op">=</span> <span class="fl">0.1</span>,
-  epsilon2 <span class="op">=</span> <span class="fl">2</span>,
-  lambda1 <span class="op">=</span> <span class="fl">1</span>,
-  lambda2 <span class="op">=</span> <span class="fl">1</span>,
-  penaltyFunction <span class="op">=</span> <span class="fu"><a href="penaltyFunctionGenerator.html">penaltyFunctionGenerator</a></span><span class="op">(</span><span class="op">)</span>,
-  verboseOutput <span class="op">=</span> <span class="cn">FALSE</span>,
-  prog <span class="op">=</span> <span class="cn">FALSE</span>,
-  include.intensity <span class="op">=</span> <span class="cn">TRUE</span>,
-  include.area <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">link.particles</span><span class="op">(</span></span>
+<span>  <span class="va">particleset</span>,</span>
+<span>  <span class="va">L</span>,</span>
+<span>  R <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  epsilon1 <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>  epsilon2 <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  lambda1 <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  lambda2 <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  penaltyFunction <span class="op">=</span> <span class="fu"><a href="penaltyFunctionGenerator.html">penaltyFunctionGenerator</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  verboseOutput <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  prog <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  include.intensity <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  include.area <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>particleset</dt>
 <dd><p>A <code>ParticleSet</code> object</p></dd>
+
+
 <dt>L</dt>
 <dd><p>Maximum number of pixels an object can move in two consecutive frames</p></dd>
+
+
 <dt>R</dt>
 <dd><p>Linkrange, i.e. the number of consecutive frames to search for potential candidate links</p></dd>
+
+
 <dt>epsilon1</dt>
 <dd><p>A numeric value, to be used in the formula. Jitter for allowing angular displacements</p></dd>
+
+
 <dt>epsilon2</dt>
 <dd><p>A numeric value, to be used in the formula. Jitter for allowing spatial displacements</p></dd>
+
+
 <dt>lambda1</dt>
 <dd><p>A numeric value. Multiplicative factor for the penalty function</p></dd>
+
+
 <dt>lambda2</dt>
 <dd><p>A numeric value. Multiplicative factor applied to the angular displacement</p></dd>
+
+
 <dt>penaltyFunction</dt>
 <dd><p>A function structured in such a way to be applied as penalty function in the linking</p></dd>
+
+
 <dt>verboseOutput</dt>
 <dd><p>Logical, whether the output should report additional intermediate steps. For debugging use mainly</p></dd>
+
+
 <dt>prog</dt>
 <dd><p>Logical, whether the a progress bar should be shown during the tracking phase</p></dd>
+
+
 <dt>include.intensity</dt>
 <dd><p>Logical, whether to include also intensity change of the particles in the cost function calculation</p></dd>
+
+
 <dt>include.area</dt>
 <dd><p>Logical, whether to include also area change of the particles in the cost function calculation</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <code>LinkedParticleSet</code> object</p>
+    
+
+<p>A <code>LinkedParticleSet</code> object</p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -130,9 +155,9 @@ URL: http://www.ncbi.nlm.nih.gov/pubmed/16043363</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"candidate.platelets"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">tracked.platelets</span> <span class="op">&lt;-</span> <span class="fu">link.particles</span><span class="op">(</span><span class="va">candidate.platelets</span>, L<span class="op">=</span> <span class="fl">40</span><span class="op">)</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"candidate.platelets"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">tracked.platelets</span> <span class="op">&lt;-</span> <span class="fu">link.particles</span><span class="op">(</span><span class="va">candidate.platelets</span>, L<span class="op">=</span> <span class="fl">40</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -147,7 +172,7 @@ URL: http://www.ncbi.nlm.nih.gov/pubmed/16043363</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

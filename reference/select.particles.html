@@ -18,7 +18,7 @@ satisfy the indicated requirements"><!-- mathjax --><script src="https://cdnjs.c
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">flowcatchR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.31.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.31.1</span>
       </span>
     </div>
 
@@ -72,21 +72,28 @@ satisfy the indicated requirements</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">select.particles</span><span class="op">(</span><span class="va">particleset</span>, min.area <span class="op">=</span> <span class="fl">1</span>, max.area <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">select.particles</span><span class="op">(</span><span class="va">particleset</span>, min.area <span class="op">=</span> <span class="fl">1</span>, max.area <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>particleset</dt>
 <dd><p>A <code>ParticleSet</code> object. A <code>LinkedParticleSet</code> object can also be provided as input, yet the returned object will be a <code>ParticleSet</code> object that needs to be linked again</p></dd>
+
+
 <dt>min.area</dt>
 <dd><p>Size in pixels of the minimum area needed to detect the object as a potential particle of interest</p></dd>
+
+
 <dt>max.area</dt>
 <dd><p>Size in pixels of the maximum area allowed to detect the object as a potential particle of interest</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <code>ParticleSet</code> object</p>
+    
+
+<p>A <code>ParticleSet</code> object</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -95,10 +102,10 @@ satisfy the indicated requirements</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"candidate.platelets"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">selected.platelets</span> <span class="op">&lt;-</span> <span class="fu">select.particles</span><span class="op">(</span><span class="va">candidate.platelets</span>, min.area <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"candidate.platelets"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">selected.platelets</span> <span class="op">&lt;-</span> <span class="fu">select.particles</span><span class="op">(</span><span class="va">candidate.platelets</span>, min.area <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Filtering the particles...</span>
-<span class="r-in"><span class="va">selected.platelets</span></span>
+<span class="r-in"><span><span class="va">selected.platelets</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of the ParticleSet class. </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Set of particles for 20 images</span>
@@ -118,7 +125,7 @@ satisfy the indicated requirements</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5      0.7172299            64                 28             4.308530</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Particles identified on the red channel</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -133,7 +140,7 @@ satisfy the indicated requirements</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

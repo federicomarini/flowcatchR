@@ -23,7 +23,7 @@ parameter is reported, either for one or all trajectories"><!-- mathjax --><scri
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">flowcatchR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.31.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.31.1</span>
       </span>
     </div>
 
@@ -82,33 +82,44 @@ parameter is reported, either for one or all trajectories</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">kinematics</span><span class="op">(</span>
-  <span class="va">trajectoryset</span>,
-  trajectoryIDs <span class="op">=</span> <span class="cn">NULL</span>,
-  acquisitionFrequency <span class="op">=</span> <span class="fl">30</span>,
-  scala <span class="op">=</span> <span class="fl">50</span>,
-  feature <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">kinematics</span><span class="op">(</span></span>
+<span>  <span class="va">trajectoryset</span>,</span>
+<span>  trajectoryIDs <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  acquisitionFrequency <span class="op">=</span> <span class="fl">30</span>,</span>
+<span>  scala <span class="op">=</span> <span class="fl">50</span>,</span>
+<span>  feature <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>trajectoryset</dt>
 <dd><p>A <code>TrajectorySet</code> object</p></dd>
+
+
 <dt>trajectoryIDs</dt>
 <dd><p>The ID of a single trajectory</p></dd>
+
+
 <dt>acquisitionFrequency</dt>
 <dd><p>The frame rate of acquisition for the images, in
 milliseconds</p></dd>
+
+
 <dt>scala</dt>
 <dd><p>The value of micro(?)meters to which each single pixel
 corresponds</p></dd>
+
+
 <dt>feature</dt>
 <dd><p>Character string, the name of the feature to be computed</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <code>KinematicsFeaturesSet</code> object, or a <code>KinematicsFeatures</code> object,
+    
+
+<p>A <code>KinematicsFeaturesSet</code> object, or a <code>KinematicsFeatures</code> object,
   or an atomic value, or a list(eventually coerced to a vector)</p>
     </div>
     <div id="author">
@@ -118,25 +129,25 @@ corresponds</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"candidate.platelets"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">platelets.trajectories</span> <span class="op">&lt;-</span> <span class="fu"><a href="trajectories.html">trajectories</a></span><span class="op">(</span><span class="va">candidate.platelets</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"candidate.platelets"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">platelets.trajectories</span> <span class="op">&lt;-</span> <span class="fu"><a href="trajectories.html">trajectories</a></span><span class="op">(</span><span class="va">candidate.platelets</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Input ParticleSet is not a LinkedParticleSet.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Performing linking first with some set of default parameters - you might want to change them according to your scenario...</span>
-<span class="r-in"><span class="co"># for all trajectories, all features</span></span>
-<span class="r-in"><span class="va">alltrajs.features</span> <span class="op">&lt;-</span> <span class="fu">kinematics</span><span class="op">(</span><span class="va">platelets.trajectories</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># for all trajectories, all features</span></span></span>
+<span class="r-in"><span><span class="va">alltrajs.features</span> <span class="op">&lt;-</span> <span class="fu">kinematics</span><span class="op">(</span><span class="va">platelets.trajectories</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The trajectory with ID 17 had 3 or less points, no features were computed.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The trajectory with ID 19 had 3 or less points, no features were computed.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The trajectory with ID 21 had 3 or less points, no features were computed.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The trajectory with ID 25 had 3 or less points, no features were computed.</span>
-<span class="r-in"><span class="co"># for one trajectory, all features</span></span>
-<span class="r-in"><span class="va">traj11features</span> <span class="op">&lt;-</span> <span class="fu">kinematics</span><span class="op">(</span><span class="va">platelets.trajectories</span>,trajectoryIDs <span class="op">=</span> <span class="fl">11</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># for all trajectories, one feature</span></span>
-<span class="r-in"><span class="va">alltrajs.curvVel</span> <span class="op">&lt;-</span> <span class="fu">kinematics</span><span class="op">(</span><span class="va">platelets.trajectories</span>,feature <span class="op">=</span> <span class="st">"curvilinearVelocity"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># for one trajectory, all features</span></span></span>
+<span class="r-in"><span><span class="va">traj11features</span> <span class="op">&lt;-</span> <span class="fu">kinematics</span><span class="op">(</span><span class="va">platelets.trajectories</span>,trajectoryIDs <span class="op">=</span> <span class="fl">11</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># for all trajectories, one feature</span></span></span>
+<span class="r-in"><span><span class="va">alltrajs.curvVel</span> <span class="op">&lt;-</span> <span class="fu">kinematics</span><span class="op">(</span><span class="va">platelets.trajectories</span>,feature <span class="op">=</span> <span class="st">"curvilinearVelocity"</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The trajectory with ID 17 had 3 or less points, no features were computed.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The trajectory with ID 19 had 3 or less points, no features were computed.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The trajectory with ID 21 had 3 or less points, no features were computed.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The trajectory with ID 25 had 3 or less points, no features were computed.</span>
-<span class="r-in">  </span>
+<span class="r-in"><span>  </span></span>
 </code></pre></div>
     </div>
   </div>
@@ -151,7 +162,7 @@ corresponds</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

@@ -18,7 +18,7 @@ A track of the provenience of the particles is stored as a comment line above th
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">flowcatchR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.31.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.31.1</span>
       </span>
     </div>
 
@@ -72,25 +72,32 @@ A track of the provenience of the particles is stored as a comment line above th
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">export.particles</span><span class="op">(</span>
-  <span class="va">particleset</span>,
-  dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,
-  nameStub <span class="op">=</span> <span class="st">"testExport_particles"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">export.particles</span><span class="op">(</span></span>
+<span>  <span class="va">particleset</span>,</span>
+<span>  dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  nameStub <span class="op">=</span> <span class="st">"testExport_particles"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>particleset</dt>
 <dd><p>A <code>ParticleSet</code> object</p></dd>
+
+
 <dt>dir</dt>
 <dd><p>The path of the folder where the particle sets should be written</p></dd>
+
+
 <dt>nameStub</dt>
 <dd><p>The stub for the file name, that will be used as a prefix for the exported particle sets</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Particle sets files are written in the desired location</p>
+    
+
+<p>Particle sets files are written in the desired location</p>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -99,9 +106,9 @@ A track of the provenience of the particles is stored as a comment line above th
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"candidate.platelets"</span><span class="op">)</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="fu">export.particles</span><span class="op">(</span><span class="va">candidate.platelets</span><span class="op">)</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"candidate.platelets"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="fu">export.particles</span><span class="op">(</span><span class="va">candidate.platelets</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -116,7 +123,7 @@ A track of the provenience of the particles is stored as a comment line above th
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>

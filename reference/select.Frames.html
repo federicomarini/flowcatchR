@@ -18,7 +18,7 @@ is presenting gaps (i.e. does not actually include a frame)"><!-- mathjax --><sc
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">flowcatchR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.31.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.31.1</span>
       </span>
     </div>
 
@@ -72,21 +72,30 @@ is presenting gaps (i.e. does not actually include a frame)</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">select.Frames</span><span class="op">(</span><span class="va">frames</span>, framesToKeep <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">select.Frames</span><span class="op">(</span><span class="va">frames</span>, framesToKeep <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>frames</dt>
 <dd><p>A <code>Frames</code> object</p></dd>
+
+
 <dt>framesToKeep</dt>
 <dd><p>A vector containing the indexes of the frames to keep in the selection</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Arguments to be passed to methods</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <code>Frames</code> object, composed by the subset of frames of the input <code>Frames</code></p>
+    
+
+<p>A <code>Frames</code> object, composed by the subset of frames of the input <code>Frames</code></p>
+
+
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -95,8 +104,8 @@ is presenting gaps (i.e. does not actually include a frame)</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"MesenteriumSubset"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">select.Frames</span><span class="op">(</span><span class="va">MesenteriumSubset</span>, framesToKeep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">14</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"MesenteriumSubset"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">select.Frames</span><span class="op">(</span><span class="va">MesenteriumSubset</span>, framesToKeep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">14</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Frames </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   colorMode    : Color </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   storage.mode : double </span>
@@ -111,7 +120,7 @@ is presenting gaps (i.e. does not actually include a frame)</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3,] 0.2352941 0.2000000 0.1764706 0.1490196 0.1333333 0.1333333</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [4,] 0.2352941 0.2117647 0.1764706 0.1529412 0.1411765 0.1411765</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [5,] 0.2313725 0.2078431 0.1725490 0.1411765 0.1294118 0.1411765</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -126,7 +135,7 @@ is presenting gaps (i.e. does not actually include a frame)</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
       </footer></div>
