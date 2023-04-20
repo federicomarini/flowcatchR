@@ -42,7 +42,7 @@ LazyData: true
 URL: https://github.com/federicomarini/flowcatchR,
     https://federicomarini.github.io/flowcatchR/
 BugReports: https://github.com/federicomarini/flowcatchR/issues
-biocViews: Software, Visualization, CellBiology, Classification, Infrastructure, GUI
-RoxygenNote: 7.2.1
+biocViews: Software, Visualization, CellBiology, Classification, Infrastructure, 
+    GUI, ShinyApps
 RoxygenNote: 7.2.3
 Encoding: UTF-8
