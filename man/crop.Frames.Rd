@@ -30,7 +30,7 @@ crop.Frames(
 
 \item{testing}{Logical, whether to just test the cropping or to actually perform it. Default set to \code{FALSE}}
 
-\item{...}{Arguments to be passed to \code{\link{display}} (e.g. setting the \code{method} argument)}
+\item{...}{Arguments to be passed to \code{\link[EBImage]{display}} (e.g. setting the \code{method} argument)}
 }
 \value{
 A \code{Frames} object, with cropped frames in the \code{image} slot

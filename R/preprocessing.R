@@ -8,16 +8,16 @@
 #' (low-pass filtering)
 #' @param brush.shape Shape of the brush to be used for initial smoothing (low-pass 
 #' filtering)
-#' @param at.offset Offset to be used in the adaptive thresholding step - see also \code{\link{thresh}}. As an
-#' alternative thresholding method, see also \code{\link{otsu}} in the \code{EBImage} package.
-#' @param at.wwidth Width of the window for the adaptive thresholding step - see also \code{\link{thresh}}. As an
-#' alternative thresholding method, see also \code{\link{otsu}} in the \code{EBImage} package.
-#' @param at.wheight Height of the window for the adaptive thresholding step - see also \code{\link{thresh}}. As an
-#' alternative thresholding method, see also \code{\link{otsu}} in the \code{EBImage} package.
-#' @param kern.size Size in pixels of the kernel used for morphological operations - e.g., opening, which is an erosion followed by a dilation, and closing which is a dilation followed by an erosion - see also \code{\link{opening}}, \code{\link{closing}}
+#' @param at.offset Offset to be used in the adaptive thresholding step - see also \code{\link[EBImage]{thresh}}. As an
+#' alternative thresholding method, see also \code{\link[EBImage]{otsu}} in the \code{EBImage} package.
+#' @param at.wwidth Width of the window for the adaptive thresholding step - see also \code{\link[EBImage]{thresh}}. As an
+#' alternative thresholding method, see also \code{\link[EBImage]{otsu}} in the \code{EBImage} package.
+#' @param at.wheight Height of the window for the adaptive thresholding step - see also \code{\link[EBImage]{thresh}}. As an
+#' alternative thresholding method, see also \code{\link[EBImage]{otsu}} in the \code{EBImage} package.
+#' @param kern.size Size in pixels of the kernel used for morphological operations - e.g., opening, which is an erosion followed by a dilation, and closing which is a dilation followed by an erosion - see also \code{\link[EBImage]{opening}}, \code{\link[EBImage]{closing}}
 #' @param kern.shape Shape of the kernel used for morphological operations
-#' @param ws.tolerance Tolerance allowed in performing the watershed-based segmentation (see also \code{\link{watershed}})
-#' @param ws.radius Radius for the watershed-based segmentation (see also \code{\link{watershed}})
+#' @param ws.tolerance Tolerance allowed in performing the watershed-based segmentation (see also \code{\link[EBImage]{watershed}})
+#' @param ws.radius Radius for the watershed-based segmentation (see also \code{\link[EBImage]{watershed}})
 #' @param displayprocessing Logical, whether to display intermediate steps while performing preprocessing. Dismissed currently, it could increase runtime a lot
 #' @param ... Arguments to be passed to methods
 #' 
@@ -213,7 +213,7 @@ particles <- function(raw.frames,
 #' @param cutDown Amount of pixels to be cut at the side
 #' @param cutAll Amount of pixels to be cut at all sides. Overrides the single side values
 #' @param testing Logical, whether to just test the cropping or to actually perform it. Default set to \code{FALSE}
-#' @param ... Arguments to be passed to \code{\link{display}} (e.g. setting the \code{method} argument)
+#' @param ... Arguments to be passed to \code{\link[EBImage]{display}} (e.g. setting the \code{method} argument)
 #' 
 #' @return A \code{Frames} object, with cropped frames in the \code{image} slot
 #' 
