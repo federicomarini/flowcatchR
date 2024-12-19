@@ -1,3 +1,9 @@
+# flowcatchR 1.42.0
+
+## Other notes
+
+* Some changes in the source of the documentation, providing anchors to all function calls. This avoids the new note in R CMD check in the new major release
+
 # flowcatchR 1.20.0
 
 ## Bug fixes
