@@ -30,9 +30,8 @@
 #'
 #' Maintainer: Federico Marini \email{marinif@@uni-mainz.de}
 #' @name flowcatchR-pkg
-#' @docType package
-NULL
-
+#' @keywords internal
+"_PACKAGE"
 
 
 

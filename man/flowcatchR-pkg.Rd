@@ -2,6 +2,8 @@
 % Please edit documentation in R/flowcatchR-pkg.R
 \docType{package}
 \name{flowcatchR-pkg}
+\alias{flowcatchR}
+\alias{flowcatchR-package}
 \alias{flowcatchR-pkg}
 \title{flowcatchR: analyzing time-lapse microscopy imaging, from detection to tracking}
 \description{
@@ -19,6 +21,15 @@ in blood vessels, to categorize the particles in flowing, rolling and
 adherent. This classification is applied in the study of phenomena such as
 hemostasis and study of thrombosis development.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/federicomarini/flowcatchR}
+  \item \url{https://federicomarini.github.io/flowcatchR/}
+  \item Report bugs at \url{https://github.com/federicomarini/flowcatchR/issues}
+}
+
+}
 \author{
 Federico Marini \email{marinif@uni-mainz.de},
 Johanna Mazur \email{mazur@uni-mainz.de},
@@ -26,3 +37,4 @@ Harald Binder \email{binderh@uni-mainz.de}, 2015
 
 Maintainer: Federico Marini \email{marinif@uni-mainz.de}
 }
+\keyword{internal}
