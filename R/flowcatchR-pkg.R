@@ -35,9 +35,9 @@
 
 
 
-#' A sample \code{Frames} object 
+#' A sample `Frames` object 
 #' 
-#' The sample \code{Frames} object is constituted by a subset of a time-lapse intravital microscopy imaging dataset.
+#' The sample `Frames` object is constituted by a subset of a time-lapse intravital microscopy imaging dataset.
 #' Green channel marks leukocytes, red channel focuses on blood platelets. 20 frames are provided in this subset.
 #' Images are kindly provided by Sven Jaeckel (\email{Sven.Jaeckel@@unimedizin-mainz.de}).
 #' 
@@ -48,9 +48,9 @@ NULL
 
 
 
-#' A sample \code{ParticleSet} object
+#' A sample `ParticleSet` object
 #' 
-#' The sample \code{ParticleSet} object is constituted by the platelets identified from the \code{MesenteriumSubset} data
+#' The sample `ParticleSet` object is constituted by the platelets identified from the `MesenteriumSubset` data
 #' 
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 #' @name candidate.platelets

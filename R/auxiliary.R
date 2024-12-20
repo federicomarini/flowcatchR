@@ -1,8 +1,8 @@
 
 
-#' Compute the length of render frames in a \code{Frames} object
+#' Compute the length of render frames in a `Frames` object
 #' 
-#' @param x A \code{Frames} object
+#' @param x A `Frames` object
 #' 
 #' @return An integer number
 #' @examples
@@ -20,14 +20,14 @@ length.Frames <- function(x)
 
 
 
-#' Channel extraction for \code{objects}
+#' Channel extraction for `objects`
 #' 
-#' \code{channel}
+#' `channel`
 #' 
-#' @param frames A \code{Frames} object
+#' @param frames A `Frames` object
 #' @param mode A character value specifying the target mode for conversion.
 #' 
-#' @return A \code{Frames} object with just the infotmation on the selected channel
+#' @return A `Frames` object with just the infotmation on the selected channel
 #' @examples
 #' data("MesenteriumSubset")
 #' channel.Frames(MesenteriumSubset,"red")
@@ -40,21 +40,21 @@ channel.Frames <- function(frames,mode)
 
 
 
-#' Explore the frames of a \code{Frames}
+#' Explore the frames of a `Frames`
 #' 
-#' The first frames of a \code{Frames} are displayed in the browser, and are interactively navigable.
+#' The first frames of a `Frames` are displayed in the browser, and are interactively navigable.
 #' 
 #' 
-#' @param frames A \code{Frames} object
-#' @param nframes The number of frames to display (default value: \code{NULL}, all are displayed )
-#' @param display.method Method for displaying, can be either \code{raster} or \code{browser}. Defaults to \code{browser}, by opening a window in the browser
+#' @param frames A `Frames` object
+#' @param nframes The number of frames to display (default value: `NULL`, all are displayed )
+#' @param display.method Method for displaying, can be either `raster` or `browser`. Defaults to `browser`, by opening a window in the browser
 #' @param verbose Logical, whether to provide additional output on the command line alongside with the images themselves
 #' 
 #' @examples
 #' data("MesenteriumSubset")
 #' \dontrun{inspect.Frames(MesenteriumSubset)}
 #' 
-#' @return \code{inspect.Frames} returns an invisible \code{NULL}.
+#' @return `inspect.Frames` returns an invisible `NULL`.
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
@@ -85,17 +85,17 @@ inspect.Frames <- function(frames,
 
 
 
-#' Constructor for a \code{Frames} object
+#' Constructor for a `Frames` object
 #' 
-#' This function is used to create a \code{Frames} object from a vector of image files (or a folder specifying the directory
+#' This function is used to create a `Frames` object from a vector of image files (or a folder specifying the directory
 #' containing them). 
 #' The number of frames is also specified, as just a subset of the images can be used for this
 #' 
 #' @param image.files Vector of strings containing the locations where the (raw) images are to be found, or alternatively, the path to the folder
-#' @param nframes Number of frames that will constitute the \code{Frames} object
+#' @param nframes Number of frames that will constitute the `Frames` object
 #'
-#' @return An object of the \code{Frames} class, which holds the info on a list of frames, specifying for each the following elements:
-#' \item{image}{The \code{Image} object containing the image itself}
+#' @return An object of the `Frames` class, which holds the info on a list of frames, specifying for each the following elements:
+#' \item{image}{The `Image` object containing the image itself}
 #' \item{location}{The complete path to the location of the original image}
 #' 
 #'
@@ -147,13 +147,13 @@ read.Frames <- function(image.files, # ../exportedMesenteriumSubset
 
 
 
-#' Exports a \code{Frames} object
+#' Exports a `Frames` object
 #' 
-#' Writes the images contained in the \code{image} slot of the \code{Frames} object elements.
+#' Writes the images contained in the `image` slot of the `Frames` object elements.
 #' The images can be exported as single frames, or as a .gif image that is composed
 #' by the single frames.
 #' 
-#' @param frames A \code{Frames} object
+#' @param frames A `Frames` object
 #' @param dir The path of the folder where the image should be written
 #' @param nameStub The stub for the file name, that will be used as a prefix for the exported images
 #' @param createGif Logical, whether to create or not an animated .gif file
@@ -198,16 +198,16 @@ export.Frames <- function(frames,
 
 
 
-#' Extracts subsets of frames from a \code{Frames} object
+#' Extracts subsets of frames from a `Frames` object
 #' 
-#' An input \code{Frames} object is subject to subsetting. This function is useful e.g. when the trajectory of interest 
+#' An input `Frames` object is subject to subsetting. This function is useful e.g. when the trajectory of interest 
 #' is presenting gaps (i.e. does not actually include a frame)
 #' 
-#' @param frames A \code{Frames} object
+#' @param frames A `Frames` object
 #' @param framesToKeep A vector containing the indexes of the frames to keep in the selection
 #' @param ... Arguments to be passed to methods
 #' 
-#' @return A \code{Frames} object, composed by the subset of frames of the input \code{Frames}
+#' @return A `Frames` object, composed by the subset of frames of the input `Frames`
 #' 
 #' 
 #' @examples
@@ -248,17 +248,17 @@ select.Frames <- function(frames,framesToKeep=1,...)
 
 
 
-#' Normalize the values of a \code{Frames} object
+#' Normalize the values of a `Frames` object
 #' 
-#' Applies a transformation to the \code{Frames} object in a way that the intensities
+#' Applies a transformation to the `Frames` object in a way that the intensities
 #' throughout the acquisition are normalized overall in term of pixel values sums.
 #' It can be used to compensate for example a global change in the illumination values, 
 #' e.g. due to changed acquisition conditions in experiments that span long timescales.
 #' 
-#' @param frames A \code{Frames} object to normalize
-#' @param normFun The normalization function chosen. Can be one of \code{mean} or \code{median}
+#' @param frames A `Frames` object to normalize
+#' @param normFun The normalization function chosen. Can be one of `mean` or `median`
 #' 
-#' @return A \code{Frames} object with normalized pixel values.
+#' @return A `Frames` object with normalized pixel values.
 #' 
 #' @export
 #' 
@@ -305,16 +305,16 @@ normalizeFrames <- function(frames, normFun = "median")
 
 
 
-#' Constructor for a \code{ParticleSet} object
+#' Constructor for a `ParticleSet` object
 #' 
-#' This function is used to create a \code{ParticleSet} object from a vector/list of tab separated text files, each of one containing one line for each 
+#' This function is used to create a `ParticleSet` object from a vector/list of tab separated text files, each of one containing one line for each 
 #' particle in the related frame, alongside with its coordinates and if available, the computed features
 #' The number of frames is also specified, as just a subset of the particle lists can be used for this
 #' 
 #' @param particle.files Vector of strings containing the locations where the particle coordinates are to be found, or alternatively, the path to the folder
-#' @param nframes Number of frames that will constitute the \code{ParticleSet} object
+#' @param nframes Number of frames that will constitute the `ParticleSet` object
 #'
-#' @return An object of the \code{ParticleSet} class 
+#' @return An object of the `ParticleSet` class 
 #' 
 #' @examples
 #' ## see vignette and export.particles
@@ -360,12 +360,12 @@ read.particles <- function(particle.files,
 
 
 
-#' Exports a \code{ParticleSet} object
+#' Exports a `ParticleSet` object
 #' 
-#' Writes the particles contained in the \code{particles} data frame slot of the \code{ParticleSet} object elements.
+#' Writes the particles contained in the `particles` data frame slot of the `ParticleSet` object elements.
 #' A track of the provenience of the particles is stored as a comment line above the header
 #' 
-#' @param particleset A \code{ParticleSet} object
+#' @param particleset A `ParticleSet` object
 #' @param dir The path of the folder where the particle sets should be written
 #' @param nameStub The stub for the file name, that will be used as a prefix for the exported particle sets
 #' 
@@ -401,16 +401,16 @@ export.particles <- function(particleset,
 
 
 
-#' Performs filtering on a \code{ParticleSet} object
+#' Performs filtering on a `ParticleSet` object
 #' 
 #' According to parameters of interests, such as size, eccentricity/shape, filters out the particles that do not 
 #' satisfy the indicated requirements
 #' 
-#' @param particleset A \code{ParticleSet} object. A \code{LinkedParticleSet} object can also be provided as input, yet the returned object will be a \code{ParticleSet} object that needs to be linked again 
+#' @param particleset A `ParticleSet` object. A `LinkedParticleSet` object can also be provided as input, yet the returned object will be a `ParticleSet` object that needs to be linked again 
 #' @param min.area Size in pixels of the minimum area needed to detect the object as a potential particle of interest
 #' @param max.area Size in pixels of the maximum area allowed to detect the object as a potential particle of interest
 #'  
-#' @return A \code{ParticleSet} object
+#' @return A `ParticleSet` object
 #' 
 #' @examples
 #' data("candidate.platelets")
@@ -475,10 +475,10 @@ select.particles <- function(particleset,
 }
 
 
-#' Shiny application for exploring the features and parameters provided by \code{flowcatchR}
+#' Shiny application for exploring the features and parameters provided by `flowcatchR`
 #' 
 #' Launches a Shiny Web Application for interactive data exploration. Default data loaded are
-#' the frames from the \code{MesenteriumSubset} object, custom values can be inserted by typing
+#' the frames from the `MesenteriumSubset` object, custom values can be inserted by typing
 #' the location of the data stored in a local folder. The Application is structured in a variety
 #' of tabs that mirror the steps in the usual workflow in time-lapse microscopy images. These can
 #' allow the user to interactively explore the parameters and their effect in the reactive 

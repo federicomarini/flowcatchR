@@ -35,7 +35,7 @@ setClass("ParticleSet",
 #' LinkedParticleSet class
 #' 
 #' S4 class for storing information of particles after they have been tracked. It inherits the slots
-#' from the \code{ParticleSet} class.
+#' from the `ParticleSet` class.
 #' 
 #' @slot tracking A list storing all necessary information for the tracking algorithm to work, and for providing the information
 #' to the function to determine the trajectories
@@ -78,7 +78,7 @@ setClass("KinematicsFeatures",
 #' KinematicsFeaturesSet class
 #' 
 #' S4 class for storing information on all kinematics features identified for all trajectories. Single
-#' \code{KinematicsFeatures} objects are the element of the main list
+#' `KinematicsFeatures` objects are the element of the main list
 #' 
 #' @slot .Data A list storing the information for the sets of kinematics features
 #' 
@@ -91,9 +91,9 @@ setClass("KinematicsFeaturesSet",
 ## and their constructors
 
 
-#' Constructor for a \code{Frames} object
+#' Constructor for a `Frames` object
 #' 
-#' @param x A multi-dimensional \code{Image} object
+#' @param x A multi-dimensional `Image` object
 #' @param channel A character vector, can be 'red','green','blue' or 'all' (if in color mode)
 #' 
 #' @examples
@@ -101,7 +101,7 @@ setClass("KinematicsFeaturesSet",
 #' inputImg <- Image(MesenteriumSubset)
 #' Frames(inputImg,"red")
 #' 
-#' @return The created \code{Frames} object.
+#' @return The created `Frames` object.
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014

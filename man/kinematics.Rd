@@ -27,7 +27,7 @@ corresponds}
 }
 \value{
 A \code{KinematicsFeaturesSet} object, or a \code{KinematicsFeatures} object,
-  or an atomic value, or a list(eventually coerced to a vector)
+or an atomic value, or a list(eventually coerced to a vector)
 }
 \description{
 The computed set of parameters include \code{delta.x}, \code{delta.t} and \code{delta.v}

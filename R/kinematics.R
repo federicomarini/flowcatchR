@@ -1,14 +1,14 @@
-#' Calculate a set of kinematics parameter from a \code{TrajectorySet} object, or a single parameter, or from a single trajectory (all possible combinations)
+#' Calculate a set of kinematics parameter from a `TrajectorySet` object, or a single parameter, or from a single trajectory (all possible combinations)
 #' 
-#' The computed set of parameters include \code{delta.x}, \code{delta.t} and \code{delta.v}
-#' (displacements and instantaneous velocity), \code{totalTime}, \code{totalDistance},
-#' \code{distStartToEnd}, \code{curvilinearVelocity}, \code{straightLineVelocity} and
-#' \code{linearityForwardProgression}, Mean Squared Displacement, velocity
+#' The computed set of parameters include `delta.x`, `delta.t` and `delta.v`
+#' (displacements and instantaneous velocity), `totalTime`, `totalDistance`,
+#' `distStartToEnd`, `curvilinearVelocity`, `straightLineVelocity` and
+#' `linearityForwardProgression`, Mean Squared Displacement, velocity
 #' autocorrelation, and more. If a single trajectory is specified, the computation is
 #' performed for that trajectory alone. If a parameter is specified, only that
 #' parameter is reported, either for one or all trajectories
 #' 
-#' @param trajectoryset A \code{TrajectorySet} object
+#' @param trajectoryset A `TrajectorySet` object
 #' @param trajectoryIDs The ID of a single trajectory
 #' @param acquisitionFrequency The frame rate of acquisition for the images, in
 #'   milliseconds
@@ -16,7 +16,7 @@
 #'   corresponds
 #' @param feature Character string, the name of the feature to be computed
 #'   
-#' @return A \code{KinematicsFeaturesSet} object, or a \code{KinematicsFeatures} object,
+#' @return A `KinematicsFeaturesSet` object, or a `KinematicsFeatures` object,
 #'   or an atomic value, or a list(eventually coerced to a vector)
 #'   
 #' @examples
@@ -99,20 +99,20 @@ kinematics <- function(trajectoryset,
 
 #' Calculate a set of kinematics parameters from a single trajectory
 #' 
-#' The computed set of parameters include \code{delta.x}, \code{delta.t} and \code{delta.v}
-#' (displacements and instantaneous velocity), \code{totalTime}, \code{totalDistance},
-#' \code{distStartToEnd}, \code{curvilinearVelocity}, \code{straightLineVelocity} and
-#' \code{linearityForwardProgression}, Mean Squared Displacement, velocity
+#' The computed set of parameters include `delta.x`, `delta.t` and `delta.v`
+#' (displacements and instantaneous velocity), `totalTime`, `totalDistance`,
+#' `distStartToEnd`, `curvilinearVelocity`, `straightLineVelocity` and
+#' `linearityForwardProgression`, Mean Squared Displacement, velocity
 #' autocorrelation, and more
 #' 
-#' @param trajectoryset A \code{TrajectorySet} object
+#' @param trajectoryset A `TrajectorySet` object
 #' @param trajectoryID The ID of a single trajectory
 #' @param acquisitionFrequency The frame rate of acquisition for the images, in
 #'   milliseconds
 #' @param scala The value of micro(?)meters to which each single pixel
 #'   corresponds
 #'   
-#' @return A \code{KinematicsFeatures} object
+#' @return A `KinematicsFeatures` object
 #'   
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 extractKinematics.traj <- function(trajectoryset,

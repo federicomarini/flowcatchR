@@ -26,17 +26,17 @@ snap(
 
 \item{frameID}{The ID of the frame to inspect}
 
-\item{infocol}{The color to use for plotting the contours and the information on the 
+\item{infocol}{The color to use for plotting the contours and the information on the
 clicked particle}
 
 \item{infocex}{The numeric character expansion value as in \code{cex} to be used
 for printing the text on the image}
 
-\item{showVelocity}{Logical, whether to display additional information on the 
+\item{showVelocity}{Logical, whether to display additional information on the
 instantaneous velocity of the particle}
 }
 \value{
-An image of the selected frame, rendered in R native graphics, and additionally 
+An image of the selected frame, rendered in R native graphics, and additionally
 a list with the coordinates as well as the trajectory ID of the particle closest to the
 clicked location
 }

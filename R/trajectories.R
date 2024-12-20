@@ -1,12 +1,12 @@
 #' Generate trajectories
 #' 
-#' Generates a \code{TrajectorySet} object from a (\code{Linked})\code{ParticleSet}
+#' Generates a `TrajectorySet` object from a (`Linked`)`ParticleSet`
 #' 
-#' @param particleset A (\code{Linked})\code{ParticleSet} object
+#' @param particleset A (`Linked`)`ParticleSet` object
 #' @param verbose Logical, currently not used - could be introduced for providing additional info on the trajectories
 #' @param ... Arguments to be passed to methods
 #' 
-#' @return A \code{TrajectorySet} object
+#' @return A `TrajectorySet` object
 #' 
 #' @examples
 #' data("candidate.platelets")
@@ -133,7 +133,7 @@ trajectories <- function(particleset,
 #' 
 #' Auxiliary function to return the dimensions of the field of interest
 #'  
-#' @param frames A \code{Frames} object
+#' @param frames A `Frames` object
 #' 
 #' @return A list object, containing the extremes of the field of interest (x-y-z, where z is time)
 #' 
@@ -146,18 +146,18 @@ axesInfo <- function(frames)
 }
 
 
-#' 3D representation of a \code{TrajectorySet} object
+#' 3D representation of a `TrajectorySet` object
 #' 
-#' Provides a visual representation of a \code{TrajectorySet} object
+#' Provides a visual representation of a `TrajectorySet` object
 #' 
 #' 
 #' 
-#' Based on the \code{plotly} library, the function extracts the region of interests 
-#' from the dimensions of an image of the \code{Frames} object,
+#' Based on the `plotly` library, the function extracts the region of interests 
+#' from the dimensions of an image of the `Frames` object,
 #' and afterwards plots the x-y-time representation of the identified trajectories
 #' 
-#' @param x A \code{TrajectorySet} object
-#' @param frames A \code{Frames} object, used here to identify the limits of the region of interest 
+#' @param x A `TrajectorySet` object
+#' @param frames A `Frames` object, used here to identify the limits of the region of interest 
 #' @param ... Arguments to be passed to methods
 #' @param verbose Logical, whether to provide additional output on the command line
 #' 
@@ -169,7 +169,7 @@ axesInfo <- function(frames)
 #' \dontrun{
 #' plot(platelets.trajectories,MesenteriumSubset)
 #' }
-#' @return \code{plot.TrajectorySet} returns an invisible \code{NULL}.
+#' @return `plot.TrajectorySet` returns an invisible `NULL`.
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
@@ -195,18 +195,18 @@ plot.TrajectorySet <- function(x,frames,verbose=FALSE,...)
 
 
 
-#' 2D projection of a \code{TrajectorySet} object
+#' 2D projection of a `TrajectorySet` object
 #' 
-#' Provides a bird's eye view of a \code{TrajectorySet} object on a bidimensional space
+#' Provides a bird's eye view of a `TrajectorySet` object on a bidimensional space
 #' 
 #' This function extracts the region of interests from the dimensions
-#' of an image of the \code{Frames} object,
+#' of an image of the `Frames` object,
 #' and afterwards plots the x-y-time representation of the identified 
-#' trajectories on a 2d plane. It is possible to subset the \code{TrajectorySet}
+#' trajectories on a 2d plane. It is possible to subset the `TrajectorySet`
 #' object with the IDs of the desired trajectories
 #' 
-#' @param trajectoryset A \code{TrajectorySet} object
-#' @param frames A \code{Frames} object, used here to identify the limits of the region of interest 
+#' @param trajectoryset A `TrajectorySet` object
+#' @param frames A `Frames` object, used here to identify the limits of the region of interest 
 #' @param trajIDs A vector containing the ids of the desired trajectories
 #' @param addGrid Logical, add an additional grid to the 2-dimensional plot (visual aid for backtracking trajectory point locations) 
 #' @param verbose Logical, whether to provide additional output on the command line
@@ -218,7 +218,7 @@ plot.TrajectorySet <- function(x,frames,verbose=FALSE,...)
 #' platelets.trajectories <- trajectories(candidate.platelets)
 #' plot2D.TrajectorySet(platelets.trajectories,MesenteriumSubset)
 #' 
-#' @return \code{plot2D.TrajectorySet} returns an invisible \code{NULL}.
+#' @return `plot2D.TrajectorySet` returns an invisible `NULL`.
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014

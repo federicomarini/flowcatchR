@@ -1,26 +1,26 @@
 
-#' Add object contours to a \code{Frames} object
+#' Add object contours to a `Frames` object
 #'  
-#' Creates a \code{Frames} object containing raw information, combined with the segmented 
+#' Creates a `Frames` object containing raw information, combined with the segmented 
 #' images and the relative trajectory under analysis
 #' 
-#' If a \code{TrajectorySet} is provided and mode is set to \code{trajectories}, returns 
-#' a \code{Frames} with all trajectories included in the IDs 
+#' If a `TrajectorySet` is provided and mode is set to `trajectories`, returns 
+#' a `Frames` with all trajectories included in the IDs 
 #' vector painted accordingly.
-#' If the mode is set to \code{particles}, it will just plot the particles (all) on all frames.
-#' If no \code{TrajectorySet} is provided, it will be computed with default parameters.
-#' If no \code{binary.frames} is provided, it will be computed also with default parameters
+#' If the mode is set to `particles`, it will just plot the particles (all) on all frames.
+#' If no `TrajectorySet` is provided, it will be computed with default parameters.
+#' If no `binary.frames` is provided, it will be computed also with default parameters
 #' 
-#' @param raw.frames A \code{Frames} object with raw images
-#' @param binary.frames A \code{Frames} object with preprocessed frames
-#' @param trajectoryset A \code{TrajectorySet} object
+#' @param raw.frames A `Frames` object with raw images
+#' @param binary.frames A `Frames` object with preprocessed frames
+#' @param trajectoryset A `TrajectorySet` object
 #' @param trajIDs Numeric vector, the ID(s) of the trajectory.
-#' @param mode A character string, can assume the values \code{particles} or \code{trajectories}.
-#' Defaults to \code{particles}
+#' @param mode A character string, can assume the values `particles` or `trajectories`.
+#' Defaults to `particles`
 #' @param col A vector of color strings
 #' @param channel A character string, to select which channel to process
 #' 
-#' @return A new \code{Frames} object with contours of the objects added
+#' @return A new `Frames` object with contours of the objects added
 #' 
 #' @examples
 #' data("MesenteriumSubset")
@@ -198,15 +198,15 @@ addTrajectories <- function(raw.frames,binary.frames,trajectoryset,trajIDs,col){
 
 
 
-#' Combines the information from a raw \code{Frames} object and the corresponding preprocessed one
+#' Combines the information from a raw `Frames` object and the corresponding preprocessed one
 #' 
 #' All objects are painted with a unique colour - for sake of speed
 #'  
-#' @param raw.frames A \code{Frames} object containing the raw images
-#' @param binary.frames A \code{Frames} object with the preprocessed versions of the images (e.g. segmented)
+#' @param raw.frames A `Frames` object containing the raw images
+#' @param binary.frames A `Frames` object with the preprocessed versions of the images (e.g. segmented)
 #' @param col A color character string, to select which color will be used for drawing the contours of the particles. If not specified, it will default according to the objects provided
 #' 
-#' @return A \code{Frames} object, whose images are the combination of the raw images with the segmented objects drawn on them
+#' @return A `Frames` object, whose images are the combination of the raw images with the segmented objects drawn on them
 #' 
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 addParticles <- function(raw.frames,binary.frames,col=NULL) {
@@ -226,15 +226,15 @@ addParticles <- function(raw.frames,binary.frames,col=NULL) {
 
 #' Match trajectories to related particles.
 #' 
-#' Match trajectories to the related particles in the \code{TrajectorySet} and 
-#' \code{ParticleSet} objects. This function returns a new \code{ParticleSet}
+#' Match trajectories to the related particles in the `TrajectorySet` and 
+#' `ParticleSet` objects. This function returns a new `ParticleSet`
 #' object that contains as additional column the trajectory ID that the particular
-#' particle was assigned to. Used also by other routines, such as \code{\link{snap}}
+#' particle was assigned to. Used also by other routines, such as [snap()]
 #' 
-#' @param particleset A \code{ParticleSet} object
-#' @param trajectoryset A \code{TrajectorySet} object coupled to the \code{particleset}
+#' @param particleset A `ParticleSet` object
+#' @param trajectoryset A `TrajectorySet` object coupled to the `particleset`
 #' 
-#' @return A \code{ParticleSet} object with an additional column with the trajectory
+#' @return A `ParticleSet` object with an additional column with the trajectory
 #' IDs 
 #' 
 #' @examples
@@ -276,14 +276,14 @@ matchTrajToParticles <- function(particleset,trajectoryset)
 #' This function combines all classes related to a single experiment in order to deliver
 #' a clickable feedback on one of the frames.
 #' 
-#' @param raw.frames A \code{Frames} object with the raw frames data
-#' @param binary.frames A \code{Frames} object with the preprocessed frames data
-#' @param particleset A \code{ParticleSet} object with the particles data
-#' @param trajectoryset A \code{TrajectorySet} object with the trajectories data
+#' @param raw.frames A `Frames` object with the raw frames data
+#' @param binary.frames A `Frames` object with the preprocessed frames data
+#' @param particleset A `ParticleSet` object with the particles data
+#' @param trajectoryset A `TrajectorySet` object with the trajectories data
 #' @param frameID The ID of the frame to inspect 
 #' @param infocol The color to use for plotting the contours and the information on the 
 #' clicked particle
-#' @param infocex The numeric character expansion value as in \code{cex} to be used
+#' @param infocex The numeric character expansion value as in `cex` to be used
 #' for printing the text on the image
 #' @param showVelocity Logical, whether to display additional information on the 
 #' instantaneous velocity of the particle

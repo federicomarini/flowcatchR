@@ -17,7 +17,7 @@ select.particles(particleset, min.area = 1, max.area = 1000)
 A \code{ParticleSet} object
 }
 \description{
-According to parameters of interests, such as size, eccentricity/shape, filters out the particles that do not 
+According to parameters of interests, such as size, eccentricity/shape, filters out the particles that do not
 satisfy the indicated requirements
 }
 \examples{

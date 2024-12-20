@@ -15,7 +15,7 @@ read.particles(particle.files, nframes = NULL)
 An object of the \code{ParticleSet} class
 }
 \description{
-This function is used to create a \code{ParticleSet} object from a vector/list of tab separated text files, each of one containing one line for each 
+This function is used to create a \code{ParticleSet} object from a vector/list of tab separated text files, each of one containing one line for each
 particle in the related frame, alongside with its coordinates and if available, the computed features
 The number of frames is also specified, as just a subset of the particle lists can be used for this
 }

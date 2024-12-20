@@ -1,27 +1,27 @@
-#' Preprocessing function for \code{Frames} objects
+#' Preprocessing function for `Frames` objects
 #' 
-#' \code{Frames} objects are processed according to the chosen set of parameters. Many of them refer directly to 
-#' existing \code{EBImage} functions, please see the corresponding help for additional information
+#' `Frames` objects are processed according to the chosen set of parameters. Many of them refer directly to 
+#' existing `EBImage` functions, please see the corresponding help for additional information
 #'  
-#' @param frames A \code{Frames} object
+#' @param frames A `Frames` object
 #' @param brush.size Size in pixels of the brush to be used for initial smoothing 
 #' (low-pass filtering)
 #' @param brush.shape Shape of the brush to be used for initial smoothing (low-pass 
 #' filtering)
-#' @param at.offset Offset to be used in the adaptive thresholding step - see also \code{\link[EBImage]{thresh}}. As an
-#' alternative thresholding method, see also \code{\link[EBImage]{otsu}} in the \code{EBImage} package.
-#' @param at.wwidth Width of the window for the adaptive thresholding step - see also \code{\link[EBImage]{thresh}}. As an
-#' alternative thresholding method, see also \code{\link[EBImage]{otsu}} in the \code{EBImage} package.
-#' @param at.wheight Height of the window for the adaptive thresholding step - see also \code{\link[EBImage]{thresh}}. As an
-#' alternative thresholding method, see also \code{\link[EBImage]{otsu}} in the \code{EBImage} package.
-#' @param kern.size Size in pixels of the kernel used for morphological operations - e.g., opening, which is an erosion followed by a dilation, and closing which is a dilation followed by an erosion - see also \code{\link[EBImage]{opening}}, \code{\link[EBImage]{closing}}
+#' @param at.offset Offset to be used in the adaptive thresholding step - see also [EBImage::thresh()]. As an
+#' alternative thresholding method, see also [EBImage::otsu()] in the `EBImage` package.
+#' @param at.wwidth Width of the window for the adaptive thresholding step - see also [EBImage::thresh()]. As an
+#' alternative thresholding method, see also [EBImage::otsu()] in the `EBImage` package.
+#' @param at.wheight Height of the window for the adaptive thresholding step - see also [EBImage::thresh()]. As an
+#' alternative thresholding method, see also [EBImage::otsu()] in the `EBImage` package.
+#' @param kern.size Size in pixels of the kernel used for morphological operations - e.g., opening, which is an erosion followed by a dilation, and closing which is a dilation followed by an erosion - see also [EBImage::opening()], [EBImage::closing()]
 #' @param kern.shape Shape of the kernel used for morphological operations
-#' @param ws.tolerance Tolerance allowed in performing the watershed-based segmentation (see also \code{\link[EBImage]{watershed}})
-#' @param ws.radius Radius for the watershed-based segmentation (see also \code{\link[EBImage]{watershed}})
+#' @param ws.tolerance Tolerance allowed in performing the watershed-based segmentation (see also [EBImage::watershed()])
+#' @param ws.radius Radius for the watershed-based segmentation (see also [EBImage::watershed()])
 #' @param displayprocessing Logical, whether to display intermediate steps while performing preprocessing. Dismissed currently, it could increase runtime a lot
 #' @param ... Arguments to be passed to methods
 #' 
-#' @return A \code{Frames} object, whose frame images are the preprocessed versions of the input images
+#' @return A `Frames` object, whose frame images are the preprocessed versions of the input images
 #' 
 #' @examples
 #' data("MesenteriumSubset")
@@ -64,16 +64,16 @@ preprocess.Frames <- function(frames,
 
 
 
-#' Extracts particles from the images of a \code{Frames} object. 
+#' Extracts particles from the images of a `Frames` object. 
 #' 
 #'  
-#' @param raw.frames A \code{Frames} object with the raw images (mandatory)
-#' @param binary.frames A \code{Frames} object with preprocessed images (optional, if not provided gets produced with standard default parameters)
-#' @param channel Character string. The channel to perform the operations on. Can be \code{red}, \code{green} or \code{blue}
-#' @param BPPARAM a \code{MulticoreParam} object, used to control the performances inside the \code{BiocParallel} call to process 
+#' @param raw.frames A `Frames` object with the raw images (mandatory)
+#' @param binary.frames A `Frames` object with preprocessed images (optional, if not provided gets produced with standard default parameters)
+#' @param channel Character string. The channel to perform the operations on. Can be `red`, `green` or `blue`
+#' @param BPPARAM a `MulticoreParam` object, used to control the performances inside the `BiocParallel` call to process 
 #' frames in parallel by taking advantage of the computing infrastructure available
 #' 
-#' @return A \code{ParticleSet} object, containing all detected particles for each frame
+#' @return A `ParticleSet` object, containing all detected particles for each frame
 #' 
 #' @examples
 #' data("MesenteriumSubset")
@@ -199,23 +199,23 @@ particles <- function(raw.frames,
 
 
 
-#' Cut borders of a \code{Frames} object
+#' Cut borders of a `Frames` object
 #' 
-#' Performs cropping on the \code{Frames} object, selecting how many pixels should be cut on each side
+#' Performs cropping on the `Frames` object, selecting how many pixels should be cut on each side
 #' 
 #' Cropping can be performed with careful choice of all cutting sides, or cropping a single value from
 #' all sides
 #' 
-#' @param frames An input \code{Frames} object
+#' @param frames An input `Frames` object
 #' @param cutLeft Amount of pixels to be cut at the side
 #' @param cutRight Amount of pixels to be cut at the side
 #' @param cutUp Amount of pixels to be cut at the side
 #' @param cutDown Amount of pixels to be cut at the side
 #' @param cutAll Amount of pixels to be cut at all sides. Overrides the single side values
-#' @param testing Logical, whether to just test the cropping or to actually perform it. Default set to \code{FALSE}
-#' @param ... Arguments to be passed to \code{\link[EBImage]{display}} (e.g. setting the \code{method} argument)
+#' @param testing Logical, whether to just test the cropping or to actually perform it. Default set to `FALSE`
+#' @param ... Arguments to be passed to [EBImage::display()] (e.g. setting the `method` argument)
 #' 
-#' @return A \code{Frames} object, with cropped frames in the \code{image} slot
+#' @return A `Frames` object, with cropped frames in the `image` slot
 #' 
 #' @examples 
 #' data("MesenteriumSubset")
@@ -242,15 +242,15 @@ crop.Frames <- function(frames,
 
 
 
-#' Rotates all images in a \code{Frames} object 
+#' Rotates all images in a `Frames` object 
 #' 
-#' Rotation is performed exploiting the rotate function of the \code{EBImage} package. Could be automated if support for coordinate/pixel interaction is included
+#' Rotation is performed exploiting the rotate function of the `EBImage` package. Could be automated if support for coordinate/pixel interaction is included
 #' 
-#' @param frames A \code{Frames} object
+#' @param frames A `Frames` object
 #' @param angle The rotation angle (clockwise) specified in degrees
-#' @param testing Logical, whether to just test the rotation or to actually perform it. Default set to \code{FALSE}
+#' @param testing Logical, whether to just test the rotation or to actually perform it. Default set to `FALSE`
 #'  
-#' @return A \code{Frames} object containing the rotated frames
+#' @return A `Frames` object containing the rotated frames
 #' 
 #' @examples 
 #' data("MesenteriumSubset")

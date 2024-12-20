@@ -17,7 +17,7 @@ select.Frames(frames, framesToKeep = 1, ...)
 A \code{Frames} object, composed by the subset of frames of the input \code{Frames}
 }
 \description{
-An input \code{Frames} object is subject to subsetting. This function is useful e.g. when the trajectory of interest 
+An input \code{Frames} object is subject to subsetting. This function is useful e.g. when the trajectory of interest
 is presenting gaps (i.e. does not actually include a frame)
 }
 \examples{

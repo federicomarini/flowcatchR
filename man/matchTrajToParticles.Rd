@@ -16,10 +16,10 @@ A \code{ParticleSet} object with an additional column with the trajectory
 IDs
 }
 \description{
-Match trajectories to the related particles in the \code{TrajectorySet} and 
+Match trajectories to the related particles in the \code{TrajectorySet} and
 \code{ParticleSet} objects. This function returns a new \code{ParticleSet}
 object that contains as additional column the trajectory ID that the particular
-particle was assigned to. Used also by other routines, such as \code{\link{snap}}
+particle was assigned to. Used also by other routines, such as \code{\link[=snap]{snap()}}
 }
 \examples{
 data(candidate.platelets)

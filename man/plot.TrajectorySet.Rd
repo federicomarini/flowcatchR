@@ -22,7 +22,7 @@
 Provides a visual representation of a \code{TrajectorySet} object
 }
 \details{
-Based on the \code{plotly} library, the function extracts the region of interests 
+Based on the \code{plotly} library, the function extracts the region of interests
 from the dimensions of an image of the \code{Frames} object,
 and afterwards plots the x-y-time representation of the identified trajectories
 }

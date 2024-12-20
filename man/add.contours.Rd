@@ -3,8 +3,8 @@
 \name{add.contours}
 \alias{add.contours}
 \title{Add object contours to a \code{Frames} object
- 
-Creates a \code{Frames} object containing raw information, combined with the segmented 
+
+Creates a \code{Frames} object containing raw information, combined with the segmented
 images and the relative trajectory under analysis}
 \usage{
 add.contours(
@@ -37,8 +37,8 @@ Defaults to \code{particles}}
 A new \code{Frames} object with contours of the objects added
 }
 \description{
-If a \code{TrajectorySet} is provided and mode is set to \code{trajectories}, returns 
-a \code{Frames} with all trajectories included in the IDs 
+If a \code{TrajectorySet} is provided and mode is set to \code{trajectories}, returns
+a \code{Frames} with all trajectories included in the IDs
 vector painted accordingly.
 If the mode is set to \code{particles}, it will just plot the particles (all) on all frames.
 If no \code{TrajectorySet} is provided, it will be computed with default parameters.

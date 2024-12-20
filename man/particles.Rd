@@ -18,7 +18,7 @@ particles(
 
 \item{channel}{Character string. The channel to perform the operations on. Can be \code{red}, \code{green} or \code{blue}}
 
-\item{BPPARAM}{a \code{MulticoreParam} object, used to control the performances inside the \code{BiocParallel} call to process 
+\item{BPPARAM}{a \code{MulticoreParam} object, used to control the performances inside the \code{BiocParallel} call to process
 frames in parallel by taking advantage of the computing infrastructure available}
 }
 \value{

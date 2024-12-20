@@ -18,7 +18,7 @@ An object of the \code{Frames} class, which holds the info on a list of frames, 
 }
 \description{
 This function is used to create a \code{Frames} object from a vector of image files (or a folder specifying the directory
-containing them). 
+containing them).
 The number of frames is also specified, as just a subset of the images can be used for this
 }
 \examples{

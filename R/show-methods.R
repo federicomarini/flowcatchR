@@ -1,11 +1,11 @@
 ## all show methods
 
-#' Display conveniently a \code{Frames} object
+#' Display conveniently a `Frames` object
 #' 
-#' @param object A \code{Frames} object
+#' @param object A `Frames` object
 #'  
 #' @method print Frames
-#' @return This returns an invisible \code{NULL}.
+#' @return This returns an invisible `NULL`.
 #' @examples
 #' data("MesenteriumSubset")
 #' print(MesenteriumSubset)
@@ -20,9 +20,9 @@ setMethod("show",
           })
 
 
-#' Display conveniently a \code{ParticleSet} object
+#' Display conveniently a `ParticleSet` object
 #'  
-#' @param object A \code{ParticleSet} object
+#' @param object A `ParticleSet` object
 #' 
 #' @method print ParticleSet
 #' 
@@ -30,7 +30,7 @@ setMethod("show",
 #' data("candidate.platelets")
 #' print(candidate.platelets)
 #' 
-#' @return This returns an invisible \code{NULL}.
+#' @return This returns an invisible `NULL`.
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 setMethod("show",
@@ -47,9 +47,9 @@ setMethod("show",
           })
   
 
-#' Display conveniently a \code{LinkedParticleSet} object
+#' Display conveniently a `LinkedParticleSet` object
 #'  
-#' @param object A \code{LinkedParticleSet} object
+#' @param object A `LinkedParticleSet` object
 #' 
 #' @method print LinkedParticleSet
 #' 
@@ -60,7 +60,7 @@ setMethod("show",
 #' include.area=FALSE)
 #' print(linked.platelets)
 #' 
-#' @return This returns an invisible \code{NULL}.
+#' @return This returns an invisible `NULL`.
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 setMethod("show",
@@ -80,9 +80,9 @@ setMethod("show",
 
 
 
-#' Display conveniently a \code{TrajectorySet} object
+#' Display conveniently a `TrajectorySet` object
 #'  
-#' @param object A \code{TrajectorySet} object
+#' @param object A `TrajectorySet` object
 #' 
 #' @method print TrajectorySet
 #' 
@@ -91,7 +91,7 @@ setMethod("show",
 #' platelets.trajectories <- trajectories(candidate.platelets)
 #' print(platelets.trajectories)
 #' 
-#' @return This returns an invisible \code{NULL}.
+#' @return This returns an invisible `NULL`.
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
@@ -112,9 +112,9 @@ setMethod("show",
 
 
 
-#' Displaying conveniently a \code{KinematicsFeatures} object
+#' Displaying conveniently a `KinematicsFeatures` object
 #'  
-#' @param object A \code{KinematicsFeatures} object
+#' @param object A `KinematicsFeatures` object
 #' 
 #' @method print KinematicsFeatures
 #' 
@@ -124,7 +124,7 @@ setMethod("show",
 #' traj11features <- kinematics(platelets.trajectories,trajectoryIDs = 11)
 #' print(traj11features)
 #' 
-#' @return This returns an invisible \code{NULL}.
+#' @return This returns an invisible `NULL`.
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
@@ -145,9 +145,9 @@ setMethod("show",
           })
 
 
-#' Display conveniently a \code{KinematicsFeatureSet} object
+#' Display conveniently a `KinematicsFeatureSet` object
 #'  
-#' @param object A \code{KinematicsFeatureSet} object
+#' @param object A `KinematicsFeatureSet` object
 #' 
 #' 
 #' @examples 
@@ -156,7 +156,7 @@ setMethod("show",
 #' alltrajs.features <- kinematics(platelets.trajectories)
 #' print(alltrajs.features)
 #'
-#' @return This returns an invisible \code{NULL}.
+#' @return This returns an invisible `NULL`.
 #' 
 #' @export
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014

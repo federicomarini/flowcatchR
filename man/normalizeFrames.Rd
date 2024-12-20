@@ -17,7 +17,7 @@ A \code{Frames} object with normalized pixel values.
 \description{
 Applies a transformation to the \code{Frames} object in a way that the intensities
 throughout the acquisition are normalized overall in term of pixel values sums.
-It can be used to compensate for example a global change in the illumination values, 
+It can be used to compensate for example a global change in the illumination values,
 e.g. due to changed acquisition conditions in experiments that span long timescales.
 }
 \examples{

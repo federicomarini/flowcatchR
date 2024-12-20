@@ -1,9 +1,9 @@
-#' Links a \code{ParticleSet} object
+#' Links a `ParticleSet` object
 #' 
 #' Performs linking of the particles by tracking them through the frames
 #'  
 #' 
-#' @param particleset A \code{ParticleSet} object
+#' @param particleset A `ParticleSet` object
 #' @param L Maximum number of pixels an object can move in two consecutive frames
 #' @param R Linkrange, i.e. the number of consecutive frames to search for potential candidate links
 #' @param epsilon1 A numeric value, to be used in the formula. Jitter for allowing angular displacements
@@ -20,7 +20,7 @@
 #' In: Journal of structural biology 151.2 (Aug. 2005), pp. 182-95. ISSN: 1047-8477. DOI: 10.1016/j.jsb.2005.06.002.
 #' URL: http://www.ncbi.nlm.nih.gov/pubmed/16043363
 #' 
-#' @return A \code{LinkedParticleSet} object
+#' @return A `LinkedParticleSet` object
 #' 
 #' @examples
 #' data("candidate.platelets")
@@ -275,12 +275,12 @@ penaltyFunctionGenerator <- function(epsilon1=0.1,
 
 
 
-#' Initialize a \code{ParticleSet} object for subsequent linking/tracking
+#' Initialize a `ParticleSet` object for subsequent linking/tracking
 #'  
-#' @param particleset A \code{ParticleSet} object
+#' @param particleset A `ParticleSet` object
 #' @param linkrange The number of frames to look for candidate particles potentially belonging to the same track
 #' 
-#' @return A \code{ParticleSet} object with slots dedicated for the tracking pre-filled
+#' @return A `ParticleSet` object with slots dedicated for the tracking pre-filled
 #' 
 #' @author Federico Marini, \email{marinif@@uni-mainz.de}, 2014
 initialize.LinkedParticleSet <- function(particleset,
