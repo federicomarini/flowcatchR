@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">flowcatchR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.41.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.43.0</span>
       </span>
     </div>
 
@@ -89,7 +89,7 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip></h1>
-<p><em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>:
+<p><em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>:
 A framework for tracking and analyzing flowing blood cells in time lapse
 microscopy images</p>
                         <h4 data-toc-skip class="author">Federico
@@ -108,7 +108,7 @@ Mainz<br><h4 data-toc-skip class="author">Harald
 Binder</h4>
             <address class="author_afil">
       Institute of Medical Biostatistics, Epidemiology and Informatics
-(IMBEI), Mainz<br><h4 data-toc-skip class="date">7 March 2025</h4>
+(IMBEI), Mainz<br><h4 data-toc-skip class="date">2 May 2025</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/federicomarini/flowcatchR/blob/devel/vignettes/flowcatchr_vignette.Rmd" class="external-link"><code>vignettes/flowcatchr_vignette.Rmd</code></a></small>
       <div class="hidden name"><code>flowcatchr_vignette.Rmd</code></div>
@@ -120,9 +120,9 @@ Binder</h4>
     
         <div class="abstract">
       <p class="abstract">Abstract</p>
-      <p><em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>
+      <p><em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>
       is a set of tools to analyze in vivo microscopy imaging data,
-      focused on tracking flowing blood cells. <em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>
+      focused on tracking flowing blood cells. <em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>
       guides throughout all the steps of bioimage processing, from
       segmentation to calculation of features, filtering out particles
       not of interest, providing also a set of utilities to help
@@ -137,7 +137,7 @@ Binder</h4>
       applications founded on time-lapse microscopy.</p>
     </div>
     
-<p><strong>Compiled date</strong>: 2025-03-07</p>
+<p><strong>Compiled date</strong>: 2025-05-02</p>
 <p><strong>Last edited</strong>: 2018-01-14</p>
 <p><strong>License</strong>: BSD_3_clause + file LICENSE</p>
 <div class="section level2">
@@ -145,17 +145,17 @@ Binder</h4>
 </h2>
 <p>This document offers an introduction and overview of the
 R/Bioconductor <span class="citation">Gentleman et al. (2004)</span>
-package <em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>,
+package <em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>,
 which provides a flexible and comprehensive set of tools to detect and
 track flowing blood cells in time-lapse microscopy.</p>
 <div class="section level3">
-<h3 id="why-flowcatchr">Why <em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>?<a class="anchor" aria-label="anchor" href="#why-flowcatchr"></a>
+<h3 id="why-flowcatchr">Why <em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>?<a class="anchor" aria-label="anchor" href="#why-flowcatchr"></a>
 </h3>
-<p><em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>
-builds upon functionalities provided by the <em><a href="https://bioconductor.org/packages/3.21/EBImage" class="external-link">EBImage</a></em>
+<p><em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>
+builds upon functionalities provided by the <em><a href="https://bioconductor.org/packages/3.22/EBImage" class="external-link">EBImage</a></em>
 package <span class="citation">(Pau et al. 2010)</span>, and extends
 them in order to analyze time-lapse microscopy images. Here we list some
-of the unique characteristics of the datasets <em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>
+of the unique characteristics of the datasets <em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>
 is designed for:</p>
 <ul>
 <li>The images come from intravital microscopy experiments. This means
@@ -174,7 +174,7 @@ be permanently adherent. Therefore, all movement modalities should be
 detected correctly throughout the entire acquisition. Cells can also
 cluster together and form (temporary) conglomerates</li>
 </ul>
-<p>Essential features <em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>
+<p>Essential features <em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>
 delivers to the user are:</p>
 <ul>
 <li>A simple and flexible, yet complete framework to analyze flowing
@@ -218,9 +218,9 @@ be dissected to explore available parameters and options.</p>
 <div class="section level3">
 <h3 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h3>
-<p><em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>
+<p><em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>
 is an R package distributed as part of the Bioconductor project. To
-install <em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>,
+install <em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>,
 please start R and type:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
@@ -237,7 +237,7 @@ site (<a href="http://support.bioconductor.org/" class="external-link uri">http:
 <div class="section level3">
 <h3 id="getting-help">Getting help<a class="anchor" aria-label="anchor" href="#getting-help"></a>
 </h3>
-<p>The <em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>
+<p>The <em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>
 package was tested on a variety of datasets provided from cooperation
 partners, yet it may require some extra tuning or bug fixes. For these
 issues, please contact the maintainer - if required with a copy of the
@@ -255,11 +255,11 @@ and test the new feature(s), and finally generate a pull request to
 integrate it to the original repository.</p>
 </div>
 <div class="section level3">
-<h3 id="citing-flowcatchr">Citing <em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em><a class="anchor" aria-label="anchor" href="#citing-flowcatchr"></a>
+<h3 id="citing-flowcatchr">Citing <em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em><a class="anchor" aria-label="anchor" href="#citing-flowcatchr"></a>
 </h3>
-<p>The work underlying the development of <em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>
+<p>The work underlying the development of <em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>
 has not been formally published yet. A manuscript has been submitted for
-peer-review. For the time being, users of <em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>
+peer-review. For the time being, users of <em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>
 are encouraged to cite it using the output of the <code>citation</code>
 function, as it follows:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -286,7 +286,7 @@ function, as it follows:</p>
 <div class="section level2">
 <h2 id="overview">Processing overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p><em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>
+<p><em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>
 works primarily with sets of fluorescent time-lapse images, where the
 particles of interest are marked with a fluorescent label (e.g., red for
 blood platelets, green for leukocytes). Although different entry spots
@@ -335,7 +335,7 @@ On a more recent MacBook Pro (2017), the same benchmark took 1.78
 seconds.</p>
 <p>The following sections will provide additional details to the
 operations mentioned above, with more also on the auxiliary functions
-that are available in <em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>.</p>
+that are available in <em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>.</p>
 </div>
 <div class="section level2">
 <h2 id="acquisition">Image acquisition<a class="anchor" aria-label="anchor" href="#acquisition"></a>
@@ -347,10 +347,10 @@ rate and a good SNR to detect the particles in the single frames. For a
 good review on the steps to be taken, please refer to Meijering’s work
 <span class="citation">Meijering, Dzyubachyk, and Smal
 (2012)</span>.</p>
-<p><em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>
+<p><em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>
 provides an S4 class that can store the information of a complete
 acquisition, namely <code>Frames</code>. The <code>Frames</code> class
-extends the <code>Image</code> class, defined in the <em><a href="https://bioconductor.org/packages/3.21/EBImage" class="external-link">EBImage</a></em>
+extends the <code>Image</code> class, defined in the <em><a href="https://bioconductor.org/packages/3.22/EBImage" class="external-link">EBImage</a></em>
 package, and thus exploits the multi-dimensional array structures of the
 class. The locations of the images are stored as <code>dimnames</code>
 of the <code>Frames</code> object. To construct a <code>Frames</code>
@@ -383,7 +383,7 @@ to leukocytes
 </p>
 </div>
 <p>By default, <code>display.method</code> is set to
-<code>browser</code>, as in the <em><a href="https://bioconductor.org/packages/3.21/EBImage" class="external-link">EBImage</a></em>
+<code>browser</code>, as in the <em><a href="https://bioconductor.org/packages/3.22/EBImage" class="external-link">EBImage</a></em>
 function display. This opens up a window in the predefined browser
 (e.g. Mozilla Firefox), with navigable frames (arrows on the top left
 corner). For the vignette, we will set it to <code>raster</code>, for
@@ -435,8 +435,8 @@ in <code>plateletsMesenterium</code> (for the thrombocytes)
 </h2>
 <p>Steps such as denoising, smoothing and morphological operations
 (erosion/dilation, opening/closing) can be performed thanks to the
-general functions provided by <em><a href="https://bioconductor.org/packages/3.21/EBImage" class="external-link">EBImage</a></em>.
-<em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>
+general functions provided by <em><a href="https://bioconductor.org/packages/3.22/EBImage" class="external-link">EBImage</a></em>.
+<em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>
 offers a wrapper around a series of operations to be applied to all
 images in a <code>Frames</code> object. The function
 <code>preprocess.Frames</code> is called via the following command:</p>
@@ -594,7 +594,7 @@ either situation, the output for this step is an object of the
 <span><span class="co">## Particles identified on the red channel</span></span></code></pre>
 <p>The function <code>particles</code> leverages on the multi-core
 architecture of the systems where the analysis is run, and this is
-implemented via <em><a href="https://bioconductor.org/packages/3.21/BiocParallel" class="external-link">BiocParallel</a></em>
+implemented via <em><a href="https://bioconductor.org/packages/3.22/BiocParallel" class="external-link">BiocParallel</a></em>
 (updated since Version 1.0.3).</p>
 <p>As it can be seen from the summary information, each
 <code>ParticleSet</code> stores the essential information on all
@@ -696,8 +696,8 @@ phenomenon under inspection.</p>
 <span><span class="co">## {</span></span>
 <span><span class="co">##     lambda1 * (distance/(1 - lambda2 * (abs(angle)/(pi + epsilon1))))</span></span>
 <span><span class="co">## }</span></span>
-<span><span class="co">## &lt;bytecode: 0x12b1e66d0&gt;</span></span>
-<span><span class="co">## &lt;environment: 0x12b1e6f20&gt;</span></span></code></pre>
+<span><span class="co">## &lt;bytecode: 0x1310d09b0&gt;</span></span>
+<span><span class="co">## &lt;environment: 0x1310d1318&gt;</span></span></code></pre>
 <p>As mentioned above, to perform the linking of the particles, we use
 <code>link.particles</code>. Fundamental parameters are <code>L</code>
 and <code>R</code>, named as in the original implementation.
@@ -744,7 +744,7 @@ might be possible to filter a <code>LinkedParticleSet</code> class
 object and subsequently reperform the linking on its updated version
 (e.g. some detected particles were found to be noise, and thus removed
 with <code>select.particles</code>).</p>
-<p><em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>
+<p><em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>
 provides functions to export and import the identified particles, in
 order to offer an additional entry point for tracking and analyzing the
 trajectories (if particles were detected with other routines) and also
@@ -795,7 +795,7 @@ points <code>npoints</code> (often coinciding with the number of
 its <code>ID</code>. A <code>keep</code> flag is used for subsequent
 user evaluation purposes.</p>
 <p>Before proceeding with the actual analysis of the trajectories, it is
-recommended to evaluate them by visual inspection. <em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>
+recommended to evaluate them by visual inspection. <em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>
 provides two complementary methods to do this, either plotting them
 (<code>plot</code> or <code>plot2D.TrajectorySet</code>) or drawing the
 contours of the points on the original image
@@ -808,7 +808,7 @@ trajectories (Fig.@ref(fig:cubeTrajs)):</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">trajPlatelets</span>, <span class="va">MesenteriumSubset</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 <div class="plotly html-widget html-fill-item" id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"visdat":{"2c3e72193074":["function () ","plotlyVisDat"]},"cur_data":"2c3e72193074","attrs":{"2c3e72193074":{"x":{},"y":{},"z":{},"mode":"lines","line":{"width":2},"split":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"range":[0,0,271]},"yaxis":{"range":[0,0,131]},"scene":{"xaxis":{"title":"xCoord"},"yaxis":{"title":"yCoord"},"zaxis":{"title":"frame"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[186.70833333333334,186.96491228070175,186.81355932203391,186.28070175438597,186.68965517241378,186.82692307692307,186.96428571428572,186.62068965517241,186.32727272727271,186.98214285714286,186.80392156862746,187.05555555555554,187.03571428571428,186.87037037037038,186.94444444444446,187.12962962962962,187.01886792452831,187.17543859649123,186.96153846153845,186.94444444444446],"y":[47.9375,48.263157894736842,48.186440677966104,47.701754385964911,47.879310344827587,48.115384615384613,48.303571428571431,48.362068965517238,48.054545454545455,48.196428571428569,48.176470588235297,48.222222222222221,48.446428571428569,48.388888888888886,48.370370370370374,48.611111111111114,48.679245283018865,48.596491228070178,48.615384615384613,48.370370370370374],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(31,119,180,1)","width":2},"type":"scatter3d","name":"1","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"frame":null},{"x":[256.1904761904762,256.42857142857144,256.34693877551018,255.5,256.28846153846155,256.25,256.25,255.91836734693877,255.56862745098039,256.06521739130437,256.14583333333331,256.5,256.64583333333331,256.06382978723406,256.17777777777781,256.63043478260869,256.64583333333331,256.5,256.17777777777781,256.13043478260869],"y":[35.857142857142854,35.673469387755105,35.734693877551024,35.5,35.807692307692307,36.104166666666664,36.104166666666664,35.857142857142854,35.784313725490193,35.956521739130437,36.291666666666664,36.439999999999998,36.458333333333336,36.212765957446805,36.333333333333336,36.217391304347828,36.458333333333336,36.439999999999998,36.333333333333336,36.260869565217391],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(255,127,14,1)","width":2},"type":"scatter3d","name":"2","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"frame":null},{"x":[251.0952380952381,251.38297872340425,251.63265306122449,250.57446808510639,251.36170212765958,251.69565217391303,251.06818181818181,250.92857142857142,250.11363636363637,250.92857142857142,250.1044776119403,251.14634146341464,250.14285714285714,250.90697674418604,251,251.16666666666666,251.58139534883722,251.66666666666666,251.02325581395348,251.02380952380952],"y":[63.523809523809526,63.297872340425535,63.367346938775512,63.48936170212766,63.446808510638299,63.695652173913047,63.545454545454547,63.928571428571431,63.840909090909093,63.928571428571431,61.611940298507463,64.048780487804876,61.542857142857144,64.279069767441854,64,64.142857142857139,64,64.288888888888891,64.186046511627907,64.095238095238102],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(44,160,44,1)","width":2},"type":"scatter3d","name":"3","marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"frame":null},{"x":[215.546875,215.71951219512195,215.72093023255815,215.12048192771084,215.69411764705882,215.69512195121951,215.5625,215.16666666666666,214.83908045977012,215.80722891566265,215.76543209876544,215.79518072289156,215.94805194805195,215.72368421052633,215.61538461538461,215.85897435897436,215.875,215.90123456790124,215.61176470588236,215.48809523809524],"y":[51.828125,52.207317073170735,52.290697674418603,52.012048192771083,52.247058823529414,52.536585365853661,52.612499999999997,52.422222222222224,52.241379310344826,52.614457831325304,52.888888888888886,53.012048192771083,52.79220779220779,52.89473684210526,52.743589743589745,52.974358974358971,53.100000000000001,53.160493827160494,53.035294117647062,52.773809523809526],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(214,39,40,1)","width":2},"type":"scatter3d","name":"4","marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"frame":null},{"x":[15.827586206896552,15.741935483870968,15.666666666666666,15.4,15.705882352941176,15.939393939393939,16.344827586206897,15.90625,15.387096774193548,16.34375,16.558823529411764,16.558823529411764,16.800000000000001,16.241379310344829,16.633333333333333,16.800000000000001,16.689655172413794,16.774193548387096,16.392857142857142,16.620689655172413],"y":[8.5172413793103452,8.5483870967741939,8.5,8.5,8.5,8.4848484848484844,8.4137931034482758,8.71875,8.3548387096774199,8.5,8.6470588235294112,8.6470588235294112,8.4000000000000004,8.8275862068965516,8.5666666666666664,8.5666666666666664,8.862068965517242,8.9032258064516121,8.5357142857142865,8.3448275862068968],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(148,103,189,1)","width":2},"type":"scatter3d","name":"5","marker":{"color":"rgba(148,103,189,1)","line":{"color":"rgba(148,103,189,1)"}},"error_y":{"color":"rgba(148,103,189,1)"},"error_x":{"color":"rgba(148,103,189,1)"},"frame":null},{"x":[98.560000000000002,98.379310344827587,98.172413793103445,97.935483870967744,98.13333333333334,98.285714285714292,98.379310344827587,98,97.65384615384616,98.379310344827587,98.517241379310349,98.5,98.518518518518519,98.142857142857139,98.548387096774192,98.5,98.5,98.5,98.5,98.34375],"y":[34.799999999999997,34.96551724137931,34.896551724137929,34.677419354838712,34.799999999999997,34.892857142857146,34.96551724137931,35,34.884615384615387,34.96551724137931,35.103448275862071,35.5,35.407407407407405,35.25,35.29032258064516,35.5,35.5,35.5,35.5,35.15625],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(140,86,75,1)","width":2},"type":"scatter3d","name":"6","marker":{"color":"rgba(140,86,75,1)","line":{"color":"rgba(140,86,75,1)"}},"error_y":{"color":"rgba(140,86,75,1)"},"error_x":{"color":"rgba(140,86,75,1)"},"frame":null},{"x":[39.38095238095238,39.620689655172413,39.125,38.782608695652172,39.5,39.399999999999999,39.5,39.090909090909093,38.909090909090907,39.5,39.391304347826086,39.666666666666664,39.08064516129032,39.090909090909093,39.600000000000001,39.5,39.600000000000001,39.600000000000001,39.399999999999999,39.407407407407405],"y":[44.238095238095241,44.482758620689658,44.166666666666664,44.086956521739133,44.166666666666664,44.560000000000002,44.272727272727273,44.909090909090907,44.090909090909093,44.5,44.782608695652172,44.875,47.87096774193548,44.909090909090907,44.960000000000001,45,44.960000000000001,44.960000000000001,44.960000000000001,44.74074074074074],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(227,119,194,1)","width":2},"type":"scatter3d","name":"7","marker":{"color":"rgba(227,119,194,1)","line":{"color":"rgba(227,119,194,1)"}},"error_y":{"color":"rgba(227,119,194,1)"},"error_x":{"color":"rgba(227,119,194,1)"},"frame":null},{"x":[16.897435897435898,35,41.942857142857143,47.484848484848484,61.6875,82.568181818181813,99.641025641025635,110.375,119.63157894736842,127.4054054054054,137.57142857142858,144.25641025641025,152.83333333333334,157.47499999999999,159.71794871794873,163.56410256410257,165.02564102564102,169.94594594594594,175,178.71794871794873],"y":[70.820512820512818,69.820512820512818,68.971428571428575,69.787878787878782,71.125,71.272727272727266,68.102564102564102,69.724999999999994,72.736842105263165,74.945945945945951,73.88095238095238,73.564102564102569,72.714285714285708,74.150000000000006,75.692307692307693,77.564102564102569,80.15384615384616,79.567567567567565,79.5,81.07692307692308],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(127,127,127,1)","width":2},"type":"scatter3d","name":"8","marker":{"color":"rgba(127,127,127,1)","line":{"color":"rgba(127,127,127,1)"}},"error_y":{"color":"rgba(127,127,127,1)"},"error_x":{"color":"rgba(127,127,127,1)"},"frame":null},{"x":[82.333333333333329,82.222222222222229,82.15789473684211,82.05263157894737,82.666666666666671,82.5,82.615384615384613,82.5,82,83.142857142857139,82.666666666666671,83.5,83.666666666666671,83.142857142857139,83,84,84,82.666666666666671],"y":[126.73333333333333,127.05555555555556,127.15789473684211,126.78947368421052,126.73333333333333,126.71428571428571,126.61538461538461,127,126.66666666666667,126.71428571428571,126.33333333333333,127,126.33333333333333,126.71428571428571,126.5,127,127,126.33333333333333],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,17,18,19],"mode":"lines","line":{"color":"rgba(188,189,34,1)","width":2},"type":"scatter3d","name":"9","marker":{"color":"rgba(188,189,34,1)","line":{"color":"rgba(188,189,34,1)"}},"error_y":{"color":"rgba(188,189,34,1)"},"error_x":{"color":"rgba(188,189,34,1)"},"frame":null},{"x":[113,113,112.53333333333333,112.53333333333333,112.86666666666666,113,113,112.77777777777777,112.59999999999999,113,113.27777777777777,113.35294117647059,113.36363636363636,113,113.46666666666667,113.33333333333333,113.40000000000001,113.33333333333333,113.125,113.23529411764706],"y":[20,20,19.866666666666667,19.866666666666667,20.466666666666665,20.5,20.5,20.5,20.399999999999999,20.5,20.888888888888889,21,21.09090909090909,20.800000000000001,21.133333333333333,21.266666666666666,21.399999999999999,21.333333333333332,21.3125,21],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(23,190,207,1)","width":2},"type":"scatter3d","name":"10","marker":{"color":"rgba(23,190,207,1)","line":{"color":"rgba(23,190,207,1)"}},"error_y":{"color":"rgba(23,190,207,1)"},"error_x":{"color":"rgba(23,190,207,1)"},"frame":null},{"x":[186.53846153846155,186.5,186.47368421052633,186.04545454545453,186.5,186.57142857142858,186.71428571428572,186.42857142857142,186.0952380952381,186.65000000000001,186.57142857142858,186.73684210526315,186.89473684210526,186.5,186.81818181818181,186.9047619047619,186.86363636363637,187,186.68181818181819,186.57894736842104],"y":[13.846153846153847,14.8125,14.631578947368421,14.454545454545455,14.777777777777779,15.19047619047619,15.428571428571429,15.380952380952381,15.095238095238095,15.300000000000001,15.619047619047619,15.526315789473685,16.05263157894737,15.5,15.727272727272727,15.952380952380953,16.09090909090909,16.136363636363637,16.136363636363637,15.894736842105264],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(31,119,180,1)","width":2},"type":"scatter3d","name":"11","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"frame":null},{"x":[46.399999999999999,69,86.733333333333334,95.58620689655173,107.71428571428571,123,138.6875,154.80555555555554,166,173.96969696969697,183.06451612903226,197.6764705882353,211.63636363636363,213.5,216.18518518518519,222.96296296296296,228.41379310344828,228.59999999999999,229.05405405405406,230.13513513513513],"y":[57.200000000000003,56.393939393939391,58.466666666666669,60.275862068965516,56.821428571428569,54.862068965517238,58.28125,57.75,58.264705882352942,61.575757575757578,62.41935483870968,61.911764705882355,62.68181818181818,64.615384615384613,65.481481481481481,66.592592592592595,67.137931034482762,67.48571428571428,68.567567567567565,69.702702702702709],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(255,127,14,1)","width":2},"type":"scatter3d","name":"12","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"frame":null},{"x":[20.5,20.666666666666668,20.125,19.90909090909091,20.545454545454547,20.615384615384617,21.125,13.76595744680851,24.684931506849313,41.407407407407405,64.021739130434781,78.804347826086953,89.869565217391298,98.642857142857139,103.32608695652173,115.61702127659575,131.73170731707316,145.75,166.6829268292683,181.5],"y":[112.5,112.11111111111111,112,112.81818181818181,112.36363636363636,112.38461538461539,111.875,110.48936170212765,113.53424657534246,114.38888888888889,113.41304347826087,113.67391304347827,111.08695652173913,109.9047619047619,110.58695652173913,113,113.26829268292683,109.83928571428571,110.04878048780488,108],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(44,160,44,1)","width":2},"type":"scatter3d","name":"13","marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"frame":null},{"x":[248,247.5,248.11111111111111,248,247.85714285714286,247.5,247.77777777777777,247.90000000000001,248.04347826086956,247.52631578947367,248.17391304347825,247.8095238095238,247.90909090909091,247.69999999999999,247.45454545454547,247.36842105263159],"y":[55,56,55.666666666666664,56.5,56.928571428571431,56.5,57.166666666666664,56.899999999999999,56.956521739130437,56.368421052631582,56.913043478260867,56.857142857142854,56.909090909090907,56.899999999999999,56.590909090909093,56.736842105263158],"z":[3,4,5,6,7,8,9,10,12,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(214,39,40,1)","width":2},"type":"scatter3d","name":"14","marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"frame":null},{"x":[1.5,16.699999999999999,36.547619047619051,49,55.586206896551722,63.064516129032256,78.65517241379311,94.200000000000003,107.03571428571429,119.33333333333333,129.92857142857142,146.51351351351352,163.30555555555554,178.97142857142856,204.04651162790697,219.14285714285714],"y":[31.5,33.759999999999998,33.023809523809526,29.5,27.275862068965516,26.93548387096774,27.931034482758619,27.600000000000001,29,30,30.30952380952381,31.351351351351351,32.055555555555557,30.885714285714286,32.372093023255815,33],"z":[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(148,103,189,1)","width":2},"type":"scatter3d","name":"15","marker":{"color":"rgba(148,103,189,1)","line":{"color":"rgba(148,103,189,1)"}},"error_y":{"color":"rgba(148,103,189,1)"},"error_x":{"color":"rgba(148,103,189,1)"},"frame":null},{"x":[19,19.666666666666668,20.333333333333332,21.5,19.636363636363637,20.800000000000001,20.333333333333332,20.199999999999999,19.545454545454547],"y":[112.28571428571429,112.33333333333333,112.5,113,113.09090909090909,112.59999999999999,113,112.40000000000001,112.27272727272727],"z":[10,11,12,13,14,16,17,19,20],"mode":"lines","line":{"color":"rgba(140,86,75,1)","width":2},"type":"scatter3d","name":"16","marker":{"color":"rgba(140,86,75,1)","line":{"color":"rgba(140,86,75,1)"}},"error_y":{"color":"rgba(140,86,75,1)"},"error_x":{"color":"rgba(140,86,75,1)"},"frame":null},{"x":[6.4146341463414638,23.820512820512821],"y":[46.536585365853661,48.92307692307692],"z":[11,12],"mode":"lines","line":{"color":"rgba(227,119,194,1)","width":2},"type":"scatter3d","name":"17","marker":{"color":"rgba(227,119,194,1)","line":{"color":"rgba(227,119,194,1)"}},"error_y":{"color":"rgba(227,119,194,1)"},"error_x":{"color":"rgba(227,119,194,1)"},"frame":null},{"x":[27,27,27],"y":[9.5,10,10],"z":[12,14,16],"mode":"lines","line":{"color":"rgba(127,127,127,1)","width":2},"type":"scatter3d","name":"18","marker":{"color":"rgba(127,127,127,1)","line":{"color":"rgba(127,127,127,1)"}},"error_y":{"color":"rgba(127,127,127,1)"},"error_x":{"color":"rgba(127,127,127,1)"},"frame":null},{"x":[51.571428571428569,59.756097560975611,74.228571428571428,87.047619047619051,110.90909090909091,135.82926829268294,151.66666666666666],"y":[47.857142857142854,47.878048780487802,49.028571428571432,53.095238095238095,53.363636363636367,54.31707317073171,54.282051282051285],"z":[14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(188,189,34,1)","width":2},"type":"scatter3d","name":"19","marker":{"color":"rgba(188,189,34,1)","line":{"color":"rgba(188,189,34,1)"}},"error_y":{"color":"rgba(188,189,34,1)"},"error_x":{"color":"rgba(188,189,34,1)"},"frame":null},{"x":[142,142],"y":[11,11],"z":[16,17],"mode":"lines","line":{"color":"rgba(23,190,207,1)","width":2},"type":"scatter3d","name":"20","marker":{"color":"rgba(23,190,207,1)","line":{"color":"rgba(23,190,207,1)"}},"error_y":{"color":"rgba(23,190,207,1)"},"error_x":{"color":"rgba(23,190,207,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script><p class="caption">
+<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"visdat":{"28bb670a961a":["function () ","plotlyVisDat"]},"cur_data":"28bb670a961a","attrs":{"28bb670a961a":{"x":{},"y":{},"z":{},"mode":"lines","line":{"width":2},"split":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"xaxis":{"range":[0,0,271]},"yaxis":{"range":[0,0,131]},"scene":{"xaxis":{"title":"xCoord"},"yaxis":{"title":"yCoord"},"zaxis":{"title":"frame"}},"hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[186.70833333333334,186.96491228070175,186.81355932203391,186.28070175438597,186.68965517241378,186.82692307692307,186.96428571428572,186.62068965517241,186.32727272727271,186.98214285714286,186.80392156862746,187.05555555555554,187.03571428571428,186.87037037037038,186.94444444444446,187.12962962962962,187.01886792452831,187.17543859649123,186.96153846153845,186.94444444444446],"y":[47.9375,48.263157894736842,48.186440677966104,47.701754385964911,47.879310344827587,48.115384615384613,48.303571428571431,48.362068965517238,48.054545454545455,48.196428571428569,48.176470588235297,48.222222222222221,48.446428571428569,48.388888888888886,48.370370370370374,48.611111111111114,48.679245283018865,48.596491228070178,48.615384615384613,48.370370370370374],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(31,119,180,1)","width":2},"type":"scatter3d","name":"1","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"frame":null},{"x":[256.1904761904762,256.42857142857144,256.34693877551018,255.5,256.28846153846155,256.25,256.25,255.91836734693877,255.56862745098039,256.06521739130437,256.14583333333331,256.5,256.64583333333331,256.06382978723406,256.17777777777781,256.63043478260869,256.64583333333331,256.5,256.17777777777781,256.13043478260869],"y":[35.857142857142854,35.673469387755105,35.734693877551024,35.5,35.807692307692307,36.104166666666664,36.104166666666664,35.857142857142854,35.784313725490193,35.956521739130437,36.291666666666664,36.439999999999998,36.458333333333336,36.212765957446805,36.333333333333336,36.217391304347828,36.458333333333336,36.439999999999998,36.333333333333336,36.260869565217391],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(255,127,14,1)","width":2},"type":"scatter3d","name":"2","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"frame":null},{"x":[251.0952380952381,251.38297872340425,251.63265306122449,250.57446808510639,251.36170212765958,251.69565217391303,251.06818181818181,250.92857142857142,250.11363636363637,250.92857142857142,250.1044776119403,251.14634146341464,250.14285714285714,250.90697674418604,251,251.16666666666666,251.58139534883722,251.66666666666666,251.02325581395348,251.02380952380952],"y":[63.523809523809526,63.297872340425535,63.367346938775512,63.48936170212766,63.446808510638299,63.695652173913047,63.545454545454547,63.928571428571431,63.840909090909093,63.928571428571431,61.611940298507463,64.048780487804876,61.542857142857144,64.279069767441854,64,64.142857142857139,64,64.288888888888891,64.186046511627907,64.095238095238102],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(44,160,44,1)","width":2},"type":"scatter3d","name":"3","marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"frame":null},{"x":[215.546875,215.71951219512195,215.72093023255815,215.12048192771084,215.69411764705882,215.69512195121951,215.5625,215.16666666666666,214.83908045977012,215.80722891566265,215.76543209876544,215.79518072289156,215.94805194805195,215.72368421052633,215.61538461538461,215.85897435897436,215.875,215.90123456790124,215.61176470588236,215.48809523809524],"y":[51.828125,52.207317073170735,52.290697674418603,52.012048192771083,52.247058823529414,52.536585365853661,52.612499999999997,52.422222222222224,52.241379310344826,52.614457831325304,52.888888888888886,53.012048192771083,52.79220779220779,52.89473684210526,52.743589743589745,52.974358974358971,53.100000000000001,53.160493827160494,53.035294117647062,52.773809523809526],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(214,39,40,1)","width":2},"type":"scatter3d","name":"4","marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"frame":null},{"x":[15.827586206896552,15.741935483870968,15.666666666666666,15.4,15.705882352941176,15.939393939393939,16.344827586206897,15.90625,15.387096774193548,16.34375,16.558823529411764,16.558823529411764,16.800000000000001,16.241379310344829,16.633333333333333,16.800000000000001,16.689655172413794,16.774193548387096,16.392857142857142,16.620689655172413],"y":[8.5172413793103452,8.5483870967741939,8.5,8.5,8.5,8.4848484848484844,8.4137931034482758,8.71875,8.3548387096774199,8.5,8.6470588235294112,8.6470588235294112,8.4000000000000004,8.8275862068965516,8.5666666666666664,8.5666666666666664,8.862068965517242,8.9032258064516121,8.5357142857142865,8.3448275862068968],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(148,103,189,1)","width":2},"type":"scatter3d","name":"5","marker":{"color":"rgba(148,103,189,1)","line":{"color":"rgba(148,103,189,1)"}},"error_y":{"color":"rgba(148,103,189,1)"},"error_x":{"color":"rgba(148,103,189,1)"},"frame":null},{"x":[98.560000000000002,98.379310344827587,98.172413793103445,97.935483870967744,98.13333333333334,98.285714285714292,98.379310344827587,98,97.65384615384616,98.379310344827587,98.517241379310349,98.5,98.518518518518519,98.142857142857139,98.548387096774192,98.5,98.5,98.5,98.5,98.34375],"y":[34.799999999999997,34.96551724137931,34.896551724137929,34.677419354838712,34.799999999999997,34.892857142857146,34.96551724137931,35,34.884615384615387,34.96551724137931,35.103448275862071,35.5,35.407407407407405,35.25,35.29032258064516,35.5,35.5,35.5,35.5,35.15625],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(140,86,75,1)","width":2},"type":"scatter3d","name":"6","marker":{"color":"rgba(140,86,75,1)","line":{"color":"rgba(140,86,75,1)"}},"error_y":{"color":"rgba(140,86,75,1)"},"error_x":{"color":"rgba(140,86,75,1)"},"frame":null},{"x":[39.38095238095238,39.620689655172413,39.125,38.782608695652172,39.5,39.399999999999999,39.5,39.090909090909093,38.909090909090907,39.5,39.391304347826086,39.666666666666664,39.08064516129032,39.090909090909093,39.600000000000001,39.5,39.600000000000001,39.600000000000001,39.399999999999999,39.407407407407405],"y":[44.238095238095241,44.482758620689658,44.166666666666664,44.086956521739133,44.166666666666664,44.560000000000002,44.272727272727273,44.909090909090907,44.090909090909093,44.5,44.782608695652172,44.875,47.87096774193548,44.909090909090907,44.960000000000001,45,44.960000000000001,44.960000000000001,44.960000000000001,44.74074074074074],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(227,119,194,1)","width":2},"type":"scatter3d","name":"7","marker":{"color":"rgba(227,119,194,1)","line":{"color":"rgba(227,119,194,1)"}},"error_y":{"color":"rgba(227,119,194,1)"},"error_x":{"color":"rgba(227,119,194,1)"},"frame":null},{"x":[16.897435897435898,35,41.942857142857143,47.484848484848484,61.6875,82.568181818181813,99.641025641025635,110.375,119.63157894736842,127.4054054054054,137.57142857142858,144.25641025641025,152.83333333333334,157.47499999999999,159.71794871794873,163.56410256410257,165.02564102564102,169.94594594594594,175,178.71794871794873],"y":[70.820512820512818,69.820512820512818,68.971428571428575,69.787878787878782,71.125,71.272727272727266,68.102564102564102,69.724999999999994,72.736842105263165,74.945945945945951,73.88095238095238,73.564102564102569,72.714285714285708,74.150000000000006,75.692307692307693,77.564102564102569,80.15384615384616,79.567567567567565,79.5,81.07692307692308],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(127,127,127,1)","width":2},"type":"scatter3d","name":"8","marker":{"color":"rgba(127,127,127,1)","line":{"color":"rgba(127,127,127,1)"}},"error_y":{"color":"rgba(127,127,127,1)"},"error_x":{"color":"rgba(127,127,127,1)"},"frame":null},{"x":[82.333333333333329,82.222222222222229,82.15789473684211,82.05263157894737,82.666666666666671,82.5,82.615384615384613,82.5,82,83.142857142857139,82.666666666666671,83.5,83.666666666666671,83.142857142857139,83,84,84,82.666666666666671],"y":[126.73333333333333,127.05555555555556,127.15789473684211,126.78947368421052,126.73333333333333,126.71428571428571,126.61538461538461,127,126.66666666666667,126.71428571428571,126.33333333333333,127,126.33333333333333,126.71428571428571,126.5,127,127,126.33333333333333],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,17,18,19],"mode":"lines","line":{"color":"rgba(188,189,34,1)","width":2},"type":"scatter3d","name":"9","marker":{"color":"rgba(188,189,34,1)","line":{"color":"rgba(188,189,34,1)"}},"error_y":{"color":"rgba(188,189,34,1)"},"error_x":{"color":"rgba(188,189,34,1)"},"frame":null},{"x":[113,113,112.53333333333333,112.53333333333333,112.86666666666666,113,113,112.77777777777777,112.59999999999999,113,113.27777777777777,113.35294117647059,113.36363636363636,113,113.46666666666667,113.33333333333333,113.40000000000001,113.33333333333333,113.125,113.23529411764706],"y":[20,20,19.866666666666667,19.866666666666667,20.466666666666665,20.5,20.5,20.5,20.399999999999999,20.5,20.888888888888889,21,21.09090909090909,20.800000000000001,21.133333333333333,21.266666666666666,21.399999999999999,21.333333333333332,21.3125,21],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(23,190,207,1)","width":2},"type":"scatter3d","name":"10","marker":{"color":"rgba(23,190,207,1)","line":{"color":"rgba(23,190,207,1)"}},"error_y":{"color":"rgba(23,190,207,1)"},"error_x":{"color":"rgba(23,190,207,1)"},"frame":null},{"x":[186.53846153846155,186.5,186.47368421052633,186.04545454545453,186.5,186.57142857142858,186.71428571428572,186.42857142857142,186.0952380952381,186.65000000000001,186.57142857142858,186.73684210526315,186.89473684210526,186.5,186.81818181818181,186.9047619047619,186.86363636363637,187,186.68181818181819,186.57894736842104],"y":[13.846153846153847,14.8125,14.631578947368421,14.454545454545455,14.777777777777779,15.19047619047619,15.428571428571429,15.380952380952381,15.095238095238095,15.300000000000001,15.619047619047619,15.526315789473685,16.05263157894737,15.5,15.727272727272727,15.952380952380953,16.09090909090909,16.136363636363637,16.136363636363637,15.894736842105264],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(31,119,180,1)","width":2},"type":"scatter3d","name":"11","marker":{"color":"rgba(31,119,180,1)","line":{"color":"rgba(31,119,180,1)"}},"error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"frame":null},{"x":[46.399999999999999,69,86.733333333333334,95.58620689655173,107.71428571428571,123,138.6875,154.80555555555554,166,173.96969696969697,183.06451612903226,197.6764705882353,211.63636363636363,213.5,216.18518518518519,222.96296296296296,228.41379310344828,228.59999999999999,229.05405405405406,230.13513513513513],"y":[57.200000000000003,56.393939393939391,58.466666666666669,60.275862068965516,56.821428571428569,54.862068965517238,58.28125,57.75,58.264705882352942,61.575757575757578,62.41935483870968,61.911764705882355,62.68181818181818,64.615384615384613,65.481481481481481,66.592592592592595,67.137931034482762,67.48571428571428,68.567567567567565,69.702702702702709],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(255,127,14,1)","width":2},"type":"scatter3d","name":"12","marker":{"color":"rgba(255,127,14,1)","line":{"color":"rgba(255,127,14,1)"}},"error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"frame":null},{"x":[20.5,20.666666666666668,20.125,19.90909090909091,20.545454545454547,20.615384615384617,21.125,13.76595744680851,24.684931506849313,41.407407407407405,64.021739130434781,78.804347826086953,89.869565217391298,98.642857142857139,103.32608695652173,115.61702127659575,131.73170731707316,145.75,166.6829268292683,181.5],"y":[112.5,112.11111111111111,112,112.81818181818181,112.36363636363636,112.38461538461539,111.875,110.48936170212765,113.53424657534246,114.38888888888889,113.41304347826087,113.67391304347827,111.08695652173913,109.9047619047619,110.58695652173913,113,113.26829268292683,109.83928571428571,110.04878048780488,108],"z":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(44,160,44,1)","width":2},"type":"scatter3d","name":"13","marker":{"color":"rgba(44,160,44,1)","line":{"color":"rgba(44,160,44,1)"}},"error_y":{"color":"rgba(44,160,44,1)"},"error_x":{"color":"rgba(44,160,44,1)"},"frame":null},{"x":[248,247.5,248.11111111111111,248,247.85714285714286,247.5,247.77777777777777,247.90000000000001,248.04347826086956,247.52631578947367,248.17391304347825,247.8095238095238,247.90909090909091,247.69999999999999,247.45454545454547,247.36842105263159],"y":[55,56,55.666666666666664,56.5,56.928571428571431,56.5,57.166666666666664,56.899999999999999,56.956521739130437,56.368421052631582,56.913043478260867,56.857142857142854,56.909090909090907,56.899999999999999,56.590909090909093,56.736842105263158],"z":[3,4,5,6,7,8,9,10,12,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(214,39,40,1)","width":2},"type":"scatter3d","name":"14","marker":{"color":"rgba(214,39,40,1)","line":{"color":"rgba(214,39,40,1)"}},"error_y":{"color":"rgba(214,39,40,1)"},"error_x":{"color":"rgba(214,39,40,1)"},"frame":null},{"x":[1.5,16.699999999999999,36.547619047619051,49,55.586206896551722,63.064516129032256,78.65517241379311,94.200000000000003,107.03571428571429,119.33333333333333,129.92857142857142,146.51351351351352,163.30555555555554,178.97142857142856,204.04651162790697,219.14285714285714],"y":[31.5,33.759999999999998,33.023809523809526,29.5,27.275862068965516,26.93548387096774,27.931034482758619,27.600000000000001,29,30,30.30952380952381,31.351351351351351,32.055555555555557,30.885714285714286,32.372093023255815,33],"z":[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(148,103,189,1)","width":2},"type":"scatter3d","name":"15","marker":{"color":"rgba(148,103,189,1)","line":{"color":"rgba(148,103,189,1)"}},"error_y":{"color":"rgba(148,103,189,1)"},"error_x":{"color":"rgba(148,103,189,1)"},"frame":null},{"x":[19,19.666666666666668,20.333333333333332,21.5,19.636363636363637,20.800000000000001,20.333333333333332,20.199999999999999,19.545454545454547],"y":[112.28571428571429,112.33333333333333,112.5,113,113.09090909090909,112.59999999999999,113,112.40000000000001,112.27272727272727],"z":[10,11,12,13,14,16,17,19,20],"mode":"lines","line":{"color":"rgba(140,86,75,1)","width":2},"type":"scatter3d","name":"16","marker":{"color":"rgba(140,86,75,1)","line":{"color":"rgba(140,86,75,1)"}},"error_y":{"color":"rgba(140,86,75,1)"},"error_x":{"color":"rgba(140,86,75,1)"},"frame":null},{"x":[6.4146341463414638,23.820512820512821],"y":[46.536585365853661,48.92307692307692],"z":[11,12],"mode":"lines","line":{"color":"rgba(227,119,194,1)","width":2},"type":"scatter3d","name":"17","marker":{"color":"rgba(227,119,194,1)","line":{"color":"rgba(227,119,194,1)"}},"error_y":{"color":"rgba(227,119,194,1)"},"error_x":{"color":"rgba(227,119,194,1)"},"frame":null},{"x":[27,27,27],"y":[9.5,10,10],"z":[12,14,16],"mode":"lines","line":{"color":"rgba(127,127,127,1)","width":2},"type":"scatter3d","name":"18","marker":{"color":"rgba(127,127,127,1)","line":{"color":"rgba(127,127,127,1)"}},"error_y":{"color":"rgba(127,127,127,1)"},"error_x":{"color":"rgba(127,127,127,1)"},"frame":null},{"x":[51.571428571428569,59.756097560975611,74.228571428571428,87.047619047619051,110.90909090909091,135.82926829268294,151.66666666666666],"y":[47.857142857142854,47.878048780487802,49.028571428571432,53.095238095238095,53.363636363636367,54.31707317073171,54.282051282051285],"z":[14,15,16,17,18,19,20],"mode":"lines","line":{"color":"rgba(188,189,34,1)","width":2},"type":"scatter3d","name":"19","marker":{"color":"rgba(188,189,34,1)","line":{"color":"rgba(188,189,34,1)"}},"error_y":{"color":"rgba(188,189,34,1)"},"error_x":{"color":"rgba(188,189,34,1)"},"frame":null},{"x":[142,142],"y":[11,11],"z":[16,17],"mode":"lines","line":{"color":"rgba(23,190,207,1)","width":2},"type":"scatter3d","name":"20","marker":{"color":"rgba(23,190,207,1)","line":{"color":"rgba(23,190,207,1)"}},"error_y":{"color":"rgba(23,190,207,1)"},"error_x":{"color":"rgba(23,190,207,1)"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script><p class="caption">
 A 2D+time representation of the trajectories. This is produced by
 plotting a <code>TrajectoryList</code> object
 </p>
@@ -821,7 +821,7 @@ dimensional projection of the identified trajectories
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot2D.TrajectorySet.html">plot2D.TrajectorySet</a></span><span class="op">(</span><span class="va">trajPlatelets</span>, <span class="va">MesenteriumSubset</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
 &lt;img
-src=“/private/var/folders/2s/h6hvv9ps03xgz_krkkstvq_r0000gn/T/RtmpGdhsqw/file28c04776e5c5/articles/flowcatchr_vignette_files/figure-html/overviewTrajs-1.png”
+src=“/private/var/folders/hn/k7g0_sh57112t0xtjxcjcm5r0000gn/T/RtmpUIhNmJ/file269635a94269/articles/flowcatchr_vignette_files/figure-html/overviewTrajs-1.png”
 alt=“A 2D”flat” representation of the trajectories. This is more
 suitable to give an indication of the global movement” width=“720” /&gt;
 <p class="caption">
@@ -1101,7 +1101,7 @@ instantaneous velocity) on it.
 <div class="section level3">
 <h3 id="the-shinyflow-shiny-application">The <code>shinyFlow</code> Shiny Application<a class="anchor" aria-label="anchor" href="#the-shinyflow-shiny-application"></a>
 </h3>
-<p>Additionally, since Version 1.0.3, <em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>
+<p>Additionally, since Version 1.0.3, <em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>
 delivers <code>shinyFlow</code>, a Shiny Web Application (<span class="citation">(RStudio, Inc 2013)</span>), which is built on the
 backbone of the analysis presented in this vignette, and is portable
 across all main operating systems. The user is thus invited to explore
@@ -1115,7 +1115,7 @@ window either in the browser or in the IDE (such as RStudio):</p>
 </div>
 <div class="section level3">
 <h3 id="flowcatchr-in-jupyter-notebooks">
-<em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>
+<em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>
 in Jupyter notebooks<a class="anchor" aria-label="anchor" href="#flowcatchr-in-jupyter-notebooks"></a>
 </h3>
 <p>A further integration are a number of Jupyter/IPython notebooks
@@ -1124,7 +1124,7 @@ provide easy reproducibility as well as communication of results, by
 combining plain text, commands and output in single documents. The R
 kernel used on the back-end was developed by Thomas Kluyver (<a href="https://github.com/takluyver/IRkernel" class="external-link uri">https://github.com/takluyver/IRkernel</a>), and instructions
 for the installation are available at the Github repository website. The
-notebooks are available in the installation folder of the package <em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>,
+notebooks are available in the installation folder of the package <em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>,
 which can be found with the command below.</p>
 <div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>,package <span class="op">=</span> <span class="st">"flowcatchR"</span><span class="op">)</span>,pattern <span class="op">=</span> <span class="st">"*.ipynb"</span><span class="op">)</span></span></code></pre></div>
@@ -1145,17 +1145,17 @@ launch it:</p>
 </div>
 <div class="section level2">
 <h2 id="flowcatchr-in-docker-containers">
-<em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>
+<em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>
 in Docker containers<a class="anchor" aria-label="anchor" href="#flowcatchr-in-docker-containers"></a>
 </h2>
-<p><em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>
+<p><em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>
 is now (as of September 2015) available also in Docker images that are
 the components of the <code>dockerflow</code> proposal (<a href="https://github.com/federicomarini/dockerflow" class="external-link uri">https://github.com/federicomarini/dockerflow</a>). This
 includes:</p>
 <ul>
 <li>
 <code>flowstudio</code> - <a href="https://github.com/federicomarini/flowstudio" class="external-link uri">https://github.com/federicomarini/flowstudio</a>, a
-command-line/IDE interface to RStudio where <em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>
+command-line/IDE interface to RStudio where <em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>
 and its dependencies are preinstalled</li>
 <li>
 <code>flowshiny</code> - <a href="https://github.com/federicomarini/flowshiny" class="external-link uri">https://github.com/federicomarini/flowshiny</a> a Shiny
@@ -1175,10 +1175,10 @@ the single components, please refer to their repositories.</p>
 <p>For more information on the method adapted for tracking cells, see
 Sbalzarini and Koumotsakos (2005) <span class="citation">(Sbalzarini and
 Koumoutsakos 2005)</span>. For additional details regarding the
-functions of <em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>,
+functions of <em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>,
 please consult the documentation or write an email to <a href="mailto:marinif@uni-mainz.de" class="email">marinif@uni-mainz.de</a>.</p>
 <p>Due to space limitations, the complete dataset for the acquired
-frames used in this vignette is not included as part of the <em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>
+frames used in this vignette is not included as part of the <em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>
 package. If you would like to get access to it, you can write an email
 to <a href="mailto:marinif@uni-mainz.de" class="email">marinif@uni-mainz.de</a>.</p>
 </div>
@@ -1189,7 +1189,7 @@ to <a href="mailto:marinif@uni-mainz.de" class="email">marinif@uni-mainz.de</a>.
 Epidemiology and Informatics at the University Medical Center, Mainz
 (Germany), with the financial support provided by the TRP-A15
 Translational Research Project grant.</p>
-<p><em><a href="https://bioconductor.org/packages/3.21/flowcatchR" class="external-link">flowcatchR</a></em>
+<p><em><a href="https://bioconductor.org/packages/3.22/flowcatchR" class="external-link">flowcatchR</a></em>
 incorporates suggestions and feedback from the wet-lab biology units
 operating at the Center for Thrombosis and Hemostasis (CTH), in
 particular Sven Jäckel and Kerstin Jurk. Sven Jäckel also provided us
@@ -1202,9 +1202,9 @@ to the first ideas on the project.</p>
 <h2 class="unnumbered" id="session-info">Session info<a class="anchor" aria-label="anchor" href="#session-info"></a>
 </h2>
 <p>This vignette was generated using the following package versions:</p>
-<pre><code><span><span class="co">## R Under development (unstable) (2025-03-06 r87893)</span></span>
+<pre><code><span><span class="co">## R version 4.5.0 (2025-04-11)</span></span>
 <span><span class="co">## Platform: aarch64-apple-darwin20</span></span>
-<span><span class="co">## Running under: macOS Sonoma 14.7.2</span></span>
+<span><span class="co">## Running under: macOS Sonoma 14.7.5</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Matrix products: default</span></span>
 <span><span class="co">## BLAS:   /Library/Frameworks/R.framework/Versions/4.5-arm64/Resources/lib/libRblas.0.dylib </span></span>
@@ -1220,33 +1220,33 @@ to the first ideas on the project.</p>
 <span><span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## other attached packages:</span></span>
-<span><span class="co">## [1] flowcatchR_1.41.2 EBImage_4.49.0    BiocStyle_2.35.0 </span></span>
+<span><span class="co">## [1] flowcatchR_1.43.0 EBImage_4.51.0    BiocStyle_2.37.0 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## loaded via a namespace (and not attached):</span></span>
-<span><span class="co">##  [1] gtable_0.3.6        xfun_0.51           bslib_0.9.0        </span></span>
-<span><span class="co">##  [4] ggplot2_3.5.1       htmlwidgets_1.6.4   lattice_0.22-6     </span></span>
-<span><span class="co">##  [7] vctrs_0.6.5         tools_4.5.0         crosstalk_1.2.1    </span></span>
-<span><span class="co">## [10] bitops_1.0-9        generics_0.1.3      parallel_4.5.0     </span></span>
-<span><span class="co">## [13] tibble_3.2.1        pkgconfig_2.0.3     data.table_1.17.0  </span></span>
-<span><span class="co">## [16] desc_1.4.3          lifecycle_1.0.4     compiler_4.5.0     </span></span>
-<span><span class="co">## [19] textshaping_1.0.0   munsell_0.5.1       tiff_0.1-12        </span></span>
-<span><span class="co">## [22] codetools_0.2-20    httpuv_1.6.15       htmltools_0.5.8.1  </span></span>
-<span><span class="co">## [25] sass_0.4.9          RCurl_1.98-1.16     yaml_2.3.10        </span></span>
-<span><span class="co">## [28] lazyeval_0.2.2      plotly_4.10.4       later_1.4.1        </span></span>
-<span><span class="co">## [31] pkgdown_2.1.1.9000  pillar_1.10.1       jquerylib_0.1.4    </span></span>
-<span><span class="co">## [34] tidyr_1.3.1         BiocParallel_1.41.2 cachem_1.1.0       </span></span>
-<span><span class="co">## [37] abind_1.4-8         mime_0.12           tidyselect_1.2.1   </span></span>
-<span><span class="co">## [40] locfit_1.5-9.12     digest_0.6.37       dplyr_1.1.4        </span></span>
-<span><span class="co">## [43] purrr_1.0.4         bookdown_0.42       fastmap_1.2.0      </span></span>
-<span><span class="co">## [46] grid_4.5.0          colorspace_2.1-1    cli_3.6.4          </span></span>
-<span><span class="co">## [49] magrittr_2.0.3      scales_1.3.0        promises_1.3.2     </span></span>
-<span><span class="co">## [52] rmarkdown_2.29      httr_1.4.7          fftwtools_0.9-11   </span></span>
-<span><span class="co">## [55] jpeg_0.1-10         ragg_1.3.3          png_0.1-8          </span></span>
-<span><span class="co">## [58] shiny_1.10.0        evaluate_1.0.3      knitr_1.49         </span></span>
-<span><span class="co">## [61] viridisLite_0.4.2   rlang_1.1.5         Rcpp_1.0.14        </span></span>
-<span><span class="co">## [64] xtable_1.8-4        glue_1.8.0          BiocManager_1.30.25</span></span>
-<span><span class="co">## [67] BiocGenerics_0.53.6 jsonlite_1.9.1      R6_2.6.1           </span></span>
-<span><span class="co">## [70] systemfonts_1.2.1   fs_1.6.5            colorRamps_2.3.4</span></span></code></pre>
+<span><span class="co">##  [1] tidyr_1.3.1         plotly_4.10.4       sass_0.4.10        </span></span>
+<span><span class="co">##  [4] generics_0.1.3      tiff_0.1-12         bitops_1.0-9       </span></span>
+<span><span class="co">##  [7] jpeg_0.1-11         lattice_0.22-7      digest_0.6.37      </span></span>
+<span><span class="co">## [10] magrittr_2.0.3      RColorBrewer_1.1-3  evaluate_1.0.3     </span></span>
+<span><span class="co">## [13] grid_4.5.0          bookdown_0.43       fftwtools_0.9-11   </span></span>
+<span><span class="co">## [16] fastmap_1.2.0       jsonlite_2.0.0      promises_1.3.2     </span></span>
+<span><span class="co">## [19] BiocManager_1.30.25 httr_1.4.7          purrr_1.0.4        </span></span>
+<span><span class="co">## [22] crosstalk_1.2.1     viridisLite_0.4.2   scales_1.4.0       </span></span>
+<span><span class="co">## [25] lazyeval_0.2.2      codetools_0.2-20    textshaping_1.0.1  </span></span>
+<span><span class="co">## [28] jquerylib_0.1.4     abind_1.4-8         cli_3.6.5          </span></span>
+<span><span class="co">## [31] shiny_1.10.0        rlang_1.1.6         cachem_1.1.0       </span></span>
+<span><span class="co">## [34] yaml_2.3.10         colorRamps_2.3.4    tools_4.5.0        </span></span>
+<span><span class="co">## [37] parallel_4.5.0      BiocParallel_1.43.0 dplyr_1.1.4        </span></span>
+<span><span class="co">## [40] ggplot2_3.5.2       locfit_1.5-9.12     httpuv_1.6.16      </span></span>
+<span><span class="co">## [43] BiocGenerics_0.55.0 vctrs_0.6.5         R6_2.6.1           </span></span>
+<span><span class="co">## [46] mime_0.13           png_0.1-8           lifecycle_1.0.4    </span></span>
+<span><span class="co">## [49] fs_1.6.6            htmlwidgets_1.6.4   ragg_1.4.0         </span></span>
+<span><span class="co">## [52] pkgconfig_2.0.3     desc_1.4.3          pillar_1.10.2      </span></span>
+<span><span class="co">## [55] pkgdown_2.1.2.9000  bslib_0.9.0         later_1.4.2        </span></span>
+<span><span class="co">## [58] gtable_0.3.6        data.table_1.17.0   glue_1.8.0         </span></span>
+<span><span class="co">## [61] Rcpp_1.0.14         systemfonts_1.2.3   tidyselect_1.2.1   </span></span>
+<span><span class="co">## [64] tibble_3.2.1        xfun_0.52           knitr_1.50         </span></span>
+<span><span class="co">## [67] farver_2.1.2        xtable_1.8-4        htmltools_0.5.8.1  </span></span>
+<span><span class="co">## [70] rmarkdown_2.29      compiler_4.5.0      RCurl_1.98-1.17</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
@@ -1330,7 +1330,7 @@ analysis</span>.”</span> <em>Nature Methods</em> 9 (7): 671–75. <a href="htt
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.9000.</p>
 </div>
 
       </footer>
