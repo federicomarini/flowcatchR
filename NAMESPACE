@@ -36,20 +36,30 @@ import(EBImage)
 import(colorRamps)
 import(methods)
 import(shiny)
-importFrom(BiocParallel,bplapply)
-importFrom(BiocParallel,bpparam)
+importFrom(BiocParallel,
+  bplapply,
+  bpparam
+)
 importFrom(abind,asub)
-importFrom(graphics,grid)
-importFrom(graphics,lines)
-importFrom(graphics,locator)
-importFrom(graphics,plot)
-importFrom(graphics,text)
-importFrom(plotly,layout)
-importFrom(plotly,plot_ly)
-importFrom(stats,acf)
-importFrom(stats,median)
-importFrom(stats,na.omit)
-importFrom(utils,read.table)
-importFrom(utils,setTxtProgressBar)
-importFrom(utils,txtProgressBar)
-importFrom(utils,write.table)
+importFrom(graphics,
+  grid,
+  lines,
+  locator,
+  plot,
+  text
+)
+importFrom(plotly,
+  layout,
+  plot_ly
+)
+importFrom(stats,
+  acf,
+  median,
+  na.omit
+)
+importFrom(utils,
+  read.table,
+  setTxtProgressBar,
+  txtProgressBar,
+  write.table
+)
