@@ -37,7 +37,7 @@ alternative thresholding method, see also \code{\link[EBImage:otsu]{EBImage::ots
 \item{at.wheight}{Height of the window for the adaptive thresholding step - see also \code{\link[EBImage:thresh]{EBImage::thresh()}}. As an
 alternative thresholding method, see also \code{\link[EBImage:otsu]{EBImage::otsu()}} in the \code{EBImage} package.}
 
-\item{kern.size}{Size in pixels of the kernel used for morphological operations - e.g., opening, which is an erosion followed by a dilation, and closing which is a dilation followed by an erosion - see also \code{\link[EBImage:morphology]{EBImage::opening()}}, \code{\link[EBImage:morphology]{EBImage::closing()}}}
+\item{kern.size}{Size in pixels of the kernel used for morphological operations - e.g., opening, which is an erosion followed by a dilation, and closing which is a dilation followed by an erosion - see also \code{\link[EBImage:opening]{EBImage::opening()}}, \code{\link[EBImage:closing]{EBImage::closing()}}}
 
 \item{kern.shape}{Shape of the kernel used for morphological operations}
 
